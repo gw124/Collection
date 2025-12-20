@@ -1,0 +1,1934 @@
+<style>
+::-webkit-scrollbar { width: 5px !important; height: 5px !important; }
+::-webkit-scrollbar-track { background-color: transparent !important; }
+::-webkit-scrollbar-thumb { background-color: rgba(148, 163, 184, 0.55) !important; border-radius: 8px !important; }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(148, 163, 184, 0.85) !important; }
+footer {
+  position: static !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+footer p {
+  color: var(--secondary-foreground) !important;
+  opacity: 0.7;
+}
+
+
+/* Logo/图片样式 */
+header a img[alt="logo"], .bubble-logo-image {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+.bubble-logo-image {
+  height: 32px;
+  width: 32px;
+}
+/* 气泡/模态框通用容器样式 (共享背景、边框、阴影) */
+.welcome-bubble, .custom-alert-modal, .finance-widget {
+  background-color: var(--purcarte-card-color);
+  border: 1px solid var(--gray-a5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px var(--gray-a4);
+  color: var(--gray-12);
+}
+/* 气泡/模态框通用头部样式 */
+.bubble-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--gray-a5);
+}
+.bubble-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-11);
+  margin: 0;
+}
+.bubble-close {
+  background: none;
+  border: none;
+  color: var(--gray-20);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.bubble-close:hover {
+  color: var(--accent-9);
+  transform: rotate(90deg);
+}
+.bubble-content {
+  padding: 15px;
+}
+/* 气泡通用信息行样式 */
+.bubble-info {
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bubble-info svg {
+  flex-shrink: 0;
+  color: var(--gray-11);
+}
+.bubble-info:last-child {
+  margin-bottom: 0;
+}
+/* 剧透文本样式 */
+.spoiler {
+  background: var(--accent-9);
+  color: transparent !important;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 6px;
+  transition: all 0.3s ease;
+}
+.spoiler:hover {
+  opacity: 0.8;
+}
+/* 帮助图标/工具提示样式 (HELP ICON/TOOLTIP) */
+.help-icon {
+  cursor: help;
+  color: var(--gray-10);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.help-icon.show-help {
+  display: flex;
+}
+.help-icon:hover {
+  color: var(--accent-9);
+}
+.help-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  right: -5px;
+  width: max-content;
+  max-width: 200px;
+  padding: 8px 12px;
+  background-color: var(--purcarte-card-color);
+  border: 1px solid var(--gray-a5);
+  border-radius: 8px;
+  color: var(--gray-12);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px var(--gray-a4);
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.95);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  white-space: pre-wrap;
+  text-align: left;
+}
+.help-icon.active::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-5px) scale(1);
+}
+
+
+/* 欢迎气泡 (Welcome Bubble) */
+.welcome-bubble {
+  position: fixed;
+  left: 5px;
+  bottom: 45px;
+  z-index: 1050;
+  max-width: 320px;
+  border-radius: 16px;
+  transform: translateY(150%);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s;
+  pointer-events: none;
+}
+.welcome-bubble.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* 资产统计 (Finance Widget) */
+/* 容器 */
+.finance-widget {
+  position: fixed;
+  right: 20px;
+  top: 70px;
+  z-index: 1040;
+  width: 280px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+.finance-widget.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 1040;
+}
+/* 悬浮按钮 */
+.finance-ball {
+  position: fixed;
+  right: 20px;
+  top: 70px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--purcarte-card-color);
+  border: 1px solid var(--gray-a5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px var(--gray-a4);
+  z-index: 1041;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+  color: var(--accent-11);
+}
+.finance-ball.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.finance-ball:hover {
+  transform: scale(1.1);
+  color: var(--accent-9);
+}
+/* 统计行 */
+.finance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+.finance-row .item-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.finance-value {
+  font-weight: bold;
+  color: var(--accent-11);
+}
+/* 分隔线 */
+.finance-separator {
+  height: 1px;
+  background-color: var(--gray-a5);
+  margin: 10px 0;
+  width: 100%;
+}
+/* 详细列表 */
+.finance-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+.finance-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  color: var(--gray-11);
+}
+.finance-list-item .item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+  color: var(--gray-12);
+}
+.finance-list-item .item-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.finance-list-item .item-value {
+  font-weight: 500;
+  color: var(--accent-11);
+}
+/* 汇率/提示信息 */
+.finance-tooltip {
+  font-size: 0.7rem;
+  color: var(--gray-11);
+  margin-top: 2px;
+  text-align: right;
+}
+/* 控制区 */
+.finance-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-a5);
+  justify-content: space-between;
+  align-items: center;
+}
+.finance-select {
+  background: transparent;
+  border: 1px solid var(--gray-a5);
+  color: var(--gray-12);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  outline: none;
+}
+.finance-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-11);
+  transition: color 0.2s;
+  padding: 2px;
+}
+.finance-btn:hover {
+  color: var(--accent-9);
+}
+.finance-btn.active svg {
+  color: var(--accent-9);
+  fill: var(--accent-9);
+  fill-opacity: 0.2;
+}
+
+
+/* 自定义警告模态框 (Custom Alert Modal) */
+/* 警告模态框覆盖层 */
+.custom-alert-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  z-index: 2000; display: none; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+/* 警告模态框内容 */
+.custom-alert-modal {
+  padding: 0; border-radius: 16px; max-width: 350px; width: 90%;
+  transform: scale(0.95); transition: transform 0.3s ease;
+  display: flex; flex-direction: column;
+}
+.alert-reason-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--red-11);
+}
+.custom-alert-modal .bubble-content svg {
+  color: var(--red-9);
+}
+
+
+/* --- 地球渲染组件 (Earth Globe Component) --- */
+/* 地球仪悬浮按钮 */
+#earth-ball {
+  top: 125px;
+  z-index: 1039;
+}
+/* 地球模态框内容 */
+#earth-modal-content {
+  width: 80vw;
+  height: 80vh;
+  max-width: 100%;
+  background-color: var(--purcarte-card-color);
+  border: 1px solid var(--gray-a5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px var(--gray-a4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+}
+/* 地球渲染区域 */
+#earth-render-area {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: transparent;
+  touch-action: none;
+  position: relative;
+  overflow: hidden;
+}
+#earth-render-area.ready {
+  opacity: 1;
+}
+#earth-render-area:active {
+  cursor: grabbing;
+}
+/* 用户标记点 */
+.earth-user-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 15px var(--accent-9), 0 0 30px var(--accent-9);
+  cursor: pointer;
+  z-index: 1002;
+  animation: userPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid var(--accent-9);
+}
+.earth-user-marker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+@keyframes userPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-9-rgb), 0.7);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(var(--accent-9-rgb), 0);
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-9-rgb), 0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+/* 旗帜标记点 */
+.earth-flag-img {
+  width: 24px;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 4px var(--accent-9));
+}
+/* 地球工具提示 */
+#earth-tooltip {
+  position: absolute;
+  display: none;
+  padding: 12px 16px;
+  background: var(--purcarte-card-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--accent-9);
+  border-radius: 8px;
+  color: var(--gray-12);
+  pointer-events: auto;
+  z-index: 9999;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  box-shadow: 0 8px 24px var(--gray-a4);
+  max-width: 300px;
+  min-width: 200px;
+}
+.earth-tooltip-header {
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--accent-9);
+  border-bottom: 1px solid var(--gray-a5);
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.earth-tooltip-content {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.earth-tooltip-content::-webkit-scrollbar {
+  width: 4px;
+}
+.earth-tooltip-content::-webkit-scrollbar-thumb {
+  background-color: var(--accent-9);
+  border-radius: 4px;
+}
+.earth-tooltip-item {
+  font-size: 0.95rem;
+  padding: 4px 0;
+  color: var(--gray-12);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.earth-tooltip-item::before {
+  content: '•';
+  color: var(--accent-9);
+  font-weight: bold;
+  font-size: 1.4em;
+}
+/* 计数器覆盖层 */
+.earth-overlay-counter {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  pointer-events: none;
+  background: var(--purcarte-card-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--gray-a5);
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px var(--gray-a4);
+}
+.counter-label {
+  font-size: 0.75rem;
+  color: var(--gray-11);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.counter-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-9);
+  line-height: 1;
+}
+
+
+/* 移动设备 (小于 576px) */
+@media (max-width: 576px) {
+  .welcome-bubble { max-width: calc(100vw - 30px); left: 15px; bottom: 15px; }
+  .finance-widget { width: calc(100vw - 40px); right: 20px; }
+}
+
+/* 平板设备 (小于 768px) - 主要针对地球组件 */
+@media (max-width: 768px) {
+  #earth-modal-content {
+    width: 95vw;
+    height: 75vh;
+    max-width: none;
+    border-radius: 16px;
+  }
+  .earth-overlay-counter {
+    top: 10px;
+    left: 10px;
+    padding: 8px 12px;
+  }
+  .counter-label {
+    font-size: 0.65rem;
+  }
+  .counter-value {
+    font-size: 1.5rem;
+  }
+  .earth-user-marker {
+    width: 28px;
+    height: 28px;
+  }
+}
+</style>
+
+<!--欢迎气泡 (Welcome Bubble)-->
+<div id="welcome-bubble-container" class="welcome-bubble">
+<div class="bubble-header">
+  <h3 class="bubble-title">
+    <img src="/favicon.ico" class="bubble-logo-image">
+    阿米诺斯
+  </h3>
+  <button class="bubble-close" id="bubbleClose">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+    </svg>
+  </button>
+</div>
+<div class="bubble-content">
+  <p class="bubble-info" id="location">欢迎你，朋友！</p>
+  <p class="bubble-info" id="os">
+    <span id="os-icon"></span>
+    <span class="data-text"></span>
+  </p>
+  <p class="bubble-info" id="browser">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+    <span class="data-text"></span>
+  </p>
+  <p class="bubble-info" id="ip">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+    <span class="data-text"></span>
+  </p>
+  <p class="bubble-info" id="isp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>
+    <span class="data-text"></span>
+  </p>
+  <p class="bubble-info" id="date">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    <span class="data-text"></span>
+  </p>
+</div>
+</div>
+
+<!--资产统计 (Finance Widget)-->
+<div id="finance-widget" class="finance-widget">
+<div class="bubble-header">
+  <h3 class="bubble-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+    资产统计
+  </h3>
+  <button class="bubble-close" id="financeClose">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+    </svg>
+  </button>
+</div>
+<div class="bubble-content">
+  <div class="finance-row">
+    <span>服务器数量</span>
+    <span class="finance-value" id="fin-total-count">...</span>
+  </div>
+  <div class="finance-row">
+    <span>总价值</span>
+    <span class="finance-value" id="fin-total-price">...</span>
+  </div>
+  <div class="finance-row">
+    <span>月均支出</span>
+    <span class="finance-value" id="fin-monthly-price">...</span>
+  </div>
+  <div class="finance-row">
+    <span>剩余总价值</span>
+    <div class="item-right">
+      <span class="finance-value" id="fin-remain-value">...</span>
+      <div class="help-icon" id="fin-remain-help">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="finance-separator"></div>
+  <div id="fin-detail-list" class="finance-list">
+  </div>
+
+  <div class="finance-tooltip" id="fin-ex-rate">汇率更新中...</div>
+  <div class="finance-controls">
+    <div style="display: flex; gap: 8px;">
+      <select id="fin-currency" class="finance-select">
+        <option value="CNY">CNY (￥)</option>
+        <option value="USD">USD ($)</option>
+        <option value="HKD">HKD (HK$)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
+      <select id="fin-sort" class="finance-select">
+        <option value="weight_asc">权重 正序</option>
+        <option value="weight_desc">权重 倒序</option>
+        <option value="price_asc">价格 正序</option>
+        <option value="price_desc">价格 倒序</option>
+      </select>
+    </div>
+    <div style="display:flex; gap:5px;">
+      <button class="finance-btn" id="fin-toggle-free" title="排除白嫖/计入白嫖">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 0.6-3.8 1.6l-1.2 1.2-1.2-1.2C11.8 5.6 10.5 5 9 5 5.5 5 3 7.6 3 11c0 3.5 3 7.6 9 13 6-5.4 9-9.5 9-13 0-3.4-2.5-6-6-6z"/></svg>
+      </button>
+      <button class="finance-btn" id="fin-refresh" title="刷新数据">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+<!--资产悬浮球 (Finance Ball)-->
+<div id="finance-ball" class="finance-ball">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+</div>
+
+<!--地球组件 (Earth Modal Overlay)-->
+<div id="earth-modal-overlay" class="custom-alert-overlay">
+<div id="earth-modal-content" class="custom-alert-modal">
+  <div class="earth-overlay-counter">
+    <span class="counter-label">Total Servers</span>
+    <span class="counter-value" id="earth-total-count">0</span>
+  </div>
+  <div id="earth-render-area"></div>
+  <div id="earth-tooltip"></div>
+</div>
+</div>
+<!--地球悬浮球 (Earth Ball)-->
+<div id="earth-ball" class="finance-ball">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"></circle>
+  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+</svg>
+</div>
+
+<!--自定义警告 (Custom Alert Overlay)-->
+<div id="custom-alert-overlay" class="custom-alert-overlay">
+<div id="custom-alert-modal" class="custom-alert-modal">
+  <div class="bubble-header">
+    <h3 class="bubble-title">
+      <img src="/favicon.ico" class="bubble-logo-image">
+      警告
+    </h3>
+    <button class="bubble-close" id="alert-close-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="bubble-content" style="display: flex; flex-direction: column; align-items: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: 1rem;">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.964 0L.165 13.233c-.457.778.091 1.767.982 1.767h13.706c.89 0 1.438-.99.982-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
+    <div class="alert-reason-container">
+      <p id="trigger-reason" class="alert-reason-text"></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="//unpkg.com/globe.gl"></script>
+<script>
+//保护组件 (Protection)
+function initializeProtection() {
+  const overlay = document.getElementById('custom-alert-overlay');
+  const modal = document.getElementById('custom-alert-modal');
+  const closeBtn = document.getElementById('alert-close-btn');
+  const reasonEl = document.getElementById('trigger-reason');
+  if (!overlay || !closeBtn || !modal || !reasonEl) return;
+
+  const style = document.createElement('style');
+  style.innerHTML = `* { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }`;
+  document.head.appendChild(style);
+
+  let isAlertShown = false;
+  let redirectTimer;
+
+  function triggerRedirect() {
+    window.open("about:blank", "_self" )
+  }
+
+  function showCustomAlert(reason) {
+    if (isAlertShown) return;
+    isAlertShown = true;
+    reasonEl.textContent = reason;
+    overlay.style.display = 'flex';
+    setTimeout(() => {
+      overlay.style.opacity = '1';
+      modal.style.transform = 'scale(1)';
+    }, 10);
+    redirectTimer = setTimeout(triggerRedirect, 3000);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    clearTimeout(redirectTimer);
+    triggerRedirect();
+  });
+
+  document.addEventListener('contextmenu', event => {
+    event.preventDefault();
+    showCustomAlert('右键菜单');
+  });
+
+  document.addEventListener('keydown', event => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    let reason = '';
+
+    if (event.key === 'F12') reason = '异常行为: F12';
+    else if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) reason = `异常行为: Ctrl+Shift+${event.key.toUpperCase()}`;
+    else if (event.ctrlKey && event.key.toUpperCase() === 'U') reason = 'Ctrl+U 查看源代码';
+    else if ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'S') reason = '异常行为: Ctrl/Cmd+S';
+    else if ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'P') reason = '异常行为: Ctrl/Cmd+P';
+    else if ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'A') reason = '异常行为: Ctrl/Cmd+A';
+    else if ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'C') reason = '异常行为: Ctrl/Cmd+C';
+    else if (isMac && event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) reason = `异常行为: Cmd+Option+${event.key.toUpperCase()}`;
+
+    if (reason) {
+      event.preventDefault();
+      showCustomAlert(reason);
+    }
+  });
+
+  document.addEventListener('copy', event => {
+    event.preventDefault();
+    showCustomAlert('异常行为: 复制');
+  });
+
+  document.addEventListener('dragstart', event => {
+    event.preventDefault();
+    showCustomAlert('异常行为: 拖拽内容');
+  });
+
+  window.addEventListener('beforeprint', () => {
+    showCustomAlert('异常行为: 打印页面');
+  });
+
+  function detectSuspiciousExtensions() {
+    const suspiciousKeys = ['__REACT_DEVTOOLS_GLOBAL_HOOK__', 'webpackJsonp', 'jQuery321'];
+    const found = suspiciousKeys.some(key => key in window);
+    const injected = Array.from(document.querySelectorAll('script[src]')).some(s =>
+        /^(chrome|moz|safari)-extension:\/\//.test(s.src)
+    );
+    const suspiciousDOM = Array.from(document.querySelectorAll('[id],[class]')).some(el => {
+      const txt = (el.id + ' ' + el.className).toLowerCase();
+      return txt.includes('supercopy') || txt.includes('copy');
+    });
+    return found || injected || suspiciousDOM;
+  }
+
+  function detectHeadless() {
+    return navigator.webdriver || /HeadlessChrome/.test(navigator.userAgent);
+  }
+
+  function detectDevtoolsOpen() {
+    const threshold = 160;
+    return (window.outerWidth - window.innerWidth > threshold) ||
+        (window.outerHeight - window.innerHeight > threshold);
+  }
+
+  function setupDomTamperDetection() {
+    const observer = new MutationObserver(mutations => {
+      for (const m of mutations) {
+        if (m.addedNodes.length > 0) {
+          m.addedNodes.forEach(node => {
+            if (node.nodeType === 1) {
+              const txt = (node.id + ' ' + node.className).toLowerCase();
+              if (/supercopy|copy|extension|tamper/i.test(txt)) {
+                showCustomAlert('环境异常: 可疑 DOM 注入');
+              }
+            }
+          });
+        }
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+  setupDomTamperDetection();
+
+  setInterval(() => {
+    const startTime = Date.now();
+    debugger;
+    const endTime = Date.now();
+
+    if (endTime - startTime > 100) {
+      showCustomAlert('环境异常: 调试模式');
+    }
+
+    if (detectSuspiciousExtensions()) {
+      showCustomAlert('环境异常: 可疑扩展');
+    }
+
+    if (detectHeadless()) {
+      showCustomAlert('环境异常: 无头浏览器');
+    }
+
+    if (detectDevtoolsOpen()) {
+      showCustomAlert('环境异常: 开发者工具窗口');
+    }
+  }, 500);
+}
+// 欢迎组件 (Welcome)
+function initializeWelcomeBubble() {
+  if (window.welcomeBubbleInitialized) return;
+  window.welcomeBubbleInitialized = true;
+
+  const bubbleClose = document.getElementById('bubbleClose');
+  if (bubbleClose) {
+    bubbleClose.addEventListener('click', function() {
+      const welcomeBubble = document.getElementById('welcome-bubble-container');
+      if (welcomeBubble) welcomeBubble.classList.remove('show');
+    });
+  }
+
+  window.currentUserGeo = { lat: 35.8617, lng: 104.1954, city: 'Unknown' };
+
+  async function fetchIpAndInfo() {
+    if (window.ipInfoFetched) return;
+    window.ipInfoFetched = true;
+
+    const welcomeBubble = document.getElementById('welcome-bubble-container');
+    const locationEl = document.getElementById('location');
+    const ipEl = document.querySelector('#ip .data-text');
+    const ispEl = document.querySelector('#isp .data-text');
+    const browserEl = document.querySelector('#browser .data-text');
+    const dateEl = document.querySelector('#date .data-text');
+    const osEl = document.querySelector('#os .data-text');
+    let ipHidden = false;
+    let ispHidden = false;
+
+    if (!welcomeBubble || !locationEl || !ipEl || !ispEl || !browserEl || !dateEl) return;
+
+    function getOperatingSystem(userAgent) {
+      if (/android/i.test(userAgent)) return "Android";
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return "iOS";
+      if (/macintosh|mac os x/i.test(userAgent)) return "macOS";
+      if (/windows phone/i.test(userAgent)) return "Windows Phone";
+      if (/windows/i.test(userAgent)) return "Windows";
+      if (/linux/i.test(userAgent)) return "Linux";
+      return "未知设备";
+    }
+
+    if (osEl) {
+      const osName = getOperatingSystem(navigator.userAgent);
+      osEl.textContent = osName;
+
+      const osIconEl = document.getElementById('os-icon');
+      if (osIconEl) {
+        const osLower = osName.toLowerCase();
+        let iconSVG = '';
+
+        if (osLower.includes('windows')) {
+          iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>';
+        } else if (osLower.includes('mac') || osLower.includes('ios')) {
+          iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>';
+        } else if (osLower.includes('android')) {
+          iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.643.643 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.81 10.81 0 0 0 1 18h22a10.81 10.81 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>';
+        } else if (osLower.includes('linux')) {
+          iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489.035.218.094.399.134.54.028.096.063.182.102.258.165.315.435.659.78 1.055 1.66 1.916 5.5 2.444 7.927 2.04.141-.024.195-.093.227-.148.03-.054.046-.117.05-.182.007-.129-.026-.228-.065-.31-.09-.189-.241-.352-.415-.495-.34-.28-.773-.524-1.228-.773-1.017-.557-2.141-1.154-2.141-1.154l-.002-.001c-.076-.045-.154-.09-.232-.135-.309-.178-.617-.357-.925-.535-.77-.446-1.542-.893-2.314-1.339l-.012-.007c-.102-.06-.205-.119-.307-.179l-.01-.006c-.822-.478-1.644-.957-2.466-1.436-.051-.03-.102-.06-.153-.089-.41-.239-.82-.478-1.23-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.411-.239-.821-.478-1.232-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.41-.239-.82-.478-1.231-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.411-.239-.821-.478-1.232-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.411-.239-.821-.478-1.232-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.411-.239-.821-.478-1.232-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716-.051-.03-.102-.06-.153-.089-.41-.239-.82-.478-1.231-.717-.05-.029-.101-.059-.152-.088-.41-.239-.82-.478-1.231-.716-.051-.03-.102-.06-.153-.09-.41-.238-.82-.477-1.23-.716z"/></svg>';
+        } else {
+          iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>';
+        }
+
+        osIconEl.innerHTML = iconSVG;
+      }
+    }
+
+    let city = '', region = '', country = '', isp = '', ip = '';
+    const strategies = [
+      {
+        'name': 'api.ip.sb',
+        'url': 'https://api.ip.sb/geoip',
+        'check_success': (j) => 'country' in j,
+        'map': (j) => ({
+          'country': j['country'],
+          'regionName': j['region'],
+          'city': j['city'],
+          'isp': j['asn_organization'],
+          'org': j['organization'],
+          'as': j['asn'] ? `AS${j['asn']}` : null,
+          'ip': j['ip'],
+          'lat': j['latitude'],
+          'lng': j['longitude']
+        })
+      },
+      {
+        'name': 'ipwho.is',
+        'url': 'https://ipwho.is',
+        'check_success': (j) => j['success'] === true,
+        'map': (j) => ({
+          'country': j['country'],
+          'regionName': j['region'],
+          'city': j['city'],
+          'isp': j['connection']['isp'],
+          'org': j['connection']['org'],
+          'as': j['connection']['asn'],
+          'ip': j['ip'],
+          'lat': j['latitude'],
+          'lng': j['longitude']
+        })
+      },
+      {
+        'name': 'api.ipapi.is',
+        'url': 'https://api.ipapi.is',
+        'check_success': (j) => 'location' in j && 'country' in j['location'],
+        'map': (j) => ({
+          'country': j['location']['country'],
+          'regionName': j['location']['state'],
+          'city': j['location']['city'],
+          'isp': j['company']['name'] || j['datacenter']['datacenter'] || j['abuse']['name'],
+          'org': j['asn']['org'],
+          'as': j['asn']['asn'] ? `AS${j['asn']['asn']}` : null,
+          'ip': j['ip'],
+          'lat': j['location']['latitude'],
+          'lng': j['location']['longitude']
+        })
+      }
+    ];
+    for (const strategy of strategies) {
+      try {
+        const response = await fetch(strategy.url, { signal: AbortSignal.timeout(5000) });
+        if (response.ok) {
+          const data = await response.json();
+          if (strategy.check_success(data)) {
+            const mapped = strategy.map(data);
+            country = mapped.country || country;
+            region = mapped.regionName || region;
+            city = mapped.city || city;
+            isp = mapped.isp || isp;
+            if (mapped.lat && mapped.lng) {
+              window.currentUserGeo = {
+                lat: parseFloat(mapped.lat),
+                lng: parseFloat(mapped.lng),
+                city: city,
+                country: country
+              };
+            }
+            if (mapped.ip) ip = mapped.ip;
+            if (ip) break;
+          }
+        }
+      } catch (e) { console.warn(`Failed to fetch from ${strategy.url}:`, e); }
+    }
+
+    let welcomeMessage = "欢迎你，朋友！";
+    if (city && region) { welcomeMessage = `欢迎来自 ${region}, ${city} 的朋友！`; }
+    else if (country) { welcomeMessage = `欢迎来自 ${country} 的朋友！`; }
+    locationEl.textContent = welcomeMessage;
+
+    if (ip) {
+      ipEl.textContent = ip;
+      document.getElementById('ip').style.cursor = 'pointer';
+      document.getElementById('ip').addEventListener('click', function() {
+        ipHidden = !ipHidden;
+        if (ipHidden) {
+          ipEl.classList.add('spoiler');
+        } else {
+          ipEl.classList.remove('spoiler');
+        }
+      });
+    } else {
+      document.getElementById('ip').style.display = 'none';
+    }
+
+    if (isp) {
+      ispEl.textContent = isp;
+      document.getElementById('isp').style.cursor = 'pointer';
+      document.getElementById('isp').addEventListener('click', function() {
+        ispHidden = !ispHidden;
+        if (ispHidden) {
+          ispEl.classList.add('spoiler');
+        } else {
+          ispEl.classList.remove('spoiler');
+        }
+      });
+    } else {
+      document.getElementById('isp').style.display = 'none';
+    }
+
+    browserEl.textContent = ((ua) => {
+      if (ua.includes("Edg")) return "Edge";
+      if (ua.includes("Firefox")) return "Firefox";
+      if (ua.includes("Chrome")) return "Chrome";
+      if (ua.includes("Safari")) return "Safari";
+      return "未知";
+    })(navigator.userAgent) + ' 浏览器';
+    dateEl.textContent = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Shanghai' });
+
+    if (welcomeBubble) setTimeout(() => welcomeBubble.classList.add('show'), 100);
+  }
+
+  fetchIpAndInfo();
+}
+// 资产组件 (Finance)
+function initializeFinanceWidget() {
+  const widget = document.getElementById('finance-widget');
+  const ball = document.getElementById('finance-ball');
+  const closeBtn = document.getElementById('financeClose');
+  const select = document.getElementById('fin-currency');
+  const toggleFreeBtn = document.getElementById('fin-toggle-free');
+  const refreshBtn = document.getElementById('fin-refresh');
+  const detailListEl = document.getElementById('fin-detail-list');
+  const totalCountEl = document.getElementById('fin-total-count');
+  let sortBy = localStorage.getItem('fin_sort') || 'weight_asc';
+  const sortSelect = document.getElementById('fin-sort');
+  if (sortSelect) {
+    sortSelect.value = sortBy;
+  }
+
+  // 配置：到期时间超过多少年视为无限期（按原价计算）
+  const LONG_TERM_YEARS = 100;
+
+  if (!widget) return;
+
+  let exchangeRates = { CNY: 1, USD: 0.14, HKD: 1.08, EUR: 0.13, GBP: 0.11, JPY: 20.8 };
+  let baseCurrency = 'CNY';
+  let userCurrency = localStorage.getItem('fin_currency') || 'CNY';
+  let excludeFree = localStorage.getItem('fin_exclude_free') === 'true';
+  if (localStorage.getItem('fin_exclude_free') === null) excludeFree = true;
+
+  select.value = userCurrency;
+  updateToggleBtnState();
+
+  const currencySymbols = { 'CNY': '￥', 'USD': '$', 'HKD': 'HK$', 'EUR': '€', 'GBP': '£', 'JPY': '¥' };
+
+  function updateToggleBtnState() {
+    if (excludeFree) {
+      toggleFreeBtn.classList.add('active');
+      toggleFreeBtn.setAttribute('title', '当前：已排除白嫖中标签');
+    } else {
+      toggleFreeBtn.classList.remove('active');
+      toggleFreeBtn.setAttribute('title', '当前：包含白嫖中标签');
+    }
+  }
+
+  async function fetchRates() {
+    try {
+      const res = await fetch('https://api.exchangerate-api.com/v4/latest/CNY');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.rates) {
+          exchangeRates = data.rates;
+          document.getElementById('fin-ex-rate').textContent = `汇率更新: ${new Date().toLocaleTimeString()}`;
+        }
+      }
+    } catch (e) {
+      console.warn('Rate fetch failed', e);
+      document.getElementById('fin-ex-rate').textContent = '使用默认汇率';
+    }
+  }
+
+  async function updateData() {
+    try {
+      const res = await fetch('/api/nodes');
+      if (!res.ok) throw new Error('API Error');
+      const json = await res.json();
+      if (json.status === 'success' && Array.isArray(json.data)) {
+        calculate(json.data);
+      }
+    } catch (e) {
+      console.warn('Node fetch failed', e);
+    }
+  }
+
+  function getPriceInfo(node) {
+    let price = parseFloat(node.price);
+    let isSpecialFree = false;
+
+    if (price === -1) {
+      price = 0;
+      isSpecialFree = true;
+    } else if (isNaN(price)) {
+      price = 0;
+    }
+
+    let cur = node.currency || '￥';
+    if (cur === 'CNY') cur = '￥';
+
+    let finalPrice = 0;
+    if (cur === '￥') finalPrice = price;
+    else if (cur === 'HK$') finalPrice = price / (exchangeRates['HKD'] || 1.08);
+    else if (cur === '$' || cur === 'USD') finalPrice = price / (exchangeRates['USD'] || 0.14);
+    else if (cur === '€' || cur === 'EUR') finalPrice = price / (exchangeRates['EUR'] || 0.13);
+    else if (cur === '£' || cur === 'GBP') finalPrice = price / (exchangeRates['GBP'] || 0.11);
+    else finalPrice = price;
+
+    return { price: finalPrice, isSpecialFree };
+  }
+
+  function calculate(nodes) {
+    nodes = nodes.slice().sort((a, b) => {
+      if (sortBy === 'weight_asc') {
+        return a.weight - b.weight;
+      } else if (sortBy === 'weight_desc') {
+        return b.weight - a.weight;
+      } else if (sortBy === 'price_asc') {
+        return a.price - b.price;
+      } else if (sortBy === 'price_desc') {
+        return b.price - a.price;
+      }
+      return 0;
+    });
+
+    let totalPriceCNY = 0;
+    let monthlyPriceCNY = 0;
+    let totalRemainValCNY = 0;
+    let totalNodes = 0;
+    let specialCases = [];
+
+    const now = new Date();
+    const targetRate = exchangeRates[userCurrency] || 1;
+    const sym = currencySymbols[userCurrency] || userCurrency;
+
+    detailListEl.innerHTML = '';
+
+    nodes.forEach(node => {
+      totalNodes++;
+      const isFreeTag = node.tags && node.tags.includes('白嫖中');
+      const { price: priceCNY, isSpecialFree } = getPriceInfo(node);
+
+      let cycleMonths = 1;
+      if (node.billing_cycle === 365) cycleMonths = 12;
+      else if (node.billing_cycle === 30) cycleMonths = 1;
+      else if (node.billing_cycle > 0) cycleMonths = node.billing_cycle / 30;
+
+      const pricePerMonth = cycleMonths > 0 ? priceCNY / cycleMonths : 0;
+
+      let remainingVal = 0;
+      let isLongTerm = false;
+
+      if (node.expired_at) {
+        const exp = new Date(node.expired_at);
+        const diffMs = exp - now;
+
+        const diffYears = diffMs / (1000 * 60 * 60 * 24 * 365);
+
+        if (diffYears > LONG_TERM_YEARS) {
+          remainingVal = priceCNY;
+          isLongTerm = true;
+        } else {
+          const billingCycleMs = node.billing_cycle * 24 * 60 * 60 * 1000;
+          if (diffMs > 0 && billingCycleMs > 0) {
+            remainingVal = priceCNY * (diffMs / billingCycleMs);
+          }
+        }
+      }
+
+      const shouldExclude = excludeFree && isFreeTag;
+
+      const displayVal = remainingVal * targetRate;
+      let helpIcon = '';
+      let tooltipText = '';
+
+      if (isSpecialFree) {
+        specialCases.push(`${node.name} (免费鸡)`);
+        tooltipText = `${node.name} (免费鸡)`;
+      } else if (isLongTerm) {
+        specialCases.push(`${node.name} (长期鸡，按原价)`);
+        tooltipText = `到期时间 > ${LONG_TERM_YEARS}年，按原价计算`;
+      } else if (isFreeTag && !shouldExclude) {
+        specialCases.push(`${node.name} (白嫖中)`);
+        tooltipText = `${node.name} (白嫖中)`;
+      }
+
+      if (tooltipText) {
+        helpIcon = `<div class="help-icon" data-tooltip="${tooltipText}" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                    </div>`;
+      }
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'finance-list-item';
+      itemDiv.innerHTML = `
+                    <span class="item-name" title="${node.public_remark || node.name}">${node.name}</span>
+                    <div class="item-right">
+                        <span class="item-value">${sym} ${displayVal.toFixed(2)}</span>
+                        ${helpIcon}
+                    </div>
+                `;
+      detailListEl.appendChild(itemDiv);
+
+      if (!shouldExclude) {
+        totalPriceCNY += priceCNY;
+        monthlyPriceCNY += pricePerMonth;
+        totalRemainValCNY += remainingVal;
+      }
+    });
+
+    const remainHelpIcon = document.getElementById('fin-remain-help');
+    if (specialCases.length > 0) {
+      const allTips = specialCases.join('\n');
+      remainHelpIcon.classList.add('show-help');
+      remainHelpIcon.setAttribute('data-tooltip', allTips);
+      remainHelpIcon.onclick = (e) => {
+        e.stopPropagation();
+        remainHelpIcon.classList.toggle('active');
+      };
+    } else {
+      remainHelpIcon.classList.remove('show-help');
+    }
+
+    totalCountEl.textContent = totalNodes;
+    document.getElementById('fin-total-price').textContent = `${sym} ${(totalPriceCNY * targetRate).toFixed(2)}`;
+    document.getElementById('fin-monthly-price').textContent = `${sym} ${(monthlyPriceCNY * targetRate).toFixed(2)}`;
+    document.getElementById('fin-remain-value').textContent = `${sym} ${(totalRemainValCNY * targetRate).toFixed(2)}`;
+  }
+
+  refreshBtn.addEventListener('click', () => {
+    refreshBtn.querySelector('svg').style.animation = 'spin 1s linear';
+    setTimeout(() => refreshBtn.querySelector('svg').style.animation = '', 1000);
+    updateData();
+  });
+
+  toggleFreeBtn.addEventListener('click', () => {
+    excludeFree = !excludeFree;
+    localStorage.setItem('fin_exclude_free', excludeFree);
+    updateToggleBtnState();
+    updateData();
+  });
+
+  select.addEventListener('change', (e) => {
+    userCurrency = e.target.value;
+    localStorage.setItem('fin_currency', userCurrency);
+    updateData();
+  });
+
+  sortSelect.addEventListener('change', (e) => {
+    sortBy = e.target.value;
+    localStorage.setItem('fin_sort', sortBy);
+    updateData();
+  });
+
+  closeBtn.addEventListener('click', () => {
+    widget.classList.remove('show');
+    ball.classList.add('show');
+  });
+
+  ball.addEventListener('click', () => {
+    ball.classList.remove('show');
+    widget.classList.add('show');
+    updateData();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.help-icon')) {
+      document.querySelectorAll('.help-icon.active').forEach(el => el.classList.remove('active'));
+    }
+  });
+
+  fetchRates().then(() => {
+    updateData();
+    // setTimeout(() => widget.classList.add('show'), 500);
+    setTimeout(() => ball.classList.add('show'), 500);
+  });
+}
+// 地球组件 (Earth)
+function initializeEarth() {
+  const ball = document.getElementById('earth-ball');
+  const overlay = document.getElementById('earth-modal-overlay');
+  const modalContent = document.getElementById('earth-modal-content');
+  const renderArea = document.getElementById('earth-render-area');
+  const tooltip = document.getElementById('earth-tooltip');
+  const counterValue = document.getElementById('earth-total-count');
+  let globeInstance = null;
+  let isGlobeInitialized = false;
+  let currentActiveFlag = null;
+  let lastAppliedThemeConfig = null;
+  const EMOJI_MAP = {
+    'CN': 'CN', 'HK': 'HK', 'TW': 'TW', 'MO': 'MO', 'JP': 'JP', 'KR': 'KR', 'KP': 'KP', 'MN': 'MN',
+    'SG': 'SG', 'TH': 'TH', 'VN': 'VN', 'ID': 'ID', 'MY': 'MY', 'PH': 'PH', 'MM': 'MM', 'KH': 'KH', 'LA': 'LA', 'TL': 'TL', 'BN': 'BN',
+    'IN': 'IN', 'BD': 'BD', 'PK': 'PK', 'LK': 'LK', 'NP': 'NP', 'BT': 'BT', 'MV': 'MV',
+    'KG': 'KG', 'TJ': 'TJ', 'KZ': 'KZ', 'UZ': 'UZ', 'TM': 'TM',
+    'AF': 'AF', 'IR': 'IR', 'IQ': 'IQ', 'SY': 'SY', 'LB': 'LB', 'JO': 'JO', 'PS': 'PS', 'IL': 'IL',
+    'SA': 'SA', 'AE': 'AE', 'QA': 'QA', 'KW': 'KW', 'OM': 'OM', 'BH': 'BH', 'YE': 'YE',
+    'TR': 'TR', 'CY': 'CY', 'AZ': 'AZ', 'GE': 'GE', 'AM': 'AM',
+    'GB': 'GB', 'FR': 'FR', 'DE': 'DE', 'NL': 'NL', 'BE': 'BE', 'LU': 'LU', 'CH': 'CH', 'AT': 'AT',
+    'IE': 'IE', 'MC': 'MC', 'LI': 'LI',
+    'IT': 'IT', 'ES': 'ES', 'PT': 'PT', 'GR': 'GR', 'MT': 'MT', 'SM': 'SM', 'VA': 'VA', 'AD': 'AD',
+    'HR': 'HR', 'BA': 'BA', 'ME': 'ME', 'MK': 'MK', 'AL': 'AL', 'SI': 'SI', 'RS': 'RS',
+    'SE': 'SE', 'NO': 'NO', 'DK': 'DK', 'FI': 'FI', 'IS': 'IS', 'FO': 'FO', 'SJ': 'SJ', 'AX': 'AX',
+    'RU': 'RU', 'UA': 'UA', 'BY': 'BY', 'MD': 'MD', 'PL': 'PL', 'CZ': 'CZ', 'SK': 'SK', 'HU': 'HU',
+    'RO': 'RO', 'BG': 'BG',
+    'LT': 'LT', 'LV': 'LV', 'EE': 'EE',
+    'IM': 'IM', 'GI': 'GI', 'JE': 'JE', 'GG': 'GG',
+    'US': 'US', 'CA': 'CA', 'MX': 'MX', 'GL': 'GL',
+    'PR': 'PR', 'CU': 'CU', 'DO': 'DO', 'HT': 'HT', 'JM': 'JM', 'BS': 'BS', 'BB': 'BB', 'TT': 'TT',
+    'LC': 'LC', 'DM': 'DM', 'GD': 'GD', 'AG': 'AG', 'KN': 'KN', 'VC': 'VC', 'AI': 'AI', 'AW': 'AW',
+    'BM': 'BM', 'BQ': 'BQ', 'CW': 'CW', 'KY': 'KY', 'GP': 'GP', 'MQ': 'MQ', 'MS': 'MS', 'SX': 'SX',
+    'TC': 'TC', 'VG': 'VG', 'VI': 'VI', 'BL': 'BL', 'MF': 'MF', 'PM': 'PM', 'AS': 'AS',
+    'CR': 'CR', 'PA': 'PA', 'GT': 'GT', 'HN': 'HN', 'SV': 'SV', 'NI': 'NI', 'BZ': 'BZ',
+    'BR': 'BR', 'AR': 'AR', 'CL': 'CL', 'CO': 'CO', 'PE': 'PE', 'VE': 'VE', 'EC': 'EC', 'BO': 'BO',
+    'PY': 'PY', 'UY': 'UY', 'GF': 'GF', 'SR': 'SR', 'GY': 'GY', 'FK': 'FK',
+    'EG': 'EG', 'MA': 'MA', 'DZ': 'DZ', 'TN': 'TN', 'LY': 'LY', 'EH': 'EH',
+    'NG': 'NG', 'GH': 'GH', 'SN': 'SN', 'ML': 'ML', 'NE': 'NE', 'MR': 'MR', 'SL': 'SL', 'LR': 'LR',
+    'GW': 'GW', 'CV': 'CV', 'BF': 'BF', 'CI': 'CI', 'TG': 'TG', 'BJ': 'BJ', 'GM': 'GM', 'GN': 'GN',
+    'CM': 'CM', 'CF': 'CF', 'GA': 'GA', 'CG': 'CG', 'CD': 'CD', 'AO': 'AO', 'TD': 'TD', 'GQ': 'GQ', 'ST': 'ST',
+    'KE': 'KE', 'ET': 'ET', 'TZ': 'TZ', 'UG': 'UG', 'SD': 'SD', 'SS': 'SS', 'RW': 'RW', 'BI': 'BI',
+    'SO': 'SO', 'ER': 'ER', 'DJ': 'DJ', 'KM': 'KM', 'SC': 'SC', 'MU': 'MU', 'RE': 'RE', 'YT': 'YT', 'MG': 'MG',
+    'ZA': 'ZA', 'ZM': 'ZM', 'ZW': 'ZW', 'MW': 'MW', 'MZ': 'MZ', 'NA': 'NA', 'BW': 'BW', 'LS': 'LS', 'SZ': 'SZ', 'SH': 'SH',
+    'AU': 'AU', 'NZ': 'NZ', 'FJ': 'FJ', 'PG': 'PG', 'SB': 'SB', 'VU': 'VU', 'NC': 'NC', 'PF': 'PF',
+    'NR': 'NR', 'TV': 'TV', 'WS': 'WS', 'TO': 'TO', 'KI': 'KI', 'MH': 'MH', 'FM': 'FM', 'PW': 'PW',
+    'MP': 'MP', 'GU': 'GU', 'WF': 'WF', 'NU': 'NU', 'TK': 'TK', 'CK': 'CK', 'PN': 'PN', 'NF': 'NF',
+    'AQ': 'AQ',
+    'UN': 'UN', 'EU': 'EU', 'AC': 'AC', 'TA': 'TA', 'CP': 'CP', 'EA': 'EA', 'IC': 'IC', 'XA': 'XA',
+    'XB': 'XB', 'EZ': 'EZ', 'ZZ': 'ZZ', 'IO': 'IO', 'TF': 'TF', 'GS': 'GS', 'HM': 'HM',
+    'UM': 'UM', 'BV': 'BV', 'CC': 'CC', 'CX': 'CX', 'DG': 'DG', 'XK': 'XK',
+
+    '🇨🇳': 'CN', '🇭🇰': 'HK', '🇹🇼': 'TW', '🇲🇴': 'MO', '🇯🇵': 'JP', '🇰🇷': 'KR', '🇰🇵': 'KP', '🇲🇳': 'MN',
+    '🇸🇬': 'SG', '🇹🇭': 'TH', '🇻🇳': 'VN', '🇮🇩': 'ID', '🇲🇾': 'MY', '🇵🇭': 'PH', '🇲🇲': 'MM', '🇰🇭': 'KH',
+    '🇱🇦': 'LA', '🇹🇱': 'TL', '🇧🇳': 'BN', '🇮🇳': 'IN', '🇧🇩': 'BD', '🇵🇰': 'PK', '🇱🇰': 'LK', '🇳🇵': 'NP',
+    '🇧🇹': 'BT', '🇲🇻': 'MV', '🇰🇬': 'KG', '🇹🇯': 'TJ', '🇰🇿': 'KZ', '🇺🇿': 'UZ', '🇹🇲': 'TM', '🇦🇫': 'AF',
+    '🇮🇷': 'IR', '🇮🇶': 'IQ', '🇸🇾': 'SY', '🇱🇧': 'LB', '🇯🇴': 'JO', '🇵🇸': 'PS', '🇮🇱': 'IL', '🇸🇦': 'SA',
+    '🇦🇪': 'AE', '🇶🇦': 'QA', '🇰🇼': 'KW', '🇴🇲': 'OM', '🇧🇭': 'BH', '🇾🇪': 'YE', '🇹🇷': 'TR', '🇨🇾': 'CY',
+    '🇦🇿': 'AZ', '🇬🇪': 'GE', '🇦🇲': 'AM',
+    '🇬🇧': 'GB', '🇫🇷': 'FR', '🇩🇪': 'DE', '🇳🇱': 'NL', '🇧🇪': 'BE', '🇱🇺': 'LU', '🇨🇭': 'CH', '🇦🇹': 'AT',
+    '🇮🇪': 'IE', '🇲🇨': 'MC', '🇱🇮': 'LI', '🇮🇹': 'IT', '🇪🇸': 'ES', '🇵🇹': 'PT', '🇬🇷': 'GR', '🇲🇹': 'MT',
+    '🇸🇲': 'SM', '🇻🇦': 'VA', '🇦🇩': 'AD', '🇭🇷': 'HR', '🇧🇦': 'BA', '🇲🇪': 'ME', '🇲🇰': 'MK', '🇦🇱': 'AL',
+    '🇸🇮': 'SI', '🇷🇸': 'RS', '🇸🇪': 'SE', '🇳🇴': 'NO', '🇩🇰': 'DK', '🇫🇮': 'FI', '🇮🇸': 'IS', '🇫🇴': 'FO',
+    '🇸🇯': 'SJ', '🇦🇽': 'AX', '🇷🇺': 'RU', '🇺🇦': 'UA', '🇧🇾': 'BY', '🇲🇩': 'MD', '🇵🇱': 'PL', '🇨🇿': 'CZ',
+    '🇸🇰': 'SK', '🇭🇺': 'HU', '🇷🇴': 'RO', '🇧🇬': 'BG', '🇱🇹': 'LT', '🇱🇻': 'LV', '🇪🇪': 'EE', '🇮🇲': 'IM',
+    '🇬🇮': 'GI', '🇯🇪': 'JE', '🇬🇬': 'GG',
+    '🇺🇸': 'US', '🇨🇦': 'CA', '🇲🇽': 'MX', '🇬🇱': 'GL', '🇵🇷': 'PR', '🇨🇺': 'CU', '🇩🇴': 'DO', '🇭🇹': 'HT',
+    '🇯🇲': 'JM', '🇧🇸': 'BS', '🇧🇧': 'BB', '🇹🇹': 'TT', '🇱🇨': 'LC', '🇩🇲': 'DM', '🇬🇩': 'GD', '🇦🇬': 'AG',
+    '🇰🇳': 'KN', '🇻🇨': 'VC', '🇦🇮': 'AI', '🇦🇼': 'AW', '🇧🇲': 'BM', '🇧🇶': 'BQ', '🇨🇼': 'CW', '🇰🇾': 'KY',
+    '🇬🇵': 'GP', '🇲🇶': 'MQ', '🇲🇸': 'MS', '🇸🇽': 'SX', '🇹🇨': 'TC', '🇻🇬': 'VG', '🇻🇮': 'VI', '🇧🇱': 'BL',
+    '🇲🇫': 'MF', '🇵🇲': 'PM', '🇦🇸': 'AS',
+    '🇨🇷': 'CR', '🇵🇦': 'PA', '🇬🇹': 'GT', '🇭🇳': 'HN', '🇸🇻': 'SV', '🇳🇮': 'NI', '🇧🇿': 'BZ',
+    '🇧🇷': 'BR', '🇦🇷': 'AR', '🇨🇱': 'CL', '🇨🇴': 'CO', '🇵🇪': 'PE', '🇻🇪': 'VE', '🇪🇨': 'EC', '🇧🇴': 'BO',
+    '🇵🇾': 'PY', '🇺🇾': 'UY', '🇬🇫': 'GF', '🇸🇷': 'SR', '🇬🇾': 'GY', '🇫🇰': 'FK',
+    '🇪🇬': 'EG', '🇲🇦': 'MA', '🇩🇿': 'DZ', '🇹🇳': 'TN', '🇱🇾': 'LY', '🇪🇭': 'EH', '🇳🇬': 'NG', '🇬🇭': 'GH',
+    '🇸🇳': 'SN', '🇲🇱': 'ML', '🇳🇪': 'NE', '🇲🇷': 'MR', '🇸🇱': 'SL', '🇱🇷': 'LR', '🇬🇼': 'GW', '🇨🇻': 'CV',
+    '🇧🇫': 'BF', '🇨🇮': 'CI', '🇹🇬': 'TG', '🇧🇯': 'BJ', '🇬🇲': 'GM', '🇬🇳': 'GN', '🇨🇲': 'CM', '🇨🇫': 'CF',
+    '🇬🇦': 'GA', '🇨🇬': 'CG', '🇨🇩': 'CD', '🇦🇴': 'AO', '🇹🇩': 'TD', '🇬🇶': 'GQ', '🇸🇹': 'ST', '🇰🇪': 'KE',
+    '🇪🇹': 'ET', '🇹🇿': 'TZ', '🇺🇬': 'UG', '🇸🇩': 'SD', '🇸🇸': 'SS', '🇷🇼': 'RW', '🇧🇮': 'BI', '🇸🇴': 'SO',
+    '🇪🇷': 'ER', '🇩🇯': 'DJ', '🇰🇲': 'KM', '🇸🇨': 'SC', '🇲🇺': 'MU', '🇷🇪': 'RE', '🇾🇹': 'YT', '🇲🇬': 'MG',
+    '🇿🇦': 'ZA', '🇿🇲': 'ZM', '🇿🇼': 'ZW', '🇲🇼': 'MW', '🇲🇿': 'MZ', '🇳🇦': 'NA', '🇧🇼': 'BW', '🇱🇸': 'LS',
+    '🇸🇿': 'SZ', '🇸🇭': 'SH',
+    '🇦🇺': 'AU', '🇳🇿': 'NZ', '🇫🇯': 'FJ', '🇵🇬': 'PG', '🇸🇧': 'SB', '🇻🇺': 'VU', '🇳🇨': 'NC', '🇵🇫': 'PF',
+    '🇳🇷': 'NR', '🇹🇻': 'TV', '🇼🇸': 'WS', '🇹🇴': 'TO', '🇰🇮': 'KI', '🇲🇭': 'MH', '🇫🇲': 'FM', '🇵🇼': 'PW',
+    '🇲🇵': 'MP', '🇬🇺': 'GU', '🇼🇫': 'WF', '🇳🇺': 'NU', '🇹🇰': 'TK', '🇨🇰': 'CK', '🇵🇳': 'PN', '🇳🇫': 'NF',
+    '🇦🇶': 'AQ',
+    '🇺🇳': 'UN', '🇪🇺': 'EU', '🇦🇨': 'AC', '🇹🇦': 'TA', '🇨🇵': 'CP', '🇪🇦': 'EA', '🇮🇨': 'IC', '🇽🇦': 'XA',
+    '🇽🇧': 'XB', '🇪🇿': 'EZ', '🇿🇿': 'ZZ', '🇮🇴': 'IO', '🇹🇫': 'TF', '🇬🇸': 'GS', '🇭🇲': 'HM',
+    '🇺🇲': 'UM', '🇧🇻': 'BV', '🇨🇨': 'CC', '🇨🇽': 'CX', '🇩🇬': 'DG', '🇽🇰': 'XK'
+  };
+  const COORD_MAP = {
+    'CN': [35.8617, 104.1954], 'HK': [22.3193, 114.1694], 'MO': [22.1987, 113.5439],
+    'TW': [23.6978, 120.9605], 'JP': [36.2048, 138.2529], 'KR': [35.9078, 127.7669],
+    'KP': [40.3399, 127.5101], 'MN': [46.8625, 103.8467],
+    'SG': [1.3521, 103.8198], 'MY': [4.2105, 101.9758], 'TH': [15.8700, 100.9925],
+    'VN': [14.0583, 108.2772], 'PH': [12.8797, 121.7740], 'ID': [-0.7893, 113.9213],
+    'MM': [21.9162, 95.9560], 'KH': [12.5657, 104.9910], 'LA': [19.8562, 102.4955],
+    'TL': [-8.8742, 125.7275], 'BN': [4.5353, 114.7277],
+    'IN': [20.5937, 78.9629], 'BD': [23.6850, 90.3563], 'PK': [30.3753, 69.3451],
+    'LK': [7.8731, 80.7718], 'NP': [28.3949, 84.1240], 'BT': [27.5142, 90.4336],
+    'MV': [3.2028, 73.2207],
+    'KG': [41.2044, 74.7661], 'TJ': [38.8610, 71.2761], 'KZ': [48.0196, 66.9237],
+    'UZ': [41.3775, 64.5853], 'TM': [38.9697, 69.4540],
+    'AF': [33.9391, 67.7099], 'IR': [32.4279, 53.6880], 'IQ': [33.2232, 43.6793],
+    'SY': [34.8021, 38.9968], 'LB': [33.8547, 35.8623], 'JO': [30.5852, 36.2384],
+    'PS': [31.9522, 35.2332], 'IL': [31.0461, 34.8516], 'SA': [23.8859, 45.0792],
+    'AE': [23.4241, 53.8478], 'QA': [25.3548, 51.1839], 'KW': [29.3117, 47.4818],
+    'OM': [21.4735, 55.9754], 'BH': [25.9304, 50.6378], 'YE': [15.5527, 48.5164],
+    'TR': [38.9637, 35.2433], 'CY': [35.1264, 33.4299], 'AZ': [40.1431, 47.5769],
+    'GE': [42.3154, 43.3569], 'AM': [40.0691, 45.0382],
+    'GB': [55.3781, -3.4360], 'FR': [46.2276, 2.2137], 'DE': [51.1657, 10.4515],
+    'NL': [52.1326, 5.2913], 'BE': [50.5039, 4.4699], 'LU': [49.8153, 6.1296],
+    'CH': [46.8182, 8.2275], 'AT': [47.5162, 14.5501], 'IE': [53.4129, -8.2439],
+    'MC': [43.7384, 7.4246], 'LI': [47.1660, 9.5554],
+    'IT': [41.8719, 12.5674], 'ES': [40.4637, -3.7492], 'PT': [39.3999, -8.2245],
+    'GR': [39.0742, 21.8243], 'MT': [35.9375, 14.3754], 'SM': [43.9424, 12.4578],
+    'VA': [41.9029, 12.4534], 'AD': [42.5063, 1.5218], 'HR': [45.1000, 15.2000],
+    'BA': [43.9159, 17.6791], 'ME': [42.7087, 19.3744], 'MK': [41.6086, 21.7453],
+    'AL': [41.1533, 20.1683], 'SI': [46.1512, 14.9955], 'RS': [44.0165, 21.0059],
+    'SE': [60.1282, 18.6435], 'NO': [60.4720, 8.4689], 'DK': [56.2639, 9.5018],
+    'FI': [61.9241, 25.7482], 'IS': [64.9631, -19.0208], 'FO': [62.0100, -6.7800],
+    'SJ': [77.5500, 23.6000], 'AX': [60.1785, 19.9156],
+    'RU': [61.5240, 105.3188], 'UA': [48.3794, 31.1656], 'BY': [53.7098, 27.9534],
+    'MD': [47.4116, 28.3699], 'PL': [51.9194, 19.1451], 'CZ': [49.8175, 15.4730],
+    'SK': [48.6690, 19.6990], 'HU': [47.1625, 19.5033], 'RO': [45.9432, 24.9668],
+    'BG': [42.7339, 25.4858],
+    'LT': [55.1694, 23.8813], 'LV': [56.8796, 24.6032], 'EE': [58.5953, 25.0136],
+    'IM': [54.2361, -4.5481], 'GI': [36.1378, -5.3453], 'JE': [49.2144, -2.1312],
+    'GG': [49.4657, -2.5853],
+    'US': [37.0902, -95.7129], 'CA': [56.1304, -106.3468], 'MX': [23.6345, -102.5528],
+    'GL': [71.7069, -42.6043],
+    'PR': [18.2208, -66.5901], 'CU': [21.5218, -77.7812], 'DO': [18.7357, -70.1627],
+    'HT': [18.9712, -72.2852], 'JM': [18.1096, -77.2975], 'BS': [25.0343, -77.3963],
+    'BB': [13.1939, -59.5432], 'TT': [10.6918, -61.2225], 'LC': [13.9094, -60.9789],
+    'DM': [15.4150, -61.3710], 'GD': [12.1165, -61.6790], 'AG': [17.0608, -61.7964],
+    'KN': [17.3578, -62.7830], 'VC': [13.2500, -61.2000], 'AI': [18.2206, -63.0686],
+    'AW': [12.5211, -69.9683], 'BM': [32.3214, -64.7574], 'BQ': [12.1784, -68.2385],
+    'CW': [12.1696, -68.9900], 'KY': [19.3133, -81.2546], 'GP': [16.2650, -61.5510],
+    'MQ': [14.6415, -61.0242], 'MS': [16.7420, -62.1874], 'SX': [18.0425, -63.0548],
+    'TC': [21.6940, -71.7979], 'VG': [18.4207, -64.6399], 'VI': [18.3358, -64.8963],
+    'BL': [17.9, -62.8333], 'MF': [18.0708, -63.0784], 'PM': [46.8852, -56.3159],
+    'AS': [-14.2710, -170.1320],
+    'CR': [9.7489, -83.7534], 'PA': [8.5380, -80.7821], 'GT': [15.7835, -90.2308],
+    'HN': [15.1999, -86.2419], 'SV': [13.7942, -88.8965], 'NI': [12.8654, -85.2072],
+    'BZ': [17.1899, -88.4976],
+    'BR': [-14.2350, -51.9253], 'AR': [-38.4161, -63.6167], 'CL': [-35.6751, -71.5430],
+    'CO': [4.5709, -74.2973], 'PE': [-9.1900, -75.0152], 'VE': [6.4238, -66.5897],
+    'EC': [-1.8312, -78.1834], 'BO': [-16.2902, -63.5887], 'PY': [-23.4425, -58.4438],
+    'UY': [-32.5228, -55.7658], 'GF': [3.9339, -53.1258], 'SR': [3.9193, -56.0278],
+    'GY': [4.8604, -58.9302], 'FK': [-51.7963, -59.5236],
+    'EG': [26.8206, 30.8025], 'MA': [31.7917, -7.0926], 'DZ': [28.0339, 1.6596],
+    'TN': [33.8869, 9.5375], 'LY': [26.3351, 17.2283], 'EH': [24.2155, -12.8858],
+    'NG': [9.0820, 8.6753], 'GH': [7.9465, -1.0232], 'SN': [14.4974, -14.4524],
+    'ML': [17.5707, -3.9962], 'NE': [17.6078, 8.0817], 'MR': [21.0079, -10.9408],
+    'SL': [8.4606, -11.7799], 'LR': [6.4281, -9.4295], 'GW': [11.8037, -15.1802],
+    'CV': [15.1481, -23.7135], 'BF': [12.2383, -1.8641], 'CI': [7.5400, -5.5471],
+    'TG': [8.6195, 0.8248], 'BJ': [9.3077, 2.3158], 'GM': [13.4432, -15.3101],
+    'GN': [9.9456, -9.6966],
+    'CM': [7.3697, 12.3547], 'CF': [6.6111, 20.9394], 'GA': [-0.2280, 11.6055],
+    'CG': [-0.2280, 15.8277], 'CD': [-4.0383, 21.7587], 'AO': [-11.2027, 17.8739],
+    'TD': [15.4542, 18.7322], 'GQ': [1.6571, 10.2679], 'ST': [0.1864, 6.6131],
+    'KE': [-0.0236, 37.9062], 'ET': [9.1450, 40.4897], 'TZ': [-6.3690, 34.8888],
+    'UG': [1.3733, 32.2903], 'SD': [12.8628, 30.2176], 'SS': [6.8770, 31.3070],
+    'RW': [-1.9403, 29.8739], 'BI': [-3.3731, 29.9189], 'SO': [5.1521, 46.1996],
+    'ER': [15.1794, 39.7823], 'DJ': [11.8251, 42.5903], 'KM': [-11.6455, 43.3333],
+    'SC': [-4.6796, 55.4920], 'MU': [-20.3484, 57.5522], 'RE': [-21.1151, 55.5364],
+    'YT': [-12.8275, 45.1662], 'MG': [-18.7669, 46.8691],
+    'ZA': [-30.5595, 22.9375], 'ZM': [-13.1339, 27.8493], 'ZW': [-19.0154, 29.1549],
+    'MW': [-13.2543, 34.3015], 'MZ': [-18.6657, 35.5296], 'NA': [-22.9576, 18.4904],
+    'BW': [-22.3285, 24.6849], 'LS': [-29.6100, 28.2336], 'SZ': [-26.5225, 31.4659],
+    'SH': [-7.9467, -14.3776],
+    'AU': [-25.2744, 133.7751], 'NZ': [-40.9006, 174.8860], 'FJ': [-17.7134, 178.0650],
+    'PG': [-6.31499, 143.9555], 'SB': [-8.4500, 157.0000], 'VU': [-15.3767, 166.9592],
+    'NC': [-20.9043, 165.6180], 'PF': [-17.6797, -149.4068], 'NR': [-0.5228, 166.9315],
+    'TV': [-7.1095, 177.6493], 'WS': [-13.7590, -172.1046], 'TO': [-20.4290, -174.8655],
+    'KI': [1.8856, -157.5562], 'MH': [7.1315, 171.1899], 'FM': [7.4256, 150.5508],
+    'PW': [7.5150, 134.5825], 'MP': [15.2097, 145.7269], 'GU': [13.4443, 144.7937],
+    'WF': [-13.7687, -177.1560], 'NU': [-19.0544, -169.8672], 'TK': [-9.2000, -171.5000],
+    'CK': [-21.2367, -159.7770], 'PN': [-25.0700, -130.1000], 'NF': [-29.0408, 167.9547],
+    'AQ': [-75.2509, -0.0713],
+    'UN': [0, 0], 'EU': [50, 10], 'AC': [-7.9400, -14.3500], 'TA': [-37.0700, -12.3000],
+    'CP': [10.3800, 109.2100], 'EA': [28.7000, -17.7500], 'IC': [28.0000, -15.5000],
+    'XA': [0, 0], 'XB': [0, 0], 'EZ': [0, 0], 'ZZ': [0, 0], 'IO': [-6.3432, 71.8765],
+    'TF': [-49.2804, 69.3486], 'GS': [-54.4296, -36.5879], 'HM': [-53.0818, 73.5042],
+    'UM': [19.2823, 166.6470], 'BV': [-54.4208, 3.3464], 'CC': [-12.1642, 96.8710],
+    'CX': [-10.4475, 105.6904], 'DG': [-7.3000, 72.4000], 'XK': [42.6026, 20.9030]
+  };
+  function getThemeColor() {
+    const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-9').trim() ||
+        (localStorage.getItem('color') ? localStorage.getItem('color').replace(/"/g, '') : null);
+    return color || '#3b82f6';
+  }
+  function getBackgroundConfig() {
+    const userAppearance = localStorage.getItem('appearance');
+    let isLight;
+    if (userAppearance === '"light"') {
+      isLight = true;
+    } else if (userAppearance === '"dark"') {
+      isLight = false;
+    } else {
+      isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    }
+    bg = 'rgba(0, 0, 0, 0)'
+    if (isLight) {
+      return {
+        bg: bg,
+        bgImage: null,
+        globeImage: '//unpkg.com/three-globe/example/img/earth-day.jpg',
+        atmosphere: 'rgba(59, 130, 246, 0.2)'
+      };
+    } else {
+      return {
+        bg: bg,
+        bgImage: '//unpkg.com/three-globe/example/img/night-sky.png',
+        globeImage: '//unpkg.com/three-globe/example/img/earth-night.jpg',
+        atmosphere: getThemeColor()
+      };
+    }
+  }
+  function getCodeFromNode(node) {
+    if (node.country_code) return node.country_code.toUpperCase();
+    if (node.region && EMOJI_MAP[node.region]) return EMOJI_MAP[node.region];
+    return null;
+  }
+  ball.addEventListener('click', async () => {
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      modalContent.style.transform = 'scale(1)';
+    });
+    updateGlobeTheme();
+    if (!isGlobeInitialized) {
+      try {
+        const res = await fetch('/api/nodes');
+        const json = await res.json();
+        let nodes = [];
+        if (json.status === 'success' && Array.isArray(json.data)) {
+          nodes = json.data;
+        }
+        const { formattedData, arcsData, totalCount } = processData(nodes);
+        if (counterValue) counterValue.innerText = totalCount;
+        initGlobe(formattedData, arcsData);
+        isGlobeInitialized = true;
+        setTimeout(() => {
+          renderArea.classList.add('ready');
+        }, 100);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      setTimeout(() => {
+        if(globeInstance) {
+          globeInstance.width(renderArea.clientWidth);
+          globeInstance.height(renderArea.clientHeight);
+        }
+      }, 300);
+    }
+  });
+  function processData(nodes) {
+    const groups = {};
+    let count = 0;
+    nodes.forEach(node => {
+      let code = getCodeFromNode(node);
+      if (code) {
+        if (!groups[code]) groups[code] = [];
+        groups[code].push(node.name);
+        count++;
+      }
+    });
+    const formattedData = Object.keys(groups).map(code => {
+      const coords = COORD_MAP[code];
+      if (!coords) return null;
+      return {
+        code: code,
+        lat: coords[0],
+        lng: coords[1],
+        servers: groups[code],
+        type: 'server',
+        size: Math.min(groups[code].length * 0.15, 1.5)
+      };
+    }).filter(item => item !== null);
+    const arcsData = [];
+    const userLat = window.currentUserGeo ? window.currentUserGeo.lat : 35.8617;
+    const userLng = window.currentUserGeo ? window.currentUserGeo.lng : 104.1954;
+    const userCity = window.currentUserGeo ? window.currentUserGeo.city : 'Your Location';
+    formattedData.push({
+      code: 'USER',
+      lat: userLat,
+      lng: userLng,
+      servers: [userCity],
+      type: 'user',
+      size: 2.0
+    });
+    formattedData.forEach(item => {
+      if (item.type === 'server') {
+        arcsData.push({
+          startLat: item.lat,
+          startLng: item.lng,
+          endLat: userLat,
+          endLng: userLng,
+        });
+      }
+    });
+    return { formattedData, arcsData, totalCount: count };
+  }
+  function calculateFlagSize(altitude) {
+    const baseSize = 24;
+    const minSize = 16;
+    const maxSize = 40;
+    const zoomFactor = Math.max(0.5, Math.min(2, 3 - altitude));
+    return Math.max(minSize, Math.min(maxSize, baseSize * zoomFactor));
+  }
+  function checkOverlap(data) {
+    const threshold = 2;
+    for (let i = 0; i < data.length; i++) {
+      for (let j = i + 1; j < data.length; j++) {
+        const latDiff = Math.abs(data[i].lat - data[j].lat);
+        const lngDiff = Math.abs(data[i].lng - data[j].lng);
+        const distance = Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
+        if (distance < threshold) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  function hideTooltip() {
+    tooltip.style.display = 'none';
+    tooltip.style.transform = '';
+    if (currentActiveFlag) {
+      if(currentActiveFlag.classList.contains('earth-flag-img')) {
+        currentActiveFlag.style.transform = 'translate(-50%, -50%) scale(1)';
+        currentActiveFlag.style.zIndex = 'auto';
+        currentActiveFlag.style.filter = `drop-shadow(0 0 4px ${getThemeColor()})`;
+      }
+      currentActiveFlag = null;
+    }
+    if (globeInstance) {
+      globeInstance.controls().autoRotate = true;
+    }
+  }
+  function initGlobe(pointsData, arcsData) {
+    const config = getBackgroundConfig();
+    const themeColor = getThemeColor();
+    const w = renderArea.clientWidth;
+    const h = renderArea.clientHeight;
+    const hasOverlap = checkOverlap(pointsData);
+    const isMobile = window.innerWidth <= 768;
+    const initialAltitude = isMobile ? 3.0 : 2.0;
+    globeInstance = Globe()(renderArea)
+        .width(w)
+        .height(h)
+        .backgroundColor(config.bg)
+        .backgroundImageUrl(config.bgImage)
+        .globeImageUrl(config.globeImage)
+        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+        .atmosphereColor(config.atmosphere)
+        .atmosphereAltitude(0.15)
+        .htmlElementsData(pointsData)
+        .htmlLat(d => d.lat)
+        .htmlLng(d => d.lng)
+        .htmlElement(d => {
+          const el = document.createElement('div');
+          if (d.type === 'user') {
+            const marker = document.createElement('div');
+            marker.className = 'earth-user-marker';
+            marker.innerHTML = `<img src="/favicon.ico" alt="You">`;
+            marker.onclick = (e) => {
+              e.stopPropagation();
+              hideTooltip();
+              globeInstance.controls().autoRotate = false;
+              tooltip.style.display = 'block';
+              tooltip.innerHTML = `
+                    <div class="earth-tooltip-header">
+                        <span>YOU</span>
+                    </div>
+                    <div class="earth-tooltip-content">
+                      <div class="earth-tooltip-item">${d.servers[0]}</div>
+                    </div>
+                  `;
+              const parentRect = renderArea.getBoundingClientRect();
+              const rect = marker.getBoundingClientRect();
+              if (window.innerWidth <= 768) {
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.style.top = 'auto';
+                tooltip.style.bottom = '20px';
+              } else {
+                tooltip.style.left = (rect.right - parentRect.left + 15) + 'px';
+                tooltip.style.top = (rect.top - parentRect.top) + 'px';
+              }
+            };
+            el.appendChild(marker);
+          } else {
+            const img = document.createElement('img');
+            img.src = `/assets/flags/${d.code}.svg`;
+            img.className = 'earth-flag-img';
+            img.style.pointerEvents = 'auto';
+            const updateFlagSize = () => {
+              if (!globeInstance) return;
+              const controls = globeInstance.controls();
+              const altitude = controls.getDistance ? controls.getDistance() / 200 : 2;
+              let newSize = calculateFlagSize(altitude);
+              if (hasOverlap && altitude < 1.5) {
+                newSize = Math.max(16, newSize * 0.7);
+              }
+              img.style.width = newSize + 'px';
+            };
+            updateFlagSize();
+            globeInstance.controls().addEventListener('change', updateFlagSize);
+            img.onmouseenter = (e) => {
+              if (currentActiveFlag !== img) {
+                img.style.transform = 'translate(-50%, -50%) scale(1.3)';
+                img.style.filter = `drop-shadow(0 0 6px ${themeColor})`;
+              }
+            };
+            img.onmouseleave = (e) => {
+              if (currentActiveFlag !== img) {
+                img.style.transform = 'translate(-50%, -50%) scale(1)';
+                img.style.filter = `drop-shadow(0 0 4px ${themeColor})`;
+              }
+            };
+            img.onclick = (e) => {
+              e.stopPropagation();
+              if (currentActiveFlag === img) {
+                hideTooltip();
+                return;
+              }
+              if (currentActiveFlag) {
+                if(currentActiveFlag.classList.contains('earth-flag-img')) {
+                  currentActiveFlag.style.transform = 'translate(-50%, -50%) scale(1)';
+                  currentActiveFlag.style.zIndex = 'auto';
+                  currentActiveFlag.style.filter = `drop-shadow(0 0 4px ${themeColor})`;
+                }
+              }
+              globeInstance.controls().autoRotate = false;
+              currentActiveFlag = img;
+              img.style.transform = 'translate(-50%, -50%) scale(1.5)';
+              img.style.zIndex = '1000';
+              img.style.filter = `drop-shadow(0 0 8px ${themeColor})`;
+              const rect = img.getBoundingClientRect();
+              const parentRect = renderArea.getBoundingClientRect();
+              tooltip.style.display = 'block';
+              tooltip.innerHTML = `
+                    <div class="earth-tooltip-header">
+                        <span>${d.code}</span>
+                        <span style="color: var(--gray-11); font-weight: normal; font-size: 0.85rem;">(${d.servers.length})</span>
+                    </div>
+                    <div class="earth-tooltip-content">
+                      ${d.servers.map(s => `<div class="earth-tooltip-item">${s}</div>`).join('')}
+                    </div>
+                `;
+              const tooltipRect = tooltip.getBoundingClientRect();
+              if (window.innerWidth <= 768) {
+                tooltip.style.left = '50%';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.style.top = 'auto';
+                tooltip.style.bottom = '20px';
+              } else {
+                let leftPos = rect.right - parentRect.left + 15;
+                let topPos = rect.top - parentRect.top;
+                if (leftPos + tooltipRect.width > parentRect.width) {
+                  leftPos = rect.left - parentRect.left - tooltipRect.width - 15;
+                }
+                if (topPos + tooltipRect.height > parentRect.height) {
+                  topPos = parentRect.height - tooltipRect.height - 10;
+                }
+                tooltip.style.left = leftPos + 'px';
+                tooltip.style.top = topPos + 'px';
+              }
+            };
+            el.appendChild(img);
+          }
+          return el;
+        })
+        .ringsData(pointsData.filter(item => item.type === 'server'))
+        .ringColor(() => getThemeColor())
+        .ringMaxRadius(2) //最大半径
+        .ringPropagationSpeed(1) //传播速度
+        .ringRepeatPeriod(1250) //重复周期
+        .arcsData(arcsData)
+        .arcStartLat(d => d.startLat)
+        .arcStartLng(d => d.startLng)
+        .arcEndLat(d => d.endLat)
+        .arcEndLng(d => d.endLng)
+        .arcColor(() => themeColor)
+        .arcDashLength(0.5)  //长度
+        .arcDashGap(1)  //间隔
+        .arcDashAnimateTime(1750)  //动画时间
+        .arcStroke(0.8) //线宽
+        .arcAltitudeAutoScale(0.5); //高度
+    const viewLat = window.currentUserGeo ? window.currentUserGeo.lat : 25;
+    const viewLng = window.currentUserGeo ? window.currentUserGeo.lng : 110;
+    globeInstance.pointOfView({ lat: viewLat, lng: viewLng, altitude: initialAltitude });
+    globeInstance.controls().autoRotate = true;
+    globeInstance.controls().autoRotateSpeed = 0.6;
+    globeInstance.controls().enableZoom = true;
+    renderArea.addEventListener('click', (e) => {
+      if (e.target === renderArea || e.target.tagName === 'CANVAS') {
+        hideTooltip();
+      }
+    });
+    let touchStartTime = 0;
+    renderArea.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+    });
+    renderArea.addEventListener('touchend', (e) => {
+      const touchDuration = Date.now() - touchStartTime;
+      if (touchDuration < 200 && (e.target === renderArea || e.target.tagName === 'CANVAS')) {
+        hideTooltip();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if(modalContent.offsetParent !== null) {
+        globeInstance.width(renderArea.clientWidth);
+        globeInstance.height(renderArea.clientHeight);
+      }
+    });
+  }
+  function updateGlobeTheme() {
+    if (!globeInstance) return;
+    const newConfig = getBackgroundConfig();
+    const hasChanged = !lastAppliedThemeConfig ||
+        lastAppliedThemeConfig.bg !== newConfig.bg ||
+        lastAppliedThemeConfig.bgImage !== newConfig.bgImage ||
+        lastAppliedThemeConfig.globeImage !== newConfig.globeImage ||
+        lastAppliedThemeConfig.atmosphere !== newConfig.atmosphere;
+    if (!hasChanged) {
+      return;
+    }
+    globeInstance.backgroundColor(newConfig.bg);
+    globeInstance.backgroundImageUrl(newConfig.bgImage);
+    globeInstance.globeImageUrl(newConfig.globeImage);
+    globeInstance.atmosphereColor(newConfig.atmosphere);
+    lastAppliedThemeConfig = { ...newConfig };
+  }
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target === modalContent) {
+      overlay.style.opacity = '0';
+      modalContent.style.transform = 'scale(0.95)';
+      setTimeout(() => overlay.style.display = 'none', 300);
+      hideTooltip();
+    }
+  });
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+  mediaQuery.addEventListener('change', () => {
+    if (localStorage.getItem('appearance') === '"system"') {
+      updateGlobeTheme();
+    }
+  });
+  const storageObserver = new MutationObserver(() => {
+    if (overlay.style.display === 'flex') {
+      updateGlobeTheme();
+    }
+  });
+  storageObserver.observe(document.body, { subtree: true, childList: true });
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'appearance' && overlay.style.display === 'flex') {
+      updateGlobeTheme();
+    }
+  });
+  setTimeout(() => ball.classList.add('show'), 600);
+}
+// 初始化
+function initializeApp() {
+  const observer = new MutationObserver((mutations, me) => {
+    const themeRoot = document.querySelector('.radix-themes');
+    const welcomeBubble = document.getElementById('welcome-bubble-container');
+    const alertOverlay = document.getElementById('custom-alert-overlay');
+    const financeWidget = document.getElementById('finance-widget');
+    const financeBall = document.getElementById('finance-ball');
+    const earthBall = document.getElementById('earth-ball');
+    const earthOverlay = document.getElementById('earth-modal-overlay');
+
+    if (themeRoot) {
+      if (welcomeBubble && !themeRoot.contains(welcomeBubble)) {
+        themeRoot.appendChild(welcomeBubble);
+      }
+      if (alertOverlay && !themeRoot.contains(alertOverlay)) {
+        themeRoot.appendChild(alertOverlay);
+      }
+      if (financeWidget && !themeRoot.contains(financeWidget)) {
+        themeRoot.appendChild(financeWidget);
+      }
+      if (financeBall && !themeRoot.contains(financeBall)) {
+        themeRoot.appendChild(financeBall);
+      }
+      if (earthBall && !themeRoot.contains(earthBall)) {
+        themeRoot.appendChild(earthBall);
+      }
+      if (earthOverlay && !themeRoot.contains(earthOverlay)) {
+        themeRoot.appendChild(earthOverlay);
+      }
+      if (themeRoot.contains(welcomeBubble) && themeRoot.contains(financeWidget)) {
+        me.disconnect();
+      }
+    }
+  });
+
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    observer.observe(rootElement, { childList: true, subtree: true });
+  }
+
+  initializeWelcomeBubble();
+  initializeFinanceWidget();
+  initializeEarth();
+
+  fetch('/api/me')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`API request failed with status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.logged_in === false) {
+          initializeProtection();
+        }
+      })
+      .catch(error => {
+        initializeProtection();
+      });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
+</script>
