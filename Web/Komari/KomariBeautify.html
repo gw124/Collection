@@ -317,6 +317,26 @@ header a img[alt="logo"], .bubble-logo-image {
   fill: var(--accent-9);
   fill-opacity: 0.2;
 }
+/* 汇率 */
+.finance-exchange-rates {
+  font-size: 0.7rem;
+  color: var(--gray-11);
+  padding: 8px 0;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.finance-rate-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.finance-rate-item:last-child {
+  margin-bottom: 0;
+}
+.finance-rate-value {
+  color: var(--accent-11);
+  font-weight: 500;
+}
 
 
 /* 自定义警告模态框 (Custom Alert Modal) */
@@ -520,10 +540,54 @@ header a img[alt="logo"], .bubble-logo-image {
 }
 
 
+/* 滚动辅助按钮 (Scroll Helper Buttons) */
+.scroll-helper-btn {
+  position: fixed;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--purcarte-card-color);
+  border: 1px solid var(--gray-a5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px var(--gray-a4);
+  z-index: 1040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: scale(0) translateY(10px);
+  pointer-events: none;
+  color: var(--accent-11);
+}
+.scroll-helper-btn.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+.scroll-helper-btn:hover {
+  transform: scale(1.1);
+  color: var(--accent-9);
+  border-color: var(--accent-9);
+}
+#scroll-to-bottom {
+  bottom: 20px;
+}
+#scroll-to-top {
+  bottom: 70px;
+}
+
+
 /* 移动设备 (小于 576px) */
 @media (max-width: 576px) {
   .welcome-bubble { max-width: calc(100vw - 30px); left: 15px; bottom: 15px; }
   .finance-widget { width: calc(100vw - 40px); right: 20px; }
+  .scroll-helper-btn { right: 15px; width: 36px; height: 36px; }
+  #scroll-to-bottom { bottom: 15px; }
+  #scroll-to-top { bottom: 60px; }
 }
 
 /* 平板设备 (小于 768px) - 主要针对地球组件 */
@@ -631,6 +695,8 @@ header a img[alt="logo"], .bubble-logo-image {
   </div>
 
   <div class="finance-tooltip" id="fin-ex-rate">汇率更新中...</div>
+  <div class="finance-separator"></div>
+  <div id="fin-exchange-rates" class="finance-exchange-rates"></div>
   <div class="finance-controls">
     <div style="display: flex; gap: 8px;">
       <select id="fin-currency" class="finance-select">
@@ -680,6 +746,18 @@ header a img[alt="logo"], .bubble-logo-image {
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="10"></circle>
   <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+</svg>
+</div>
+
+<!--滚动辅助按钮 (Scroll Helper Buttons)-->
+<div id="scroll-to-top" class="scroll-helper-btn" title="Top">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m18 15-6-6-6 6"/>
+</svg>
+</div>
+<div id="scroll-to-bottom" class="scroll-helper-btn" title="Bottom">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m6 9 6 6 6-6"/>
 </svg>
 </div>
 
@@ -1034,11 +1112,14 @@ function initializeWelcomeBubble() {
       return "未知";
     })(navigator.userAgent) + ' 浏览器';
     dateEl.textContent = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Shanghai' });
-
-    if (welcomeBubble) setTimeout(() => welcomeBubble.classList.add('show'), 100);
   }
 
-  fetchIpAndInfo();
+  fetchIpAndInfo().then(() => {
+    const welcomeBubble = document.getElementById('welcome-bubble-container');
+    if (welcomeBubble) {
+      setTimeout(() => welcomeBubble.classList.add('show'), 100);
+    }
+  });
 }
 // 资产组件 (Finance)
 function initializeFinanceWidget() {
@@ -1061,7 +1142,7 @@ function initializeFinanceWidget() {
 
   if (!widget) return;
 
-  let exchangeRates = { CNY: 1, USD: 0.14, HKD: 1.08, EUR: 0.13, GBP: 0.11, JPY: 20.8 };
+  let exchangeRates = { CNY: 1, USD: 0.142536, HKD: 1.108377, EUR: 0.12102, GBP: 0.105581, JPY: 22.231552 };
   let baseCurrency = 'CNY';
   let userCurrency = localStorage.getItem('fin_currency') || 'CNY';
   let excludeFree = localStorage.getItem('fin_exclude_free') === 'true';
@@ -1083,19 +1164,37 @@ function initializeFinanceWidget() {
   }
 
   async function fetchRates() {
-    try {
-      const res = await fetch('https://api.exchangerate-api.com/v4/latest/CNY');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.rates) {
-          exchangeRates = data.rates;
-          document.getElementById('fin-ex-rate').textContent = `汇率更新: ${new Date().toLocaleTimeString()}`;
-        }
+    const apis = [
+      {
+        url: 'https://open.er-api.com/v6/latest/CNY',
+        parse: (data) => data.rates
+      },
+      {
+        url: 'https://api.frankfurter.app/latest?from=CNY',
+        parse: (data) => data.rates
       }
-    } catch (e) {
-      console.warn('Rate fetch failed', e);
-      document.getElementById('fin-ex-rate').textContent = '使用默认汇率';
+    ];
+    for (const api of apis) {
+      try {
+        const res = await fetch(api.url, { signal: AbortSignal.timeout(5000) });
+        if (res.ok) {
+          const data = await res.json();
+          const rates = api.parse(data);
+          if (rates) {
+            const requiredCurrencies = ['CNY', 'USD', 'HKD', 'EUR', 'GBP', 'JPY'];
+            const hasAllCurrencies = requiredCurrencies.every(cur => cur === 'CNY' || rates[cur]);
+            if (hasAllCurrencies) {
+              exchangeRates = { CNY: 1, ...rates };
+              document.getElementById('fin-ex-rate').textContent = `汇率更新: ${new Date().toLocaleTimeString()}`;
+              return;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn(`从 ${api.url} 获取汇率失败:`, e);
+      }
     }
+    document.getElementById('fin-ex-rate').textContent = '使用默认汇率';
   }
 
   async function updateData() {
@@ -1134,6 +1233,25 @@ function initializeFinanceWidget() {
     else finalPrice = price;
 
     return { price: finalPrice, isSpecialFree };
+  }
+
+  function updateExchangeRatesDisplay() {
+    const ratesEl = document.getElementById('fin-exchange-rates');
+    if (!ratesEl) return;
+
+    const names = { 'USD': 'USD $', 'HKD': 'HKD $', 'EUR': 'EUR €', 'GBP': 'GBP £', 'JPY': 'JPY ¥', 'CNY': 'CNY ¥' };
+    const list = ['USD', 'HKD', 'EUR', 'GBP', 'JPY', 'CNY'].filter(c => c !== userCurrency);
+
+    let html = '';
+    list.forEach(c => {
+      const rate = exchangeRates[userCurrency] / exchangeRates[c];
+      html += `<div class="finance-rate-item">
+      <span>1 ${names[c]}</span>
+      <span class="finance-rate-value">${currencySymbols[userCurrency]} ${rate.toFixed(6)}</span>
+    </div>`;
+    });
+
+    ratesEl.innerHTML = html;
   }
 
   function calculate(nodes) {
@@ -1222,7 +1340,7 @@ function initializeFinanceWidget() {
       itemDiv.innerHTML = `
                     <span class="item-name" title="${node.public_remark || node.name}">${node.name}</span>
                     <div class="item-right">
-                        <span class="item-value">${sym} ${displayVal.toFixed(2)}</span>
+                        <span class="item-value">${sym} ${displayVal.toFixed(6)}</span>
                         ${helpIcon}
                     </div>
                 `;
@@ -1249,9 +1367,11 @@ function initializeFinanceWidget() {
     }
 
     totalCountEl.textContent = totalNodes;
-    document.getElementById('fin-total-price').textContent = `${sym} ${(totalPriceCNY * targetRate).toFixed(2)}`;
-    document.getElementById('fin-monthly-price').textContent = `${sym} ${(monthlyPriceCNY * targetRate).toFixed(2)}`;
-    document.getElementById('fin-remain-value').textContent = `${sym} ${(totalRemainValCNY * targetRate).toFixed(2)}`;
+    document.getElementById('fin-total-price').textContent = `${sym} ${(totalPriceCNY * targetRate).toFixed(6)}`;
+    document.getElementById('fin-monthly-price').textContent = `${sym} ${(monthlyPriceCNY * targetRate).toFixed(6)}`;
+    document.getElementById('fin-remain-value').textContent = `${sym} ${(totalRemainValCNY * targetRate).toFixed(6)}`;
+
+    updateExchangeRatesDisplay();
   }
 
   refreshBtn.addEventListener('click', () => {
@@ -1865,6 +1985,53 @@ function initializeEarth() {
   });
   setTimeout(() => ball.classList.add('show'), 600);
 }
+// 滚动辅助组件 (Scroll Helpers)
+function initializeScrollHelpers() {
+  const toTopBtn = document.getElementById('scroll-to-top');
+  const toBottomBtn = document.getElementById('scroll-to-bottom');
+  if (!toTopBtn || !toBottomBtn) return;
+  const getScrollContainer = () => document.querySelector('[data-radix-scroll-area-viewport]') || document.documentElement;
+  const performScroll = (pos) => {
+    const container = getScrollContainer();
+    const targetY = pos === 'top' ? 0 : (container.scrollHeight || document.documentElement.scrollHeight);
+    container.scrollTo({ top: targetY, behavior: 'smooth' });
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  };
+  toTopBtn.addEventListener('click', () => performScroll('top'));
+  toBottomBtn.addEventListener('click', () => performScroll('bottom'));
+  function handleScroll() {
+    const container = getScrollContainer();
+    const scrollTop = Math.max(container.scrollTop, window.scrollY, document.documentElement.scrollTop);
+    const clientHeight = container.clientHeight || window.innerHeight;
+    const scrollHeight = Math.max(container.scrollHeight, document.documentElement.scrollHeight);
+    const thresholdTop = 15;
+    const thresholdBottom = 15;
+    window.requestAnimationFrame(() => {
+      const isAtTop = scrollTop <= thresholdTop;
+      const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - thresholdBottom);
+      if (isAtTop) {
+        toTopBtn.classList.remove('show');
+      } else {
+        toTopBtn.classList.add('show');
+      }
+      if (isAtBottom || scrollHeight <= clientHeight + 20) {
+        toBottomBtn.classList.remove('show');
+      } else {
+        toBottomBtn.classList.add('show');
+      }
+    });
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  const container = getScrollContainer();
+  container.addEventListener('scroll', handleScroll, { passive: true });
+  const resizeObserver = new ResizeObserver(() => {
+    handleScroll();
+  });
+  resizeObserver.observe(container);
+  resizeObserver.observe(document.body);
+  setInterval(handleScroll, 1500);
+  handleScroll();
+}
 // 初始化
 function initializeApp() {
   const observer = new MutationObserver((mutations, me) => {
@@ -1875,6 +2042,8 @@ function initializeApp() {
     const financeBall = document.getElementById('finance-ball');
     const earthBall = document.getElementById('earth-ball');
     const earthOverlay = document.getElementById('earth-modal-overlay');
+    const toTopBtn = document.getElementById('scroll-to-top');
+    const toBottomBtn = document.getElementById('scroll-to-bottom');
 
     if (themeRoot) {
       if (welcomeBubble && !themeRoot.contains(welcomeBubble)) {
@@ -1895,6 +2064,12 @@ function initializeApp() {
       if (earthOverlay && !themeRoot.contains(earthOverlay)) {
         themeRoot.appendChild(earthOverlay);
       }
+      if (toTopBtn && !themeRoot.contains(toTopBtn)) {
+        themeRoot.appendChild(toTopBtn);
+      }
+      if (toBottomBtn && !themeRoot.contains(toBottomBtn)) {
+        themeRoot.appendChild(toBottomBtn);
+      }
       if (themeRoot.contains(welcomeBubble) && themeRoot.contains(financeWidget)) {
         me.disconnect();
       }
@@ -1909,6 +2084,7 @@ function initializeApp() {
   initializeWelcomeBubble();
   initializeFinanceWidget();
   initializeEarth();
+  initializeScrollHelpers();
 
   fetch('/api/me')
       .then(response => {
