@@ -43,15 +43,15 @@ pm: &pm {type: file, health-check: {enable: true, url: https://www.gstatic.com/g
 proxy-providers:
   VPN:
     <<: *p
-    url: http://127.0.0.1:3001/9708281/download/collection/VPN
+    url: http://127.0.0.1:3001
   
   VPS:
     <<: *pc
-    url: http://127.0.0.1:3001/9708281/download/collection/VPS
+    url: http://127.0.0.1:3001
 
   CloudFlare:
     <<: *pc
-    url: http://127.0.0.1:3001/9708281/download/collection/CloudFlare
+    url: http://127.0.0.1:3001
 
 
 # 自建节点信息
