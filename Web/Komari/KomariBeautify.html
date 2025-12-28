@@ -147,7 +147,7 @@ header a img[alt="logo"], .bubble-logo-image {
 .welcome-bubble {
   position: fixed;
   left: 5px;
-  bottom: 45px;
+  bottom: 15px;
   z-index: 1050;
   max-width: 320px;
   border-radius: 16px;
@@ -337,6 +337,170 @@ header a img[alt="logo"], .bubble-logo-image {
   color: var(--accent-11);
   font-weight: 500;
 }
+/* 服务器交易模态框样式 */
+.server-trade-modal {
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  position: relative;
+  cursor: move;
+  border-radius: 16px !important;
+  background-color: var(--purcarte-card-color) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--gray-a5) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  overflow: hidden;
+}
+.server-trade-header {
+  cursor: move;
+  user-select: none;
+}
+.server-trade-content {
+  max-height: calc(85vh - 60px);
+  overflow-y: auto;
+}
+.trade-section {
+  margin-bottom: 15px;
+}
+.trade-section:last-child {
+  margin-bottom: 0;
+}
+.trade-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--accent-11);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gray-a5);
+}
+.server-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+  margin-bottom: 12px;
+}
+.server-info-row {
+  display: flex;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.info-label {
+  font-weight: 600;
+  color: var(--gray-11);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.info-value {
+  color: var(--gray-12);
+  font-weight: 500;
+  word-break: break-all;
+}
+.trade-tags-container,
+.trade-remark-container {
+  margin-top: 10px;
+}
+.trade-tags-label,
+.trade-remark-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-11);
+  margin-bottom: 6px;
+  display: block;
+}
+.trade-tags-list,
+.trade-remark-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.trade-tag,
+.trade-remark-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  background: var(--accent-a3);
+  border: 1px solid var(--accent-a5);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: var(--accent-11);
+  font-weight: 500;
+}
+.trade-remark-tag {
+  background: var(--gray-a3);
+  border-color: var(--gray-a5);
+  color: var(--gray-11);
+}
+/* 交易计算输入样式 */
+.trade-input-group {
+  margin-bottom: 12px;
+}
+.trade-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-11);
+  margin-bottom: 6px;
+}
+.trade-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--gray-a2);
+  border: 1px solid var(--gray-a5);
+  border-radius: 6px;
+  color: var(--gray-12);
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.2s;
+}
+.trade-input:focus {
+  border-color: var(--accent-9);
+  background: var(--gray-a3);
+}
+/* 交易结果展示 */
+.trade-result-box {
+  background: var(--gray-a2);
+  border: 1px solid var(--gray-a5);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+.trade-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 0.85rem;
+}
+.trade-result-row:not(:last-child) {
+  border-bottom: 1px solid var(--gray-a4);
+}
+.trade-result-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--accent-11);
+}
+.trade-result-value.premium {
+  color: var(--red-11);
+}
+.trade-result-value.premium.positive {
+  color: var(--green-11);
+}
+#server-trade-overlay {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0;
+}
+#server-trade-overlay .server-trade-modal {
+  pointer-events: auto !important;
+}
 
 
 /* 自定义警告模态框 (Custom Alert Modal) */
@@ -365,7 +529,7 @@ header a img[alt="logo"], .bubble-logo-image {
 }
 
 
-/* --- 地球渲染组件 (Earth Globe Component) --- */
+/* 地球渲染组件 (Earth Globe Component) */
 /* 地球仪悬浮按钮 */
 #earth-ball {
   top: 125px;
@@ -588,6 +752,10 @@ header a img[alt="logo"], .bubble-logo-image {
   .scroll-helper-btn { right: 15px; width: 36px; height: 36px; }
   #scroll-to-bottom { bottom: 15px; }
   #scroll-to-top { bottom: 60px; }
+  .server-trade-modal { width: 95%; max-height: 92vh;}
+  .server-info-grid { grid-template-columns: 1fr; gap: 8px; }
+  .server-info-row { flex-direction: column; align-items: flex-start; }
+  .info-label { margin-bottom: 2px; }
 }
 
 /* 平板设备 (小于 768px) - 主要针对地球组件 */
@@ -729,6 +897,115 @@ header a img[alt="logo"], .bubble-logo-image {
 <div id="finance-ball" class="finance-ball">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
 </div>
+<!-- 服务器交易模态框 (Server Trade Modal) -->
+<div id="server-trade-overlay" class="custom-alert-overlay">
+<div id="server-trade-modal" class="server-trade-modal">
+  <div class="bubble-header server-trade-header">
+    <h3 class="bubble-title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      服务器交易
+    </h3>
+    <button class="bubble-close" id="trade-modal-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="bubble-content server-trade-content">
+    <div class="trade-section">
+      <div class="trade-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        服务器信息
+      </div>
+      <div class="server-info-grid">
+        <div class="server-info-row">
+          <span class="info-label">地区:</span>
+          <span class="info-value" id="trade-server-region"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">名称:</span>
+          <span class="info-value" id="trade-server-name"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">CPU:</span>
+          <span class="info-value" id="trade-server-cpu"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">核心数:</span>
+          <span class="info-value" id="trade-server-cores"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">架构:</span>
+          <span class="info-value" id="trade-server-arch"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">虚拟化:</span>
+          <span class="info-value" id="trade-server-virtualization"></span>
+        </div>
+        <div class="server-info-row" id="trade-gpu-row" style="display:none;">
+          <span class="info-label">GPU:</span>
+          <span class="info-value" id="trade-server-gpu"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">内存:</span>
+          <span class="info-value" id="trade-server-memory"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">硬盘:</span>
+          <span class="info-value" id="trade-server-disk"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">流量:</span>
+          <span class="info-value" id="trade-server-traffic"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">原价:</span>
+          <span class="info-value" id="trade-server-price"></span>
+        </div>
+        <div class="server-info-row">
+          <span class="info-label">周期:</span>
+          <span class="info-value" id="trade-server-cycle"></span>
+        </div>
+      </div>
+      <div class="trade-tags-container" id="trade-tags-container"></div>
+      <div class="trade-remark-container" id="trade-remark-container"></div>
+    </div>
+    <div class="finance-separator"></div>
+    <div class="trade-section">
+      <div class="trade-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+        交易计算
+      </div>
+
+      <div class="trade-input-group">
+        <label class="trade-label">交易日期:</label>
+        <input type="date" id="trade-date-input" class="trade-input" />
+      </div>
+
+      <div class="trade-input-group">
+        <label class="trade-label">交易金额:</label>
+        <input type="number" id="trade-amount-input" class="trade-input" placeholder="请输入交易金额" step="0.01" min="0" />
+      </div>
+
+      <div class="trade-result-box">
+        <div class="trade-result-row">
+          <span>剩余价值:</span>
+          <span class="trade-result-value" id="trade-remain-value">-</span>
+        </div>
+        <div class="trade-result-row">
+          <span>溢价金额:</span>
+          <span class="trade-result-value premium" id="trade-premium-value">-</span>
+        </div>
+        <div class="trade-result-row">
+          <span>溢价率:</span>
+          <span class="trade-result-value premium" id="trade-premium-rate">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 <!--地球组件 (Earth Modal Overlay)-->
 <div id="earth-modal-overlay" class="custom-alert-overlay">
@@ -788,6 +1065,84 @@ header a img[alt="logo"], .bubble-logo-image {
 
 <script src="//unpkg.com/globe.gl"></script>
 <script>
+const EMOJI_MAP = {
+  'CN': 'CN', 'HK': 'HK', 'TW': 'TW', 'MO': 'MO', 'JP': 'JP', 'KR': 'KR', 'KP': 'KP', 'MN': 'MN',
+  'SG': 'SG', 'TH': 'TH', 'VN': 'VN', 'ID': 'ID', 'MY': 'MY', 'PH': 'PH', 'MM': 'MM', 'KH': 'KH', 'LA': 'LA', 'TL': 'TL', 'BN': 'BN',
+  'IN': 'IN', 'BD': 'BD', 'PK': 'PK', 'LK': 'LK', 'NP': 'NP', 'BT': 'BT', 'MV': 'MV',
+  'KG': 'KG', 'TJ': 'TJ', 'KZ': 'KZ', 'UZ': 'UZ', 'TM': 'TM',
+  'AF': 'AF', 'IR': 'IR', 'IQ': 'IQ', 'SY': 'SY', 'LB': 'LB', 'JO': 'JO', 'PS': 'PS', 'IL': 'IL',
+  'SA': 'SA', 'AE': 'AE', 'QA': 'QA', 'KW': 'KW', 'OM': 'OM', 'BH': 'BH', 'YE': 'YE',
+  'TR': 'TR', 'CY': 'CY', 'AZ': 'AZ', 'GE': 'GE', 'AM': 'AM',
+  'GB': 'GB', 'FR': 'FR', 'DE': 'DE', 'NL': 'NL', 'BE': 'BE', 'LU': 'LU', 'CH': 'CH', 'AT': 'AT',
+  'IE': 'IE', 'MC': 'MC', 'LI': 'LI',
+  'IT': 'IT', 'ES': 'ES', 'PT': 'PT', 'GR': 'GR', 'MT': 'MT', 'SM': 'SM', 'VA': 'VA', 'AD': 'AD',
+  'HR': 'HR', 'BA': 'BA', 'ME': 'ME', 'MK': 'MK', 'AL': 'AL', 'SI': 'SI', 'RS': 'RS',
+  'SE': 'SE', 'NO': 'NO', 'DK': 'DK', 'FI': 'FI', 'IS': 'IS', 'FO': 'FO', 'SJ': 'SJ', 'AX': 'AX',
+  'RU': 'RU', 'UA': 'UA', 'BY': 'BY', 'MD': 'MD', 'PL': 'PL', 'CZ': 'CZ', 'SK': 'SK', 'HU': 'HU',
+  'RO': 'RO', 'BG': 'BG',
+  'LT': 'LT', 'LV': 'LV', 'EE': 'EE',
+  'IM': 'IM', 'GI': 'GI', 'JE': 'JE', 'GG': 'GG',
+  'US': 'US', 'CA': 'CA', 'MX': 'MX', 'GL': 'GL',
+  'PR': 'PR', 'CU': 'CU', 'DO': 'DO', 'HT': 'HT', 'JM': 'JM', 'BS': 'BS', 'BB': 'BB', 'TT': 'TT',
+  'LC': 'LC', 'DM': 'DM', 'GD': 'GD', 'AG': 'AG', 'KN': 'KN', 'VC': 'VC', 'AI': 'AI', 'AW': 'AW',
+  'BM': 'BM', 'BQ': 'BQ', 'CW': 'CW', 'KY': 'KY', 'GP': 'GP', 'MQ': 'MQ', 'MS': 'MS', 'SX': 'SX',
+  'TC': 'TC', 'VG': 'VG', 'VI': 'VI', 'BL': 'BL', 'MF': 'MF', 'PM': 'PM', 'AS': 'AS',
+  'CR': 'CR', 'PA': 'PA', 'GT': 'GT', 'HN': 'HN', 'SV': 'SV', 'NI': 'NI', 'BZ': 'BZ',
+  'BR': 'BR', 'AR': 'AR', 'CL': 'CL', 'CO': 'CO', 'PE': 'PE', 'VE': 'VE', 'EC': 'EC', 'BO': 'BO',
+  'PY': 'PY', 'UY': 'UY', 'GF': 'GF', 'SR': 'SR', 'GY': 'GY', 'FK': 'FK',
+  'EG': 'EG', 'MA': 'MA', 'DZ': 'DZ', 'TN': 'TN', 'LY': 'LY', 'EH': 'EH',
+  'NG': 'NG', 'GH': 'GH', 'SN': 'SN', 'ML': 'ML', 'NE': 'NE', 'MR': 'MR', 'SL': 'SL', 'LR': 'LR',
+  'GW': 'GW', 'CV': 'CV', 'BF': 'BF', 'CI': 'CI', 'TG': 'TG', 'BJ': 'BJ', 'GM': 'GM', 'GN': 'GN',
+  'CM': 'CM', 'CF': 'CF', 'GA': 'GA', 'CG': 'CG', 'CD': 'CD', 'AO': 'AO', 'TD': 'TD', 'GQ': 'GQ', 'ST': 'ST',
+  'KE': 'KE', 'ET': 'ET', 'TZ': 'TZ', 'UG': 'UG', 'SD': 'SD', 'SS': 'SS', 'RW': 'RW', 'BI': 'BI',
+  'SO': 'SO', 'ER': 'ER', 'DJ': 'DJ', 'KM': 'KM', 'SC': 'SC', 'MU': 'MU', 'RE': 'RE', 'YT': 'YT', 'MG': 'MG',
+  'ZA': 'ZA', 'ZM': 'ZM', 'ZW': 'ZW', 'MW': 'MW', 'MZ': 'MZ', 'NA': 'NA', 'BW': 'BW', 'LS': 'LS', 'SZ': 'SZ', 'SH': 'SH',
+  'AU': 'AU', 'NZ': 'NZ', 'FJ': 'FJ', 'PG': 'PG', 'SB': 'SB', 'VU': 'VU', 'NC': 'NC', 'PF': 'PF',
+  'NR': 'NR', 'TV': 'TV', 'WS': 'WS', 'TO': 'TO', 'KI': 'KI', 'MH': 'MH', 'FM': 'FM', 'PW': 'PW',
+  'MP': 'MP', 'GU': 'GU', 'WF': 'WF', 'NU': 'NU', 'TK': 'TK', 'CK': 'CK', 'PN': 'PN', 'NF': 'NF',
+  'AQ': 'AQ',
+  'UN': 'UN', 'EU': 'EU', 'AC': 'AC', 'TA': 'TA', 'CP': 'CP', 'EA': 'EA', 'IC': 'IC', 'XA': 'XA',
+  'XB': 'XB', 'EZ': 'EZ', 'ZZ': 'ZZ', 'IO': 'IO', 'TF': 'TF', 'GS': 'GS', 'HM': 'HM',
+  'UM': 'UM', 'BV': 'BV', 'CC': 'CC', 'CX': 'CX', 'DG': 'DG', 'XK': 'XK',
+
+  '🇨🇳': 'CN', '🇭🇰': 'HK', '🇹🇼': 'TW', '🇲🇴': 'MO', '🇯🇵': 'JP', '🇰🇷': 'KR', '🇰🇵': 'KP', '🇲🇳': 'MN',
+  '🇸🇬': 'SG', '🇹🇭': 'TH', '🇻🇳': 'VN', '🇮🇩': 'ID', '🇲🇾': 'MY', '🇵🇭': 'PH', '🇲🇲': 'MM', '🇰🇭': 'KH',
+  '🇱🇦': 'LA', '🇹🇱': 'TL', '🇧🇳': 'BN', '🇮🇳': 'IN', '🇧🇩': 'BD', '🇵🇰': 'PK', '🇱🇰': 'LK', '🇳🇵': 'NP',
+  '🇧🇹': 'BT', '🇲🇻': 'MV', '🇰🇬': 'KG', '🇹🇯': 'TJ', '🇰🇿': 'KZ', '🇺🇿': 'UZ', '🇹🇲': 'TM', '🇦🇫': 'AF',
+  '🇮🇷': 'IR', '🇮🇶': 'IQ', '🇸🇾': 'SY', '🇱🇧': 'LB', '🇯🇴': 'JO', '🇵🇸': 'PS', '🇮🇱': 'IL', '🇸🇦': 'SA',
+  '🇦🇪': 'AE', '🇶🇦': 'QA', '🇰🇼': 'KW', '🇴🇲': 'OM', '🇧🇭': 'BH', '🇾🇪': 'YE', '🇹🇷': 'TR', '🇨🇾': 'CY',
+  '🇦🇿': 'AZ', '🇬🇪': 'GE', '🇦🇲': 'AM',
+  '🇬🇧': 'GB', '🇫🇷': 'FR', '🇩🇪': 'DE', '🇳🇱': 'NL', '🇧🇪': 'BE', '🇱🇺': 'LU', '🇨🇭': 'CH', '🇦🇹': 'AT',
+  '🇮🇪': 'IE', '🇲🇨': 'MC', '🇱🇮': 'LI', '🇮🇹': 'IT', '🇪🇸': 'ES', '🇵🇹': 'PT', '🇬🇷': 'GR', '🇲🇹': 'MT',
+  '🇸🇲': 'SM', '🇻🇦': 'VA', '🇦🇩': 'AD', '🇭🇷': 'HR', '🇧🇦': 'BA', '🇲🇪': 'ME', '🇲🇰': 'MK', '🇦🇱': 'AL',
+  '🇸🇮': 'SI', '🇷🇸': 'RS', '🇸🇪': 'SE', '🇳🇴': 'NO', '🇩🇰': 'DK', '🇫🇮': 'FI', '🇮🇸': 'IS', '🇫🇴': 'FO',
+  '🇸🇯': 'SJ', '🇦🇽': 'AX', '🇷🇺': 'RU', '🇺🇦': 'UA', '🇧🇾': 'BY', '🇲🇩': 'MD', '🇵🇱': 'PL', '🇨🇿': 'CZ',
+  '🇸🇰': 'SK', '🇭🇺': 'HU', '🇷🇴': 'RO', '🇧🇬': 'BG', '🇱🇹': 'LT', '🇱🇻': 'LV', '🇪🇪': 'EE', '🇮🇲': 'IM',
+  '🇬🇮': 'GI', '🇯🇪': 'JE', '🇬🇬': 'GG',
+  '🇺🇸': 'US', '🇨🇦': 'CA', '🇲🇽': 'MX', '🇬🇱': 'GL', '🇵🇷': 'PR', '🇨🇺': 'CU', '🇩🇴': 'DO', '🇭🇹': 'HT',
+  '🇯🇲': 'JM', '🇧🇸': 'BS', '🇧🇧': 'BB', '🇹🇹': 'TT', '🇱🇨': 'LC', '🇩🇲': 'DM', '🇬🇩': 'GD', '🇦🇬': 'AG',
+  '🇰🇳': 'KN', '🇻🇨': 'VC', '🇦🇮': 'AI', '🇦🇼': 'AW', '🇧🇲': 'BM', '🇧🇶': 'BQ', '🇨🇼': 'CW', '🇰🇾': 'KY',
+  '🇬🇵': 'GP', '🇲🇶': 'MQ', '🇲🇸': 'MS', '🇸🇽': 'SX', '🇹🇨': 'TC', '🇻🇬': 'VG', '🇻🇮': 'VI', '🇧🇱': 'BL',
+  '🇲🇫': 'MF', '🇵🇲': 'PM', '🇦🇸': 'AS',
+  '🇨🇷': 'CR', '🇵🇦': 'PA', '🇬🇹': 'GT', '🇭🇳': 'HN', '🇸🇻': 'SV', '🇳🇮': 'NI', '🇧🇿': 'BZ',
+  '🇧🇷': 'BR', '🇦🇷': 'AR', '🇨🇱': 'CL', '🇨🇴': 'CO', '🇵🇪': 'PE', '🇻🇪': 'VE', '🇪🇨': 'EC', '🇧🇴': 'BO',
+  '🇵🇾': 'PY', '🇺🇾': 'UY', '🇬🇫': 'GF', '🇸🇷': 'SR', '🇬🇾': 'GY', '🇫🇰': 'FK',
+  '🇪🇬': 'EG', '🇲🇦': 'MA', '🇩🇿': 'DZ', '🇹🇳': 'TN', '🇱🇾': 'LY', '🇪🇭': 'EH', '🇳🇬': 'NG', '🇬🇭': 'GH',
+  '🇸🇳': 'SN', '🇲🇱': 'ML', '🇳🇪': 'NE', '🇲🇷': 'MR', '🇸🇱': 'SL', '🇱🇷': 'LR', '🇬🇼': 'GW', '🇨🇻': 'CV',
+  '🇧🇫': 'BF', '🇨🇮': 'CI', '🇹🇬': 'TG', '🇧🇯': 'BJ', '🇬🇲': 'GM', '🇬🇳': 'GN', '🇨🇲': 'CM', '🇨🇫': 'CF',
+  '🇬🇦': 'GA', '🇨🇬': 'CG', '🇨🇩': 'CD', '🇦🇴': 'AO', '🇹🇩': 'TD', '🇬🇶': 'GQ', '🇸🇹': 'ST', '🇰🇪': 'KE',
+  '🇪🇹': 'ET', '🇹🇿': 'TZ', '🇺🇬': 'UG', '🇸🇩': 'SD', '🇸🇸': 'SS', '🇷🇼': 'RW', '🇧🇮': 'BI', '🇸🇴': 'SO',
+  '🇪🇷': 'ER', '🇩🇯': 'DJ', '🇰🇲': 'KM', '🇸🇨': 'SC', '🇲🇺': 'MU', '🇷🇪': 'RE', '🇾🇹': 'YT', '🇲🇬': 'MG',
+  '🇿🇦': 'ZA', '🇿🇲': 'ZM', '🇿🇼': 'ZW', '🇲🇼': 'MW', '🇲🇿': 'MZ', '🇳🇦': 'NA', '🇧🇼': 'BW', '🇱🇸': 'LS',
+  '🇸🇿': 'SZ', '🇸🇭': 'SH',
+  '🇦🇺': 'AU', '🇳🇿': 'NZ', '🇫🇯': 'FJ', '🇵🇬': 'PG', '🇸🇧': 'SB', '🇻🇺': 'VU', '🇳🇨': 'NC', '🇵🇫': 'PF',
+  '🇳🇷': 'NR', '🇹🇻': 'TV', '🇼🇸': 'WS', '🇹🇴': 'TO', '🇰🇮': 'KI', '🇲🇭': 'MH', '🇫🇲': 'FM', '🇵🇼': 'PW',
+  '🇲🇵': 'MP', '🇬🇺': 'GU', '🇼🇫': 'WF', '🇳🇺': 'NU', '🇹🇰': 'TK', '🇨🇰': 'CK', '🇵🇳': 'PN', '🇳🇫': 'NF',
+  '🇦🇶': 'AQ',
+  '🇺🇳': 'UN', '🇪🇺': 'EU', '🇦🇨': 'AC', '🇹🇦': 'TA', '🇨🇵': 'CP', '🇪🇦': 'EA', '🇮🇨': 'IC', '🇽🇦': 'XA',
+  '🇽🇧': 'XB', '🇪🇿': 'EZ', '🇿🇿': 'ZZ', '🇮🇴': 'IO', '🇹🇫': 'TF', '🇬🇸': 'GS', '🇭🇲': 'HM',
+  '🇺🇲': 'UM', '🇧🇻': 'BV', '🇨🇨': 'CC', '🇨🇽': 'CX', '🇩🇬': 'DG', '🇽🇰': 'XK'
+};
 //保护组件 (Protection)
 function initializeProtection() {
   const overlay = document.getElementById('custom-alert-overlay');
@@ -1142,6 +1497,7 @@ function initializeFinanceWidget() {
 
   if (!widget) return;
 
+  let currentTradeModalData = null;
   let exchangeRates = { CNY: 1, USD: 0.142536, HKD: 1.108377, EUR: 0.12102, GBP: 0.105581, JPY: 22.231552 };
   let baseCurrency = 'CNY';
   let userCurrency = localStorage.getItem('fin_currency') || 'CNY';
@@ -1337,13 +1693,18 @@ function initializeFinanceWidget() {
 
       const itemDiv = document.createElement('div');
       itemDiv.className = 'finance-list-item';
+      itemDiv.style.cursor = 'pointer';
       itemDiv.innerHTML = `
                     <span class="item-name" title="${node.public_remark || node.name}">${node.name}</span>
                     <div class="item-right">
-                        <span class="item-value">${sym} ${displayVal.toFixed(6)}</span>
+                        <span class="item-value">${sym} ${displayVal.toFixed(2)}</span>
                         ${helpIcon}
                     </div>
                 `;
+      itemDiv.addEventListener('click', (e) => {
+        if (e.target.closest('.help-icon')) return;
+        openTradeModal(node, remainingVal, userCurrency);
+      });
       detailListEl.appendChild(itemDiv);
 
       if (!shouldExclude) {
@@ -1367,9 +1728,9 @@ function initializeFinanceWidget() {
     }
 
     totalCountEl.textContent = totalNodes;
-    document.getElementById('fin-total-price').textContent = `${sym} ${(totalPriceCNY * targetRate).toFixed(6)}`;
-    document.getElementById('fin-monthly-price').textContent = `${sym} ${(monthlyPriceCNY * targetRate).toFixed(6)}`;
-    document.getElementById('fin-remain-value').textContent = `${sym} ${(totalRemainValCNY * targetRate).toFixed(6)}`;
+    document.getElementById('fin-total-price').textContent = `${sym} ${(totalPriceCNY * targetRate).toFixed(2)}`;
+    document.getElementById('fin-monthly-price').textContent = `${sym} ${(monthlyPriceCNY * targetRate).toFixed(2)}`;
+    document.getElementById('fin-remain-value').textContent = `${sym} ${(totalRemainValCNY * targetRate).toFixed(2)}`;
 
     updateExchangeRatesDisplay();
   }
@@ -1391,6 +1752,7 @@ function initializeFinanceWidget() {
     userCurrency = e.target.value;
     localStorage.setItem('fin_currency', userCurrency);
     updateData();
+    updateTradeModalIfOpen();
   });
 
   sortSelect.addEventListener('change', (e) => {
@@ -1415,6 +1777,235 @@ function initializeFinanceWidget() {
       document.querySelectorAll('.help-icon.active').forEach(el => el.classList.remove('active'));
     }
   });
+  function openTradeModal(node, remainValueCNY, currency) {
+    const overlay = document.getElementById('server-trade-overlay');
+    const modal = document.getElementById('server-trade-modal');
+    if (!overlay || !modal) return;
+
+    currentTradeModalData = {
+      node: node,
+      remainValueCNY: remainValueCNY
+    };
+
+    const regionCode = EMOJI_MAP[node.region] || node.region || 'UN';
+
+    const cycleMap = {
+      '30': '月付',
+      '92': '季付',
+      '365': '年付',
+      '730': '两年付',
+      '-1': '一次性'
+    };
+    const cycleText = cycleMap[String(node.billing_cycle)] || `${node.billing_cycle}天`;
+
+    const targetRate = exchangeRates[currency] || 1;
+    const sym = currencySymbols[currency] || currency;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function formatTraffic(bytes) {
+      if (bytes === 362838837166080) return '∞TB/月';
+      if (bytes === 0) return '无限制';
+      return formatBytes(bytes) + '/月';
+    }
+
+    document.getElementById('trade-server-region').innerHTML =
+        `<img src="/assets/flags/${regionCode}.svg" style="width:20px;height:auto;vertical-align:middle;margin-right:4px;">${regionCode}`;
+    document.getElementById('trade-server-name').textContent = node.name;
+    document.getElementById('trade-server-cpu').textContent = node.cpu_name || '未知';
+    document.getElementById('trade-server-cores').textContent = node.cpu_cores ? `${node.cpu_cores} 核` : '未知';
+    document.getElementById('trade-server-arch').textContent = node.arch || '未知';
+    document.getElementById('trade-server-virtualization').textContent = node.virtualization || '未知';
+
+    const gpuRow = document.getElementById('trade-gpu-row');
+    const gpuElement = document.getElementById('trade-server-gpu');
+    if (node.gpu_name && node.gpu_name !== 'None') {
+      gpuRow.style.display = 'flex';
+      gpuElement.textContent = node.gpu_name;
+    } else {
+      gpuRow.style.display = 'none';
+    }
+
+    document.getElementById('trade-server-memory').textContent = node.mem_total ? formatBytes(node.mem_total) : '未知';
+    document.getElementById('trade-server-disk').textContent = node.disk_total ? formatBytes(node.disk_total) : '未知';
+    document.getElementById('trade-server-traffic').textContent = node.traffic_limit ? formatTraffic(node.traffic_limit) : '未知';
+    document.getElementById('trade-server-price').textContent =
+        `${node.currency || '￥'} ${node.price === -1 ? '免费' : node.price}`;
+    document.getElementById('trade-server-cycle').textContent = cycleText;
+
+    const tagsContainer = document.getElementById('trade-tags-container');
+    if (node.tags) {
+      const tags = node.tags.split(';').filter(t => t.trim());
+      tagsContainer.innerHTML = `
+    <span class="trade-tags-label">标签:</span>
+    <div class="trade-tags-list">
+      ${tags.map(tag => `<span class="trade-tag">${tag.trim()}</span>`).join('')}
+    </div>
+  `;
+      tagsContainer.style.display = 'block';
+    } else {
+      tagsContainer.style.display = 'none';
+    }
+
+    const remarkContainer = document.getElementById('trade-remark-container');
+    if (node.public_remark) {
+      const remarks = node.public_remark.split(';').filter(r => r.trim());
+      remarkContainer.innerHTML = `
+    <span class="trade-remark-label">备注:</span>
+    <div class="trade-remark-list">
+      ${remarks.map(remark => `<span class="trade-remark-tag">${remark.trim()}</span>`).join('')}
+    </div>
+  `;
+      remarkContainer.style.display = 'block';
+    } else {
+      remarkContainer.style.display = 'none';
+    }
+
+    const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+    const dateStr = today.toISOString().split('T')[0];
+    document.getElementById('trade-date-input').value = dateStr;
+
+    document.getElementById('trade-amount-input').value = '';
+
+    const remainValue = remainValueCNY * targetRate;
+    const displayRemainValue = parseFloat(remainValue.toFixed(2));
+    document.getElementById('trade-remain-value').textContent = `${sym} ${displayRemainValue.toFixed(2)}`;
+    document.getElementById('trade-premium-value').textContent = '-';
+    document.getElementById('trade-premium-rate').textContent = '-';
+
+    const amountInput = document.getElementById('trade-amount-input');
+    amountInput.oninput = () => {
+      const tradeAmount = parseFloat(amountInput.value);
+      if (!isNaN(tradeAmount) && tradeAmount >= 0) {
+        const premium = tradeAmount - displayRemainValue;
+        const premiumRate = displayRemainValue > 0 ? (premium / displayRemainValue * 100) : 0;
+
+        const premiumValueEl = document.getElementById('trade-premium-value');
+        const premiumRateEl = document.getElementById('trade-premium-rate');
+
+        premiumValueEl.textContent = `${sym} ${premium.toFixed(2)}`;
+        premiumRateEl.textContent = `${premiumRate > 0 ? '+' : ''}${premiumRate.toFixed(2)}%`;
+
+        if (premium > 0) {
+          premiumValueEl.classList.remove('positive');
+          premiumRateEl.classList.remove('positive');
+        } else {
+          premiumValueEl.classList.add('positive');
+          premiumRateEl.classList.add('positive');
+        }
+      } else {
+        document.getElementById('trade-premium-value').textContent = '-';
+        document.getElementById('trade-premium-rate').textContent = '-';
+      }
+    };
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      modal.style.transform = 'scale(1)';
+    });
+    enableModalDrag(modal);
+  }
+
+  function updateTradeModalIfOpen() {
+    const overlay = document.getElementById('server-trade-overlay');
+    if (!overlay || overlay.style.display !== 'flex' || !currentTradeModalData) {
+      return;
+    }
+    const { node, remainValueCNY } = currentTradeModalData;
+    const targetRate = exchangeRates[userCurrency] || 1;
+    const sym = currencySymbols[userCurrency] || userCurrency;
+    const remainValue = remainValueCNY * targetRate;
+    document.getElementById('trade-remain-value').textContent = `${sym} ${remainValue.toFixed(2)}`;
+    const amountInput = document.getElementById('trade-amount-input');
+    const tradeAmount = parseFloat(amountInput.value);
+    if (!isNaN(tradeAmount) && tradeAmount >= 0) {
+      const premium = tradeAmount - remainValue;
+      const premiumRate = remainValue > 0 ? (premium / remainValue * 100) : 0;
+      const premiumValueEl = document.getElementById('trade-premium-value');
+      const premiumRateEl = document.getElementById('trade-premium-rate');
+      premiumValueEl.textContent = `${sym} ${premium.toFixed(2)}`;
+      premiumRateEl.textContent = `${premiumRate > 0 ? '+' : ''}${premiumRate.toFixed(2)}%`;
+      if (premium > 0) {
+        premiumValueEl.classList.remove('positive');
+        premiumRateEl.classList.remove('positive');
+      } else {
+        premiumValueEl.classList.add('positive');
+        premiumRateEl.classList.add('positive');
+      }
+    } else {
+      document.getElementById('trade-premium-value').textContent = '-';
+      document.getElementById('trade-premium-rate').textContent = '-';
+    }
+  }
+
+  document.getElementById('trade-modal-close').addEventListener('click', () => {
+    const overlay = document.getElementById('server-trade-overlay');
+    const modal = document.getElementById('server-trade-modal');
+    overlay.style.opacity = '0';
+    modal.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      modal.style.left = '';
+      modal.style.top = '';
+      currentTradeModalData = null;
+    }, 300);
+  });
+
+  function enableModalDrag(modal) {
+    const header = modal.querySelector('.server-trade-header');
+    let isDragging = false;
+    let currentX, currentY, initialX, initialY;
+
+    header.addEventListener('mousedown', dragStart);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', dragEnd);
+
+    header.addEventListener('touchstart', dragStart);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+      if (e.target.closest('.bubble-close')) return;
+
+      if (e.type === 'touchstart') {
+        initialX = e.touches[0].clientX - (modal.offsetLeft || 0);
+        initialY = e.touches[0].clientY - (modal.offsetTop || 0);
+      } else {
+        initialX = e.clientX - (modal.offsetLeft || 0);
+        initialY = e.clientY - (modal.offsetTop || 0);
+      }
+
+      isDragging = true;
+      modal.style.position = 'absolute';
+    }
+
+    function drag(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+
+      if (e.type === 'touchmove') {
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+      } else {
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+      }
+
+      modal.style.left = currentX + 'px';
+      modal.style.top = currentY + 'px';
+    }
+
+    function dragEnd() {
+      isDragging = false;
+    }
+  }
 
   fetchRates().then(() => {
     updateData();
@@ -1434,84 +2025,6 @@ function initializeEarth() {
   let isGlobeInitialized = false;
   let currentActiveFlag = null;
   let lastAppliedThemeConfig = null;
-  const EMOJI_MAP = {
-    'CN': 'CN', 'HK': 'HK', 'TW': 'TW', 'MO': 'MO', 'JP': 'JP', 'KR': 'KR', 'KP': 'KP', 'MN': 'MN',
-    'SG': 'SG', 'TH': 'TH', 'VN': 'VN', 'ID': 'ID', 'MY': 'MY', 'PH': 'PH', 'MM': 'MM', 'KH': 'KH', 'LA': 'LA', 'TL': 'TL', 'BN': 'BN',
-    'IN': 'IN', 'BD': 'BD', 'PK': 'PK', 'LK': 'LK', 'NP': 'NP', 'BT': 'BT', 'MV': 'MV',
-    'KG': 'KG', 'TJ': 'TJ', 'KZ': 'KZ', 'UZ': 'UZ', 'TM': 'TM',
-    'AF': 'AF', 'IR': 'IR', 'IQ': 'IQ', 'SY': 'SY', 'LB': 'LB', 'JO': 'JO', 'PS': 'PS', 'IL': 'IL',
-    'SA': 'SA', 'AE': 'AE', 'QA': 'QA', 'KW': 'KW', 'OM': 'OM', 'BH': 'BH', 'YE': 'YE',
-    'TR': 'TR', 'CY': 'CY', 'AZ': 'AZ', 'GE': 'GE', 'AM': 'AM',
-    'GB': 'GB', 'FR': 'FR', 'DE': 'DE', 'NL': 'NL', 'BE': 'BE', 'LU': 'LU', 'CH': 'CH', 'AT': 'AT',
-    'IE': 'IE', 'MC': 'MC', 'LI': 'LI',
-    'IT': 'IT', 'ES': 'ES', 'PT': 'PT', 'GR': 'GR', 'MT': 'MT', 'SM': 'SM', 'VA': 'VA', 'AD': 'AD',
-    'HR': 'HR', 'BA': 'BA', 'ME': 'ME', 'MK': 'MK', 'AL': 'AL', 'SI': 'SI', 'RS': 'RS',
-    'SE': 'SE', 'NO': 'NO', 'DK': 'DK', 'FI': 'FI', 'IS': 'IS', 'FO': 'FO', 'SJ': 'SJ', 'AX': 'AX',
-    'RU': 'RU', 'UA': 'UA', 'BY': 'BY', 'MD': 'MD', 'PL': 'PL', 'CZ': 'CZ', 'SK': 'SK', 'HU': 'HU',
-    'RO': 'RO', 'BG': 'BG',
-    'LT': 'LT', 'LV': 'LV', 'EE': 'EE',
-    'IM': 'IM', 'GI': 'GI', 'JE': 'JE', 'GG': 'GG',
-    'US': 'US', 'CA': 'CA', 'MX': 'MX', 'GL': 'GL',
-    'PR': 'PR', 'CU': 'CU', 'DO': 'DO', 'HT': 'HT', 'JM': 'JM', 'BS': 'BS', 'BB': 'BB', 'TT': 'TT',
-    'LC': 'LC', 'DM': 'DM', 'GD': 'GD', 'AG': 'AG', 'KN': 'KN', 'VC': 'VC', 'AI': 'AI', 'AW': 'AW',
-    'BM': 'BM', 'BQ': 'BQ', 'CW': 'CW', 'KY': 'KY', 'GP': 'GP', 'MQ': 'MQ', 'MS': 'MS', 'SX': 'SX',
-    'TC': 'TC', 'VG': 'VG', 'VI': 'VI', 'BL': 'BL', 'MF': 'MF', 'PM': 'PM', 'AS': 'AS',
-    'CR': 'CR', 'PA': 'PA', 'GT': 'GT', 'HN': 'HN', 'SV': 'SV', 'NI': 'NI', 'BZ': 'BZ',
-    'BR': 'BR', 'AR': 'AR', 'CL': 'CL', 'CO': 'CO', 'PE': 'PE', 'VE': 'VE', 'EC': 'EC', 'BO': 'BO',
-    'PY': 'PY', 'UY': 'UY', 'GF': 'GF', 'SR': 'SR', 'GY': 'GY', 'FK': 'FK',
-    'EG': 'EG', 'MA': 'MA', 'DZ': 'DZ', 'TN': 'TN', 'LY': 'LY', 'EH': 'EH',
-    'NG': 'NG', 'GH': 'GH', 'SN': 'SN', 'ML': 'ML', 'NE': 'NE', 'MR': 'MR', 'SL': 'SL', 'LR': 'LR',
-    'GW': 'GW', 'CV': 'CV', 'BF': 'BF', 'CI': 'CI', 'TG': 'TG', 'BJ': 'BJ', 'GM': 'GM', 'GN': 'GN',
-    'CM': 'CM', 'CF': 'CF', 'GA': 'GA', 'CG': 'CG', 'CD': 'CD', 'AO': 'AO', 'TD': 'TD', 'GQ': 'GQ', 'ST': 'ST',
-    'KE': 'KE', 'ET': 'ET', 'TZ': 'TZ', 'UG': 'UG', 'SD': 'SD', 'SS': 'SS', 'RW': 'RW', 'BI': 'BI',
-    'SO': 'SO', 'ER': 'ER', 'DJ': 'DJ', 'KM': 'KM', 'SC': 'SC', 'MU': 'MU', 'RE': 'RE', 'YT': 'YT', 'MG': 'MG',
-    'ZA': 'ZA', 'ZM': 'ZM', 'ZW': 'ZW', 'MW': 'MW', 'MZ': 'MZ', 'NA': 'NA', 'BW': 'BW', 'LS': 'LS', 'SZ': 'SZ', 'SH': 'SH',
-    'AU': 'AU', 'NZ': 'NZ', 'FJ': 'FJ', 'PG': 'PG', 'SB': 'SB', 'VU': 'VU', 'NC': 'NC', 'PF': 'PF',
-    'NR': 'NR', 'TV': 'TV', 'WS': 'WS', 'TO': 'TO', 'KI': 'KI', 'MH': 'MH', 'FM': 'FM', 'PW': 'PW',
-    'MP': 'MP', 'GU': 'GU', 'WF': 'WF', 'NU': 'NU', 'TK': 'TK', 'CK': 'CK', 'PN': 'PN', 'NF': 'NF',
-    'AQ': 'AQ',
-    'UN': 'UN', 'EU': 'EU', 'AC': 'AC', 'TA': 'TA', 'CP': 'CP', 'EA': 'EA', 'IC': 'IC', 'XA': 'XA',
-    'XB': 'XB', 'EZ': 'EZ', 'ZZ': 'ZZ', 'IO': 'IO', 'TF': 'TF', 'GS': 'GS', 'HM': 'HM',
-    'UM': 'UM', 'BV': 'BV', 'CC': 'CC', 'CX': 'CX', 'DG': 'DG', 'XK': 'XK',
-
-    '🇨🇳': 'CN', '🇭🇰': 'HK', '🇹🇼': 'TW', '🇲🇴': 'MO', '🇯🇵': 'JP', '🇰🇷': 'KR', '🇰🇵': 'KP', '🇲🇳': 'MN',
-    '🇸🇬': 'SG', '🇹🇭': 'TH', '🇻🇳': 'VN', '🇮🇩': 'ID', '🇲🇾': 'MY', '🇵🇭': 'PH', '🇲🇲': 'MM', '🇰🇭': 'KH',
-    '🇱🇦': 'LA', '🇹🇱': 'TL', '🇧🇳': 'BN', '🇮🇳': 'IN', '🇧🇩': 'BD', '🇵🇰': 'PK', '🇱🇰': 'LK', '🇳🇵': 'NP',
-    '🇧🇹': 'BT', '🇲🇻': 'MV', '🇰🇬': 'KG', '🇹🇯': 'TJ', '🇰🇿': 'KZ', '🇺🇿': 'UZ', '🇹🇲': 'TM', '🇦🇫': 'AF',
-    '🇮🇷': 'IR', '🇮🇶': 'IQ', '🇸🇾': 'SY', '🇱🇧': 'LB', '🇯🇴': 'JO', '🇵🇸': 'PS', '🇮🇱': 'IL', '🇸🇦': 'SA',
-    '🇦🇪': 'AE', '🇶🇦': 'QA', '🇰🇼': 'KW', '🇴🇲': 'OM', '🇧🇭': 'BH', '🇾🇪': 'YE', '🇹🇷': 'TR', '🇨🇾': 'CY',
-    '🇦🇿': 'AZ', '🇬🇪': 'GE', '🇦🇲': 'AM',
-    '🇬🇧': 'GB', '🇫🇷': 'FR', '🇩🇪': 'DE', '🇳🇱': 'NL', '🇧🇪': 'BE', '🇱🇺': 'LU', '🇨🇭': 'CH', '🇦🇹': 'AT',
-    '🇮🇪': 'IE', '🇲🇨': 'MC', '🇱🇮': 'LI', '🇮🇹': 'IT', '🇪🇸': 'ES', '🇵🇹': 'PT', '🇬🇷': 'GR', '🇲🇹': 'MT',
-    '🇸🇲': 'SM', '🇻🇦': 'VA', '🇦🇩': 'AD', '🇭🇷': 'HR', '🇧🇦': 'BA', '🇲🇪': 'ME', '🇲🇰': 'MK', '🇦🇱': 'AL',
-    '🇸🇮': 'SI', '🇷🇸': 'RS', '🇸🇪': 'SE', '🇳🇴': 'NO', '🇩🇰': 'DK', '🇫🇮': 'FI', '🇮🇸': 'IS', '🇫🇴': 'FO',
-    '🇸🇯': 'SJ', '🇦🇽': 'AX', '🇷🇺': 'RU', '🇺🇦': 'UA', '🇧🇾': 'BY', '🇲🇩': 'MD', '🇵🇱': 'PL', '🇨🇿': 'CZ',
-    '🇸🇰': 'SK', '🇭🇺': 'HU', '🇷🇴': 'RO', '🇧🇬': 'BG', '🇱🇹': 'LT', '🇱🇻': 'LV', '🇪🇪': 'EE', '🇮🇲': 'IM',
-    '🇬🇮': 'GI', '🇯🇪': 'JE', '🇬🇬': 'GG',
-    '🇺🇸': 'US', '🇨🇦': 'CA', '🇲🇽': 'MX', '🇬🇱': 'GL', '🇵🇷': 'PR', '🇨🇺': 'CU', '🇩🇴': 'DO', '🇭🇹': 'HT',
-    '🇯🇲': 'JM', '🇧🇸': 'BS', '🇧🇧': 'BB', '🇹🇹': 'TT', '🇱🇨': 'LC', '🇩🇲': 'DM', '🇬🇩': 'GD', '🇦🇬': 'AG',
-    '🇰🇳': 'KN', '🇻🇨': 'VC', '🇦🇮': 'AI', '🇦🇼': 'AW', '🇧🇲': 'BM', '🇧🇶': 'BQ', '🇨🇼': 'CW', '🇰🇾': 'KY',
-    '🇬🇵': 'GP', '🇲🇶': 'MQ', '🇲🇸': 'MS', '🇸🇽': 'SX', '🇹🇨': 'TC', '🇻🇬': 'VG', '🇻🇮': 'VI', '🇧🇱': 'BL',
-    '🇲🇫': 'MF', '🇵🇲': 'PM', '🇦🇸': 'AS',
-    '🇨🇷': 'CR', '🇵🇦': 'PA', '🇬🇹': 'GT', '🇭🇳': 'HN', '🇸🇻': 'SV', '🇳🇮': 'NI', '🇧🇿': 'BZ',
-    '🇧🇷': 'BR', '🇦🇷': 'AR', '🇨🇱': 'CL', '🇨🇴': 'CO', '🇵🇪': 'PE', '🇻🇪': 'VE', '🇪🇨': 'EC', '🇧🇴': 'BO',
-    '🇵🇾': 'PY', '🇺🇾': 'UY', '🇬🇫': 'GF', '🇸🇷': 'SR', '🇬🇾': 'GY', '🇫🇰': 'FK',
-    '🇪🇬': 'EG', '🇲🇦': 'MA', '🇩🇿': 'DZ', '🇹🇳': 'TN', '🇱🇾': 'LY', '🇪🇭': 'EH', '🇳🇬': 'NG', '🇬🇭': 'GH',
-    '🇸🇳': 'SN', '🇲🇱': 'ML', '🇳🇪': 'NE', '🇲🇷': 'MR', '🇸🇱': 'SL', '🇱🇷': 'LR', '🇬🇼': 'GW', '🇨🇻': 'CV',
-    '🇧🇫': 'BF', '🇨🇮': 'CI', '🇹🇬': 'TG', '🇧🇯': 'BJ', '🇬🇲': 'GM', '🇬🇳': 'GN', '🇨🇲': 'CM', '🇨🇫': 'CF',
-    '🇬🇦': 'GA', '🇨🇬': 'CG', '🇨🇩': 'CD', '🇦🇴': 'AO', '🇹🇩': 'TD', '🇬🇶': 'GQ', '🇸🇹': 'ST', '🇰🇪': 'KE',
-    '🇪🇹': 'ET', '🇹🇿': 'TZ', '🇺🇬': 'UG', '🇸🇩': 'SD', '🇸🇸': 'SS', '🇷🇼': 'RW', '🇧🇮': 'BI', '🇸🇴': 'SO',
-    '🇪🇷': 'ER', '🇩🇯': 'DJ', '🇰🇲': 'KM', '🇸🇨': 'SC', '🇲🇺': 'MU', '🇷🇪': 'RE', '🇾🇹': 'YT', '🇲🇬': 'MG',
-    '🇿🇦': 'ZA', '🇿🇲': 'ZM', '🇿🇼': 'ZW', '🇲🇼': 'MW', '🇲🇿': 'MZ', '🇳🇦': 'NA', '🇧🇼': 'BW', '🇱🇸': 'LS',
-    '🇸🇿': 'SZ', '🇸🇭': 'SH',
-    '🇦🇺': 'AU', '🇳🇿': 'NZ', '🇫🇯': 'FJ', '🇵🇬': 'PG', '🇸🇧': 'SB', '🇻🇺': 'VU', '🇳🇨': 'NC', '🇵🇫': 'PF',
-    '🇳🇷': 'NR', '🇹🇻': 'TV', '🇼🇸': 'WS', '🇹🇴': 'TO', '🇰🇮': 'KI', '🇲🇭': 'MH', '🇫🇲': 'FM', '🇵🇼': 'PW',
-    '🇲🇵': 'MP', '🇬🇺': 'GU', '🇼🇫': 'WF', '🇳🇺': 'NU', '🇹🇰': 'TK', '🇨🇰': 'CK', '🇵🇳': 'PN', '🇳🇫': 'NF',
-    '🇦🇶': 'AQ',
-    '🇺🇳': 'UN', '🇪🇺': 'EU', '🇦🇨': 'AC', '🇹🇦': 'TA', '🇨🇵': 'CP', '🇪🇦': 'EA', '🇮🇨': 'IC', '🇽🇦': 'XA',
-    '🇽🇧': 'XB', '🇪🇿': 'EZ', '🇿🇿': 'ZZ', '🇮🇴': 'IO', '🇹🇫': 'TF', '🇬🇸': 'GS', '🇭🇲': 'HM',
-    '🇺🇲': 'UM', '🇧🇻': 'BV', '🇨🇨': 'CC', '🇨🇽': 'CX', '🇩🇬': 'DG', '🇽🇰': 'XK'
-  };
   const COORD_MAP = {
     'CN': [35.8617, 104.1954], 'HK': [22.3193, 114.1694], 'MO': [22.1987, 113.5439],
     'TW': [23.6978, 120.9605], 'JP': [36.2048, 138.2529], 'KR': [35.9078, 127.7669],
@@ -2042,6 +2555,7 @@ function initializeApp() {
     const financeBall = document.getElementById('finance-ball');
     const earthBall = document.getElementById('earth-ball');
     const earthOverlay = document.getElementById('earth-modal-overlay');
+    const tradeOverlay = document.getElementById('server-trade-overlay'); // 新增
     const toTopBtn = document.getElementById('scroll-to-top');
     const toBottomBtn = document.getElementById('scroll-to-bottom');
 
@@ -2063,6 +2577,9 @@ function initializeApp() {
       }
       if (earthOverlay && !themeRoot.contains(earthOverlay)) {
         themeRoot.appendChild(earthOverlay);
+      }
+      if (tradeOverlay && !themeRoot.contains(tradeOverlay)) {
+        themeRoot.appendChild(tradeOverlay);
       }
       if (toTopBtn && !themeRoot.contains(toTopBtn)) {
         themeRoot.appendChild(toTopBtn);
