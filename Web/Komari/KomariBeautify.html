@@ -920,51 +920,51 @@ header a img[alt="logo"], .bubble-logo-image {
       </div>
       <div class="server-info-grid">
         <div class="server-info-row">
-          <span class="info-label">地区:</span>
+          <span class="info-label">地区</span>
           <span class="info-value" id="trade-server-region"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">名称:</span>
+          <span class="info-label">名称</span>
           <span class="info-value" id="trade-server-name"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">CPU:</span>
+          <span class="info-label">CPU</span>
           <span class="info-value" id="trade-server-cpu"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">核心数:</span>
+          <span class="info-label">核心数</span>
           <span class="info-value" id="trade-server-cores"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">架构:</span>
+          <span class="info-label">架构</span>
           <span class="info-value" id="trade-server-arch"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">虚拟化:</span>
+          <span class="info-label">虚拟化</span>
           <span class="info-value" id="trade-server-virtualization"></span>
         </div>
         <div class="server-info-row" id="trade-gpu-row" style="display:none;">
-          <span class="info-label">GPU:</span>
+          <span class="info-label">GPU</span>
           <span class="info-value" id="trade-server-gpu"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">内存:</span>
+          <span class="info-label">内存</span>
           <span class="info-value" id="trade-server-memory"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">硬盘:</span>
+          <span class="info-label">硬盘</span>
           <span class="info-value" id="trade-server-disk"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">流量:</span>
+          <span class="info-label">流量</span>
           <span class="info-value" id="trade-server-traffic"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">原价:</span>
+          <span class="info-label">原价</span>
           <span class="info-value" id="trade-server-price"></span>
         </div>
         <div class="server-info-row">
-          <span class="info-label">周期:</span>
+          <span class="info-label">周期</span>
           <span class="info-value" id="trade-server-cycle"></span>
         </div>
       </div>
@@ -979,26 +979,26 @@ header a img[alt="logo"], .bubble-logo-image {
       </div>
 
       <div class="trade-input-group">
-        <label class="trade-label">交易日期:</label>
+        <label class="trade-label">交易日期</label>
         <input type="date" id="trade-date-input" class="trade-input" />
       </div>
 
       <div class="trade-input-group">
-        <label class="trade-label">交易金额:</label>
+        <label class="trade-label">交易金额</label>
         <input type="number" id="trade-amount-input" class="trade-input" placeholder="请输入交易金额" step="0.01" min="0" />
       </div>
 
       <div class="trade-result-box">
         <div class="trade-result-row">
-          <span>剩余价值:</span>
+          <span>剩余价值</span>
           <span class="trade-result-value" id="trade-remain-value">-</span>
         </div>
         <div class="trade-result-row">
-          <span>溢价金额:</span>
+          <span>溢价金额</span>
           <span class="trade-result-value premium" id="trade-premium-value">-</span>
         </div>
         <div class="trade-result-row">
-          <span>溢价率:</span>
+          <span>溢价率</span>
           <span class="trade-result-value premium" id="trade-premium-rate">-</span>
         </div>
       </div>
@@ -1816,7 +1816,7 @@ function initializeFinanceWidget() {
     }
 
     document.getElementById('trade-server-region').innerHTML =
-        `<img src="/assets/flags/${regionCode}.svg" style="width:20px;height:auto;vertical-align:middle;margin-right:4px;">${regionCode}`;
+        `<img src="/assets/flags/${regionCode}.svg" style="width:20px;height:auto;">`;
     document.getElementById('trade-server-name').textContent = node.name;
     document.getElementById('trade-server-cpu').textContent = node.cpu_name || '未知';
     document.getElementById('trade-server-cores').textContent = node.cpu_cores ? `${node.cpu_cores} 核` : '未知';
