@@ -43,15 +43,15 @@ pm: &pm {type: file, health-check: {enable: true, url: https://www.gstatic.com/g
 proxy-providers:
   VPN:
     <<: *p
-    url: http://127.0.0.1:3001
+    url: http://127.0.0.1:3001/xxx/download/collection/VPN
   
   VPS:
     <<: *pc
-    url: http://127.0.0.1:3001
+    url: http://127.0.0.1:3001/xxx/download/collection/VPS
 
   CloudFlare:
     <<: *pc
-    url: http://127.0.0.1:3001
+    url: http://127.0.0.1:3001/xxx/download/collection/CloudFlare
 
 
 # 自建节点信息
@@ -75,33 +75,33 @@ use: &use {type: select, use: [VPN,VPS,CloudFlare]}
 ######### 策略锚点  end  #######
 
 proxy-groups:
-  - {name: YouTube, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/YouTube.png}
-  - {name: Github, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/github.png}
-  - {name: 社交媒体, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Twitter.png}
-  - {name: 人工智能, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/OpenAI.png}
-  - {name: NetFlix, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Netflix.png}
-  - {name: Disney+, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/DisneyPlus.png}
-  - {name: Google, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Google.png}
-  - {name: Microsoft, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Microsoft.png}
-  - {name: Apple 中国, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Apple.png, type: select, proxies: [国内直连, 全球代理]}
-  - {name: Apple 国际, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/AppleTV.png}
-  - {name: OneDrive, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/refs/heads/master/Color/GoogleDrive.png}
-  - {name: Tiktok, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/TikTok.png}
-  - {name: Telegram, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Telegram.png}
-  - {name: 网络测试, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Speedtest.png, type: select, proxies: [国内直连, 全球代理]}
-  - {name: 游戏服务, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Steam.png, type: select, proxies: [国内直连, 全球代理]}
-  - {name: 香港, <<: *auto, filter: "(?i)HK|🇭🇰|香港", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/HK.png}
-  - {name: 韩国, <<: *auto, filter: "(?i)韩国|Kr|🇰🇷", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/KR.png}
-  - {name: 日本, <<: *auto, filter: "(?i)JP|🇯🇵|日本", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/JP.png}
-  - {name: 新加坡, <<: *auto, filter: "(?i)SG|🇸🇬|新加坡", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/SG.png}
-  - {name: 美国, <<: *auto, filter: "(?i)US|美国|🇺🇲|SanJose", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/US.png}
-  - {name: 其它地区, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|Oracle|RackNerd|ClawCloud|Other|CloudFlare|CF)).*", icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/UN.png}
-  - {name: Automatic, <<: *auto, filter: ".*", icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/refs/heads/master/Universal/Auto_Speed.png}
-  - {name: Server｜Choose, <<: *use, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://cdn.jsdelivr.net/gh/gw124/IconsHub@Web/icon/Uncategorized/Ugos-pro.png}
-  - {name: Server｜Auto, <<: *auto, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://cdn.jsdelivr.net/gh/gw124/IconsHub@Web/icon/Uncategorized/Ugos-pro.png}
-  - {name: CloudFlare, <<: *balance, filter: "(?i)CloudFlare|CF", icon: https://cdn.jsdelivr.net/gh/gw124/IconsHub@Web/icon/Common/Cloudflare_A.png}
-  - {name: 国内直连, type: url-test, proxies: [直连], icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/China.png}
-  - {name: 全球代理, <<: *pr, icon: https://raw.githubusercontent.com/waynesg/mini/master/Color/Global.png}
+  - {name: YouTube, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/YouTube.png}
+  - {name: Github, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/GitHub.png}
+  - {name: 社交媒体, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Twitter.png}
+  - {name: 人工智能, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/AI.png}
+  - {name: NetFlix, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Netflix.png}
+  - {name: Disney+, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Disney.png}
+  - {name: Google, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Google.png}
+  - {name: Microsoft, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Microsoft.png}
+  - {name: Apple 中国, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Apple.png, type: select, proxies: [国内直连, 全球代理]}
+  - {name: Apple 国际, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Apple1.png}
+  - {name: OneDrive, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/GoogleDrive.png}
+  - {name: Tiktok, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/TikTok.png}
+  - {name: Telegram, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Telegram.png}
+  - {name: 网络测试, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Speedtest.png, type: select, proxies: [国内直连, 全球代理]}
+  - {name: 游戏服务, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Steam.png, type: select, proxies: [国内直连, 全球代理]}
+  - {name: 香港, <<: *auto, filter: "(?i)HK|🇭🇰|香港", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Hong_Kong.png}
+  - {name: 韩国, <<: *auto, filter: "(?i)韩国|Kr|🇰🇷", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/South_Korea.png}
+  - {name: 日本, <<: *auto, filter: "(?i)JP|🇯🇵|日本", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Japan.png}
+  - {name: 新加坡, <<: *auto, filter: "(?i)SG|🇸🇬|新加坡", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Singapore.png}
+  - {name: 美国, <<: *auto, filter: "(?i)US|美国|🇺🇲|SanJose", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/United_States.png}
+  - {name: 其它地区, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|Oracle|RackNerd|ClawCloud|Other|CloudFlare|CF)).*", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/United_Nations.png}
+  - {name: Automatic, <<: *auto, filter: ".*", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Automatic.png}
+  - {name: Server｜Choose, <<: *use, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Server.png}
+  - {name: Server｜Auto, <<: *auto, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Server.png}
+  - {name: CloudFlare, <<: *balance, filter: "(?i)CloudFlare|CF", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Cloudflare.png}
+  - {name: 国内直连, type: url-test, proxies: [直连], icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/GoHome.png}
+  - {name: 全球代理, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Global.png}
 
 # 规则匹配
 rules:
@@ -150,36 +150,36 @@ rule-anchor:
 ######### 规则锚点  end  #######
 rule-providers: 
 # domain 规则
-#  gohome: { <<: *class, url: "https://raw.githubusercontent.com/GWen124/Script/refs/heads/master/Rules/GoHome.list"}
-  wendirect: { <<: *class, url: "https://raw.githubusercontent.com/GWen124/Script/refs/heads/master/Rules/WenDirect.list"}
-#  wenproxy: { <<: *class, url: "https://raw.githubusercontent.com/GWen124/Script/refs/heads/master/Rules/WenProxy.list"}
-  domain_private: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
-  domain_category_games@cn: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-games@cn.mrs"}
-  domain_ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
-  domain_youtube: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
-  domain_google: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
-  domain_github: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
-  domain_telegram: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
-  domain_netflix: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
-  domain_disney: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"}
-  domain_onedrive: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
-  domain_social_media: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.mrs"}
-  domain_microsoft: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
-  domain_cloudflare: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.mrs"}
-  domain_microsoft@cn: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
-  domain_apple: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"}
-  domain_autodesk: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/autodesk.mrs"}
-  domain_apple_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
-  domain_category-public-tracker: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"}
-  domain_tracker: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tracker.mrs"}  
-  domain_speedtest: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
-  domain_tiktok: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
-  domain_tailscale: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tailscale.mrs"}
-  domain_gfw: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
-  domain_geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
-  domain_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
+#  gohome: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Rules/Wen/GoHome.list"}
+  wendirect: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Rules/Wen/WenDirect.list"}
+#  wenproxy: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Rules/Wen/WenProxy.list"}
+  domain_private: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/private.mrs"}
+  domain_category_games@cn: {  <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/category-games@cn.mrs"}
+  domain_ai: {  <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/category-ai-!cn.mrs"}
+  domain_youtube: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/youtube.mrs"}
+  domain_google: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/google.mrs"}
+  domain_github: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/github.mrs"}
+  domain_telegram: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/telegram.mrs"}
+  domain_netflix: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/netflix.mrs"}
+  domain_disney: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/disney.mrs"}
+  domain_onedrive: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/onedrive.mrs"}
+  domain_social_media: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/category-social-media-!cn.mrs"}
+  domain_microsoft: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/microsoft.mrs"}
+  domain_cloudflare: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/cloudflare.mrs"}
+  domain_microsoft@cn: {  <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/microsoft@cn.mrs"}
+  domain_apple: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/apple.mrs"}
+  domain_autodesk: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/autodesk.mrs"}
+  domain_apple_cn: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/apple-cn.mrs"}
+  domain_category-public-tracker: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/category-public-tracker.mrs"}
+  domain_tracker: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/tracker.mrs"}  
+  domain_speedtest: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/ookla-speedtest.mrs"}
+  domain_tiktok: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/tiktok.mrs"}
+  domain_tailscale: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/tailscale.mrs"}
+  domain_gfw: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/gfw.mrs"}
+  domain_geolocation-!cn: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/geolocation-!cn.mrs"}
+  domain_cn: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/cn.mrs"}
 # IP 规则  
-  ip_cn: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
-  ip_google: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
-  ip_telegram: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
-  ip_netflix: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"}
+  ip_cn: { <<: *ip, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/cn.mrs"}
+  ip_google: { <<: *ip, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/google.mrs"}
+  ip_telegram: { <<: *ip, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/telegram.mrs"}
+  ip_netflix: { <<: *ip, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/netflix.mrs"}
