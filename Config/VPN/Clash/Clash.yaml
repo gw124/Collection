@@ -36,22 +36,21 @@ p: &p {type: http, interval: 86400, proxy: 国内直连, health-check: {enable: 
 pc: &pc {type: http, interval: 7200, proxy: 国内直连, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
 # 个人本地节点
 pm: &pm {type: file, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 3600}}
-
 ######### 订阅锚点  end  #######
 
 # 机场订阅信息
 proxy-providers:
   VPN:
     <<: *p
-    url: http://127.0.0.1:3001/xxx/download/collection/VPN
+    url: http://127.0.0.1:3001/xxxxxx/download/collection/VPN
   
   VPS:
     <<: *pc
-    url: http://127.0.0.1:3001/xxx/download/collection/VPS
+    url: http://127.0.0.1:3001/xxxxxx/download/collection/VPS
 
   CloudFlare:
     <<: *pc
-    url: http://127.0.0.1:3001/xxx/download/collection/CloudFlare
+    url: http://127.0.0.1:3001/xxxxxx/download/collection/CloudFlare
 
 
 # 自建节点信息
@@ -61,17 +60,18 @@ proxies:
 ######### 策略锚点 start #######
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [香港, 韩国, 日本, 新加坡, 美国, 其它地区, Automatic, Server｜Choose, Server｜Auto, CloudFlare]}
+pr: &pr {type: select, proxies: [香港, 韩国, 日本, 新加坡, 美国, 其它地区, Automatic, Server｜Choose, Server｜Auto, CloudFlare,Snippets,国内直连]}
 # 自动优选
 auto: &auto {type: url-test, interval: 300, tolerance: 50, use: [VPN,VPS,CloudFlare]}
 # SMART优选
-#smart: &smart {type: smart, interval: 300, uselightgbm: true, collectdata: false, strategy: sticky-sessions,use: [VPN,VPS,CloudFlare]}
+smart: &smart {type: smart, interval: 300, uselightgbm: true, collectdata: false, strategy: sticky-sessions,use: [VPN,VPS,CloudFlare]}
 #负载均衡相关
 balance: &balance {type: load-balance, lazy: false, tolerance: 50, interval: 300, strategy: consistent-hashing, use: [VPN,VPS,CloudFlare]}
 # 自动回退相关
 fallback: &fallback {type: fallback,interval: 900, use: [VPN,VPS,CloudFlare]}
 # 手动选择相关
 use: &use {type: select, use: [VPN,VPS,CloudFlare]}
+
 ######### 策略锚点  end  #######
 
 proxy-groups:
@@ -89,7 +89,7 @@ proxy-groups:
   - {name: Tiktok, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/TikTok.png}
   - {name: Telegram, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Telegram.png}
   - {name: 网络测试, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Speedtest.png, type: select, proxies: [国内直连, 全球代理]}
-  - {name: 游戏服务, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Steam.png, type: select, proxies: [国内直连, 全球代理]}
+  - {name: 游戏服务, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Gamer.png, type: select, proxies: [国内直连, 全球代理]}
   - {name: 香港, <<: *auto, filter: "(?i)HK|🇭🇰|香港", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Hong_Kong.png}
   - {name: 韩国, <<: *auto, filter: "(?i)韩国|Kr|🇰🇷", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/South_Korea.png}
   - {name: 日本, <<: *auto, filter: "(?i)JP|🇯🇵|日本", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Japan.png}
@@ -100,8 +100,9 @@ proxy-groups:
   - {name: Server｜Choose, <<: *use, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Server.png}
   - {name: Server｜Auto, <<: *auto, filter: "(?i)Oracle|RackNerd|ClawCloud|Other", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Server.png}
   - {name: CloudFlare, <<: *balance, filter: "(?i)CloudFlare|CF", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Cloudflare.png}
-  - {name: 国内直连, type: url-test, proxies: [直连], icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/GoHome.png}
-  - {name: 全球代理, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Global.png}
+  - {name: Snippets, <<: *smart, filter: "(?i)Snippets", icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Cloudflare1.png}
+  - {name: 国内直连, type: url-test, proxies: [直连], icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/China.png}
+  - {name: 全球代理, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Config/VPN/png/Proxy.png}
 
 # 规则匹配
 rules:
@@ -109,6 +110,11 @@ rules:
   - PROCESS-NAME,qbittorrent,DIRECT
   - DOMAIN-KEYWORD,tracker,DIRECT
   - DST-PORT,34567,DIRECT
+  - DOMAIN-SUFFIX,gw124.com,DIRECT
+  - DOMAIN-SUFFIX,gw124.cn,DIRECT
+  - DOMAIN-SUFFIX,19880124.xyz,DIRECT
+  - DOMAIN-SUFFIX,resourcemap.lol,DIRECT
+  - DOMAIN,api.ip.sb,DIRECT
   - RULE-SET,wendirect,DIRECT
   - RULE-SET,domain_private,国内直连
   - RULE-SET,domain_category_games@cn,游戏服务
