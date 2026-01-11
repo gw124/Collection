@@ -23,3 +23,6 @@ DOMAIN,tracker.hhanclub.top
 DOMAIN,tracker.trackerfile.com
 DOMAIN,tracker.hhan.club
 DOMAIN-SUFFIX,115.com
+DOMAIN,api.ip.sb
+PROCESS-NAME,qbittorrent
+DST-PORT,34567
