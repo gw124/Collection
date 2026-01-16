@@ -1,4 +1,4 @@
-# CFnew - 终端 v2.9
+# CFnew - 终端 v2.9.1
 
 **语言:** [中文](README.md) | [فارسی](فارسی.md)
 
@@ -16,6 +16,14 @@
 - 应用唤醒：点按钮自动打开对应客户端
 - 自动识别：根据User-Agent自动返回对应格式
 - 多语言：支持中文和波斯语，根据浏览器语言自动切换
+
+## v2.9.1 更新
+
+- ECH支持：新增 Encrypted Client Hello (ECH) 功能
+  - 每次刷新订阅时自动获取最新的 ECH 配置
+  - 启用 ECH 时自动启用"仅 TLS"模式，避免 80 端口干扰
+  - 图形界面可一键开启/关闭 ECH 功能
+
 
 ## v2.9 更新
 
@@ -56,6 +64,7 @@
 | `et` | yes/no | 可选，启用Trojan（默认禁用） |
 | `ex` | yes/no | 可选，启用xhttp（默认禁用） |
 | `tp` | 自定义密码 | 可选，Trojan密码，留空用UUID |
+| `ech` | yes/no | 可选，启用ECH功能（默认禁用） |
 
 #### 图形化配置（推荐）
 
@@ -74,6 +83,7 @@
 | `egi` | yes/no | 可选，启用GitHub默认优选（默认启用） |
 | `qj` | no | 可选，设为`no`启用降级：CF直连失败→SOCKS5→fallback |
 | `dkby` | yes | 可选，设为`yes`只生成TLS节点 |
+| `ech` | yes/no | 可选，启用ECH功能（默认禁用，启用后自动开启仅TLS模式） |
 | `yxby` | yes | 可选，设为`yes`关闭所有优选功能 |
 | `rm` | no | 可选，设为`no`关闭地区智能匹配 |
 | `ae` | yes | 可选，设为`yes`允许API管理（默认关闭） |
@@ -145,6 +155,19 @@ v2.7开始提供，v2.9增强了筛选功能
 - 图形界面一键开关
 - 协议配置有独立保存按钮
 
+#### ECH 功能 (Encrypted Client Hello)
+
+- 支持 Encrypted Client Hello (ECH) 加密客户端握手
+- 自动获取：每次刷新订阅时自动从 DoH 获取最新的 ECH 配置
+- 优先使用 Google DNS，失败时自动尝试 Cloudflare DNS
+- 智能模式：启用 ECH 时自动启用"仅 TLS"模式，避免 80 端口干扰
+- 图形界面：可在协议配置区域一键开启/关闭
+- 调试信息：在浏览器开发者工具的响应头中可查看详细的 ECH 获取过程
+- 响应头信息：
+  - `X-ECH-Status`: SUCCESS 或 FAILED
+  - `X-ECH-Debug`: 详细的调试信息
+  - `X-ECH-Config-Length`: ECH 配置长度（成功时）
+
 #### 自定义路径（d变量）
 
 - 不用UUID当路径了，可以自己设置
@@ -208,6 +231,7 @@ v2.7开始提供，v2.9增强了筛选功能
 - `rm=no` 关闭地区智能匹配
 - `qj=no` 启用降级模式（CF直连失败→SOCKS5→fallback）
 - `dkby=yes` 只生成TLS节点
+- `ech=yes` 启用ECH功能（启用后自动开启仅TLS模式）
 - `yxby=yes` 关闭所有优选功能
 
 #### 多客户端支持
