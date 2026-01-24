@@ -14,6 +14,8 @@ YouTube视频部署教程：https://youtu.be/GEcKz2NoKlM
 
 Shadowsocks部署视频教程：https://youtu.be/hUPN_69Atow
 
+pages部署视频教程：https://www.youtube.com/watch?v=kNi6OwJ_e5k
+
 </div>
 
 ## 功能特性
@@ -87,9 +89,11 @@ _acme-challenge
 ```
 
 ## shadowsocks 节点参数对照图
-节点path为SSpath变量或uuid开头，示例：`/5dc15e15-f285-4a9d-959b-0e4fbdd77b63/?ed=2560`   带proxyip的示例：`/5dc15e15-f285-4a9d-959b-0e4fbdd77b63/?ed=2560&proxyip=xxxx`  小火箭可去掉`?ed=2560&` 来自定义proxyip或全局出站
-<img width="1585" height="1420" alt="PixPin_2025-11-20_21-30-22" src="https://github.com/user-attachments/assets/1ce9060f-9a0d-4093-99e3-4548ee7ac869" />
+节点path为SSpath变量或uuid开头，示例：`/5dc15e15-f285-4a9d-959b-0e4fbdd77b63/?ed=2560`   
 
+带proxyip的示例：`/5dc15e15-f285-4a9d-959b-0e4fbdd77b63/?ed=2560&proxyip=xxxx`  v2rayN上设置全局socks5或http出站
+
+小火箭示例: `/5dc15e15-f285-4a9d-959b-0e4fbdd77b63/proxyip=xxxx` 设置socks5或http全局出站,karing,nekobox一样设置
 
 
 ## 许可证
