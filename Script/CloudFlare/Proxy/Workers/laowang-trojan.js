@@ -610,7 +610,7 @@ export default {
                             host = cdnItem;
                         }
                         const troNodeName = nodeName ? `${nodeName}-${troHeader}` : `Workers-${troHeader}`;
-                        return `${troHeader}://${yourUUID}@${host}:${port}?security=tls&sni=${currentDomain}&fp=firefox&allowInsecure=1&type=ws&host=${currentDomain}&path=%2F%3Fed%3D2560#${troNodeName}`;
+                        return `${troHeader}://${yourUUID}@${host}:${port}?security=tls&sni=${currentDomain}&fp=firefox&allowInsecure=0&type=ws&host=${currentDomain}&path=%2F%3Fed%3D2560#${troNodeName}`;
                     });
                     const linksText = troLinks.join('\n');
                     const base64Content = btoa(unescape(encodeURIComponent(linksText)));
