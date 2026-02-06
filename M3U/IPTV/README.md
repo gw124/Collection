@@ -1,5 +1,5 @@
 # IPTV Collection
-Auto-updated at: 2026-02-06 10:52:51 (Beijing Time)
+Auto-updated at: 2026-02-06 11:04:01 (Beijing Time)
 
 | File | GitHub Raw | jsDelivr CDN |
 | :--- | :--- | :--- |
@@ -14,6 +14,7 @@ Auto-updated at: 2026-02-06 10:52:51 (Beijing Time)
 | **Source_YueChan_Global.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_YueChan_Global.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_YueChan_Global.m3u) |
 | **Source_YueChan_IPTV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_YueChan_IPTV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_YueChan_IPTV.m3u) |
 | **Source_YueChan_Radio.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_YueChan_Radio.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_YueChan_Radio.m3u) |
+| **Source_suxuang.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_suxuang.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_suxuang.m3u) |
 | **Source_vbskycn.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_vbskycn.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_vbskycn.m3u) |
 | **Spring_Festival_Gala.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Spring_Festival_Gala.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Spring_Festival_Gala.m3u) |
 | **EPG.xml** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/EPG.xml) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/EPG.xml) |
