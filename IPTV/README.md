@@ -1,5 +1,5 @@
 # IPTV Collection
-Auto-updated at: 2026-02-07 00:41:02 (Beijing Time)
+Auto-updated at: 2026-02-07 00:54:50 (Beijing Time)
 
 | File | GitHub Raw | jsDelivr CDN |
 | :--- | :--- | :--- |
@@ -14,8 +14,8 @@ Auto-updated at: 2026-02-07 00:41:02 (Beijing Time)
 | **Porn_All.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Porn_All.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Porn_All.m3u) |
 | **Radio.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Radio.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Radio.m3u) |
 | **Source_Kimentanm.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Source_Kimentanm.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Source_Kimentanm.m3u) |
-| **Source_YueChan_Global.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Source_YueChan_Global.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Source_YueChan_Global.m3u) |
-| **Source_YueChan_IPTV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Source_YueChan_IPTV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Source_YueChan_IPTV.m3u) |
+| **Source_YueChan_Adult.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Source_YueChan_Adult.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Source_YueChan_Adult.m3u) |
 | **Source_suxuang.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Source_suxuang.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Source_suxuang.m3u) |
 | **Spring_Festival_Gala.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Spring_Festival_Gala.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Spring_Festival_Gala.m3u) |
+| **YueChan_IPTV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/YueChan_IPTV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/YueChan_IPTV.m3u) |
 | **EPG.xml** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/EPG.xml) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/EPG.xml) |
