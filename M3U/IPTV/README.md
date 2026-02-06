@@ -1,5 +1,5 @@
 # IPTV Collection
-Auto-updated at: 2026-02-06 11:04:01 (Beijing Time)
+Auto-updated at: 2026-02-06 11:17:50 (Beijing Time)
 
 | File | GitHub Raw | jsDelivr CDN |
 | :--- | :--- | :--- |
@@ -8,6 +8,8 @@ Auto-updated at: 2026-02-06 11:04:01 (Beijing Time)
 | **Children_Channel.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Children_Channel.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Children_Channel.m3u) |
 | **IPTV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/IPTV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/IPTV.m3u) |
 | **Movie_Channel.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Movie_Channel.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Movie_Channel.m3u) |
+| **Source_GWen124_Porn｜A.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_GWen124_Porn｜A.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_GWen124_Porn｜A.m3u) |
+| **Source_GWen124_Porn｜B.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_GWen124_Porn｜B.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_GWen124_Porn｜B.m3u) |
 | **Source_Kimentanm.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_Kimentanm.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_Kimentanm.m3u) |
 | **Source_YueChan_Adult.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_YueChan_Adult.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_YueChan_Adult.m3u) |
 | **Source_YueChan_GATV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/M3U/IPTV/Source_YueChan_GATV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/M3U/IPTV/Source_YueChan_GATV.m3u) |
