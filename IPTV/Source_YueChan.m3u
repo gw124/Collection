@@ -257,16 +257,6 @@ https://hls.ningxiahuangheyun.com/live/nxse1M.m3u8
 https://hwapi.yntv.net/62hdvf/rjwt14.m3u8
 #EXTINF:-1 group-title="云南频道",云南娱乐
 https://hwapi.yntv.net/62hdvf/q9vs1b.m3u8
-#EXTINF:-1 group-title="河南频道",新闻频道
-http://tvcdn.stream3.hndt.com/tv/65bb6966017e100059b75a8500000000_transios/playlist.m3u8?wsSecret=ea3f25f2cab61c2730b1ab6274cfea7d&wsTime=1770400669
-#EXTINF:-1 group-title="河南频道",都市频道
-http://tvcdn.stream3.hndt.com/tv/65c3fbc5017e1000fde13faa00000000_transios/playlist.m3u8?wsSecret=c3691f75369ccd9b1a39963101073c8c&wsTime=1770400669
-#EXTINF:-1 group-title="河南频道",民生频道
-http://tvcdn.stream3.hndt.com/tv/65bef28a017e10009c49d5f900000000_transios/playlist.m3u8?wsSecret=b43de9b4a7a4df763c6c577db0d66610&wsTime=1770400669
-#EXTINF:-1 group-title="河南频道",公共频道
-http://tvcdn.stream3.hndt.com/tv/65b93894017e10000ae6b07d00000000_transios/playlist.m3u8?wsSecret=80573eda65cafc71cc2f8c3fe4667ae6&wsTime=1770400669
-#EXTINF:-1 group-title="河南频道",电视剧频道
-http://tvcdn.stream3.hndt.com/tv/65bd329b017e1000648cd2ed00000000_transios/playlist.m3u8?wsSecret=5ff80b85d5c37e2f0d41311fdb4ec082&wsTime=1770400669
 #EXTINF:-1 group-title="河南频道",梨园频道
 https://dxtx.hntv.tv/live/lypd.m3u8?txSecret=10c771842a0be59e8b575d765173ec96&txTime=7B923E0A&wsSecret=1966aa8a0405e1541cff782f56c75447&wsTime=1770400669
 #EXTINF:-1 group-title="河南频道",文物宝库
@@ -293,14 +283,10 @@ https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8
 https://fl1.moveonjoy.com/CNBC/index.m3u8
 #EXTINF:-1 group-title="国际",NBC
 https://fl1.moveonjoy.com/FL_Tampa_NBC/index.m3u8
-#EXTINF:-1 group-title="国际",MSNBC
-http://41.205.93.154/MSNBC/index.m3u8
 #EXTINF:-1 group-title="国际",NBC News Now
 https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
 #EXTINF:-1 group-title="国际",LiveNow
 https://jmp2.uk/rok-f9c0d48b540a55dcb98b04d2cc8abf25.m3u8
-#EXTINF:-1 group-title="国际",Euronews
-https://jmp2.uk/rok-dafd06b712a35fbe9935d4c04c2e8b53.m3u8
 #EXTINF:-1 group-title="国际",Al Jazeera
 https://live-hls-aje-ak.getaj.net/AJE/01.m3u8
 #EXTINF:-1 group-title="国际",TRT World
@@ -323,8 +309,6 @@ https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8
 https://live-talktv-ssai.simplestreamcdn.com/v1/master/774d979dd66704abea7c5b62cb34c6815fda0d35/talktv-live/index.m3u8
 #EXTINF:-1 group-title="国际",Arirang
 https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/chunklist_b3256000_sleng.m3u8
-#EXTINF:-1 group-title="国际",Taiwan Plus
-https://bcovlive-a.akamaihd.net/rce33d845cb9e42dfa302c7ac345f7858/ap-northeast-1/6282251407001/playlist.m3u8
 #EXTINF:-1 group-title="国际",RT Documentary
 https://rt-rtd.rttv.com/live/rtdoc/playlist_4500Kb.m3u8
 #EXTINF:-1 group-title="国际",Newsy
@@ -347,10 +331,6 @@ https://wildearth-plex.amagi.tv/masterR1080p.m3u8
 http://nvsoo4tx.megogo.xyz/iptv/UWA8DBPMZFQ9PX9ZLSBM7FFX/5001/index.m3u8
 #EXTINF:-1 group-title="国际",Fashion Channel
 http://fl1001.bozztv.com/ushba19/tracks-v1a1/mono.m3u8
-#EXTINF:-1 group-title="国际",Fashion TV
-http://91.247.68.229:8000/play/Fashion/index.m3u8
-#EXTINF:-1 group-title="国际",4K Travel
-https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/4k-travel-tv/manifest.m3u8
 #EXTINF:-1 group-title="国际",Action Hollywood
 https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-actionhollywood-samsungau/playlist.m3u8
 #EXTINF:-1 group-title="国际",Mytime Movie
@@ -363,8 +343,6 @@ https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-pulse-samsu
 https://cdn-ue1-prod.tsv2.amagi.tv/linear/tastemade-tastemade-int-aus-samsungau/playlist.m3u8
 #EXTINF:-1 group-title="国际",Travel XP
 http://nvsoo4tx.megogo.xyz/iptv/UWA8DBPMZFQ9PX9ZLSBM7FFX/14026/index.m3u8
-#EXTINF:-1 group-title="国际",PowerNation
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01258-raycomsports-powernationau-samsungau/playlist.m3u8
 #EXTINF:-1 group-title="国际",Trace Urban
 https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8
 #EXTINF:-1 group-title="国际",Kartoon Channel
@@ -491,7 +469,3 @@ https://fl1.moveonjoy.com/HALLMARK_MOVIES_MYSTERIES/index.m3u8
 http://fl1.moveonjoy.com/LIFETIME/index.m3u8
 #EXTINF:-1 group-title="国际",YES Network
 https://fl1.moveonjoy.com/YES_NETWORK/index.m3u8
-#EXTINF:-1 group-title="国际",BBC Two
-https://viamotionhsi.netplus.ch/live/eds/bbc2/browser-HLS8/bbc2.m3u8
-#EXTINF:-1 group-title="国际",BBC Three
-https://streamer.nexyl.uk/39290a19-b8dd-43ea-b8dc-081c37790f24.m3u8
