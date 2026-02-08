@@ -1,5 +1,5 @@
 # IPTV Collection
-Auto-updated at: 2026-02-09 02:25:03 (Beijing Time)
+Auto-updated at: 2026-02-09 02:38:19 (Beijing Time)
 
 | File | GitHub Raw | jsDelivr CDN |
 | :--- | :--- | :--- |
@@ -10,6 +10,7 @@ Auto-updated at: 2026-02-09 02:25:03 (Beijing Time)
 | **Global.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Global.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Global.m3u) |
 | **IPTV.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/IPTV.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/IPTV.m3u) |
 | **IPTV_All.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/IPTV_All.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/IPTV_All.m3u) |
+| **Live_China.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Live_China.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Live_China.m3u) |
 | **Movie_Channel.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Movie_Channel.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Movie_Channel.m3u) |
 | **Porn.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Porn.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Porn.m3u) |
 | **Porn_All.m3u** | [Link](https://raw.githubusercontent.com/gw124/Collection/main/IPTV/Porn_All.m3u) | [Link](https://cdn.jsdelivr.net/gh/gw124/Collection@main/IPTV/Porn_All.m3u) |
