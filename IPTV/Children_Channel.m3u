@@ -23,5 +23,3 @@ http://221.13.234.14:9901/tsfile/live/1017_1.m3u8?key=txiptv&playlive=1&authid=0
 http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
 #EXTINF:-1 tvg-name="黑龙江少儿" tvg-id="黑龙江少儿" tvg-logo="https://tb.zbds.top/logo/黑龙江少儿.png" group-title="少儿频道""少儿频道", 黑龙江少儿
 https://ls.qingting.fm/live/4972/64k.m3u8
-#EXTINF:-1 tvg-name="龙华卡通" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/LTV8.png" group-title="少儿频道""少儿频道",龙华卡通
-https://cdn8.163189.xyz/live/lhkt/stream.m3u8
