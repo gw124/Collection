@@ -189,6 +189,8 @@ http://cdn.163189.xyz/live/hoy/stream.m3u8
 http://cdn6.163189.xyz/163189/fct4k
 #EXTINF:-1 tvg-name="ASTRO AOD" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/ASTROAOD.png" group-title="港澳台频道""港澳台频道",ASTRO AOD
 http://cdn9.163189.xyz/smt1.1.php?id=Aodhd
+#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/hkwcBM9.png" tvg-id="Beautiful Life TV",Beautiful Life TV
+https://5ddce30eb4b55.streamlock.net/bltvhd/bltv1/playlist.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CHU
 http://cdn6.163189.xyz/163189/chu
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/fEUmRST.png" tvg-id="CTi News",CTi News
@@ -233,6 +235,8 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV78.m3u8
 https://cdn.163189.xyz/163189/viu
 #EXTINF:-1 tvg-id="三立戏剧" tvg-name="三立戏剧" group-title="港澳台频道""港澳台频道",三立戏剧
 http://61.221.215.25:8800/hls/41/index.m3u8
+#EXTINF:-1 tvg-name="东森洋片" tvg-id="东森洋片" tvg-logo="https://tb.zbds.top/logo/东森洋片.png" group-title="港澳台频道""港澳台频道", 东森洋片
+https://hls.iill.top/api/dsyp/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="东森财经新闻",东森财经新闻
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV03.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="中视新闻",中视新闻
@@ -265,8 +269,12 @@ http://cdn6.163189.xyz/163189/wxxw
 http://cdn6.163189.xyz/163189/mzt
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
+#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
+http://phoneal.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1hbF9waG9uZTMmY2hzPSZkZWY9MSZzPTQ5NGMzZTk4N2Q0NGNmNjQyMzAyNzE2ZWU0ZjA3ZGJlJnVpZD0mdXVpZD00MGRmNDQ2NWI5ZDRjNWU4OTU0MDZhNjAzNWUzMDNjNy02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzcwNjA5Njcy/HNYLMPP360.m3u8
 #EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
 http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1od19waG9uZSZjaHM9JmRlZj0xJnM9NDFiMmQ4ZDVkNjdhNDQwMTJkOTE1ODQyNjgyZDBiZDQmdWlkPSZ1dWlkPWFlNTBjNzgyYTk2NzE1NmY1YzQ0YjcyMmVhZTI5ZmI3LTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzA1ODQxOTc,/HNDSJMPP360.m3u8
+#EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1lMTA5NjcwMTQ5NzlkOGJmOGU2YmIzMTM0ZWI3ODYyYiZ1aWQ9JnV1aWQ9YTVmNGNmMmE0MTQ1YmE4YzFlNDMzYzgxNGU5OTY4MWItNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDYwNTc3MA,,/HNJSMPP360.m3u8
 #EXTINF:-1 tvg-id="湖南都市" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E9%83%BD%E5%B8%82.png" group-title="港澳台频道""港澳台频道",湖南都市
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1lMTIyODY0MWFlMDVhNGVkNjBmYzU5MTE3OWEzZTVhNSZ1aWQ9JnV1aWQ9M2I1YjI1NDcyYWIyNDdhZjFhOGU1MTFiNGYzOTZiY2MtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDU4ODA0Mw,,/HNDSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
@@ -371,6 +379,8 @@ http://ali-xwl.cztv.com/live/channel081080Plxw.m3u8
 http://gmxw.7766.org:808/hls/175/index.m3u8
 #EXTINF:-1 tvg-name="浙江少儿" tvg-id="浙江少儿" tvg-logo="https://tb.zbds.top/logo/浙江少儿.png" group-title="少儿频道""少儿频道", 浙江少儿
 https://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
+#EXTINF:-1 tvg-name="炫动卡通" tvg-id="炫动卡通" tvg-logo="https://tb.zbds.top/logo/炫动卡通.png" group-title="少儿频道""少儿频道", 炫动卡通
+http://120.238.94.10:9901/tsfile/live/1037_1.m3u8
 #EXTINF:-1 tvg-name="福州少儿" tvg-id="福州少儿" tvg-logo="https://tb.zbds.top/logo/福州少儿.png" group-title="少儿频道""少儿频道", 福州少儿
 http://live.zohi.tv/video/s10001-fztv-4/index.m3u8
 #EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/金鹰卡通.png" group-title="少儿频道""少儿频道" response-time="22ms",金鹰卡通
@@ -698,4 +708,4 @@ http://iot-mqqt.111yao.cn:8080/live/diyp_starmovies.m3u8
 #EXTINF:-1 tvg-name="浙江国际" tvg-id="浙江国际" tvg-logo="https://tb.zbds.top/logo/浙江国际.png" group-title="国际频道""国际频道", 浙江国际
 https://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道" tvg-id="湖南国际频道" tvg-logo="http://tv.haoqu99.com/d/file/2016/0614/20160614032623217.jpg",湖南国际频道
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1mZDY0OTk2ZDJhYzE4ZGJkYTFmMmZkZjczMjY4MzVhNyZ1aWQ9JnV1aWQ9MGFkM2I3OTQ5Y2MxNTY5ZDBmZThhMjVkNzMyYjhjMmQtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDU3NjYwMw,,/HNGJMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1mNDA1ZTlhN2RjOWI1YTE1MjQyZjdjMTYyODNjZDE5ZiZ1aWQ9JnV1aWQ9NTUxMTdhN2JmZTRmMzNlNDFlNmVlODlkNDVkZmE2YWItNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDYwNjEyNA,,/HNGJMPP360.m3u8
