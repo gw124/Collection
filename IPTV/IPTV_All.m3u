@@ -3230,10 +3230,14 @@ https://i.mjh.nz/SamsungTVPlus/GBBC4300005AL.m3u8
 https://i.mjh.nz/SamsungTVPlus/GBBD1100012JB.m3u8
 #EXTINF:-1 group-title="港澳台",湖南娱乐频道
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz0xNDFkNTMyZTNhMGUyNTAzYWNjZmE5ZTU2N2ZlOTZkOCZ1aWQ9JnV1aWQ9ZDQ3MGQ4NDJjMThhNDM3YzAzYzc4NjMyYjdlODM5YWMtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDU3ODA5MA,,/HNYLMPP360.m3u8
+#EXTINF:-1 group-title="港澳台",金鹰纪实频道
+https://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1kOTczM2ZkYjdjMGYyMDkyZjJkNWY0NWQ1MGMzMzQ0ZiZ1aWQ9JnV1aWQ9OGQ2NzAwNWQzN2NiYmQ3NmFhNmMyYTQ5NDEzYTZlMmMtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDU3NDM0Nw,,/JYJSMPP360.m3u8
 #EXTINF:-1 group-title="国际频道",湖南国际频道
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz1mZDY0OTk2ZDJhYzE4ZGJkYTFmMmZkZjczMjY4MzVhNyZ1aWQ9JnV1aWQ9MGFkM2I3OTQ5Y2MxNTY5ZDBmZThhMjVkNzMyYjhjMmQtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDU3NjYwMw,,/HNGJMPP360.m3u8
 #EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="影视频道",湖南电视剧
 http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1od19waG9uZSZjaHM9JmRlZj0xJnM9NDFiMmQ4ZDVkNjdhNDQwMTJkOTE1ODQyNjgyZDBiZDQmdWlkPSZ1dWlkPWFlNTBjNzgyYTk2NzE1NmY1YzQ0YjcyMmVhZTI5ZmI3LTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzA1ODQxOTc,/HNDSJMPP360.m3u8
+#EXTINF:-1 group-title="港澳台",长沙新闻频道
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1od19waG9uZSZjaHM9JmRlZj0xJnM9MmZmMTI0MGE4MTI2YjZjYzNhYTIzNDQyYTc3NzAyZTMmdWlkPSZ1dWlkPTZjNjY2MGNiMzMwM2FjYzFiOGMyYjQ2YzEzMmZhZmQ1LTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzA1NzQ5MjU,/CSXWMPP360.m3u8
 #EXTINF:-1 group-title="港澳台",Pet Club TV
 https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-petclub-samsungnz/playlist.m3u8
 #EXTINF:-1 group-title="港澳台",Bloomberg TV Asia
@@ -3307,4 +3311,6 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV16.m3u8
 #EXTINF:-1 group-title="港澳台",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
 #EXTINF:-1 group-title="4K专区",CCTV-4K 高清
-https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1770609600-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-0de8ff3848da5cc67330efed250e1014&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1770620400-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-c11417ae4004b48e7c65cae8f424f188&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+#EXTINF:-1 group-title="体育频道",CCTV-5 体育赛事
+https://ldcctvwbcdks.v.kcdnvip.com/ldcctvwbcd/cdrmldcctv5plus_1/index.m3u8?BR=td&region=shanghai
