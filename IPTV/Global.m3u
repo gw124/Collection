@@ -21,8 +21,6 @@ https://stream.ads.ottera.tv/playlist.m3u8?network_id=15270&avod=1&coppa=0&td=6&
 https://epg.pw/stream/d2edf469b9079064a283f4b0811cbf6f2597ebbb3d08dcf77036a4b5a791b7cf.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",CNA
 https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8
-#EXTINF:-1 group-title="国际频道""国际频道",CNBC
-https://fl1.moveonjoy.com/CNBC/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Fashion Channel
 http://fl1001.bozztv.com/ushba19/tracks-v1a1/mono.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Global News
@@ -90,4 +88,4 @@ http://iot-mqqt.111yao.cn:8080/live/diyp_starmovies.m3u8
 #EXTINF:-1 tvg-name="浙江国际" tvg-id="浙江国际" tvg-logo="https://tb.zbds.top/logo/浙江国际.png" group-title="国际频道""国际频道", 浙江国际
 https://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道" tvg-id="湖南国际频道" tvg-logo="http://tv.haoqu99.com/d/file/2016/0614/20160614032623217.jpg",湖南国际频道
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz00YmZjM2IwZjYxMmJkNDkzODkyOTU3MmRiZWFlZDA1MyZ1aWQ9JnV1aWQ9OWExZGU4MjU1ODU3OTNjNGJjMDdhZTVmY2E5MmZiNWMtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDcyNDk1NQ,,/HNGJMPP360.m3u8
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz00NmIyM2RiODU1NTU3NTM2YmY2NzE3N2NmMWMxM2VjOSZ1aWQ9JnV1aWQ9NTAzYTNiOWI4YmUyNTAyNDZhYzVjZTZhM2M5NmVmYTUtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDc1NDIxMw,,/HNGJMPP360.m3u8
