@@ -105,6 +105,14 @@ http://cdn6.163189.xyz/163189/wxxw
 http://cdn6.163189.xyz/163189/mzt
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
+#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1od19waG9uZSZjaHM9JmRlZj0xJnM9ZjQ1ZWIyNzg3OWY1MzYxNjg3YzQ1NjQ2NTY3M2UwN2EmdWlkPSZ1dWlkPWVkNDBkNTVlZGI4YzBhZjE0YTc0OGZhMmJiZmI1YTk5LTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzA4NzY5MzM,/HNYLMPP360.m3u8
+#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南爱晚" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%88%B1%E6%99%9A.png",湖南爱晚
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTk4ZGU4NmUyMmY5NzZkZWMwMWYwZTI2ZWYyNTIzNDk5JnVpZD0mdXVpZD1mYzg3NzQ4MDhiYmZiN2YxMDMyYTE3ZWRkMjJlNTc3OS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzcwODY5Mjg0/HNGGMPP360.m3u8
+#EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz03Nzg1NmQ4ZGE3MzViNWVjMDk0N2YwYzhjZDUxYWI1OCZ1aWQ9JnV1aWQ9Yzc4M2Q1ZGFiMTJmMWEzNmJjYTEyZjBlZWE4MDgyZjEtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDg3Nzc3MQ,,/HNDSJMPP360.m3u8
+#EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1xcV9waG9uZV9saXZlJmNocz0mZGVmPTEmcz02ODBlN2YzMzA4N2U0Mjg3NTIyMGI0ODVhNThhYTM2YSZ1aWQ9JnV1aWQ9OTYzOGFiZGM4NzVmMTc5ZTc5MDFiZjdhZGJmMmEwMDgtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3MDg3OTMyNw,,/HNJSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
 https://cdn6.163189.xyz/163189/as
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",澳视澳门
