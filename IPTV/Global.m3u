@@ -33,8 +33,6 @@ https://epg.pw/stream/d2edf469b9079064a283f4b0811cbf6f2597ebbb3d08dcf77036a4b5a7
 http://mytvstream.net:8080/live/30550113/30550113/136589.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",CBS
 http://mytvstream.net:8080/live/30550113/30550113/120749.m3u8
-#EXTINF:-1 group-title="国际频道""国际频道",CMT
-http://23.237.104.106:8080/USA_CMT/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",CNA
 https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Cartoon Network
