@@ -33,6 +33,8 @@ https://epg.pw/stream/d2edf469b9079064a283f4b0811cbf6f2597ebbb3d08dcf77036a4b5a7
 http://mytvstream.net:8080/live/30550113/30550113/136589.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",CBS
 http://mytvstream.net:8080/live/30550113/30550113/120749.m3u8
+#EXTINF:-1 group-title="国际频道""国际频道",CMT
+http://23.237.104.106:8080/USA_CMT/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",CNA
 https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Cartoon Network
@@ -145,5 +147,3 @@ https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f4906
 http://iot-mqqt.111yao.cn:8080/live/diyp_starmovies.m3u8
 #EXTINF:-1 tvg-name="浙江国际" tvg-id="浙江国际" tvg-logo="https://tb.zbds.top/logo/浙江国际.png" group-title="国际频道""国际频道", 浙江国际
 https://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
-#EXTINF:-1 group-title="国际频道""国际频道" tvg-id="湖南国际频道" tvg-logo="http://tv.haoqu99.com/d/file/2016/0614/20160614032623217.jpg",湖南国际频道
-http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZjZG5leF9pZD1od19waG9uZSZjaHM9JmRlZj0xJnM9ODkxY2U3MGU3MzQ2MjdlZGY3NDIyNjBkNGYyNjE2MTImdWlkPSZ1dWlkPTlmMGU2N2FhZjA0MDg0OTU4NDk3MGM5MThiMzg4MzEzLTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzA5MDgxMzA,/HNGJMPP360.m3u8
