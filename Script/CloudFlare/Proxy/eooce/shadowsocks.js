@@ -2,8 +2,8 @@
 import { connect } from 'cloudflare:sockets';
 
 let subPath = 'link';     // 节点订阅路径,不修改将使用UUID作为订阅路径
-let proxyIP = 'socks5://wen:Asdf123456@seoul-oracle-arm.198812345.xyz:8800';  // proxyIP 格式：ip、域名、ip:port、域名:port等,没填写port，默认使用443,也可以是socks5
-let password = '3e789adf-6b8e-4e5a-b973-1deb78336333';  // 节点UUID
+let proxyIP = 'proxy.xxxxxxxx.tk:50001';  // proxyIP 格式：ip、域名、ip:port、域名:port等,没填写port，默认使用443,也可以是socks5
+let password = '5dc15e15-f285-4a9d-959b-0e4fbdd77b63';  // 节点UUID
 let SSpath = '';          // 路径验证，为空则使用UUID作为验证路径
 
 // CF-CDN 
