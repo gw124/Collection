@@ -1,7 +1,7 @@
 
 # rename.js
 ```
-https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Sub-Store/rename.js#out=zh&nf&flag&name=机场名｜&blgd&bl&blkey=Zx>专线+直连+Direct>直连+中转+Transit>中转+中继+Relay>中继+家宽+动态+IPV6+流媒体+Netflix+Disney+chatGPT>OpenAI+IPLC+IEPL+BGP+CN2+GIA+CMI+CMIN+AIG+PCCW+HKT
+https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Sub-Store/rename.js#out=zh&nf&flag&name=机场名｜&bl&blkey=Zx>专线+Fam>家宽+直连+Direct>直连+中转+Transit>中转+中继>中转+Relay>中转+家宽+动态+IPV6+流媒体+Netflix+Disney+chatGPT>OpenAI+IPLC+IEPL+BGP+CN2+GIA+CMI+CMIN+AIG+PCCW+HKT
 ```
 | 原始节点名 (Input) | 处理后效果 (Output) | 说明 |
 | :--- | :--- | :--- |
