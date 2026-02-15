@@ -1,7 +1,7 @@
 
 # rename.js
 ```
-https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Sub-Store/rename.js#bl=&blgd=&blkey=Zx%3E%E4%B8%93%E7%BA%BF%2B%E7%9B%B4%E8%BF%9E%2BDirect%3E%E7%9B%B4%E8%BF%9E%2B%E4%B8%AD%E8%BD%AC%2BTransit%3E%E4%B8%AD%E8%BD%AC%2B%E4%B8%AD%E7%BB%A7%2BRelay%3E%E4%B8%AD%E7%BB%A7%2B%E5%AE%B6%E5%AE%BD%2B%E5%8A%A8%E6%80%81%2BIPV6%2B%E6%B5%81%E5%AA%92%E4%BD%93%2BNetflix%2BDisney%2BchatGPT%3EOpenAI%2BIPLC%2BIEPL%2BBGP%2BCN2%2BGIA%2BCMI%2BCMIN%2BAIG%2BPCCW%2BHKT&fgf=&flag=&name=%E6%9C%BA%E5%9C%BA%EF%BD%9C&nf=&out=zh
+https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Sub-Store/rename.js#out=zh&nf&flag&name=机场名｜&blgd&bl&blkey=Zx>专线+直连+Direct>直连+中转+Transit>中转+中继+Relay>中继+家宽+动态+IPV6+流媒体+Netflix+Disney+chatGPT>OpenAI+IPLC+IEPL+BGP+CN2+GIA+CMI+CMIN+AIG+PCCW+HKT
 ```
 | 原始节点名 (Input) | 处理后效果 (Output) | 说明 |
 | :--- | :--- | :--- |
