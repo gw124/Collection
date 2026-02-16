@@ -1,10 +1,5 @@
-# NAME: Custom_Direct
+# NAME: Wen_Custom_Direct
 # DATE = 2026-02-16 18:36:26
-# DOMAIN
-# DOMAIN-SUFFIX
-# DOMAIN-KEYWORD
-# IP-CIDR
-# IP-CIDR6
 #!
 payload:
   # 进程与端口
