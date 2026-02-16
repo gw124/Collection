@@ -3,6 +3,7 @@
 
 payload:
   # 进程与端口
+  - SRC-IP-CIDR,10.10.10.12/32
   - PROCESS-NAME,qbittorrent
   - DST-PORT,34567
 
