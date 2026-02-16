@@ -35,8 +35,6 @@ http://23.237.104.106:8080/USA_CMT/index.m3u8
 https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Cartoon Network
 http://23.237.104.106:8080/USA_CARTOON_NETWORK/index.m3u8
-#EXTINF:-1 group-title="国际频道""国际频道",Comedy Central
-http://23.237.104.106:8080/USA_COMEDY_CENTRAL/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Cooking Channel
 http://23.237.104.106:8080/USA_COOKING/index.m3u8
 #EXTINF:-1 tvg-id="Discovery.Channel.HD.us2" tvg-name="Discovery Channel" tvg-logo="http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s11150_dark_360w_270h.png" group-title="国际频道""国际频道",Discovery Channel
