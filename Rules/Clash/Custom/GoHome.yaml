@@ -1,11 +1,6 @@
 # NAME: GoHome
 # DATE = 2026-02-16 18:36:26
-# DOMAIN
-# DOMAIN-SUFFIX
-# DOMAIN-KEYWORD
-# IP-CIDR
-# IP-CIDR6
-#!
+
 payload:
   # 进程与端口
   - SRC-IP-CIDR,10.10.10.12/32
