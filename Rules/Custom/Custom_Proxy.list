@@ -1,0 +1,10 @@
+# NAME: WenProxy
+# DOMAIN
+# DOMAIN-SUFFIX
+# IP-CIDR
+# IP-CIDR6
+
+DOMAIN-SUFFIX,vercel.app
+DOMAIN-SUFFIX,javbus.com
+DOMAIN-SUFFIX,69yun69.com
+DOMAIN-SUFFIX,emby.media
