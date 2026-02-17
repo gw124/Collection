@@ -28,7 +28,6 @@ payload:
   - DOMAIN,tracker.hhanclub.top
   - DOMAIN,tracker.trackerfile.com
   - DOMAIN,tracker.hhan.club
-  - DOMAIN,api.ip.sb
 
   #网盘规则
   - DOMAIN-SUFFIX,aliyundrive.com
@@ -48,3 +47,5 @@ payload:
   # Cloudflare
   - DOMAIN-SUFFIX,cloudflare.com
 
+  # 其它
+  - DOMAIN,api.ip.sb
