@@ -1,7 +1,6 @@
 # NAME: Wen_Custom_Direct
 # DATE: 2026-02-16 18:36:26
 
-SRC-IP-CIDR,10.10.10.12/32
 DOMAIN-SUFFIX,gw124.com
 DOMAIN-SUFFIX,gw126.com
 DOMAIN-SUFFIX,gw126.cn
@@ -27,7 +26,6 @@ DOMAIN,tracker.keepfrds.com
 DOMAIN,tracker.hhanclub.top
 DOMAIN,tracker.trackerfile.com
 DOMAIN,tracker.hhan.club
-DOMAIN,api.ip.sb
 
 # 网盘规则
 DOMAIN-SUFFIX,aliyundrive.com
@@ -46,3 +44,6 @@ DOMAIN-SUFFIX,github.boki.moe
 
 # Cloudflare
 DOMAIN-SUFFIX,cloudflare.com
+
+#   其它
+DOMAIN,api.ip.sb
