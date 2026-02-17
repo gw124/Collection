@@ -45,7 +45,7 @@ payload:
   - DOMAIN-SUFFIX,github.boki.moe
 
   # Cloudflare
-  - DOMAIN-SUFFIX,cloudflare.com
+  #- DOMAIN-SUFFIX,cloudflare.com
 
   # 其它
   - DOMAIN,api.ip.sb
