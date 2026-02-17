@@ -29,7 +29,7 @@ payload:
   - DOMAIN,tracker.trackerfile.com
   - DOMAIN,tracker.hhan.club
 
-  #网盘规则
+  # 网盘规则
   - DOMAIN-SUFFIX,aliyundrive.com
   - DOMAIN-SUFFIX,voicehub.top
   - DOMAIN-SUFFIX,quark.cn
@@ -45,7 +45,7 @@ payload:
   - DOMAIN-SUFFIX,github.boki.moe
 
   # Cloudflare
-  #- DOMAIN-SUFFIX,cloudflare.com
+  - DOMAIN-SUFFIX,cloudflare.com
 
   # 其它
   - DOMAIN,api.ip.sb
