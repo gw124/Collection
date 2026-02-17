@@ -1,0 +1,9 @@
+# NAME: Wen_Custom_Proxy
+# DATE: 2026-02-16 18:36:26
+
+payload:
+  # 域名后缀
+  - DOMAIN-SUFFIX,vercel.app
+  - DOMAIN-SUFFIX,javbus.com
+  - DOMAIN-SUFFIX,69yun69.com
+  - DOMAIN-SUFFIX,emby.media
