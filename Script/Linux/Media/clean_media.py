@@ -2,36 +2,16 @@ import os
 import time
 import random
 
-# ================= 配置区 =================
-# 对比对：(源目录, 目标参考目录)
+# 配置对比对
 DIR_PAIRS = [
     ("/root/Wen/CloudDrive/115/Media/每日更新/电影/", "/root/Wen/CloudDrive/115/Media/电影/"),
     ("/root/Wen/CloudDrive/115/Media/每日更新/电视剧/", "/root/Wen/CloudDrive/115/Media/电视剧/"),
     ("/root/Wen/CloudDrive/115/Media/每日更新/动漫/", "/root/Wen/CloudDrive/115/Media/动漫/"),
 ]
 
-# --- 小文件夹清理开关 ---
-CLEAN_SMALL_DIRS = True           # 是否开启小文件夹清理
-SMALL_DIR_THRESHOLD_MB = 10       # 体积阈值，单位 MB（小于此数值则删除整个文件夹）
-
-# --- 风控避让设置 ---
+# 规避风控
 SLEEP_MIN = 0.3
 SLEEP_MAX = 1.0
-# ==========================================
-
-def get_dir_size_mb(path):
-    """计算文件夹总大小 (MB)"""
-    total_size = 0
-    try:
-        for root, dirs, files in os.walk(path):
-            for f in files:
-                fp = os.path.join(root, f)
-                # 不计入软连接
-                if not os.path.islink(fp):
-                    total_size += os.path.getsize(fp)
-    except Exception:
-        pass
-    return total_size / (1024 * 1024)
 
 def process_fast_match(source_base, target_base):
     print(f"\n{'='*50}")
@@ -43,56 +23,51 @@ def process_fast_match(source_base, target_base):
 
     del_count = 0
     
-    # 1. 遍历并执行文件比对删除
+    # 遍历“每日更新”目录（这里文件通常较少，扫描很快）
     for root, dirs, files in os.walk(source_base):
         for file in files:
+            # 获取文件在源目录下的相对路径（包含子文件夹）
+            # 例如: "动画电影/哪吒.mp4"
             full_source_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_source_path, source_base)
+            
+            # 构建它在目标参考库中对应的绝对路径
+            # 例如: "/root/.../电影/动画电影/哪吒.mp4"
             corresponding_target_path = os.path.join(target_base, rel_path)
 
+            # --- 核心改进：直接询问系统该路径是否存在 ---
+            # 这不会触发全库扫描，只会触发对单个文件的元数据查询
             if os.path.exists(corresponding_target_path):
                 try:
                     os.remove(full_source_path)
                     del_count += 1
                     print(f"  [发现重复并删除] {rel_path}")
+                    # 稍微停顿，保护网盘 API
                     time.sleep(random.uniform(SLEEP_MIN, SLEEP_MAX))
                 except Exception as e:
                     print(f"  [删除失败] {rel_path}: {e}")
+            else:
+                # 目标库没有，保留，不打印信息以保持屏幕清爽
+                pass
 
-    # 2. 小文件夹清理逻辑
-    if CLEAN_SMALL_DIRS:
-        print(f"\n检查小于 {SMALL_DIR_THRESHOLD_MB}MB 的残留文件夹...")
-        # 使用 topdown=False 确保先处理最深层的子目录
-        for root, dirs, _ in os.walk(source_base, topdown=False):
-            for d in dirs:
-                dir_path = os.path.join(root, d)
-                
-                # 跳过源目录根路径本身
-                if dir_path == source_base:
-                    continue
-                
-                size_mb = get_dir_size_mb(dir_path)
-                
-                if size_mb < SMALL_DIR_THRESHOLD_MB:
-                    try:
-                        # 再次确认目录是否存在（可能被父级一起删了）
-                        if os.path.exists(dir_path):
-                            # 使用 shutil 递归删除非空的小文件夹
-                            import shutil
-                            shutil.rmtree(dir_path)
-                            print(f"  [清理小目录] {d} (体积: {size_mb:.2f}MB)")
-                            time.sleep(random.uniform(SLEEP_MIN, SLEEP_MAX))
-                    except Exception as e:
-                        print(f"  [清理失败] {d}: {e}")
+    # 清理空文件夹
+    if del_count > 0:
+        print("清理空文件夹...")
+        for _ in range(2):
+            for r, ds, _ in os.walk(source_base, topdown=False):
+                for d in ds:
+                    dp = os.path.join(r, d)
+                    if not os.listdir(dp):
+                        try: os.rmdir(dp)
+                        except: pass
 
-    print(f"\n任务结束。本次清理了 {del_count} 个重复文件。")
+    print(f"任务结束。本次清理了 {del_count} 个重复文件。")
 
 def main():
     start_time = time.time()
     for src, tgt in DIR_PAIRS:
         process_fast_match(src, tgt)
-    print(f"\n{'='*50}")
-    print(f"全部任务运行结束，总耗时: {int(time.time() - start_time)}s")
+    print(f"\n全部耗时: {int(time.time() - start_time)}s")
 
 if __name__ == "__main__":
     main()
