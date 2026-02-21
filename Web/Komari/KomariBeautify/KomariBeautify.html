@@ -2363,14 +2363,32 @@ function initializeEarth() {
       modalContent.style.transform = 'scale(1)';
     });
     updateGlobeTheme();
+    const soloPlay = false
     if (!isGlobeInitialized) {
-      try {
-        const res = await fetch('/api/nodes');
-        const json = await res.json();
-        let nodes = [];
-        if (json.status === 'success' && Array.isArray(json.data)) {
-          nodes = json.data;
+      if (!soloPlay) {
+        try {
+          const res = await fetch('/api/nodes');
+          const json = await res.json();
+          let nodes = [];
+          if (json.status === 'success' && Array.isArray(json.data)) {
+            nodes = json.data;
+          }
+          const { formattedData, arcsData, totalCount } = processData(nodes);
+          if (counterValue) counterValue.innerText = totalCount;
+          initGlobe(formattedData, arcsData);
+          isGlobeInitialized = true;
+          setTimeout(() => {
+            renderArea.classList.add('ready');
+          }, 100);
+        } catch (e) {
+          console.error(e);
         }
+      } else {
+        const nodes = Object.keys(COORD_MAP).map(code => ({
+          name: `${code}`,
+          region: code
+        }));
+
         const { formattedData, arcsData, totalCount } = processData(nodes);
         if (counterValue) counterValue.innerText = totalCount;
         initGlobe(formattedData, arcsData);
@@ -2378,8 +2396,6 @@ function initializeEarth() {
         setTimeout(() => {
           renderArea.classList.add('ready');
         }, 100);
-      } catch (e) {
-        console.error(e);
       }
     } else {
       setTimeout(() => {
