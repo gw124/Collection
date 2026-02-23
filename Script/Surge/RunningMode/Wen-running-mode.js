@@ -1,91 +1,110 @@
 /**
- * Surge Mac 自动模式切换 (调试版)
- * 特性：增加延迟执行，防止网络未就绪导致判断失败
+ * Surge & Loon 的运行模式，根据当前网络自动切换模式，此脚本思路来自于Quantumult X。
+ * @author: Peng-YM
+ * 更新地址: https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tools/RunningMode/running-mode.js
+ *
+ *************** Surge配置 ***********************
+ * 推荐使用模块：
+ * https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tools/RunningMode/running-mode.sgmodule
+ * 手动配置：
+ * [Script]
+ * event network-changed script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tools/RunningMode/running-mode.js
+ *
+ *************** Loon配置 ***********************
+ * 推荐使用插件：
+ * https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tools/RunningMode/running-mode.plugin
+ * 手动配置：
+ * [Script]
+ * network-changed script-path=https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tools/RunningMode/running-mode.js
+ *
+ *************** 脚本配置 ***********************
+ * 推荐使用BoxJS配置。
+ * BoxJS订阅：https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/box.js.json
+ * (不推荐！)手动配置项为config, 请看注释
  */
 
-// ================= 配置区域 =================
-const config = {
-  // 指定必须【全局直连】的 WiFi 名称 (精确匹配)
-  all_direct: ["SuiYue", "303", "Company_Guest"],
-  
-  // 指定必须【全局代理】的 WiFi 名称
-  all_proxy: [],
-  
-  // 默认 Wifi 下的模式 (RULE / DIRECT / PROXY)
-  wifi_default: "RULE",
-  
-  // 有线网络/无法获取SSID时的模式 (通常建议 DIRECT 或 RULE)
-  wired_default: "DIRECT" 
+let config = {
+  silence: false, // 是否静默运行，默认false
+  cellular: "RULE", // 蜂窝数据下的模式，RULE代表规则模式，PROXY代表全局代理，DIRECT代表全局直连
+  wifi: "RULE", // wifi下默认的模式
+  all_direct: ["SuiYue", "303"], // 指定全局直连的wifi名字
+  all_proxy: [], // 指定全局代理的wifi名字
 };
-// ===========================================
 
+// load user prefs from box
+const boxConfig = $persistentStore.read("surge_running_mode");
+if (boxConfig) {
+  config = JSON.parse(boxConfig);
+  config.silence = JSON.parse(config.silence);
+  config.all_direct = JSON.parse(config.all_direct);
+  config.all_proxy = JSON.parse(config.all_proxy);
+}
+
+const isLoon = typeof $loon !== "undefined";
+const isSurge = typeof $httpClient !== "undefined" && !isLoon;
 const MODE_NAMES = {
-  rule: "🚦规则模式",
-  "global-proxy": "🚀全局代理",
-  direct: "🎯全局直连"
+  RULE: "🚦规则模式",
+  PROXY: "🚀全局代理模式",
+  DIRECT: "🎯全局直连模式",
 };
 
-// 延迟 3000 毫秒 (3秒) 执行，确保 Wi-Fi 已经获取到 IP
-setTimeout(run, 3000);
+manager();
+$done();
 
-function run() {
-  // 1. 检查是否为 Surge
-  if (typeof $surge === "undefined") {
-    console.log("❌ 不是 Surge 环境，停止运行");
-    $done();
-    return;
-  }
+function manager() {
+  let ssid;
+  let mode;
 
-  // 2. 获取网络状态
-  const v4_ip = $network.v4.primaryAddress;
-  const ssid = $network.wifi ? $network.wifi.ssid : null;
-
-  console.log(`[调试日志]当前 IP: ${v4_ip}, SSID: ${ssid}`);
-
-  // 3. 核心逻辑判断
-  let targetMode = "rule"; // 默认为规则模式
-  let reason = "";
-
-  if (ssid) {
-    // === 情况 A: 连接了 Wi-Fi ===
-    if (config.all_direct.includes(ssid)) {
-      targetMode = "direct";
-      reason = `匹配到直连 Wi-Fi: ${ssid}`;
-    } else if (config.all_proxy.includes(ssid)) {
-      targetMode = "global-proxy";
-      reason = `匹配到代理 Wi-Fi: ${ssid}`;
-    } else {
-      targetMode = config.wifi_default.toLowerCase();
-      if(targetMode === "proxy") targetMode = "global-proxy"; // 修正配置写法差异
-      reason = `未知 Wi-Fi (${ssid})，使用默认配置`;
-    }
-  } else {
-    // === 情况 B: 没有 Wi-Fi (通常是有线网 或 没给定位权限) ===
-    if (v4_ip) {
-      // 有 IP 但没 SSID -> 认为是有线网络
-      targetMode = config.wired_default.toLowerCase();
-      reason = "检测到有线网络 (或未获取到 SSID)";
-    } else {
-      // 既没 IP 也没 SSID -> 无网络
-      console.log("❌ 当前无网络连接，不做改变");
-      $done();
+  if (isSurge) {
+    const v4_ip = $network.v4.primaryAddress;
+    // no network connection
+    if (!config.silence && !v4_ip) {
+      notify("🤖 Surge 运行模式", "❌ 当前无网络", "");
       return;
     }
+    ssid = $network.wifi.ssid;
+    mode = ssid ? lookupSSID(ssid) : config.cellular;
+    const target = {
+      RULE: "rule",
+      PROXY: "global-proxy",
+      DIRECT: "direct",
+    }[mode];
+    $surge.setOutboundMode(target);
+  } else if (isLoon) {
+    const conf = JSON.parse($config.getConfig());
+    ssid = conf.ssid;
+    mode = ssid ? lookupSSID(ssid) : config.cellular;
+    const target = {
+      DIRECT: 0,
+      RULE: 1,
+      PROXY: 2,
+    }[mode];
+    $config.setRunningModel(target);
   }
+  if (!config.silence) {
+    notify(
+      `🤖 ${isSurge ? "Surge" : "Loon"} 运行模式`,
+      `当前网络：${ssid ? ssid : "蜂窝数据"}`,
+      `${isSurge ? "Surge" : "Loon"} 已切换至${MODE_NAMES[mode]}`
+    );
+  }
+}
 
-  // 4. 执行切换
-  // 获取当前模式进行对比，避免重复操作
-  $surge.setOutboundMode(targetMode);
-  
-  // 5. 发送通知和日志
-  const logMsg = `模式: ${MODE_NAMES[targetMode]} | 原因: ${reason}`;
-  console.log(`✅ 切换成功: ${logMsg}`);
-  
-  $notification.post(
-    "运行模式自动切换", 
-    `当前网络: ${ssid || "有线/蜂窝"}`, 
-    `已切换至: ${MODE_NAMES[targetMode]}`
-  );
+function lookupSSID(ssid) {
+  const map = {};
+  config.all_direct.map((id) => (map[id] = "DIRECT"));
+  config.all_proxy.map((id) => (map[id] = "PROXY"));
 
-  $done();
+  const matched = map[ssid];
+  return matched ? matched : config.wifi;
+}
+
+function notify(title, subtitle, content) {
+  const SUBTITLE_STORE_KEY = "running_mode_notified_subtitle";
+  const lastNotifiedSubtitle = $persistentStore.read(SUBTITLE_STORE_KEY);
+
+  if (!lastNotifiedSubtitle || lastNotifiedSubtitle !== subtitle) {
+    $persistentStore.write(subtitle.toString(), SUBTITLE_STORE_KEY);
+    $notification.post(title, subtitle, content);
+  }
 }
