@@ -51,7 +51,7 @@
 | `PROJECT_URL` | Space 保活链接 | ❌ |
 | `TG_BOT_TOKEN` | Telegram Bot Token | ❌ |
 | `TG_CHAT_ID` | Telegram 聊天 ID | ❌ |
-| `TG_API_URL` | Telegram API 反代地址 | ❌ |
+| `TG_API` | Telegram API 反代地址 | ❌ |
 
 ### 第三步：上传文件
 
@@ -110,7 +110,7 @@ https://用户名-项目名.hf.space
 |------|------|
 | `TG_BOT_TOKEN` | 从 [@BotFather](https://t.me/BotFather) 获取 |
 | `TG_CHAT_ID` | 从 [@userinfobot](https://t.me/userinfobot) 获取 |
-| `TG_API_URL` | Telegram API 反代地址 |
+| `TG_API` | Telegram API 反代地址 |
 
 **反代地址格式：**
 ```
@@ -165,7 +165,7 @@ HuggingFace 免费 Space 无访问时会自动休眠。设置 `PROJECT_URL` 后�
 <details>
 <summary><b>为什么收不到 Telegram 通知？</b></summary>
 
-HuggingFace 网络限制无法直接访问 `api.telegram.org`，必须配置 `TG_API_URL` 反代地址。可使用 Cloudflare Workers 自建反代。
+HuggingFace 网络限制无法直接访问 `api.telegram.org`，必须配置 `TG_API` 反代地址。可使用 Cloudflare Workers 自建反代。
 </details>
 
 <details>
@@ -180,5 +180,6 @@ NA1 金币可兑换服务器资源，详见 [NA1 官网](https://panel.na1.host)
 
 
 本项目仅供学习交流，请遵守 [panel.na1.host](https://panel.na1.host) 服务条款。使用本程序产生的任何后果由用户自行承担。
+
 
 
