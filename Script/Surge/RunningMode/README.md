@@ -12,12 +12,12 @@
 
 | 平台 | 特性说明 | 模块链接 (点击复制) |
 | :--- | :--- | :--- |
-| **macOS** | ✅ 适配有线网络 (Ethernet)<br>✅ 修复定位权限导致的 SSID 获取失败 | `https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Surge/RunningMode/MacOS-running-mode.sgmodule` |
-| **iOS** | ✅ 适配蜂窝数据 (Cellular)<br>✅ 针对移动端省电优化 | `https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Surge/RunningMode/IOS-running-mode.sgmodule` |
+| **macOS** | ✅ 适配有线网络 (Ethernet)<br>✅ 修复定位权限导致的 SSID 获取失败 | `https://raw.githubusercontent.com/gw124/Collection/main/Script/Surge/RunningMode/MacOS-running-mode.sgmodule` |
+| **iOS** | ✅ 适配蜂窝数据 (Cellular)<br>✅ 针对移动端省电优化 | `https://raw.githubusercontent.com/gw124/Collection/main/Script/Surge/RunningMode/IOS-running-mode.sgmodule` |
 
 > **一键安装链接 (需已安装 Surge):**
-> * [安装 macOS 版](surge:///install-module?url=https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Surge/RunningMode/MacOS-running-mode.sgmodule)
-> * [安装 iOS 版](surge:///install-module?url=https://raw.githubusercontent.com/gw124/Collection/refs/heads/main/Script/Surge/RunningMode/IOS-running-mode.sgmodule)
+> * [安装 macOS 版](surge:///install-module?url=https://raw.githubusercontent.com/gw124/Collection/main/Script/Surge/RunningMode/MacOS-running-mode.sgmodule)
+> * [安装 iOS 版](surge:///install-module?url=https://raw.githubusercontent.com/gw124/Collection/main/Script/Surge/RunningMode/IOS-running-mode.sgmodule)
 
 ---
 
