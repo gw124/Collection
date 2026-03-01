@@ -21,10 +21,8 @@ let config = {
   silence: false,      // true: 静默运行(不通知); false: 开启通知
   wifi: "RULE",        // 默认 Wi-Fi 下使用规则模式
   ethernet: "DIRECT",  // 有线网络下使用直连模式
-  all_direct: [        // 强制直连的 Wi-Fi 列表 (比如公司的内网 Wi-Fi)
-    "Company_WiFi", 
-    "SuiYue"
-  ], 
+  all_direct:         // 强制直连的 Wi-Fi 列表 (比如公司的内网 Wi-Fi)
+    ["SuiYue", "303"], 
   all_proxy: [         // 强制全局代理的 Wi-Fi 列表 (比如必须翻墙的 Wi-Fi)
     "Starbucks_Free"
   ], 
