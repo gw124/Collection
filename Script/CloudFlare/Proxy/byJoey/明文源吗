@@ -220,7 +220,7 @@
         }
     }
 
-    async function getBestBackupIP(workerRegion = '') {
+    async function getBestBackupIP(workerRegion = '', useRegionMatching = enableRegionMatching) {
         
         if (backupIPs.length === 0) {
             return null;
@@ -228,8 +228,8 @@
         
         const availableIPs = backupIPs.map(ip => ({ ...ip, available: true }));
         
-        if (enableRegionMatching && workerRegion) {
-            const sortedIPs = getSmartRegionSelection(workerRegion, availableIPs);
+        if (useRegionMatching && workerRegion) {
+            const sortedIPs = getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching);
             if (sortedIPs.length > 0) {
                 const selectedIP = sortedIPs[0];
                 return selectedIP;
@@ -263,9 +263,9 @@
         return [region, ...nearbyRegions, ...allRegions.filter(r => r !== region && !nearbyRegions.includes(r))];
     }
 
-    function getSmartRegionSelection(workerRegion, availableIPs) {
+    function getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching = enableRegionMatching) {
         
-        if (!enableRegionMatching || !workerRegion) {
+        if (!useRegionMatching || !workerRegion) {
             return availableIPs;
         }
         
@@ -297,8 +297,9 @@
             const address = input.substring(0, lastColonIndex);
             const portStr = input.substring(lastColonIndex + 1);
             const port = parseInt(portStr, 10);
-            
-            if (!isNaN(port) && port > 0 && port <= 65535) {
+
+            // address 含 ':' 说明是裸 IPv6（如 2001:db8::1），整体当地址，无端口
+            if (!address.includes(':') && !isNaN(port) && port > 0 && port <= 65535) {
                 return { address, port };
             }
         }
@@ -1982,13 +1983,32 @@
     }
 
     async function handleWsRequest(request) {
+        // 从请求URL的path query中读取客户端自定义参数
+        // p=ProxyIP, wk=Worker地区, rm=地区匹配(no关闭), s=socks5代理
+        const reqUrl = new URL(request.url);
+        const reqFallback = reqUrl.searchParams.get('p') || '';
+        const reqRegion = (reqUrl.searchParams.get('wk') || '').toUpperCase();
+        const reqRmStr = reqUrl.searchParams.get('rm') || '';
+        const reqRm = reqRmStr ? reqRmStr.toLowerCase() !== 'no' : null;
+        const reqSocksStr = reqUrl.searchParams.get('s') || '';
+        let reqSocksConfig = null;
+        if (reqSocksStr) {
+            try { reqSocksConfig = parseSocksConfig(reqSocksStr); } catch (_) {}
+        }
+
         // 检测并设置当前Worker地区，确保WebSocket请求能正确进行就近匹配
-        if (!currentWorkerRegion || currentWorkerRegion === '') {
-            if (manualWorkerRegion && manualWorkerRegion.trim()) {
-                currentWorkerRegion = manualWorkerRegion.trim().toUpperCase();
+        // 优先级：客户端path参数wk > 全局manualWorkerRegion > 自动检测
+        let effectiveRegion = currentWorkerRegion;
+        if (!effectiveRegion || effectiveRegion === '') {
+            if (reqRegion) {
+                effectiveRegion = reqRegion;
+            } else if (manualWorkerRegion && manualWorkerRegion.trim()) {
+                effectiveRegion = manualWorkerRegion.trim().toUpperCase();
             } else {
-                currentWorkerRegion = await detectWorkerRegion(request);
+                effectiveRegion = await detectWorkerRegion(request);
             }
+        } else if (reqRegion) {
+            effectiveRegion = reqRegion;
         }
         
         const wsPair = new WebSocketPair();
@@ -2026,7 +2046,7 @@
                 const respHeader = new Uint8Array([version[0], 0]);
                 const rawData = chunk.slice(rawIndex);
                 if (isDnsQuery) return forwardUDP(rawData, serverSock, respHeader);
-                await forwardTCP(addressType, hostname, port, rawData, serverSock, respHeader, remoteConnWrapper);
+                await forwardTCP(addressType, hostname, port, rawData, serverSock, respHeader, remoteConnWrapper, reqFallback, effectiveRegion, reqRm, reqSocksConfig);
                             return;
                         }
                     }
@@ -2036,7 +2056,7 @@
                         if (!tjResult.hasError) {
                             protocolType = atob('dHJvamFu');
                             const { addressType, port, hostname, rawClientData } = tjResult;
-                            await forwardTCP(addressType, hostname, port, rawClientData, serverSock, null, remoteConnWrapper);
+                            await forwardTCP(addressType, hostname, port, rawClientData, serverSock, null, remoteConnWrapper, reqFallback, effectiveRegion, reqRm, reqSocksConfig);
                             return;
                         }
                     }
@@ -2049,10 +2069,17 @@
         return new Response(null, { status: 101, webSocket: clientSock });
     }
 
-    async function forwardTCP(addrType, host, portNum, rawData, ws, respHeader, remoteConnWrapper) {
+    async function forwardTCP(addrType, host, portNum, rawData, ws, respHeader, remoteConnWrapper, reqFallback = '', reqRegion = '', reqRm = null, reqSocksConfig = null) {
+        // 优先使用客户端path参数，其次回退到全局配置
+        const effectiveFallback = reqFallback || fallbackAddress;
+        const effectiveRegion = reqRegion || currentWorkerRegion;
+        const effectiveRegionMatching = reqRm !== null ? reqRm : enableRegionMatching;
+        const effectiveSocksConfig = reqSocksConfig || parsedSocks5Config;
+        const effectiveSocksEnabled = reqSocksConfig ? true : isSocksEnabled;
+
         async function connectAndSend(address, port, useSocks = false) {
             const remoteSock = useSocks ?
-                await establishSocksConnection(addrType, address, port) :
+                await establishSocksConnection(addrType, address, port, effectiveSocksConfig) :
                 connect({ hostname: address, port: port });
             const writer = remoteSock.writable.getWriter();
             await writer.write(rawData);
@@ -2061,7 +2088,7 @@
         }
         
         async function retryConnection() {
-            if (enableSocksDowngrade && isSocksEnabled) {
+            if (enableSocksDowngrade && effectiveSocksEnabled) {
                 try {
                     const socksSocket = await connectAndSend(host, portNum, true);
                     remoteConnWrapper.socket = socksSocket;
@@ -2070,12 +2097,12 @@
                     return;
                 } catch (socksErr) {
                     let backupHost, backupPort;
-                    if (fallbackAddress && fallbackAddress.trim()) {
-                        const parsed = parseAddressAndPort(fallbackAddress);
+                    if (effectiveFallback && effectiveFallback.trim()) {
+                        const parsed = parseAddressAndPort(effectiveFallback);
                         backupHost = parsed.address;
                         backupPort = parsed.port || portNum;
                     } else {
-                        const bestBackupIP = await getBestBackupIP(currentWorkerRegion);
+                        const bestBackupIP = await getBestBackupIP(effectiveRegion, effectiveRegionMatching);
                         backupHost = bestBackupIP ? bestBackupIP.domain : host;
                         backupPort = bestBackupIP ? bestBackupIP.port : portNum;
                     }
@@ -2091,18 +2118,18 @@
                 }
             } else {
                 let backupHost, backupPort;
-                if (fallbackAddress && fallbackAddress.trim()) {
-                    const parsed = parseAddressAndPort(fallbackAddress);
+                if (effectiveFallback && effectiveFallback.trim()) {
+                    const parsed = parseAddressAndPort(effectiveFallback);
                     backupHost = parsed.address;
                     backupPort = parsed.port || portNum;
                 } else {
-                    const bestBackupIP = await getBestBackupIP(currentWorkerRegion);
+                    const bestBackupIP = await getBestBackupIP(effectiveRegion, effectiveRegionMatching);
                     backupHost = bestBackupIP ? bestBackupIP.domain : host;
                     backupPort = bestBackupIP ? bestBackupIP.port : portNum;
                 }
                 
                 try {
-                    const fallbackSocket = await connectAndSend(backupHost, backupPort, isSocksEnabled);
+                    const fallbackSocket = await connectAndSend(backupHost, backupPort, effectiveSocksEnabled);
                     remoteConnWrapper.socket = fallbackSocket;
                     fallbackSocket.closed.catch(() => {}).finally(() => closeSocketQuietly(ws));
                     connectStreams(fallbackSocket, ws, respHeader, null);
@@ -2113,7 +2140,7 @@
         }
         
         try {
-            const initialSocket = await connectAndSend(host, portNum, enableSocksDowngrade ? false : isSocksEnabled);
+            const initialSocket = await connectAndSend(host, portNum, enableSocksDowngrade ? false : effectiveSocksEnabled);
             remoteConnWrapper.socket = initialSocket;
             connectStreams(initialSocket, ws, respHeader, retryConnection);
         } catch (err) {
@@ -2191,8 +2218,8 @@
         } catch (error) { }
     }
 
-    async function establishSocksConnection(addrType, address, port) {
-        const { username, password, hostname, socksPort } = parsedSocks5Config;
+    async function establishSocksConnection(addrType, address, port, socksConfig = parsedSocks5Config) {
+        const { username, password, hostname, socksPort } = socksConfig;
         const socket = connect({ hostname, port: socksPort });
         const writer = socket.writable.getWriter();
         await writer.write(new Uint8Array(username ? [5, 2, 0, 2] : [5, 1, 0]));
