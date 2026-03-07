@@ -47,5 +47,9 @@ payload:
   # Cloudflare
   - DOMAIN-SUFFIX,cloudflare.com
 
+  # Game
+  - DOMAIN-SUFFIX,papergames.io
+
+
   # 其它
   - DOMAIN,api.ip.sb
