@@ -1,7 +1,9 @@
 function operator(proxies) {
-    // === 自定义前缀与分隔符 ===
-    const PREFIX = "红叶";
-    const SEP = "｜";       // 节点名前缀分隔符 (全角)
+    // === 获取 URL 参数中的自定义前缀 ===
+    // 例如传入 #name=GLaDOS｜，这里就会获取到 "GLaDOS｜"
+    const args = typeof $arguments !== 'undefined' ? $arguments : {};
+    let prefix = args.name ? decodeURIComponent(args.name) : "";
+
     const TAG_SEP = "｜";   // 标签之间的分隔符 (全角)
 
     // === 1. 标签提取与统称规则 ===
@@ -25,7 +27,7 @@ function operator(proxies) {
     // === 2. 地区识别规则 ===
     const countryMap = [
         { keys: /香港|港|HK|Hong/i, flag: '🇭🇰', name: '香港' },
-        { keys: /台湾|台|TW|Tai|新北/i, flag: '🇨🇳', name: '台湾' }, // 💡 已按要求强制使用中国国旗
+        { keys: /台湾|台|TW|Tai|新北/i, flag: '🇨🇳', name: '台湾' }, // 强制显示中国国旗
         { keys: /澳门|澳|MO|Macau|Macao/i, flag: '🇲🇴', name: '澳门' },
         { keys: /日本|日|JP|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
         { keys: /韩国|韩|KR|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
@@ -122,8 +124,11 @@ function operator(proxies) {
         items.forEach((item, index) => {
             let seq = (index + 1).toString().padStart(2, '0');
             
-            // 基础名字：红叶｜🇨🇳 台湾 01
-            let newName = `${PREFIX}${SEP}${cFlag} ${region} ${seq}`;
+            // 基础名字拼接：只负责国旗、国家和序号
+            let coreName = `${cFlag} ${region} ${seq}`;
+            
+            // 加上用户通过参数传进来的 prefix (如：GLaDOS｜🇨🇳 台湾 01)
+            let newName = prefix + coreName;
             
             // 追加标签
             if (item.tags.length > 0) {
