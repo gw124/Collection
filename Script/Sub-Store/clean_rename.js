@@ -1,6 +1,5 @@
 function operator(proxies) {
     // === 获取 URL 参数中的自定义前缀 ===
-    // 例如传入 #name=GLaDOS｜，这里就会获取到 "GLaDOS｜"
     const args = typeof $arguments !== 'undefined' ? $arguments : {};
     let prefix = args.name ? decodeURIComponent(args.name) : "";
 
@@ -75,7 +74,6 @@ function operator(proxies) {
                 if (!tags.includes(formattedTag)) {
                     tags.push(formattedTag);
                 }
-                // 匹配后抹除该关键词，避免重复识别
                 tempName = tempName.replace(regex, "");
             }
         });
@@ -86,7 +84,7 @@ function operator(proxies) {
         if (blMatch) {
             const rev = blMatch[0].match(/(\d[\d.]*)/)[0];
             if (rev !== "1" && rev !== "1.0") {
-                multiplier = rev + "x"; 
+                multiplier = "x" + rev; // 💡 这里改成了 x在前，数字在后，例如：x2, x1.5
             }
         }
 
@@ -126,8 +124,6 @@ function operator(proxies) {
             
             // 基础名字拼接：只负责国旗、国家和序号
             let coreName = `${cFlag} ${region} ${seq}`;
-            
-            // 加上用户通过参数传进来的 prefix (如：GLaDOS｜🇨🇳 台湾 01)
             let newName = prefix + coreName;
             
             // 追加标签
