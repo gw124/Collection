@@ -1,0 +1,44 @@
+# ChmlFrp 自动签到脚本
+
+基于 GitHub Actions 的 ChmlFrp 面板自动签到脚本。支持多账号批量签到、日志敏感信息脱敏，旨在自动维持账号活跃并获取每日积分。
+
+## ✨ 功能特性
+
+- **多账号支持**：支持配置多个账号，批量执行签到任务。
+- **隐私保护**：日志中自动隐藏用户名，仅显示 "账号 1", "账号 2" 等代号，保护账号安全。
+- **移动端模拟**：模拟 iPhone 移动端请求，提高签到成功率。
+- **自动化运行**：通过 GitHub Actions 每天定时自动运行，无需服务器。
+- **健壮性**：包含完善的错误捕获机制，防止单个账号失败影响其他账号。
+
+## 🚀 使用方法
+
+### 1. 准备工作
+
+Fork 本仓库，或将以下文件上传至你的 GitHub 仓库：
+- `main.py` (主逻辑代码)
+- `requirements.txt` (依赖文件)
+- `.github/workflows/signin.yml` (自动任务配置)
+
+### 2. 配置账号信息 (Secrets)
+
+为了保护你的账号安全，**请勿将账号密码直接写入代码中**。请使用 GitHub Secrets 配置：
+
+1. 进入仓库页面，点击上方导航栏的 **Settings**。
+2. 在左侧菜单栏找到 **Secrets and variables** -> **Actions**。
+3. 点击 **New repository secret**。
+4. **Name** 填写：`ACCOUNTS_JSON`
+5. **Secret** 填写你的账号列表，必须是标准的 **JSON 格式**。
+
+**Secret 格式示例：**
+
+```json
+[
+  {
+    "username": "你的用户名1",
+    "password": "你的密码1"
+  },
+  {
+    "username": "你的用户名2",
+    "password": "你的密码2"
+  }
+]

@@ -1,0 +1,66 @@
+name: SakuraFrp 自动签到
+
+on:
+  # 定时任务：每天北京时间 9:00 执行（UTC 1:00）
+  schedule:
+    - cron: '0 1 * * *'
+  
+  # 允许手动触发
+  workflow_dispatch:
+  
+jobs:
+  checkin:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: 安装Chrome和ChromeDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable curl unzip
+          # 使用webdriver-manager自动管理ChromeDriver版本
+          pip install webdriver-manager chromedriver-binary-auto
+      
+      - name: 安装 Python 依赖
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: 运行签到脚本
+        env:
+          SAKURAFRP_USER: ${{ secrets.SAKURAFRP_USER }}
+          SAKURAFRP_PASS: ${{ secrets.SAKURAFRP_PASS }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
+          MODEL: ${{ secrets.MODEL }}
+          CI: 'true'
+          HEADLESS: 'true'
+        run: |
+          python main.py
+      
+      - name: 发送邮件通知
+        if: always()
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER || 'smtp.gmail.com' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '587' }}
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL || secrets.EMAIL_USERNAME }}
+        run: |
+          python send_email.py
+      
+      - name: 上传日志
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkin-logs
+          path: checkin.log
+          retention-days: 7

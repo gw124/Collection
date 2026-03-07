@@ -1,0 +1,5 @@
+.env
+.venv
+checkin.log
+test/
+__pycache__/

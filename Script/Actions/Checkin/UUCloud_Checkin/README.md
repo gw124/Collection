@@ -1,0 +1,38 @@
+# UUCloud Checkin with WARP
+
+这是一个基于 GitHub Actions 的自动签到脚本，专为 UUCloud (uuyun.us) 设计。
+
+## ✨ 功能特点
+
+* **多账号支持**：通过环境变量配置，支持无限个账号轮询签到。
+* **IP 隔离 (隐私保护)**：
+    * 集成了 **Cloudflare WARP**。
+    * 每次切换账号前，脚本会自动断开并重连 WARP，以获取新的出口 IP，防止因多账号同 IP 签到被封禁。
+* **智能数据提取**：
+    * 自动登录并签到。
+    * 精确解析签到结果（成功/重复/失败）。
+    * **增强的正则匹配**：支持解析 `TB`, `GB`, `MB`, `KB` 等多种单位的剩余流量，完美适配不同的用户面板布局。
+* **隐私日志**：
+    * 日志中仅显示 "账户 1"、"账户 2"，自动隐藏邮箱和密码等敏感信息。
+    * 使用 GitHub Secrets 存储凭据，确保安全。
+
+## 🚀 快速开始
+
+### 1. Fork 本仓库
+点击右上角的 **Fork** 按钮，将本项目复刻到你自己的 GitHub 账号下。
+
+### 2. 配置 Secrets
+进入你的仓库页面，依次点击：
+`Settings` -> `Secrets and variables` -> `Actions` -> `New repository secret`
+
+添加以下 Secret：
+
+| Name | Value 格式 |
+| :--- | :--- |
+| `UUYUN_ACCOUNTS` | `邮箱,密码` (多账号请换行) |
+
+**示例配置：**
+```text
+zhangsan@qq.com,password123
+lisi@gmail.com,mysecret456
+wangwu@163.com,helloworld789
