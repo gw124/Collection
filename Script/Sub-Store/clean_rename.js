@@ -7,10 +7,10 @@ function operator(proxies) {
     // === 1. 标签提取与统称规则 ===
     const tagDict = {
         "Zx": "专线", "专线": "专线", 
-        "IPLC": "IPLC", "IEPL": "IEPL", // 💡 IPLC 和 IEPL 独立显示
+        "IPLC": "IPLC", "IEPL": "IEPL", 
         "Fam": "家宽", "家宽": "家宽", 
         "直连": "直连", "Direct": "直连", 
-        "中继": "中转", "Relay": "中转", "Transit": "中转", "中转": "中转", // 统称中转
+        "中继": "中转", "Relay": "中转", "Transit": "中转", "中转": "中转", 
         "动态": "动态", 
         "IPV6": "IPv6", "IPv6": "IPv6",
         "流媒体": "流媒体", "Netflix": "Netflix", "Disney": "Disney", 
@@ -25,7 +25,7 @@ function operator(proxies) {
     // === 2. 地区识别规则 ===
     const countryMap = [
         { keys: /香港|港|HK|Hong/i, flag: '🇭🇰', name: '香港' },
-        { keys: /台湾|台|TW|Tai|新北/i, flag: '🇹🇼', name: '台湾' },
+        { keys: /台湾|台|TW|Tai|新北/i, flag: '🇨🇳', name: '台湾' }, // 💡 已按要求强制使用中国国旗
         { keys: /澳门|澳|MO|Macau|Macao/i, flag: '🇲🇴', name: '澳门' },
         { keys: /日本|日|JP|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
         { keys: /韩国|韩|KR|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
@@ -122,15 +122,15 @@ function operator(proxies) {
         items.forEach((item, index) => {
             let seq = (index + 1).toString().padStart(2, '0');
             
-            // 基础名字：红叶｜🇯🇵 日本 01
+            // 基础名字：红叶｜🇨🇳 台湾 01
             let newName = `${PREFIX}${SEP}${cFlag} ${region} ${seq}`;
             
-            // 追加标签：[IPLC｜EIP]
+            // 追加标签
             if (item.tags.length > 0) {
                 newName += ` [${item.tags.join(TAG_SEP)}]`;
             }
             
-            // 追加倍率：1.5x (在方括号外面，用空格隔开)
+            // 追加倍率
             if (item.multi !== "") {
                 newName += ` ${item.multi}`;
             }
