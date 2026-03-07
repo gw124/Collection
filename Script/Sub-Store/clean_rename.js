@@ -7,7 +7,7 @@ function operator(proxies) {
     // === 1. 标签提取与统称规则 ===
     const tagDict = {
         "Zx": "专线", "专线": "专线", 
-        "IPLC": "IPLC", "IEPL": "IEPL", // 💡 已恢复独立显示，不再合并为专线
+        "IPLC": "IPLC", "IEPL": "IEPL", // 💡 IPLC 和 IEPL 独立显示
         "Fam": "家宽", "家宽": "家宽", 
         "直连": "直连", "Direct": "直连", 
         "中继": "中转", "Relay": "中转", "Transit": "中转", "中转": "中转", // 统称中转
@@ -130,7 +130,7 @@ function operator(proxies) {
                 newName += ` [${item.tags.join(TAG_SEP)}]`;
             }
             
-            // 追加倍率：1.5x
+            // 追加倍率：1.5x (在方括号外面，用空格隔开)
             if (item.multi !== "") {
                 newName += ` ${item.multi}`;
             }
