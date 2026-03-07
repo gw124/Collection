@@ -13,6 +13,8 @@ http://mytvstream.net:8080/live/30550113/30550113/2210.m3u8
 http://mytvstream.net:8080/live/30550113/30550113/1847.m3u8
 #EXTINF:-1 tvg-id="HBO2.HD.us2" tvg-name="HBO 2" tvg-logo="http://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s68140_dark_360w_270h.png" group-title="国际频道""国际频道",HBO 2
 http://23.237.104.106:8080/USA_HBO2/index.m3u8
+#EXTINF:-1 group-title="国际频道""国际频道",Eurosport 4K
+http://nvsoo4tx.megogo.xyz/iptv/UWA8DBPMZFQ9PX9ZLSBM7FFX/31475/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",ABC
 http://mytvstream.net:8080/live/30550113/30550113/120952.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Al Jazeera
@@ -65,6 +67,8 @@ http://mytvstream.net:8080/live/30550113/30550113/9297.m3u8
 https://lightning-fnf-samsungaus.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="LMN.HD.us2" tvg-name="Lifetime Movie Network" tvg-logo="https://schedulesdirect-api20141201-logos.s3.dualstack.us-east-1.amazonaws.com/stationLogos/s18480_dark_360w_270h.png" group-title="国际频道""国际频道",Lifetime Movie Network
 http://23.237.104.106:8080/USA_LMN/index.m3u8
+#EXTINF:-1 group-title="国际频道""国际频道",Love Nature
+http://nvsoo4tx.megogo.xyz/iptv/UWA8DBPMZFQ9PX9ZLSBM7FFX/5001/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",MovieSphere
 https://moviesphereuk-samsunguk.amagi.tv/playlist.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Mytime Movie
@@ -111,6 +115,8 @@ https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8
 https://lightning-tracesport-samsungau.amagi.tv/playlist1080p.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Trace Urban
 https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8
+#EXTINF:-1 group-title="国际频道""国际频道",Travel XP
+http://nvsoo4tx.megogo.xyz/iptv/UWA8DBPMZFQ9PX9ZLSBM7FFX/14026/index.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",WION
 https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8
 #EXTINF:-1 group-title="国际频道""国际频道",Wild Earth
