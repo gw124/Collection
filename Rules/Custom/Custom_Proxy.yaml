@@ -3,7 +3,7 @@
 
 payload:
   # 端口
-  - DST-PORT,22
+  #- DST-PORT,22
   # 域名后缀
   - DOMAIN-SUFFIX,vercel.app
   - DOMAIN-SUFFIX,javbus.com
