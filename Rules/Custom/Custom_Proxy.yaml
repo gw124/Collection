@@ -2,6 +2,8 @@
 # DATE: 2026-02-17 20:00:00
 
 payload:
+  # 端口
+  - DST-PORT,22
   # 域名后缀
   - DOMAIN-SUFFIX,vercel.app
   - DOMAIN-SUFFIX,javbus.com
