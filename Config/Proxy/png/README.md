@@ -1,12 +1,17 @@
 # Proxy Icons Collection
-这是自动生成的图标预览文档，包含图标、文件名及直链。
+> 自动生成的图标库索引文件。
 
+### 📂 配置文件链接 (JSON)
+- **Raw 直链**: [https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Proxy_icons.json](https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Proxy_icons.json)
+- **浏览器预览**: [点击查看](https://github.com/gw124/Collection/blob/main/Config/Proxy/png/Proxy_icons.json)
+
+### 🖼️ 图标预览列表
 <table width="100%">
   <thead>
     <tr>
       <th width="10%" align="center">预览</th>
       <th width="30%" align="left">文件名</th>
-      <th width="60%" align="left">Raw 直链地址</th>
+      <th width="60%" align="left">图片直链地址</th>
     </tr>
   </thead>
   <tbody>
