@@ -8,42 +8,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/AI.png" target="_blank">
-        <img src="AI.png" width="60" height="60" style="object-fit: contain;">
+        <img src="AI.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/AI_A.png" target="_blank">
-        <img src="AI_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="AI_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Adblock.png" target="_blank">
-        <img src="Adblock.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Adblock.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Airport.png" target="_blank">
-        <img src="Airport.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Airport.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/AppStore.png" target="_blank">
-        <img src="AppStore.png" width="60" height="60" style="object-fit: contain;">
+        <img src="AppStore.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple.png" target="_blank">
-        <img src="Apple.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple1.png" target="_blank">
-        <img src="Apple1.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple1.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/AppleTV.png" target="_blank">
-        <img src="AppleTV.png" width="60" height="60" style="object-fit: contain;">
+        <img src="AppleTV.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -76,42 +76,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple_A.png" target="_blank">
-        <img src="Apple_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple_Home.png" target="_blank">
-        <img src="Apple_Home.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple_Home.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple_Messages.png" target="_blank">
-        <img src="Apple_Messages.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple_Messages.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Apple_Wallet.png" target="_blank">
-        <img src="Apple_Wallet.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Apple_Wallet.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Automatic.png" target="_blank">
-        <img src="Automatic.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Automatic.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Available.png" target="_blank">
-        <img src="Available.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Available.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Backup.png" target="_blank">
-        <img src="Backup.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Backup.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Bypass.png" target="_blank">
-        <img src="Bypass.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Bypass.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -144,42 +144,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/China.png" target="_blank">
-        <img src="China.png" width="60" height="60" style="object-fit: contain;">
+        <img src="China.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/ChinaMedia.png" target="_blank">
-        <img src="ChinaMedia.png" width="60" height="60" style="object-fit: contain;">
+        <img src="ChinaMedia.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/China_Map.png" target="_blank">
-        <img src="China_Map.png" width="60" height="60" style="object-fit: contain;">
+        <img src="China_Map.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Cloudflare.png" target="_blank">
-        <img src="Cloudflare.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Cloudflare.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Cloudflare1.png" target="_blank">
-        <img src="Cloudflare1.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Cloudflare1.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Cloudflare2.png" target="_blank">
-        <img src="Cloudflare2.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Cloudflare2.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Cloudflare_A.png" target="_blank">
-        <img src="Cloudflare_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Cloudflare_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Cloudflare_B.png" target="_blank">
-        <img src="Cloudflare_B.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Cloudflare_B.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -212,42 +212,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Direct1.png" target="_blank">
-        <img src="Direct1.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Direct1.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Direct_A.png" target="_blank">
-        <img src="Direct_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Direct_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Disney.png" target="_blank">
-        <img src="Disney.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Disney.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Emby.png" target="_blank">
-        <img src="Emby.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Emby.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/FallBack.png" target="_blank">
-        <img src="FallBack.png" width="60" height="60" style="object-fit: contain;">
+        <img src="FallBack.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Final.png" target="_blank">
-        <img src="Final.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Final.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Game.png" target="_blank">
-        <img src="Game.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Game.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Game1.png" target="_blank">
-        <img src="Game1.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Game1.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -280,42 +280,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Game_A.png" target="_blank">
-        <img src="Game_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Game_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Gamer.png" target="_blank">
-        <img src="Gamer.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Gamer.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/GitHub.png" target="_blank">
-        <img src="GitHub.png" width="60" height="60" style="object-fit: contain;">
+        <img src="GitHub.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Global.png" target="_blank">
-        <img src="Global.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Global.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/GlobalMedia.png" target="_blank">
-        <img src="GlobalMedia.png" width="60" height="60" style="object-fit: contain;">
+        <img src="GlobalMedia.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Global_A.png" target="_blank">
-        <img src="Global_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Global_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Google.png" target="_blank">
-        <img src="Google.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Google.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/GoogleDrive.png" target="_blank">
-        <img src="GoogleDrive.png" width="60" height="60" style="object-fit: contain;">
+        <img src="GoogleDrive.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -348,42 +348,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Home.png" target="_blank">
-        <img src="Home.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Home.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Hong_Kong.png" target="_blank">
-        <img src="Hong_Kong.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Hong_Kong.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Japan.png" target="_blank">
-        <img src="Japan.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Japan.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Kuromis.png" target="_blank">
-        <img src="Kuromis.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Kuromis.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Macau.png" target="_blank">
-        <img src="Macau.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Macau.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Mail.png" target="_blank">
-        <img src="Mail.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Mail.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Microsoft.png" target="_blank">
-        <img src="Microsoft.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Microsoft.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Music.png" target="_blank">
-        <img src="Music.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Music.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -416,42 +416,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Netflix.png" target="_blank">
-        <img src="Netflix.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Netflix.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Oracle.png" target="_blank">
-        <img src="Oracle.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Oracle.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/OvO.png" target="_blank">
-        <img src="OvO.png" width="60" height="60" style="object-fit: contain;">
+        <img src="OvO.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Paypal.png" target="_blank">
-        <img src="Paypal.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Paypal.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/PornHub.png" target="_blank">
-        <img src="PornHub.png" width="60" height="60" style="object-fit: contain;">
+        <img src="PornHub.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Proxy.png" target="_blank">
-        <img src="Proxy.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Proxy.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/SSID.png" target="_blank">
-        <img src="SSID.png" width="60" height="60" style="object-fit: contain;">
+        <img src="SSID.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Server.png" target="_blank">
-        <img src="Server.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Server.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -484,42 +484,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Singapore.png" target="_blank">
-        <img src="Singapore.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Singapore.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Smart.png" target="_blank">
-        <img src="Smart.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Smart.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/South_Korea.png" target="_blank">
-        <img src="South_Korea.png" width="60" height="60" style="object-fit: contain;">
+        <img src="South_Korea.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Speedtest.png" target="_blank">
-        <img src="Speedtest.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Speedtest.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Spotify.png" target="_blank">
-        <img src="Spotify.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Spotify.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Stash.png" target="_blank">
-        <img src="Stash.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Stash.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/SubStore.png" target="_blank">
-        <img src="SubStore.png" width="60" height="60" style="object-fit: contain;">
+        <img src="SubStore.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/SubStore_A.png" target="_blank">
-        <img src="SubStore_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="SubStore_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -552,42 +552,42 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Sun.png" target="_blank">
-        <img src="Sun.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Sun.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Surge.png" target="_blank">
-        <img src="Surge.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Surge.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Team.png" target="_blank">
-        <img src="Team.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Team.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Telegram.png" target="_blank">
-        <img src="Telegram.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Telegram.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Telegram1.png" target="_blank">
-        <img src="Telegram1.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Telegram1.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Telegram_A.png" target="_blank">
-        <img src="Telegram_A.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Telegram_A.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/TikTok.png" target="_blank">
-        <img src="TikTok.png" width="60" height="60" style="object-fit: contain;">
+        <img src="TikTok.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/Twitter.png" target="_blank">
-        <img src="Twitter.png" width="60" height="60" style="object-fit: contain;">
+        <img src="Twitter.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
   </tr>
@@ -620,27 +620,27 @@
   <tr>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/United_Nations.png" target="_blank">
-        <img src="United_Nations.png" width="60" height="60" style="object-fit: contain;">
+        <img src="United_Nations.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/United_States.png" target="_blank">
-        <img src="United_States.png" width="60" height="60" style="object-fit: contain;">
+        <img src="United_States.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/XD.png" target="_blank">
-        <img src="XD.png" width="60" height="60" style="object-fit: contain;">
+        <img src="XD.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/YouTube.png" target="_blank">
-        <img src="YouTube.png" width="60" height="60" style="object-fit: contain;">
+        <img src="YouTube.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td align="center" valign="bottom" width="16.6%" style="border: none; padding: 15px 0 0 0;">
       <a href="https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/png/iCloud.png" target="_blank">
-        <img src="iCloud.png" width="60" height="60" style="object-fit: contain;">
+        <img src="iCloud.png" width="50" height="50" style="object-fit: contain;">
       </a>
     </td>
     <td style="border: none;"></td>
