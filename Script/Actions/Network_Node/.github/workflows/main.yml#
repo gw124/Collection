@@ -1,0 +1,86 @@
+name: 🚀 Auto Update Network Nodes
+
+on:
+  workflow_dispatch: 
+  schedule:
+    - cron: '0 */3 * * *' 
+  push:
+    paths:
+      - 'sources.yaml'   
+      - 'Nodes/**'       
+
+jobs:
+  run-all:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write 
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 2. Setup Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 3. Install Python Dependencies
+        run: pip install requests pyyaml
+
+      - name: 4. Install & Connect Cloudflare WARP
+        run: |
+          curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+          sudo apt-get update && sudo apt-get install cloudflare-warp -y
+          warp-cli --accept-tos registration new
+          warp-cli --accept-tos mode warp
+          warp-cli --accept-tos connect
+          sleep 5
+          curl -4 ifconfig.me
+
+      - name: 5. Run fetch.py (执行动态抓取与配置自我净化)
+        run: python fetch.py
+
+      - name: 6. Subconverter Parse
+        run: |
+          docker run -d --network host cmliu/subconverter:latest
+          sleep 5
+          fuser -k 8000/tcp || true
+          python -m http.server 8000 &
+          sleep 2
+          API_URL=$(cat sub_api_url.txt)
+          curl -s "$API_URL" > clash_nodes.yaml
+
+      - name: 7. Run Mihomo Speed Test
+        run: |
+          wget https://github.com/MetaCubeX/mihomo/releases/download/v1.18.3/mihomo-linux-amd64-v1.18.3.gz
+          gunzip mihomo-linux-amd64-v1.18.3.gz
+          mv mihomo-linux-amd64-v1.18.3 mihomo
+          chmod +x mihomo
+          python check.py
+
+      - name: 8. Generate Universal Base64 Sub
+        run: |
+          curl -s "http://127.0.0.1:25500/sub?target=mixed&url=http://127.0.0.1:8000/final_sub.yaml" > final_sub.txt
+        
+      - name: 9. Clean Nodes, Update Config & Push
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 清理 Nodes 文件夹内临时文件
+          rm -f Nodes/* || true
+          touch Nodes/.gitkeep
+          
+          git rm --cached tg_nodes.txt || true
+          
+          git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true
+          
+          # 依然使用 [skip ci] 防止死循环
+          git commit -m "🚀 Auto updated nodes, cleaned sources & Nodes Dir: $(date) [skip ci]" || echo "No changes to commit"
+          
+          # 处理冲突并推送
+          git pull origin main --rebase=false -X ours || (git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true && git commit -m "Auto resolve merge conflicts [skip ci]" || true)
+          git push

@@ -1,0 +1,136 @@
+name: 🚀 Auto Update Network Nodes (Push to B)
+
+on:
+  workflow_dispatch: 
+  schedule:
+    - cron: '0 0 * * *' 
+  push:
+    paths:
+      - 'sources.yaml'   
+      - 'Nodes/**'       
+
+jobs:
+  run-all:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write 
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 2. Setup Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 3. Install Python Dependencies
+        run: pip install requests pyyaml
+
+      - name: 4. Install & Connect Cloudflare WARP
+        run: |
+          curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+          sudo apt-get update && sudo apt-get install cloudflare-warp -y
+          warp-cli --accept-tos registration new
+          warp-cli --accept-tos mode warp
+          warp-cli --accept-tos connect
+          sleep 5
+          curl -4 ifconfig.me
+
+      - name: 5. Run "fetch to B.py" (执行动态抓取与配置传参)
+        run: python "fetch to B.py"
+
+      - name: 6. Subconverter Parse
+        run: |
+          docker run -d --network host cmliu/subconverter:latest
+          sleep 5
+          fuser -k 8000/tcp || true
+          python -m http.server 8000 &
+          sleep 2
+          API_URL=$(cat sub_api_url.txt)
+          curl -s "$API_URL" > clash_nodes.yaml
+
+      - name: 7. Run Mihomo Speed Test
+        run: |
+          wget https://github.com/MetaCubeX/mihomo/releases/download/v1.18.3/mihomo-linux-amd64-v1.18.3.gz
+          gunzip mihomo-linux-amd64-v1.18.3.gz
+          mv mihomo-linux-amd64-v1.18.3 mihomo
+          chmod +x mihomo
+          python check.py
+
+      - name: 8. Generate Universal Base64 Sub
+        run: |
+          curl -s "http://127.0.0.1:25500/sub?target=mixed&url=http://127.0.0.1:8000/final_sub.yaml" > final_sub.txt
+
+      - name: 9. Clean A Repo (清理当前 A 仓库现场)
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          
+          rm -f Nodes/* || true
+          touch Nodes/.gitkeep
+          git rm --cached tg_nodes.txt || true
+          
+          git add sources.yaml Nodes/ || true
+          git commit -m "♻️ Cleaned Nodes Dir & Updated Config: $(date) [skip ci]" || echo "No changes to commit in A Repo"
+          git pull origin main --rebase=false -X ours || true
+          git push
+
+      - name: 10. Push Results & Generate README to B Repo
+        env:
+          GW124_TOKEN: ${{ secrets.GW124_TOKEN }}
+        run: |
+          echo "准备推送到目标仓库: ${TARGET_REPO}, 目标路径: ${TARGET_DIR}"
+          
+          git clone https://${GW124_TOKEN}@github.com/${TARGET_REPO}.git b_repo
+          mkdir -p b_repo/${TARGET_DIR}
+          
+          cp final_sub.yaml b_repo/${TARGET_DIR}/
+          cp final_sub.txt b_repo/${TARGET_DIR}/
+          
+          # 🌟 核心新增：统计节点数量和更新时间
+          NODE_COUNT=$(cat final_sub.txt | grep -v "^$" | wc -l)
+          UPDATE_TIME=$(TZ='Asia/Shanghai' date +"%Y-%m-%d %H:%M:%S")
+          
+          # 🌟 核心新增：动态生成精美的 README.md
+          cat <<EOF > b_repo/${TARGET_DIR}/README.md
+          # 🚀 极速网络节点订阅 (全自动聚合与测速)
+
+          > ⏱️ **最后更新时间**: ${UPDATE_TIME} (北京时间)
+          > 🟢 **当前可用节点**: **${NODE_COUNT}** 个
+
+          ---
+
+          ## 🔗 订阅链接
+
+          请根据你的客户端类型，复制下方对应的链接并添加到订阅中。为了防止 GitHub 被墙，已贴心为您提供多个免翻墙 CDN 加速链接。
+
+          ### 👑 推荐版：YAML 完整订阅 (支持最新协议)
+          *适用：OpenClash, Clash Verge Rev, Mihomo Party 等现代客户端。包含 Hysteria2, TUIC 等全部极速新协议。*
+
+          - **[默认直连]** \`https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.yaml\`
+          - **[CDN 加速 1 - jsDelivr]** \`https://fastly.jsdelivr.net/gh/${TARGET_REPO}@main/${TARGET_DIR}/final_sub.yaml\`
+          - **[CDN 加速 2 - Ghproxy]** \`https://ghp.ci/https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.yaml\`
+
+          ### 🛡️ 兼容版：Base64 订阅 (TXT)
+          *适用：v2rayN, v2rayNG 等传统客户端。仅包含稳定常规协议 (SS, VMess, Trojan 等)。*
+
+          - **[默认直连]** \`https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.txt\`
+          - **[CDN 加速 1 - jsDelivr]** \`https://fastly.jsdelivr.net/gh/${TARGET_REPO}@main/${TARGET_DIR}/final_sub.txt\`
+          - **[CDN 加速 2 - Ghproxy]** \`https://ghp.ci/https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.txt\`
+
+          ---
+          *📝 **说明**: 本仓库由 GitHub Actions 全自动驱动，每日定时汇聚全网优质源，并经 Mihomo 内核进行严格的并发连通性测速，确保所见即所得。*
+          EOF
+          
+          # 进入 B 仓库，提交更新 (同时提交 yaml, txt 和 README.md)
+          cd b_repo
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add ${TARGET_DIR}/final_sub.yaml ${TARGET_DIR}/final_sub.txt ${TARGET_DIR}/README.md
+          git commit -m "🚀 Auto update High-Speed nodes & README: $(date)" || echo "No changes to commit in B Repo"
+          git push

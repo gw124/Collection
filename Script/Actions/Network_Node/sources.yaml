@@ -1,0 +1,33 @@
+# ==========================================
+# 结果分发目标仓库配置 
+# ==========================================
+# 填写你要推送的仓库 (格式: 用户名/仓库名)
+TARGET_REPO: "gw124/Collection"
+# 填写你要存放在 B 仓库的具体文件夹路径 (如果是根目录请留空 "", 不要以 / 开头或结尾)
+TARGET_DIR: "Web/Nodes"
+
+# ==========================================
+# 节点获取源配置文件
+# ==========================================
+CHANNELS:
+- https://t.me/s/proxygogogo
+- https://t.me/s/freekankan
+- https://t.me/s/freeVPNjd
+EXTERNAL_URLS:
+- https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml
+- https://raw.githubusercontent.com/clashv2ray-hub/v2rayfree/refs/heads/main/v2ray.txt
+- https://raw.githubusercontent.com/shaoyouvip/free/refs/heads/main/all.yaml
+- https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub
+- https://raw.githubusercontent.com/PuddinCat/BestClash/refs/heads/main/proxies.yaml
+- https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/v2ray.txt
+- https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml
+- https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/subdom.txt
+- https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml
+- https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.txt
+- https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.meta.yml
+- https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash
+- https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub
+- https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml
+- https://beacon-api.ssdxz.cn/sub?token=b7013ff726878124d363c1680f59de74&b64
+- https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs.txt
+- https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt
