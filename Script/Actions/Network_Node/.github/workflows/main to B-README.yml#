@@ -1,4 +1,4 @@
-name: 🚀 Auto Update Network Nodes (Push to B)
+name: 🚀 Auto Update Network Nodes (Push to B+README)
 
 on:
   workflow_dispatch: 
@@ -41,7 +41,6 @@ jobs:
           curl -4 ifconfig.me
 
       - name: 5. Run "fetch to B.py" (执行动态抓取与配置传参)
-        # 🌟 核心修改：这里带上了双引号，完美兼容带空格的文件名！
         run: python "fetch to B.py"
 
       - name: 6. Subconverter Parse
@@ -80,23 +79,58 @@ jobs:
           git pull origin main --rebase=false -X ours || true
           git push
 
-      - name: 10. Push Results to B Repo (根据 sources.yaml 动态推送到目标)
+      - name: 10. Push Results & Generate README to B Repo
         env:
           GW124_TOKEN: ${{ secrets.GW124_TOKEN }}
         run: |
           echo "准备推送到目标仓库: ${TARGET_REPO}, 目标路径: ${TARGET_DIR}"
           
           git clone https://${GW124_TOKEN}@github.com/${TARGET_REPO}.git b_repo
-          
           mkdir -p b_repo/${TARGET_DIR}
           
           cp final_sub.yaml b_repo/${TARGET_DIR}/
           cp final_sub.txt b_repo/${TARGET_DIR}/
           
+          # 🌟 核心新增：统计节点数量和更新时间
+          NODE_COUNT=$(cat final_sub.txt | grep -v "^$" | wc -l)
+          UPDATE_TIME=$(TZ='Asia/Shanghai' date +"%Y-%m-%d %H:%M:%S")
+          
+          # 🌟 核心新增：动态生成精美的 README.md
+          cat <<EOF > b_repo/${TARGET_DIR}/README.md
+          # 🚀 极速网络节点订阅 (全自动聚合与测速)
+
+          > ⏱️ **最后更新时间**: ${UPDATE_TIME} (北京时间)
+          > 🟢 **当前可用节点**: **${NODE_COUNT}** 个
+
+          ---
+
+          ## 🔗 订阅链接
+
+          请根据你的客户端类型，复制下方对应的链接并添加到订阅中。为了防止 GitHub 被墙，已贴心为您提供多个免翻墙 CDN 加速链接。
+
+          ### 👑 推荐版：YAML 完整订阅 (支持最新协议)
+          *适用：OpenClash, Clash Verge Rev, Mihomo Party 等现代客户端。包含 Hysteria2, TUIC 等全部极速新协议。*
+
+          - **[默认直连]** \`https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.yaml\`
+          - **[CDN 加速 1 - jsDelivr]** \`https://fastly.jsdelivr.net/gh/${TARGET_REPO}@main/${TARGET_DIR}/final_sub.yaml\`
+          - **[CDN 加速 2 - Ghproxy]** \`https://ghp.ci/https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.yaml\`
+
+          ### 🛡️ 兼容版：Base64 订阅 (TXT)
+          *适用：v2rayN, v2rayNG 等传统客户端。仅包含稳定常规协议 (SS, VMess, Trojan 等)。*
+
+          - **[默认直连]** \`https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.txt\`
+          - **[CDN 加速 1 - jsDelivr]** \`https://fastly.jsdelivr.net/gh/${TARGET_REPO}@main/${TARGET_DIR}/final_sub.txt\`
+          - **[CDN 加速 2 - Ghproxy]** \`https://ghp.ci/https://raw.githubusercontent.com/${TARGET_REPO}/main/${TARGET_DIR}/final_sub.txt\`
+
+          ---
+          *📝 **说明**: 本仓库由 GitHub Actions 全自动驱动，每日定时汇聚全网优质源，并经 Mihomo 内核进行严格的并发连通性测速，确保所见即所得。*
+          EOF
+          
+          # 进入 B 仓库，提交更新 (同时提交 yaml, txt 和 README.md)
           cd b_repo
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
           
-          git add ${TARGET_DIR}/final_sub.yaml ${TARGET_DIR}/final_sub.txt
-          git commit -m "🚀 Auto update High-Speed nodes: $(date)" || echo "No changes to commit in B Repo"
+          git add ${TARGET_DIR}/final_sub.yaml ${TARGET_DIR}/final_sub.txt ${TARGET_DIR}/README.md
+          git commit -m "🚀 Auto update High-Speed nodes & README: $(date)" || echo "No changes to commit in B Repo"
           git push
