@@ -2,8 +2,8 @@ name: 🚀 Auto Update Network Nodes (Push to B+README)
 
 on:
   workflow_dispatch: 
-  schedule:
-    - cron: '0 0 * * *' 
+#  schedule:
+#    - cron: '0 */3 * * *' 
   push:
     paths:
       - 'sources.yaml'   

@@ -1,0 +1,141 @@
+name: 📦 Network Node Smart Collector
+
+permissions:
+  contents: write
+  actions: write 
+
+concurrency:
+  group: node-collector-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/Network Node Smart Collector.yml'
+  schedule:
+    - cron: '0 */3 * * *'
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    env:
+      CLEAN_BEFORE_PULL: true 
+      CLEAN_OLD_FILES: true
+      # 【关键】必须在仓库 Secrets 中配置 MY_GIT_TOKEN (PAT)，否则无法触发后续流
+      GH_TOKEN: ${{ secrets.MY_GIT_TOKEN }} 
+
+    steps:
+      - name: Checkout 仓库内容
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🚀 执行清理逻辑
+        run: |
+          mkdir -p Nodes
+          mkdir -p temp/clone
+          if [ "${{ env.CLEAN_BEFORE_PULL }}" = "true" ]; then
+            echo "🧹 模式：正在彻底清空 Nodes 目录..."
+            rm -rf Nodes/*
+          fi
+          if [ "${{ env.CLEAN_OLD_FILES }}" = "true" ]; then
+            if [ "$(ls -A Nodes 2>/dev/null)" ]; then
+              echo "📆 模式：正在清理 7 天前的旧文件..."
+              find Nodes -type f -mtime +7 -delete || true
+            fi
+          fi
+
+      - name: 🚀 采集并自动处理同名冲突
+        shell: bash
+        run: |
+          TARGET_DIR="Nodes"
+          smart_move() {
+              local src="$1"
+              local base_name=$(basename "$2")
+              local name="${base_name%.*}"
+              local ext="${base_name##*.}"
+              if [[ "$name" == "$ext" ]]; then ext_dot=""; else ext_dot=".$ext"; fi
+              local final_path="$TARGET_DIR/$base_name"
+              local counter=1
+              while [[ -f "$final_path" ]]; do
+                  final_path="$TARGET_DIR/${name}_${counter}${ext_dot}"
+                  ((counter++))
+              done
+              cp "$src" "$final_path"
+          }
+
+          repos=(
+            "https://github.com/Barabama/FreeNodes/tree/main/nodes"
+            "https://github.com/Jsnzkpg/Jsnzkpg.git"
+            "https://github.com/free-nodes/v2rayfree.git"
+            "https://github.com/free-nodes/clashfree.git"
+          )
+
+          for url in "${repos[@]}"; do
+            echo "🔄 正在处理: $url"
+            if [[ "$url" == *".git" ]] || [[ "$url" == *"/tree/"* ]]; then
+                repo_url_part=$(echo "$url" | sed -E 's|https://github.com/([^/]+/[^/]+).*|\1|')
+                repo_name="${repo_url_part%.git}"
+                rm -rf temp/clone/*
+                if [[ "$url" == *"/tree/"* ]]; then
+                    branch=$(echo "$url" | sed -E 's|.*/tree/([^/]+).*|\1|')
+                    repo_subpath=$(echo "$url" | sed -E "s|.*/tree/$branch/||")
+                else
+                    branch="main"; repo_subpath=""
+                fi
+                if git clone --depth=1 -b "$branch" "https://github.com/${repo_name}.git" temp/clone 2>/dev/null; then
+                    search_path="temp/clone/$repo_subpath"
+                    if [ -d "$search_path" ]; then
+                        find "$search_path" -maxdepth 1 -type f | while read -r file; do
+                            smart_move "$file" "$(basename "$file")"
+                        done
+                    fi
+                fi
+                continue
+            fi
+            [[ "$url" == *"/blob/"* ]] && url=$(echo "$url" | sed 's|github.com|raw.githubusercontent.com|;s|/blob/|/|')
+            filename=$(basename "$url")
+            if curl -L -s -f "$url" -o "temp/single_file"; then
+              smart_move "temp/single_file" "$filename"
+            fi
+          done
+
+      - name: 提交并推送
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A Nodes/
+          if git diff --cached --quiet; then
+            echo "✅ 内容无实际变动，但将继续触发后续流程。"
+          else
+            git commit -m "🌐 Nodes 同步更新 (全量清理: ${{ env.CLEAN_BEFORE_PULL }})"
+            git push origin HEAD:${{ github.ref_name }}
+            echo "✅ 已推送更新。"
+          fi
+
+      - name: 🚀 强制触发后续工作流
+        env:
+          # 尝试直接在这里绑定默认 Token
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "正在通知并启动后续工作流..."
+          
+          # 使用 gh 命令行工具，并捕获可能的错误输出
+          # 1. 触发 main to B.yml
+          echo "通知: main to B.yml"
+          gh workflow run "main to B.yml" --ref ${{ github.ref_name }} || echo "❌ main to B.yml 触发失败"
+          
+          # 2. 触发 main.yml
+          echo "通知: main.yml"
+          gh workflow run "main.yml" --ref ${{ github.ref_name }} || echo "❌ main.yml 触发失败"
+          
+          # 3. 触发 main to B-README.yml
+          echo "通知: main to B-README.yml"
+          gh workflow run "main to B-README.yml" --ref ${{ github.ref_name }} || echo "❌ main to B-README.yml 触发失败"
+          
+          echo "🎉 触发指令处理完毕。"
+
+      - name: 清理临时空间
+        if: always()
+        run: rm -rf temp

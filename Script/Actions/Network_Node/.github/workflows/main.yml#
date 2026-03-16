@@ -2,8 +2,8 @@ name: 🚀 Auto Update Network Nodes
 
 on:
   workflow_dispatch: 
-  schedule:
-    - cron: '0 */3 * * *' 
+#  schedule:
+#    - cron: '0 */3 * * *' 
   push:
     paths:
       - 'sources.yaml'   
@@ -64,23 +64,19 @@ jobs:
       - name: 8. Generate Universal Base64 Sub
         run: |
           curl -s "http://127.0.0.1:25500/sub?target=mixed&url=http://127.0.0.1:8000/final_sub.yaml" > final_sub.txt
-        
-      - name: 9. Clean Nodes, Update Config & Push
+
+      - name: 9. Update Config & Push
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          
-          # 清理 Nodes 文件夹内临时文件
-          rm -f Nodes/* || true
-          touch Nodes/.gitkeep
-          
+
+          # 移除了所有关于 rm -f Nodes/* 的清理逻辑
+          echo "📦 保持 Nodes 文件夹内容持久化"
+
           git rm --cached tg_nodes.txt || true
-          
           git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true
+
+          git commit -m "🚀 Auto updated nodes & synced sources: $(date) [skip ci]" || echo "No changes to commit"
           
-          # 依然使用 [skip ci] 防止死循环
-          git commit -m "🚀 Auto updated nodes, cleaned sources & Nodes Dir: $(date) [skip ci]" || echo "No changes to commit"
-          
-          # 处理冲突并推送
           git pull origin main --rebase=false -X ours || (git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true && git commit -m "Auto resolve merge conflicts [skip ci]" || true)
           git push
