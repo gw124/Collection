@@ -169,7 +169,7 @@ proxy-groups:
   - {name: Singapore, <<: *auto, filter: "(?i)^(?!.*(Oracle|Other|RackNerd|Acck|Backup|Internet)).*(🇸🇬|SG|新加坡)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Singapore.png}
   - {name: United States, <<: *auto, filter: "(?i)^(?!.*(Oracle|Other|RackNerd|Acck|Backup|Internet)).*(🇺🇸|US|美国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_States.png}
   - {name: Other, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇨🇳|台湾|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|Oracle|Acck|Backup|Other|RackNerd|ClawCloud|Other|Cloudflare|Internet|Snippets)).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Nations.png}
-  - {name: Internet, <<: *auto, filter: "(?i)Internet", icon: https://github.com/gw124/Collection/raw/main/Config/Proxy/png/XD.png}
+  - {name: Internet, <<: *auto, filter: "(?i)Internet", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/XD.png}
 
   - {name: Cloudflare, <<: *auto, filter: "(?i)Cloudflare|CF", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Cloudflare.png}
   - {name: Server｜Choose, <<: *use, filter: "(?i)Oracle|RackNerd|ClawCloud|Acck|Other", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Server.png}
