@@ -37,57 +37,58 @@ function operator(proxies) {
     };
     const sortedTagKeys = Object.keys(tagDict).sort((a, b) => b.length - a.length);
 
-    // === 3. 地区识别规则 ===
+    // === 3. 地区识别规则 (💡 修复短字母误伤问题) ===
     const countryMap = [
-        { keys: /香港|港|HK|Hong\s*Kong/i, flag: '🇭🇰', name: '香港' },
-        { keys: /台湾|台|TW|Tai\s*wan|新北/i, flag: '🇨🇳', name: '台湾' }, // 强制显示中国国旗
-        { keys: /澳门|澳|MO|Macau|Macao/i, flag: '🇲🇴', name: '澳门' },
-        { keys: /日本|日|JP|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
-        { keys: /韩国|韩|KR|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
-        { keys: /新加坡|新|SG|Singapore|狮城/i, flag: '🇸🇬', name: '新加坡' },
-        { keys: /美国|美|US|America|United\s*States|洛杉矶|硅谷|西雅图/i, flag: '🇺🇸', name: '美国' },
-        { keys: /英国|英|GB|UK|London|England/i, flag: '🇬🇧', name: '英国' },
-        { keys: /德国|德|DE|Germany|法兰克福/i, flag: '🇩🇪', name: '德国' },
-        { keys: /法国|法|FR|France|巴黎/i, flag: '🇫🇷', name: '法国' },
-        { keys: /加拿大|加|CA|Canada/i, flag: '🇨🇦', name: '加拿大' },
-        { keys: /澳洲|澳大利亚|澳|AU|Australia|悉尼/i, flag: '🇦🇺', name: '澳洲' },
-        { keys: /俄罗斯|俄|RU|Russia|莫斯科/i, flag: '🇷🇺', name: '俄罗斯' },
-        { keys: /印度|印|IN|India|孟买/i, flag: '🇮🇳', name: '印度' },
-        { keys: /泰国|泰|TH|Thailand|曼谷/i, flag: '🇹🇭', name: '泰国' },
-        { keys: /马来西亚|马|MY|Malaysia/i, flag: '🇲🇾', name: '马来西亚' },
-        { keys: /土耳其|土|TR|Turkey/i, flag: '🇹🇷', name: '土耳其' },
-        { keys: /越南|越|VN|Vietnam/i, flag: '🇻🇳', name: '越南' },
-        { keys: /印尼|ID|Indonesia|雅加达/i, flag: '🇮🇩', name: '印尼' },
-        { keys: /菲律宾|菲|PH|Philippines/i, flag: '🇵🇭', name: '菲律宾' },
-        { keys: /巴西|BR|Brazil/i, flag: '🇧🇷', name: '巴西' },
-        { keys: /阿根廷|AR|Argentina/i, flag: '🇦🇷', name: '阿根廷' },
-        { keys: /希腊|GR|Greece/i, flag: '🇬🇷', name: '希腊' },
-        { keys: /冰岛|IS|Iceland/i, flag: '🇮🇸', name: '冰岛' },
-        { keys: /葡萄牙|PT|Portugal/i, flag: '🇵🇹', name: '葡萄牙' },
-        { keys: /西班牙|ES|Spain/i, flag: '🇪🇸', name: '西班牙' },
-        { keys: /意大利|IT|Italy/i, flag: '🇮🇹', name: '意大利' },
-        { keys: /荷兰|NL|Netherlands|阿姆斯特丹/i, flag: '🇳🇱', name: '荷兰' },
-        { keys: /瑞士|CH|Switzerland/i, flag: '🇨🇭', name: '瑞士' },
-        { keys: /瑞典|SE|Sweden/i, flag: '🇸🇪', name: '瑞典' },
-        { keys: /波兰|PL|Poland/i, flag: '🇵🇱', name: '波兰' },
-        { keys: /南非|ZA|South\s*Africa/i, flag: '🇿🇦', name: '南非' },
-        { keys: /智利|CL|Chile/i, flag: '🇨🇱', name: '智利' },
-        { keys: /埃及|EG|Egypt/i, flag: '🇪🇬', name: '埃及' },
-        { keys: /爱尔兰|IE|Ireland/i, flag: '🇮🇪', name: '爱尔兰' },
-        { keys: /阿联酋|迪拜|AE|UAE|Dubai/i, flag: '🇦🇪', name: '阿联酋' },
-        { keys: /新西兰|NZ|New\s*Zealand/i, flag: '🇳🇿', name: '新西兰' },
-        { keys: /墨西哥|MX|Mexico/i, flag: '🇲🇽', name: '墨西哥' },
-        { keys: /哥伦比亚|CO|Colombia/i, flag: '🇨🇴', name: '哥伦比亚' },
-        { keys: /柬埔寨|KH|Cambodia/i, flag: '🇰🇭', name: '柬埔寨' },
-        { keys: /巴基斯坦|PK|Pakistan/i, flag: '🇵🇰', name: '巴基斯坦' },
-        { keys: /以色列|IL|Israel/i, flag: '🇮🇱', name: '以色列' },
-        { keys: /挪威|NO|Norway/i, flag: '🇳🇴', name: '挪威' },
-        { keys: /沙特|沙特阿拉伯|SA|Saudi\s*Arabia/i, flag: '🇸🇦', name: '沙特' },
-        { keys: /缅甸|MM|Myanmar/i, flag: '🇲🇲', name: '缅甸' },
-        { keys: /孟加拉|BD|Bangladesh/i, flag: '🇧🇩', name: '孟加拉' },
-        { keys: /秘鲁|PE|Peru/i, flag: '🇵🇪', name: '秘鲁' },
-        { keys: /尼日利亚|NG|Nigeria/i, flag: '🇳🇬', name: '尼日利亚' },
-        { keys: /中国|中|CN|China|北京|上海|广州|深圳/i, flag: '🇨🇳', name: '中国' }
+        { keys: /香港|港|\bHK\b|Hong\s*Kong/i, flag: '🇭🇰', name: '香港' },
+        { keys: /台湾|台|\bTW\b|Tai\s*wan|新北/i, flag: '🇨🇳', name: '台湾' }, 
+        { keys: /澳门|澳|\bMO\b|Macau|Macao/i, flag: '🇲🇴', name: '澳门' },
+        { keys: /日本|日|\bJP\b|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
+        { keys: /韩国|韩|\bKR\b|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
+        { keys: /新加坡|新|\bSG\b|Singapore|狮城/i, flag: '🇸🇬', name: '新加坡' },
+        { keys: /美国|美|\bUS\b|America|United\s*States|洛杉矶|硅谷|西雅图/i, flag: '🇺🇸', name: '美国' },
+        { keys: /英国|英|\bGB\b|\bUK\b|London|England/i, flag: '🇬🇧', name: '英国' },
+        { keys: /德国|德|\bDE\b|Germany|法兰克福/i, flag: '🇩🇪', name: '德国' },
+        { keys: /法国|法|\bFR\b|France|巴黎/i, flag: '🇫🇷', name: '法国' },
+        { keys: /加拿大|加|\bCA\b|Canada/i, flag: '🇨🇦', name: '加拿大' },
+        { keys: /澳洲|澳大利亚|澳|\bAU\b|Australia|悉尼/i, flag: '🇦🇺', name: '澳洲' },
+        { keys: /俄罗斯|俄|\bRU\b|Russia|莫斯科/i, flag: '🇷🇺', name: '俄罗斯' },
+        { keys: /印度|印|\bIN\b|India|孟买/i, flag: '🇮🇳', name: '印度' },
+        { keys: /泰国|泰|\bTH\b|Thailand|曼谷/i, flag: '🇹🇭', name: '泰国' },
+        { keys: /马来西亚|马|\bMY\b|Malaysia/i, flag: '🇲🇾', name: '马来西亚' },
+        { keys: /土耳其|土|\bTR\b|Turkey/i, flag: '🇹🇷', name: '土耳其' },
+        { keys: /越南|越|\bVN\b|Vietnam/i, flag: '🇻🇳', name: '越南' },
+        { keys: /印尼|ID|Indonesia|雅加达/i, flag: '🇮🇩', name: '印尼' }, // ID 很容易误伤，但通常紧跟国旗
+        { keys: /菲律宾|菲|\bPH\b|Philippines/i, flag: '🇵🇭', name: '菲律宾' },
+        { keys: /巴西|\bBR\b|Brazil/i, flag: '🇧🇷', name: '巴西' },
+        { keys: /阿根廷|\bAR\b|Argentina/i, flag: '🇦🇷', name: '阿根廷' },
+        { keys: /希腊|\bGR\b|Greece/i, flag: '🇬🇷', name: '希腊' },
+        { keys: /冰岛|\bIS\b|Iceland/i, flag: '🇮🇸', name: '冰岛' },
+        { keys: /葡萄牙|\bPT\b|Portugal/i, flag: '🇵🇹', name: '葡萄牙' },
+        { keys: /西班牙|\bES\b|Spain/i, flag: '🇪🇸', name: '西班牙' },
+        { keys: /意大利|\bIT\b|Italy/i, flag: '🇮🇹', name: '意大利' },
+        { keys: /荷兰|\bNL\b|Netherlands|阿姆斯特丹/i, flag: '🇳🇱', name: '荷兰' },
+        { keys: /瑞士|\bCH\b|Switzerland/i, flag: '🇨🇭', name: '瑞士' },
+        { keys: /瑞典|\bSE\b|Sweden/i, flag: '🇸🇪', name: '瑞典' },
+        { keys: /波兰|\bPL\b|Poland/i, flag: '🇵🇱', name: '波兰' },
+        { keys: /南非|\bZA\b|South\s*Africa/i, flag: '🇿🇦', name: '南非' },
+        { keys: /智利|\bCL\b|Chile/i, flag: '🇨🇱', name: '智利' },
+        { keys: /埃及|\bEG\b|Egypt/i, flag: '🇪🇬', name: '埃及' },
+        { keys: /爱尔兰|\bIE\b|Ireland/i, flag: '🇮🇪', name: '爱尔兰' },
+        { keys: /阿联酋|迪拜|\bAE\b|UAE|Dubai/i, flag: '🇦🇪', name: '阿联酋' },
+        { keys: /新西兰|\bNZ\b|New\s*Zealand/i, flag: '🇳🇿', name: '新西兰' },
+        { keys: /墨西哥|\bMX\b|Mexico/i, flag: '🇲🇽', name: '墨西哥' },
+        { keys: /哥伦比亚|\bCO\b|Colombia/i, flag: '🇨🇴', name: '哥伦比亚' },
+        { keys: /柬埔寨|\bKH\b|Cambodia/i, flag: '🇰🇭', name: '柬埔寨' },
+        { keys: /巴基斯坦|\bPK\b|Pakistan/i, flag: '🇵🇰', name: '巴基斯坦' },
+        { keys: /以色列|\bIL\b|Israel/i, flag: '🇮🇱', name: '以色列' },
+        { keys: /挪威|\bNO\b|Norway/i, flag: '🇳🇴', name: '挪威' },
+        { keys: /沙特|沙特阿拉伯|\bSA\b|Saudi\s*Arabia/i, flag: '🇸🇦', name: '沙特' },
+        { keys: /缅甸|\bMM\b|Myanmar/i, flag: '🇲🇲', name: '缅甸' },
+        { keys: /孟加拉|\bBD\b|Bangladesh/i, flag: '🇧🇩', name: '孟加拉' },
+        { keys: /秘鲁|\bPE\b|Peru/i, flag: '🇵🇪', name: '秘鲁' },
+        { keys: /尼日利亚|\bNG\b|Nigeria/i, flag: '🇳🇬', name: '尼日利亚' },
+        { keys: /芬兰|\bFI\b|Finland/i, flag: '🇫🇮', name: '芬兰' }, // 💡 补上了芬兰
+        { keys: /中国|中|\bCN\b|China|北京|上海|广州|深圳/i, flag: '🇨🇳', name: '中国' }
     ];
 
     let grouped = {};
@@ -143,7 +144,7 @@ function operator(proxies) {
         '香港', '台湾', '澳门', '日本', '韩国', '新加坡', '美国', '英国', '德国', '法国', 
         '加拿大', '澳洲', '俄罗斯', '印度', '泰国', '马来西亚', '土耳其', '越南', '印尼', '菲律宾', 
         '阿联酋', '巴西', '阿根廷', '希腊', '冰岛', '葡萄牙', '西班牙', '意大利', '荷兰', '瑞士', 
-        '瑞典', '波兰', '南非', '智利', '埃及', '爱尔兰', '新西兰', '墨西哥', '哥伦比亚', '柬埔寨', 
+        '瑞典', '芬兰', '波兰', '南非', '智利', '埃及', '爱尔兰', '新西兰', '墨西哥', '哥伦比亚', '柬埔寨', 
         '巴基斯坦', '以色列', '挪威', '沙特', '缅甸', '孟加拉', '秘鲁', '尼日利亚', '中国', '未知'
     ];
     let sortedRegions = Object.keys(grouped).sort((a, b) => {
@@ -174,12 +175,12 @@ function operator(proxies) {
             let coreName = `${cFlag} ${region} ${seq}`;
             let newName = prefix + coreName;
             
-            // 💡 调整点：追加标签，并在 [] 内侧加入空格
+            // 💡 追加标签，并在 [] 内侧加入空格
             if (item.tags.length > 0) {
                 newName += ` [ ${item.tags.join(TAG_SEP)} ]`; 
             }
             
-            // 追加倍率: x2
+            // 追加倍率
             if (item.multi !== "") {
                 newName += ` ${item.multi}`;
             }
