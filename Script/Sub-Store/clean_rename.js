@@ -37,10 +37,10 @@ function operator(proxies) {
     };
     const sortedTagKeys = Object.keys(tagDict).sort((a, b) => b.length - a.length);
 
-    // === 3. 地区识别规则 (💡 修复短字母误伤问题) ===
+    // === 3. 地区识别规则 (💡 修复短字母误伤，并补充芬兰) ===
     const countryMap = [
         { keys: /香港|港|\bHK\b|Hong\s*Kong/i, flag: '🇭🇰', name: '香港' },
-        { keys: /台湾|台|\bTW\b|Tai\s*wan|新北/i, flag: '🇨🇳', name: '台湾' }, 
+        { keys: /台湾|台|\bTW\b|Tai\s*wan|新北/i, flag: '🇨🇳', name: '台湾' }, // 强制显示中国国旗
         { keys: /澳门|澳|\bMO\b|Macau|Macao/i, flag: '🇲🇴', name: '澳门' },
         { keys: /日本|日|\bJP\b|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
         { keys: /韩国|韩|\bKR\b|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
@@ -57,7 +57,7 @@ function operator(proxies) {
         { keys: /马来西亚|马|\bMY\b|Malaysia/i, flag: '🇲🇾', name: '马来西亚' },
         { keys: /土耳其|土|\bTR\b|Turkey/i, flag: '🇹🇷', name: '土耳其' },
         { keys: /越南|越|\bVN\b|Vietnam/i, flag: '🇻🇳', name: '越南' },
-        { keys: /印尼|ID|Indonesia|雅加达/i, flag: '🇮🇩', name: '印尼' }, // ID 很容易误伤，但通常紧跟国旗
+        { keys: /印尼|\bID\b|Indonesia|雅加达/i, flag: '🇮🇩', name: '印尼' },
         { keys: /菲律宾|菲|\bPH\b|Philippines/i, flag: '🇵🇭', name: '菲律宾' },
         { keys: /巴西|\bBR\b|Brazil/i, flag: '🇧🇷', name: '巴西' },
         { keys: /阿根廷|\bAR\b|Argentina/i, flag: '🇦🇷', name: '阿根廷' },
@@ -69,6 +69,7 @@ function operator(proxies) {
         { keys: /荷兰|\bNL\b|Netherlands|阿姆斯特丹/i, flag: '🇳🇱', name: '荷兰' },
         { keys: /瑞士|\bCH\b|Switzerland/i, flag: '🇨🇭', name: '瑞士' },
         { keys: /瑞典|\bSE\b|Sweden/i, flag: '🇸🇪', name: '瑞典' },
+        { keys: /芬兰|\bFI\b|Finland/i, flag: '🇫🇮', name: '芬兰' },
         { keys: /波兰|\bPL\b|Poland/i, flag: '🇵🇱', name: '波兰' },
         { keys: /南非|\bZA\b|South\s*Africa/i, flag: '🇿🇦', name: '南非' },
         { keys: /智利|\bCL\b|Chile/i, flag: '🇨🇱', name: '智利' },
@@ -87,7 +88,6 @@ function operator(proxies) {
         { keys: /孟加拉|\bBD\b|Bangladesh/i, flag: '🇧🇩', name: '孟加拉' },
         { keys: /秘鲁|\bPE\b|Peru/i, flag: '🇵🇪', name: '秘鲁' },
         { keys: /尼日利亚|\bNG\b|Nigeria/i, flag: '🇳🇬', name: '尼日利亚' },
-        { keys: /芬兰|\bFI\b|Finland/i, flag: '🇫🇮', name: '芬兰' }, // 💡 补上了芬兰
         { keys: /中国|中|\bCN\b|China|北京|上海|广州|深圳/i, flag: '🇨🇳', name: '中国' }
     ];
 
