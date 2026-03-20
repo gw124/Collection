@@ -46,6 +46,7 @@ payload:
 
   # Cloudflare
   - DOMAIN-SUFFIX,cloudflare.com
+  - DOMAIN-SUFFIX,argotunnel.com
 
   # Game
   - DOMAIN-SUFFIX,papergames.io
