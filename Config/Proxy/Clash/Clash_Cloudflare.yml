@@ -121,7 +121,7 @@ dns:
     #- https://dns.google/dns-query
 
 ######### 策略锚点 #########
-pr: &pr {type: select, proxies: [Japan, Korea, Singapore, United States, United Kingdom, Germany, Internet, Other, Available, Automatic, Cloudflare, Fallback, Direct]}
+pr: &pr {type: select, proxies: [Hong Kong, Japan, South Korea, Singapore, United States, Germany, Internet, Other, Available, Automatic, Cloudflare, Fallback, Direct]}
 
 #########  策略组模板锚点 ######### 
 # 自动优选 (Url-Test)
@@ -182,20 +182,19 @@ proxy-groups:
   - {name: Games, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Game.png}
   - {name: Speedtest, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Speedtest.png}
 
-#  - {name: Hong Kong, <<: *auto, filter: "(?i)(?:(?!Internet).*)(HK|🇭🇰|香港)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Hong_Kong.png}
-#  - {name: Taiwan, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇨🇳|台湾|Taiwan)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China.png}
-  - {name: Japan, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇯🇵|JP|日本)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Japan.png}
-  - {name: Korea, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇰🇷|韩国|Kr)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/South_Korea.png}
-  - {name: Singapore, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇸🇬|SG|新加坡)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Singapore.png}
-  - {name: United States, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇺🇸|US|美国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_States.png}
-  - {name: United Kingdom, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇬🇧|UK|英国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Kingdom.png}
-  - {name: Germany, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇩🇪|DE|德国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Germany.png}
-  - {name: Other, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇨🇳|台湾|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|🇬🇧|英国|🇩🇪|德国|Internet)).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Nations.png}
+  - {name: Hong Kong, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(HK|🇭🇰|香港)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Hong_Kong.png}
+#  - {name: Taiwan, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)((🇨🇳|台湾|Taiwan)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China.png}
+  - {name: Japan, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(🇯🇵|JP|日本)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Japan.png}
+  - {name: South Korea, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(🇰🇷|韩国|Kr)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/South_Korea.png}
+  - {name: Singapore, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(🇸🇬|SG|新加坡)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Singapore.png}
+  - {name: United States, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(🇺🇸|US|美国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_States.png}
+  - {name: Germany, <<: *auto, filter: "^(?!.*(?i)Internet).*(?i)(🇩🇪|DE|德国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Germany.png}
+  - {name: Other, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇨🇳|台湾|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|🇩🇪|德国|Internet)).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Nations.png}
   - {name: Internet, <<: *auto, filter: "(?i)Internet", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/XD.png}
   - {name: Cloudflare, <<: *auto, filter: "(?i)Cloudflare|Snippets", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Cloudflare.png}
   - {name: Available, <<: *use, filter: "^(?!.*GoHome|Internet).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Available.png}
   - {name: Automatic, <<: *auto, filter: "^(?!.*GoHome|Internet).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Automatic.png}
-  - {name: Fallback, type: fallback, url: https://cp.cloudflare.com/generate_204, interval: 300, proxies: [Japan, Korea, Singapore, United States, United Kingdom, Germany, Cloudflare, Internet], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png}
+  - {name: Fallback, type: fallback, url: https://cp.cloudflare.com/generate_204, interval: 300, proxies: [Japan, South Korea, Singapore, United States, Germany, Hong Kong, Cloudflare, Internet], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png}
 #  - {name: Fallback, type: fallback, url: https://cp.cloudflare.com/generate_204, interval: 300, proxies: [Cloudflare, Automatic, Internet], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png}
   - {name: Direct, type: select, proxies: [直连], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China_Map.png}
   - {name: Proxy, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Global.png}
