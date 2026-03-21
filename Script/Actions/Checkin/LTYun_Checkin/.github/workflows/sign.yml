@@ -4,7 +4,7 @@ on:
   workflow_dispatch: # 允许手动在页面上点击触发，方便测试
   schedule:
     # 每天 UTC 时间 01:00 执行 (即北京时间早上 09:00)
-    - cron: '0 1 * * *'
+    - cron: '0 4,10 * * *'
 
 jobs:
   run_script:

@@ -1,9 +1,9 @@
-name: Taoqitu Auto Checkin
+name: Taoqitu Multi-Account Checkin
 
 on:
   schedule:
     - cron: '30 0 * * *'  # 每天北京时间 08:30
-  workflow_dispatch:      # 允许手动点击触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,24 +14,22 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # 升级到 v4，解决 Node.js 警告
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5  # 升级到 v5，解决 Node.js 警告
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run Sign Script
+      - name: Run Multi-Account Script
         env:
-          USERNAME: ${{ secrets.USERNAME }}        # 传入你设置的账号邮箱
-          PASSWORD: ${{ secrets.PASSWORD }}        # 传入你设置的密码
-          ENABLE_OFFSET: ${{ secrets.ENABLE_OFFSET }} 
-        run: python sign.py
+          ACCOUNTS: ${{ secrets.ACCOUNTS }}
+          ENABLE_OFFSET: ${{ secrets.ENABLE_OFFSET }}
+        run: python sign_multi.py
 
-      # --- 使用 GitHub 官方命令清理旧日志，永远不会失效 ---
       - name: Delete old workflow runs
         env:
           GH_TOKEN: ${{ github.token }}

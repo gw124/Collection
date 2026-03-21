@@ -1,17 +1,12 @@
 import requests
 import os
 import time
+import random
 
-# 1. 从环境变量获取配置
-USERNAME = os.environ.get('USERNAME')
-PASSWORD = os.environ.get('PASSWORD')
-ENABLE_OFFSET = os.environ.get('ENABLE_OFFSET', 'false')
-
-def run_task():
-    if not USERNAME or not PASSWORD:
-        print("❌ 错误: 未检测到 USERNAME 或 PASSWORD环境变量！")
-        return
-
+def do_sign(username, password, enable_offset):
+    mask_name = f"{username[:3]}***"
+    print(f"\n========== 🚀 开始执行账号: [{mask_name}] ==========")
+    
     api_host = "api-20260304.apitutu.com"
     api_base = f"https://{api_host}/gateway/tqt/cn"
     origin_site = "https://vip.taoqitu.pro"
@@ -37,18 +32,8 @@ def run_task():
     session = requests.Session()
 
     try:
-        # ==========================================
-        # 步骤一：使用账号密码动态登录获取 Token
-        # ==========================================
-        print(f"🔐 正在尝试为账号 [{USERNAME[:3]}***] 登录...")
-        
-        login_url = f"{api_base}/passport/auth/login"
-        login_payload = {
-            "email": USERNAME,   
-            "password": PASSWORD 
-        }
-
-        login_res = session.post(login_url, json=login_payload, headers=headers, timeout=15)
+        # 1. 登录
+        login_res = session.post(f"{api_base}/passport/auth/login", json={"email": username, "password": password}, headers=headers, timeout=15)
         
         if login_res.status_code != 200:
             print(f"❌ 登录网络请求失败，状态码: {login_res.status_code}")
@@ -72,58 +57,45 @@ def run_task():
 
         if dynamic_token:
             print(f"✅ 登录成功，已精准获取真正 Token！(Token前缀: {dynamic_token[:15]}...)")
-            
             headers['Authorization'] = dynamic_token
             headers['authorization'] = dynamic_token
-            
             session.cookies.update({
                 'auth_data': dynamic_token,
                 'authorization': dynamic_token
             })
         else:
-            print(f"❌ 提取真正 Token 失败！请看服务器到底返回了什么: {login_data}")
+            print(f"❌ 账号或密码错误，登录失败！")
             return
 
-        # ==========================================
-        # 步骤二：执行每日签到
-        # ==========================================
+        # 2. 签到
         print("🚀 开始执行签到任务...")
         time.sleep(2) 
-        
-        sign_url = f"{api_base}/user/sign"
-        res = session.get(sign_url, headers=headers, timeout=10) 
+        res = session.get(f"{api_base}/user/sign", headers=headers, timeout=10) 
         
         print(f"📊 签到状态码: {res.status_code}")
         if res.text.strip():
             try:
-                data = res.json()
-                msg = data.get('message', '无消息')
+                msg = res.json().get('message', '无消息')
                 print(f"🎉 签到反馈: {msg}")
             except:
                 print(f"⚠️ 原始签到响应: {res.text[:100]}")
 
-        # ==========================================
-        # 步骤三：查询剩余流量与抵消逻辑
-        # ==========================================
+        # 3. 流量与抵消
         if res.status_code == 200 or (res.text and "已签到" in res.text):
             time.sleep(2) 
             print("🔄 正在获取您的签到流量数据...")
-            
             list_res = session.get(f"{api_base}/user/getSignList", headers=headers, timeout=10)
             
             try:
                 list_json = list_res.json()
-                
-                # --- 💡 新增：提取并计算当前剩余流量 ---
                 total_traffic = float(list_json.get('total', 0))
                 used_traffic = float(list_json.get('yishiyong_total', 0))
                 remain_traffic = total_traffic - used_traffic
                 
                 print(f"💰 【签到流量池】累计获取: {total_traffic:.2f}GB | 已抵消: {used_traffic:.2f}GB | 当前剩余: {remain_traffic:.2f}GB")
                 
-                # 检查抵消开关
-                if ENABLE_OFFSET.lower() != 'true':
-                    print(f"🛑 自动抵消未开启 (当前设置: {ENABLE_OFFSET})，任务圆满结束。")
+                if enable_offset.lower() != 'true':
+                    print(f"🛑 自动抵消未开启，当前账号任务结束。")
                     return
 
                 print("⚙️ 抵消开关已开启，准备执行抵消...")
@@ -132,7 +104,6 @@ def run_task():
                     first_item = list_data[0]
                     flow_val = first_item.get('get_num')
                     
-                    # 只有当剩余流量大于 0 时，才发起抵消请求
                     if flow_val and remain_traffic > 0: 
                         convert_res = session.get(f"{api_base}/user/convertSign", headers=headers, params={'convert_num': flow_val}, timeout=10)
                         print(f"🎁 抵消结果: {convert_res.json().get('message', '完成')}")
@@ -146,5 +117,33 @@ def run_task():
     except Exception as e:
         print(f"💥 运行出错，异常信息: {str(e)}")
 
+
+def main():
+    accounts_str = os.environ.get('ACCOUNTS')
+    enable_offset = os.environ.get('ENABLE_OFFSET', 'false')
+
+    if not accounts_str:
+        print("❌ 未检测到 ACCOUNTS 环境变量！")
+        return
+
+    account_lines = accounts_str.strip().split('\n')
+    valid_accounts = [line.strip() for line in account_lines if line.strip() and ',' in line]
+    
+    print(f"🔍 共检测到 {len(valid_accounts)} 个有效账号，开始执行...")
+
+    for index, line in enumerate(valid_accounts):
+        parts = line.split(',', 1)
+        username = parts[0].strip()
+        password = parts[1].strip()
+        
+        do_sign(username, password, enable_offset)
+        
+        if index < len(valid_accounts) - 1:
+            wait_time = random.randint(10, 20)
+            print(f"\n⏳ 等待 {wait_time} 秒后执行下一个账号...")
+            time.sleep(wait_time)
+
+    print("\n✅ 所有账号任务执行完毕！")
+
 if __name__ == "__main__":
-    run_task()
+    main()
