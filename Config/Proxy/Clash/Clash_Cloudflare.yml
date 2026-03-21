@@ -1,282 +1,182 @@
-######### 订阅锚点 start #######
-### 远程节点调用
-# 个人本地节点
-## Cloudflare订阅
-pc: &pc {type: http, interval: 7200, proxy: Direct, health-check: {enable: true, url: https://cp.cloudflare.com/generate_204, interval: 3600, timeout: 3000}}
-## 网络节点
-pn: &pn {type: http, interval: 3600, proxy: Direct, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 600, timeout: 3000}}
-######### 订阅锚点 end #######
+[General]
+# 增强型Wi-Fi辅助
+wifi-assist = true
+# 混合网络
+all-hybrid = false
+# 游戏优化
+udp-priority = true
+# 延迟基准测试
+internet-test-url = http://connectivitycheck.gstatic.com/generate_204
+proxy-test-url = http://bing.com/
+test-timeout = 5
+# GeoIP数据库
+geoip-maxmind-url = https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
+disable-geoip-db-auto-update = false
+# 启用IPv6支持
+ipv6 = true
+ipv6-vif = auto
 
-proxy-providers:
-  Cloudflare:
-    <<: *pc
-    url: http://127.0.0.1:3001/share/col/CloudFlare?token=eKaQKfHio5sA0sMVFxS5S
+# 任务栏图标显示VPN状态
+hide-vpn-icon = false
 
-  Internet:
-    <<: *pn
-    url: http://127.0.0.1:3001/share/sub/From%20the%20Internet?token=Mw-isaM8nMd4HzGNsaMci
+# --- Wi-Fi 接入 ---
+allow-wifi-access = true
+# Surge iOS - 默认 HTTP 端口号：6152，SOCKS5 端口号：6153
+wifi-access-http-port = 6152
+wifi-access-socks5-port = 6153
+# Surge Mac - 默认 HTTP 端口号：6152，SOCKS5 端口号：6153
+http-listen = 0.0.0.0
+socks5-listen = 0.0.0.0
+# 允许热点共享
+allow-hotspot-access = true
 
-proxies:
-  - {name: 直连, type: direct, udp: true}
+# --- 远程访问 ---
+external-controller-access = Wen@0.0.0.0:6160
+# HTTP API & Web Dashboard
+# 此选项允许使用HTTP API进行控制。
+http-api = Wen@0.0.0.0:6166
+http-api-tls = true
+http-api-web-dashboard = true
 
-port: 7890
-socks-port: 7898
-redir-port: 7891
-mixed-port: 7893
-tproxy-port: 7892
+# --- 兼容性 ---
+compatibility-mode = 0
+# 跳过代理
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, injections.adguard.org, local.adguard.org, captive.apple.com, guzzoni.apple.com
+exclude-simple-hostnames = true
+# tun-excluded-routes = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12
 
-allow-lan: true
-bind-address: "*"
+# --- DNS ---
+# 上游DNS服务器的IP地址
+read-etc-hosts = true
+use-local-host-item-for-proxy = true
+encrypted-dns-follow-outbound-mode = true
+include-all-networks = false
 
-mode: rule
-log-level: warning
-ipv6: true
-unified-delay: true
-tcp-concurrent: true
+# --- 路由 ---
+include-local-networks = false
+loglevel = notify
 
-find-process-mode: strict
-client-fingerprint: chrome
+# --- 高级 ---
+show-error-page-for-reject = true
+always-real-ip = link-ip.nextdns.io, *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.logon.battlenet.com.cn, *.logon.battle.net, stun.l.google.com
+hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+force-http-engine-hosts = *.ott.cibntv.net, 123.59.31.1,119.18.193.135, 122.14.246.33, 175.102.178.52, 116.253.24.*, 175.6.26.*, 220.169.153.*
+udp-policy-not-supported-behaviour = REJECT
+dns-server = 223.5.5.5, 119.29.29.29, 2400:3200::1, 2402:4e00::, system
+proxy-restricted-to-lan = true
+block-quic = per-policy
 
-profile:
-  store-selected: true
-  store-fake-ip: true
+[Proxy Group]
+# > 策略组（下面的节点信息需与外部节点对应，若删除了外部节点里的节点，那么在策略组里也要删除。）
+Custom = select, DIRECT, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Final.png, include-all-proxies=0, hidden=0
+AI = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/AI_A.png
+YouTube = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/YouTube.png
+Netflix = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Netflix.png
+Disney+ = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Disney.png
+TikTok = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/TikTok.png
+Spotify = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Spotify.png, include-all-proxies=0, hidden=0
+GlobalMedia = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/GlobalMedia.png
+Telegram = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Telegram.png
+Twitter = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Twitter.png
+GitHub = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/GitHub.png
+Apple = select, DIRECT, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Apple.png
+Google = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Google.png
+Microsoft = select, DIRECT, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Microsoft.png
+Gamer = select, DIRECT, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Gamer.png, include-all-proxies=0, hidden=0
+Proxy = select, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Other, Internet, Cloudflare, Fallback, DIRECT, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Global.png, include-all-proxies=0
 
-external-controller: 0.0.0.0:9090
-secret: ""
+# > 外部节点
+GoHome = smart, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Home.png, policy-regex-filter=GoHome, evaluate-before-use=1, policy-path=https://substore.gw124.com/share/sub/GoHome?token=9f0KcfJ0ugZLp_b23ua1D
 
-external-ui: "/etc/nikki/run/ui"
-external-ui-name: MetaCubeXD
-external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
+# Hong Kong = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^(?!.*(?:GoHome|Internet)).*(?:🇭🇰|香港|Hong|HK), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Hong_Kong.png, evaluate-before-use=1
 
-sniffer:
-  enable: true
-  sniff:
-    HTTP:
-      ports: [80,8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443,8443]
-    QUIC:
-      ports: [443,8443]
-  force-domain:
-    - "+.v2ex.com"
-    - "+.netflix.com"
-    - "+.nflxvideo.net"
-    - "+.amazonaws.com"
-    - "+.media.dssott.com"
-  skip-domain:
-    - "dlg.io.mi.com"
-    - "+.push.apple.com"
-    - "+.apple.com"
-    - "+.wechat.com"
-    - "+.qpic.cn"
-    - "+.qq.com"
-    - "+.wechatapp.com"
-    - "+.vivox.com"
-    - "+.oray.com"
-    - "+.sunlogin.net"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - "Mijia Cloud"
-    - "+.oray.com"
-    - "rule-set:domain_private,domain_cn"
-tun:
-  enable: true
-  stack: mixed
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  strict-route: true
-  dns-hijack:
-    - any:53
-    - tcp://any:53
+# Taiwan = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^(?!.*(?:GoHome|Internet)).*(?:🇨🇳|🇹🇼|台湾|Taiwan|TW), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China.png, evaluate-before-use=1
 
-dns:
-  enable: true
-  listen: 0.0.0.0:1053
-  ipv6: true
-  respect-rules: true
+Japan = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^(?!.*(?:GoHome|Internet)).*(?:🇯🇵|日本|Japan|JP), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Japan.png, evaluate-before-use=1
 
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: blacklist
-  fake-ip-filter:
-    - "+.gw124.cn"
-    - "+.services.googleapis.cn"
-    - "+.xn--ngstr-lra8j.com"
-    - "time.*.com"
-    - "rule-set:domain_cn,domain_private,domain_tailscale,domain_category-public-tracker,domain_cloudflare"
-  #default-nameserver:
-  #  - 1.1.1.1
-  #  - 8.8.8.8
-  proxy-server-nameserver:
-     - https://dns.alidns.com/dns-query
-  nameserver:
-    - 58.20.127.170
-    - 58.20.127.238
-    - 2408:8001:2000:3::ffff
-    - 2408:8001:2000:3::eeee
-  #nameserver:
-    #- https://1.1.1.1/dns-query
-    #- https://dns.google/dns-query
+South Korea = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^(?!.*(?:GoHome|Internet)).*(?:🇰🇷|韩国|Korea|KR), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/South_Korea.png, evaluate-before-use=1
 
-######### 策略锚点 #########
-pr: &pr {type: select, proxies: [Japan, Korea, Singapore, United States, United Kingdom, Germany, Internet, Other, Available, Automatic, Cloudflare, Fallback, Direct]}
+Singapore = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^(?!.*(?:GoHome|Internet)).*(?:🇸🇬|新加坡|Singapore|SG), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Singapore.png, evaluate-before-use=1
 
-#########  策略组模板锚点 ######### 
-# 自动优选 (Url-Test)
-auto: &auto
-  type: url-test
-  url: "https://cp.cloudflare.com/generate_204"
-  interval: 300
-  tolerance: 50
-  use: [Cloudflare, Internet]
+United States = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=(?i)^(?!.*(?:GoHome|Internet)).*(?:🇺🇸|美国|United\s*States|\bUS\b|USA), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_States.png, evaluate-before-use=1
 
-# 手动选择 (Select)
-use: &use
-  type: select
-  use: [Cloudflare, Internet]
+United Kingdom = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=(?i)^(?!.*(?:GoHome|Internet)).*(?:🇬🇧|英国|United\s*Kingdom|\bUK\b), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Kingdom.png, evaluate-before-use=1
 
-# 智能优选 (Smart)
-smart: &smart
-  type: smart
-  url: "https://cp.cloudflare.com/generate_204"
-  interval: 300
-  uselightgbm: true
-  collectdata: false
-  strategy: sticky-sessions
-  use: [Cloudflare, Internet]
+Germany = smart, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=(?i)^(?!.*(?:GoHome|Internet)).*(?:🇩🇪|德国|Germany|DE), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Germany.png, evaluate-before-use=1
 
-# 自动回退 (Fallback)
-fallback: &fallback
-  type: fallback
-  url: "https://www.gstatic.com/generate_204"
-  interval: 300
-  use: [Cloudflare, Internet] 
+Other = select, include-other-group=Cloudflare, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=(?i)^(?!.*(?:GoHome|🇭🇰|香港|HK|Hong|HKG|🇨🇳|🇹🇼|台湾|Taiwan|🇰🇷|韩国|KR|Korea|🇸🇬|新加坡|SG|Singapore|🇯🇵|日本|JP|Japan|🇺🇸|美国|\bUS\b|States|American|🇬🇧|英国|🇩🇪|德国|Internet)).*$, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Nations.png
 
-# 负载均衡 (Load-Balance)
-balance: &balance
-  type: load-balance
-  url: "https://cp.cloudflare.com/generate_204"
-  interval: 300
-  tolerance: 50
-  strategy: consistent-hashing
-  lazy: false
-  use: [Cloudflare, Internet]
+Cloudflare = url-test, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Cloudflare.png, evaluate-before-use=1, policy-path=https://substore.gw124.com/share/col/CloudFlare?token=eKaQKfHio5sA0sMVFxS5S
 
-proxy-groups:
-  - {name: Custom, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Final.png}
-  - {name: AI, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/AI_A.png}
-  - {name: YouTube, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/YouTube.png}
-  - {name: NetFlix, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Netflix.png}
-  - {name: Disney+, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Disney.png}
-  - {name: Tiktok, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/TikTok.png}
-  - {name: OneDrive, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/GoogleDrive.png}
-  - {name: Telegram, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Telegram.png}
-  - {name: Twitter, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Twitter.png}
-  - {name: Github, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/GitHub.png}
-  - {name: Google, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Google.png}
-  - {name: Apple CN, type: select, proxies: [Direct, Proxy], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Apple.png}
-  - {name: Apple Global, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Apple_B.png}
-  - {name: Microsoft, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Microsoft.png}
-  - {name: Games, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Game.png}
-  - {name: Speedtest, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Speedtest.png}
+Internet = url-test, update-interval=3600, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=(Internet), icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/XD.png, evaluate-before-use=1, policy-path=https://substore.19880124.xyz/share/sub/From%20the%20Internet?token=Mw-isaM8nMd4HzGNsaMci
 
-#  - {name: Hong Kong, <<: *auto, filter: "(?i)(?:(?!Internet).*)(HK|🇭🇰|香港)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Hong_Kong.png}
-#  - {name: Taiwan, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇨🇳|台湾|Taiwan)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China.png}
-  - {name: Japan, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇯🇵|JP|日本)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Japan.png}
-  - {name: Korea, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇰🇷|韩国|Kr)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/South_Korea.png}
-  - {name: Singapore, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇸🇬|SG|新加坡)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Singapore.png}
-  - {name: United States, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇺🇸|US|美国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_States.png}
-  - {name: United Kingdom, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇬🇧|UK|英国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Kingdom.png}
-  - {name: Germany, <<: *auto, filter: "(?i)(?:(?!Internet).*)(🇩🇪|DE|德国)", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Germany.png}
-  - {name: Other, <<: *use, filter: "^(?!.*(🇺🇸|美国|🇭🇰|香港|🇨🇳|台湾|🇸🇬|新加坡|🇰🇷|韩国|🇯🇵|日本|🇬🇧|英国|🇩🇪|德国|Internet)).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/United_Nations.png}
-  - {name: Internet, <<: *auto, filter: "(?i)Internet", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/XD.png}
-  - {name: Cloudflare, <<: *auto, filter: "(?i)Cloudflare|Snippets", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Cloudflare.png}
-  - {name: Available, <<: *use, filter: "^(?!.*GoHome|Internet).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Available.png}
-  - {name: Automatic, <<: *auto, filter: "^(?!.*GoHome|Internet).*", icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Automatic.png}
-  - {name: Fallback, type: fallback, url: https://cp.cloudflare.com/generate_204, interval: 300, proxies: [Japan, Korea, Singapore, United States, United Kingdom, Germany, Cloudflare, Internet], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png}
-#  - {name: Fallback, type: fallback, url: https://cp.cloudflare.com/generate_204, interval: 300, proxies: [Cloudflare, Automatic, Internet], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png}
-  - {name: Direct, type: select, proxies: [直连], icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/China_Map.png}
-  - {name: Proxy, <<: *pr, icon: https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/Global.png}
+Fallback = fallback, Japan, "South Korea", Singapore, "United States", "United Kingdom", Germany, Cloudflare, Internet, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, icon-url=https://raw.githubusercontent.com/gw124/Collection/main/Config/Proxy/icons/FallBack.png, evaluate-before-use=1
 
-rules:
-  - RULE-SET,domain_custom_direct,Direct
-  - RULE-SET,domain_custom_proxy,Custom
-  - RULE-SET,domain_private,Direct
-  - RULE-SET,domain_category_games@cn,Games
-  - RULE-SET,domain_tailscale,Direct
-  - RULE-SET,domain_category-public-tracker,Direct
-  - RULE-SET,domain_tracker,Direct
-  - RULE-SET,domain_cloudflare,Direct
-  - RULE-SET,domain_ai,AI
-  - RULE-SET,domain_netflix,NetFlix
-  - RULE-SET,domain_disney,Disney+
-  - RULE-SET,domain_apple_cn,Apple CN
-  - RULE-SET,domain_apple,Apple Global
-  - RULE-SET,domain_github,Github
-  - RULE-SET,domain_youtube,YouTube
-  - RULE-SET,domain_google,Google
-  - RULE-SET,domain_binance,Custom
-  - RULE-SET,domain_microsoft@cn,Direct
-  - RULE-SET,domain_onedrive,OneDrive
-  - RULE-SET,domain_microsoft,Microsoft
-  - RULE-SET,domain_tiktok,Tiktok
-  - RULE-SET,domain_social_media,Twitter
-  - RULE-SET,domain_speedtest,Speedtest
-  - RULE-SET,domain_telegram,Telegram
-  - RULE-SET,domain_gfw,Proxy
-  - RULE-SET,domain_geolocation-!cn,Proxy
-  - RULE-SET,domain_cn,Direct
-  - RULE-SET,ip_google,Google,no-resolve
-  - RULE-SET,ip_netflix,NetFlix,no-resolve
-  - RULE-SET,ip_telegram,Telegram,no-resolve
-  - RULE-SET,ip_cn,Direct
-  - MATCH,Proxy
+[Rule]
+# >回家规则
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Home.list,GoHome
+# >Custom
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Direct.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Proxy.list,Custom
+DOMAIN-KEYWORD,mastodon,Twitter
+DOMAIN-KEYWORD,cursor,AI
+# > SUFFIX
+# DOMAIN-SUFFIX,cloudflare.com,Automatic // Added for: www.Cloudflare.com:443
+# > DOMAIN
+DOMAIN,api.amplitude.com,Proxy
+DOMAIN,api.revenuecat.com,REJECT
+# > 广告拦截
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/AWAvenue-Ads-Rule-Surge-RULE-SET.list,REJECT,extended-matching
+DOMAIN-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/txt/anti-ad-surge2.txt,REJECT
+# > 币安
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Binance.list,Custom
+# > 智能助理
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/OpenAI.list,AI
+# > 苹果服务
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Apple_All.list,Apple
+# > GitHub
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/GitHub.list,GitHub
+# > Docker
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Docker.list,GitHub
+# > 微软服务
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Microsoft.list,Microsoft
+# > 社交平台
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Telegram.list,Telegram
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Twitter.list,Twitter
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Facebook.list,Twitter
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Instagram.list,Twitter
+# > 游戏平台
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Epic.list,Gamer
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Sony.list,Gamer
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Steam.list,Gamer
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Nintendo.list,Gamer
+# > 流媒体
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/DouYin.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/BiliBili.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/YouTube.list,YouTube
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Netflix.list,Netflix
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Disney.list,Disney+
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Spotify.list,Spotify
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/TikTok.list,TikTok
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/ChinaMedia.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/GlobalMedia_All_No_Resolve.list,GlobalMedia
+# > Google
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Google.list,Google
+# > Proxy
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/Proxy_All_No_Resolve.list,Proxy,extended-matching
+# > China
+RULE-SET,https://raw.githubusercontent.com/gw124/Collection/main/Rules/Surge/list/ChinaMax_All.list,DIRECT,extended-matching
+# > IPv6
+IP-CIDR6,::/0,DIRECT,no-resolve
+# > 局域网地址
 
-######### 规则锚点 start #######
-rule-anchor:
-# ipcidr 规则锚点
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-# domain 规则锚点
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
-# classical yaml 规则锚点
-  class: &class {type: http, interval: 86400, behavior: classical, format: yaml}
-# text 纯文本列表规则锚点 (list格式)
-  list: &list {type: http, interval: 86400, behavior: classical, format: text}
-######### 规则锚点  end  #######
-rule-providers: 
-# domain 规则
-#  gohome: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Home.yaml"}
-  domain_custom_direct: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Direct.yaml"}
-  domain_custom_proxy: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/main/Rules/Custom/Custom_Proxy.yaml"}
-  domain_category-public-tracker: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/category-public-tracker.mrs"}
-  domain_tracker: { <<: *domain, url: "https://github.com/gw124/Collection/raw/refs/heads/main/Rules/Clash/mrs/tracker.mrs"}
-  domain_binance: { <<: *class, url: "https://raw.githubusercontent.com/gw124/Collection/main/Rules/Clash/yaml/Binance.yaml"}
-  domain_private: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
-  domain_category_games@cn: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-games@cn.mrs"}
-  domain_ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
-  domain_youtube: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
-  domain_github: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
-  domain_google: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
-  domain_telegram: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
-  domain_netflix: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
-  domain_disney: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"}
-  domain_onedrive: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
-  domain_social_media: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.mrs"}
-  domain_microsoft: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
-  domain_cloudflare: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.mrs"}
-  domain_microsoft@cn: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
-  domain_apple: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"}
-  domain_apple_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
-  domain_speedtest: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
-  domain_tiktok: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
-  domain_tailscale: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tailscale.mrs"}
-  domain_gfw: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
-  domain_geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
-  domain_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
-# IP 规则  
-  ip_cn: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
-  ip_google: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
-  ip_telegram: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
-  ip_netflix: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"}
+RULE-SET,LAN,DIRECT
+# > DNS 查询失败走Final规则
+FINAL,Proxy,dns-failed
+
+[MITM]
+skip-server-cert-verify = true
+tcp-connection = true
+h2 = true
+ca-passphrase = 24CB003C
+ca-p12 = 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
