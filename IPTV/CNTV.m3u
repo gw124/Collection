@@ -11,8 +11,8 @@ http://nn.7x9d.cn/深圳最新.php?id=szws4k
 https://srs.ssws.tv/video/sstv-10/index.m3u8
 #EXTINF:-1 tvg-name="上海卫视" tvg-logo="https://live.fanmingming.cn/tv/上海卫视.png" group-title="卫视频道""卫视频道",上海卫视
 http://112.27.235.94:8000/hls/28/index.m3u8
-#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/东南卫视.png" group-title="卫视频道""卫视频道" response-time="30ms",东南卫视
-http://112.123.243.37:50085/tsfile/live/0113_1.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/东南卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",东南卫视
+http://live.zohi.tv/video/s10001-fztv-3/index.m3u8
 #EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/云南卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",云南卫视
 http://111.221.137.234:44330/tsfile/live/0118_2.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="人间卫视" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/BLTV.png" group-title="卫视频道""卫视频道",人间卫视
@@ -33,8 +33,8 @@ http://cdn6.163189.xyz/163189/fhhk
 http://23.237.228.134/live3/beijing.m3u8
 #EXTINF:-1 tvg-name="厦门卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/厦门卫视.png" group-title="卫视频道""卫视频道",厦门卫视
 http://e2.woc.iiiya.cn:28888/rtp/239.61.2.11:8060
-#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/吉林卫视.png" group-title="卫视频道""卫视频道" response-time="36ms",吉林卫视
-http://101.66.195.207:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1 tvg-name="吉林卫视" tvg-id="122" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png" group-title="卫视频道""卫视频道", 吉林卫视
+http://58.57.40.22:9901/tsfile/live/1050_1.m3u8
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-id="大湾区卫视" tvg-logo="https://tb.zbds.top/logo/大湾区卫视.png" group-title="卫视频道""卫视频道", 大湾区卫视
 http://222.128.55.152:9080/live/dwq.m3u8
 #EXTINF:-1 tvg-name="天津卫视" tvg-id="144" tvg-logo="https://tb.zbds.top/logo/天津卫视.png" group-title="卫视频道""卫视频道", 天津卫视
@@ -84,7 +84,7 @@ http://153.0.171.163:9901/tsfile/live/0120_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-id="141" tvg-logo="https://tb.zbds.top/logo/辽宁卫视.png" group-title="卫视频道""卫视频道", 辽宁卫视
 http://58.57.40.22:9901/tsfile/live/1035_1.m3u8
 #EXTINF:-1 group-title="卫视频道""卫视频道" tvg-id="重庆卫视" tvg-logo="https://live.fanmingming.com/tv/重庆卫视.png",重庆卫视
-http://p2.ytelc.com/videojs.php?id=https://sjlivecdn9.cbg.cn/202603221235/app_2/_definst_/ls_2.stream/chunklist.m3u8
+http://p2.ytelc.com/videojs.php?id=https://sjlivecdn9.cbg.cn/202603221452/app_2/_definst_/ls_2.stream/chunklist.m3u8
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/陕西卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",陕西卫视
 http://112.27.235.94:8000/hls/43/index.m3u8
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/青海卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",青海卫视
