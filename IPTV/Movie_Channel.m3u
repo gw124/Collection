@@ -15,6 +15,10 @@ http://183.237.95.108:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=0&authid=
 http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
 #EXTINF:-1 tvg-name="东阳影视生活" tvg-id="155" tvg-logo="https://tb.zbds.top/logo/东阳影视生活.png" group-title="影视频道""影视频道", 东阳影视生活
 http://l.cztvcloud.com/channels/lantian/SXdongyang1/720p.m3u8
+#EXTINF:-1 tvg-name="二胖影视" tvg-id="二胖影视" tvg-logo="https://tb.zbds.top/logo/二胖影视.png" group-title="影视频道""影视频道", 二胖影视
+https://goodiptv.club/douyu/10064260
+#EXTINF:-1 tvg-name="五分钟电影汇" tvg-id="五分钟电影汇" tvg-logo="https://tb.zbds.top/logo/五分钟电影汇.png" group-title="影视频道""影视频道", 五分钟电影汇
+https://goodiptv.club/douyu/8443438
 #EXTINF:-1 tvg-name="倩女幽魂人间道" tvg-id="倩女幽魂人间道" tvg-logo="https://tb.zbds.top/logo/倩女幽魂人间道.png" group-title="影视频道""影视频道", 倩女幽魂人间道
 http://jsmov2.a.yximgs.com/bs3/video-hls/5250634317044855747_hlsb.m3u8
 #EXTINF:-1 tvg-name="倩女幽魂妖魔道" tvg-id="倩女幽魂妖魔道" tvg-logo="https://tb.zbds.top/logo/倩女幽魂妖魔道.png" group-title="影视频道""影视频道", 倩女幽魂妖魔道
@@ -23,12 +27,34 @@ http://jsmov2.a.yximgs.com/bs3/video-hls/5232901391302199073_hlsb.m3u8
 http://jsmov2.a.yximgs.com/bs3/video-hls/5216294367991385255_hlsb.m3u8
 #EXTINF:-1 tvg-name="句容影院" tvg-id="句容影院" tvg-logo="https://tb.zbds.top/logo/句容影院.png" group-title="影视频道""影视频道", 句容影院
 http://jrlive.jrntv.com/live/_definst_/yingshis/chunklist_w1994429382.m3u8?zjiangsd
+#EXTINF:-1 tvg-name="同同电影" tvg-id="同同电影" tvg-logo="https://tb.zbds.top/logo/同同电影.png" group-title="影视频道""影视频道", 同同电影
+https://goodiptv.club/douyu/10155359
+#EXTINF:-1 tvg-name="哈尔滨影视" tvg-id="哈尔滨影视" tvg-logo="https://tb.zbds.top/logo/哈尔滨影视.png" group-title="影视频道""影视频道", 哈尔滨影视
+http://stream.hrbtv.net/yspd/sd/live.m3u8?zheild
+#EXTINF:-1 tvg-name="大笑影院" tvg-id="大笑影院" tvg-logo="https://tb.zbds.top/logo/大笑影院.png" group-title="影视频道""影视频道", 大笑影院
+https://goodiptv.club/douyu/10329300
+#EXTINF:-1 tvg-name="大米饭影视" tvg-id="大米饭影视" tvg-logo="https://tb.zbds.top/logo/大米饭影视.png" group-title="影视频道""影视频道", 大米饭影视
+https://goodiptv.club/douyu/9824094
 #EXTINF:-1 tvg-name="广东影视" tvg-logo="https://live.fanmingming.cn/tv/广东影视.png" group-title="影视频道""影视频道",广东影视
 http://119.32.12.17:2901/udp/224.1.100.11:11111
+#EXTINF:-1 tvg-name="怪兽马提尼电影" tvg-id="怪兽马提尼电影" tvg-logo="https://tb.zbds.top/logo/怪兽马提尼电影.png" group-title="影视频道""影视频道", 怪兽马提尼电影
+https://goodiptv.club/douyu/9075333
 #EXTINF:-1 group-title="影视频道""影视频道",教科影院
 http://ali-xwl.cztv.com/live/channel041080Plxw.m3u8
 #EXTINF:-1 tvg-name="无线星河" tvg-id="518" tvg-logo="https://tb.zbds.top/logo/无线星河.png" group-title="影视频道""影视频道", 无线星河
 https://cdn6.101.qzz.io/163189/tvbxh
+#EXTINF:-1 tvg-name="无际电影" tvg-id="无际电影" tvg-logo="https://tb.zbds.top/logo/无际电影.png" group-title="影视频道""影视频道", 无际电影
+https://goodiptv.club/douyu/9720498
+#EXTINF:-1 tvg-name="有部电影儿" tvg-id="有部电影儿" tvg-logo="https://tb.zbds.top/logo/有部电影儿.png" group-title="影视频道""影视频道", 有部电影儿
+https://goodiptv.club/douyu/9736479
+#EXTINF:-1 tvg-name="浙江教科影视" tvg-id="浙江教科影视" tvg-logo="https://tb.zbds.top/logo/浙江教科影视.png" group-title="影视频道""影视频道", 浙江教科影视
+https://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
+#EXTINF:-1 tvg-name="电影冷知识" tvg-id="电影冷知识" tvg-logo="https://tb.zbds.top/logo/电影冷知识.png" group-title="影视频道""影视频道", 电影冷知识
+https://goodiptv.club/douyu/9660835
+#EXTINF:-1 tvg-name="电影吐槽汇" tvg-id="电影吐槽汇" tvg-logo="https://tb.zbds.top/logo/电影吐槽汇.png" group-title="影视频道""影视频道", 电影吐槽汇
+https://goodiptv.club/douyu/9447668
+#EXTINF:-1 tvg-name="腹黑电影" tvg-id="腹黑电影" tvg-logo="https://tb.zbds.top/logo/腹黑电影.png" group-title="影视频道""影视频道", 腹黑电影
+https://goodiptv.club/douyu/8867878
 #EXTINF:-1 tvg-name="辽宁影视剧" tvg-logo="https://live.fanmingming.cn/tv/辽宁影视.png" group-title="影视频道""影视频道",辽宁影视
 http://dassby.qqff.top:99/live/辽宁影视剧/index.m3u8
 #EXTINF:-1 tvg-name="辽宁影视剧" tvg-id="辽宁影视剧" tvg-logo="https://tb.zbds.top/logo/辽宁影视剧.png" group-title="影视频道""影视频道", 辽宁影视剧
