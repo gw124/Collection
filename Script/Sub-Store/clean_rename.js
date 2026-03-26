@@ -37,7 +37,7 @@ function operator(proxies) {
     };
     const sortedTagKeys = Object.keys(tagDict).sort((a, b) => b.length - a.length);
 
-    // === 3. 地区识别规则 (💡 新增伊拉克、哈萨克斯坦) ===
+    // === 3. 地区识别规则 (💡 补充了 USA) ===
     const countryMap = [
         { keys: /香港|港|\bHK\b|Hong\s*Kong/i, flag: '🇭🇰', name: '香港' },
         { keys: /台湾|台|\bTW\b|Tai\s*wan|新北/i, flag: '🇨🇳', name: '台湾' }, 
@@ -45,7 +45,7 @@ function operator(proxies) {
         { keys: /日本|日|\bJP\b|Japan|Tokyo|Osaka/i, flag: '🇯🇵', name: '日本' },
         { keys: /韩国|韩|\bKR\b|Korea|Seoul|春川/i, flag: '🇰🇷', name: '韩国' },
         { keys: /新加坡|新|\bSG\b|Singapore|狮城/i, flag: '🇸🇬', name: '新加坡' },
-        { keys: /美国|美|\bUS\b|America|United\s*States|洛杉矶|硅谷|西雅图/i, flag: '🇺🇸', name: '美国' },
+        { keys: /美国|美|\bUS\b|\bUSA\b|America|United\s*States|洛杉矶|硅谷|西雅图/i, flag: '🇺🇸', name: '美国' }, // 💡 在这里加上了 \bUSA\b
         { keys: /英国|英|\bGB\b|\bUK\b|London|England/i, flag: '🇬🇧', name: '英国' },
         { keys: /德国|德|\bDE\b|Germany|法兰克福/i, flag: '🇩🇪', name: '德国' },
         { keys: /法国|法|\bFR\b|France|巴黎/i, flag: '🇫🇷', name: '法国' },
@@ -88,8 +88,8 @@ function operator(proxies) {
         { keys: /孟加拉|\bBD\b|Bangladesh/i, flag: '🇧🇩', name: '孟加拉' },
         { keys: /秘鲁|\bPE\b|Peru/i, flag: '🇵🇪', name: '秘鲁' },
         { keys: /尼日利亚|\bNG\b|Nigeria/i, flag: '🇳🇬', name: '尼日利亚' },
-        { keys: /伊拉克|\bIQ\b|Iraq/i, flag: '🇮🇶', name: '伊拉克' }, // 💡 新增
-        { keys: /哈萨克斯坦|哈萨克|\bKZ\b|Kazakhstan/i, flag: '🇰🇿', name: '哈萨克斯坦' }, // 💡 新增
+        { keys: /伊拉克|\bIQ\b|Iraq/i, flag: '🇮🇶', name: '伊拉克' }, 
+        { keys: /哈萨克斯坦|哈萨克|\bKZ\b|Kazakhstan/i, flag: '🇰🇿', name: '哈萨克斯坦' }, 
         { keys: /中国|中|\bCN\b|China|北京|上海|广州|深圳/i, flag: '🇨🇳', name: '中国' }
     ];
 
