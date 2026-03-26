@@ -59,6 +59,8 @@ http://67.220.67.246:2347/livehttpplay?channel_id=13000
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV10.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",Now爆谷台
 http://67.220.67.246:2347/livehttpplay?channel_id=13002
+#EXTINF:-1 group-title="港澳台频道""港澳台频道",ROCK
+http://iptv.4666888.xyz/iptv2A.php?id=50
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/kFMHayP.png" tvg-id="Supreme Master TV",Supreme Master TV
 https://lbs-us1.suprememastertv.com/720p.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",TVB Plus
@@ -118,15 +120,15 @@ http://cdn6.163189.xyz/163189/mzt
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPThlOTY3N2RhYjk3NDE0YzAxNDY5MGU4OGRkOWE0NTc0JnVpZD0mdXVpZD0xZjAxZWIwYTY5OGYyNGYxZTcxNThkMWI3Y2NiMjY0MS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTA5NzI1/HNYLMPP360.m3u8
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz1jNDgzNmUwMTRlZmRjYzEyNDE2ODYzZGU0MTg4NWI5OSZ1aWQ9JnV1aWQ9ZGFkOWRhOGYzYTk3ODg4YTU2MTM0NTI0YWIxMTIyOGYtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NDUzODU4NA,,/HNYLMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南爱晚" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%88%B1%E6%99%9A.png",湖南爱晚
-http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz0yYTgxOGU5YzBjOTdiNGI4NDVlMTQxMWE4ODFiNDZmNyZ1aWQ9JnV1aWQ9Y2U0Y2VjMTVhZmY2NzNlYjIzZjZhM2U1ZjNjYzQ0MzgtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NDUxMjAwNQ,,/HNGGMPP360.m3u8
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz0wYmNiNDk2NjdhZTAwNzdkOWZlYjFkM2U0YTllMjUwZSZ1aWQ9JnV1aWQ9YjkwNmFjMjU1ZDkxY2FkMmE2MmJhYWY5ZjU2NmRiYmQtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NDU0MTA5NQ,,/HNGGMPP360.m3u8
 #EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTdjOGI3N2U3ZWZlMDEwMTY3ZGRiMjY1YjEzNGMyM2I5JnVpZD0mdXVpZD1iZGQ2Njg4ZDZmMjliYjhmZGM2Y2MzYTFhZDY0NDI0Ny02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTA3NDYy/HNDSJMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWJhMGY0NTRhYmY1MTBiZWFlZGY3ZDViNzQwMTUzNTk2JnVpZD0mdXVpZD00YTUyYTE5NmJkYWQ5MzFiN2E4M2MwYTdlNjgyZDFiOC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTM2MzAw/HNDSJMPP360.m3u8
 #EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b24mY2RuZXhfaWQ9cXFfcGhvbmVfbGl2ZSZjaHM9JmRlZj0xJnM9MzU1ZmQ5ODA0YTkxOTJhNDNmNjZjMDE2N2YxNTQ2NjImdWlkPSZ1dWlkPWUxMDdhZTQ4MzRmYmZkMmU2NWVhOGY1YmFjNTMwZTYzLTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzQ1MTMyMjQ,/HNJSMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b24mY2RuZXhfaWQ9cXFfcGhvbmVfbGl2ZSZjaHM9JmRlZj0xJnM9YTE1MTQ3Y2NmYzgzZDZkMGE5ODA0ZjU5YWQwMmZlNWImdWlkPSZ1dWlkPTJiZTczNzM5NGNlM2VmNjY2ZGM5ODZhY2UxNWIzNTllLTZhMGUyNjM3JnY9MiZhcz0wJmVzPTE3NzQ1NDIxMDk,/HNJSMPP360.m3u8
 #EXTINF:-1 tvg-id="湖南都市" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E9%83%BD%E5%B8%82.png" group-title="港澳台频道""港澳台频道",湖南都市
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTJhMWU4OTNhN2ZkNTI1YTg2Y2FhMjhmYmYxN2E1ZDgyJnVpZD0mdXVpZD1jYjQ0MzFhYTY1MDQzZDhkMjM4YjY1ZTJjZTRmM2I4Yy02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTAzODE5/HNDSMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTE5OTA2YzEyNGM1MzZhMjJlNTVlMzhjZGJmOTg5NTFiJnVpZD0mdXVpZD0wNmY2NGVmYjIwZGFlMGRiODQ2OWE1MGQ4OGUyZDc1Yy02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTMyNjgw/HNDSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
 https://cdn6.163189.xyz/163189/as
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",澳视澳门
@@ -156,7 +158,7 @@ http://67.220.67.246:2347/livehttpplay?channel_id=20197
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",重温经典
 http://cdn6.163189.xyz/163189/cwjd
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="金鹰纪实频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125839242.jpg",金鹰纪实频道
-https://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWM5ODcyMzY4ODA1Y2FkMTA0MTlhZTBhY2RlNzY0ZDI2JnVpZD0mdXVpZD05YWZjMzU0NDcyYTY2NmFhMDVmYTIxNjk3YTU5MWVjYy02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTA4MTE5/JYJSMPP360.m3u8
+https://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWI5ZDY0OWQ5Njk0MWRjNzQwOWQ0N2RkNmNkOTgxMmMwJnVpZD0mdXVpZD1iMTllYmE3MzAzNWMxMmZhNTc4OTBhNTE0NTY0N2NmOS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc0NTM2OTI2/JYJSMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",香港面包
 https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",龙华偶像
