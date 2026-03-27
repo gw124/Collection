@@ -1,5 +1,5 @@
 # IPTV Collection
-Auto-updated at: 2026-03-27 10:41:52 (Beijing Time)
+Auto-updated at: 2026-03-27 13:44:47 (Beijing Time)
 
 | File | GitHub Raw | jsDelivr CDN |
 | :--- | :--- | :--- |
