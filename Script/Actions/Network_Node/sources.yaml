@@ -1,39 +1,73 @@
-# ==========================================
-# 结果分发目标仓库配置 
-# ==========================================
-# 填写你要推送的仓库 (格式: 用户名/仓库名)
-TARGET_REPO: "gw124/Collection"
-# 填写你要存放在 B 仓库的具体文件夹路径 (如果是根目录请留空 "", 不要以 / 开头或结尾)
-TARGET_DIR: "Web/Nodes"
-
-# ==========================================
-# 运行后是否自动清空 Nodes 文件夹
-# (true: 测速完就删掉临时文件 / false: 永久保留文件)
-# ==========================================
-CLEAN_NODES: false
-
-# ==========================================
-# 节点获取源配置文件
-# ==========================================
-CHANNELS:
-- https://t.me/s/proxygogogo
-- https://t.me/s/freekankan
-- https://t.me/s/freeVPNjd
+TARGET_REPO: gw124/Collection
+TARGET_DIR: Config/Proxy/Nodes
+REPOS:
+- https://github.com/Barabama/FreeNodes/tree/main/nodes
+- https://github.com/Jsnzkpg/Jsnzkpg.git
+- https://github.com/free-nodes/v2rayfree.git
+- https://github.com/free-nodes/clashfree.git
+- https://github.com/snakem982/proxypool/tree/main/source
 EXTERNAL_URLS:
+- https://gist.githubusercontent.com/SpecialActions/e548ca30af9250d912f6d90aa454d094/raw/7c3109bff9f31f8ea79cc9ce6a6229030702088b/%25E5%258D%2595%25E8%258A%2582%25E7%2582%25B9.txt
+- https://gist.githubusercontent.com/SpecialActions/e548ca30af9250d912f6d90aa454d094/raw/4f4fe3eec4776c5ac70bfbd0825024c1d29fd60a/%25E8%2580%2581%25E7%258E%258B%25E8%25AE%25A2%25E9%2598%2585
 - https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml
-- https://raw.githubusercontent.com/clashv2ray-hub/v2rayfree/refs/heads/main/v2ray.txt
 - https://raw.githubusercontent.com/shaoyouvip/free/refs/heads/main/all.yaml
 - https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub
-- https://raw.githubusercontent.com/PuddinCat/BestClash/refs/heads/main/proxies.yaml
 - https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/v2ray.txt
 - https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml
-- https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/subdom.txt
 - https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml
 - https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.txt
 - https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.meta.yml
 - https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash
 - https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub
 - https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml
-- https://beacon-api.ssdxz.cn/sub?token=b7013ff726878124d363c1680f59de74&b64
 - https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/main/configs/proxy_configs.txt
 - https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt
+- https://xmxosfepggzm.503403.xyz
+- https://sub.proxygo.org/v2ray.php?key=e2e0eb16eb2749533f296ba637680615
+- https://raw.githubusercontent.com/dongchengjie/airport/refs/heads/main/subs/merged/tested_within.yaml
+- https://raw.githubusercontent.com/v2raynnodes/clashfree/refs/heads/main/clash.yaml
+- https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt
+- https://www.xrayvip.com/free.txt
+- https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt
+- https://raw.githubusercontent.com/acymz/AutoVPN/refs/heads/main/data/V2.txt
+- https://raw.githubusercontent.com/firefoxmmx2/v2rayshare_subcription/main/subscription/clash_sub.yaml
+- https://raw.githubusercontent.com/Q3dlaXpoaQ/V2rayN_Clash_Node_Getter/refs/heads/main/APIs/sc0.yaml
+- https://raw.githubusercontent.com/mahdibland/SSAggregator/master/sub/sub_merge_yaml.yml
+- https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml
+- https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml
+- https://raw.githubusercontent.com/zhangkaiitugithub/passcro/main/speednodes.yaml
+- https://raw.githubusercontent.com/aiboboxx/v2rayfree/refs/heads/main/README.md
+- https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/snippets/nodes.meta.yml
+- https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml
+- https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/main/all_configs.txt
+- https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml
+- https://raw.githubusercontent.com/actionsfz/v2ray/refs/heads/master/all.yaml
+- https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/wenode.txt
+- https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/v2rayshare.txt
+- https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/nodefree.txt
+- https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/ndnode.txt
+- https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/clashmeta.txt
+- https://raw.githubusercontent.com/xiaoji235/airport-free/main/v2ray.txt
+DATE_TEMPLATES:
+- https://clashgithub.com/wp-content/uploads/rss/{YYYYMMDD}.yml
+- https://clashgithub.com/wp-content/uploads/rss/{YYYYMMDD}.txt
+- https://yoyapai.com/mianfeijiedian/{YYYYMMDD}-clashvpn-mfjiedian-yoyapai.com.yaml
+- https://yoyapai.com/mianfeijiedian/{YYYYMMDD}-ssr-v2rayvpn-jiedian-yoyapai.com.txt
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/0-{YYYYMMDD}.yaml
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/1-{YYYYMMDD}.yaml
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/2-{YYYYMMDD}.yaml
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/3-{YYYYMMDD}.yaml
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/4-{YYYYMMDD}.yaml
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/0-{YYYYMMDD}.txt
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/1-{YYYYMMDD}.txt
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/2-{YYYYMMDD}.txt
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/3-{YYYYMMDD}.txt
+- https://node.freeclashnode.com/uploads/{YYYY}/{MM}/4-{YYYYMMDD}.txt
+- http://stairnode.cczzuu.top/node/{YYYYMMDD}-v2ray.txt
+- http://stairnode.cczzuu.top/node/{YYYYMMDD}-clash.yaml
+CHANNELS:
+- https://t.me/s/proxygogogo
+- https://t.me/s/freekankan
+- https://t.me/s/freeVPNjd
+- https://t.me/s/xunVPN
+- https://t.me/s/xhjvpn

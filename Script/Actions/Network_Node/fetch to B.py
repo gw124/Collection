@@ -7,6 +7,7 @@ import hashlib
 import yaml
 import os
 import sys
+import datetime
 
 # ==========================================
 # 1. 动态加载配置文件与跨步传参
@@ -18,10 +19,15 @@ try:
     CHANNELS = config.get("CHANNELS", [])
     EXTERNAL_URLS = config.get("EXTERNAL_URLS", [])
     DYNAMIC_REPOS = config.get("DYNAMIC_REPOS", [])
+    # 🌟 新增：读取动态日期模板
+    DATE_TEMPLATES = config.get("DATE_TEMPLATES", [])
     
     # 读取 B 仓库的目标配置，如果没有则使用默认值防崩溃
     TARGET_REPO = config.get("TARGET_REPO", "gw124/Collection")
     TARGET_DIR = config.get("TARGET_DIR", "Web/Nodes")
+    
+    # 🌟 新增：读取清理 Nodes 文件夹的开关 (默认开启)
+    CLEAN_NODES = config.get("CLEAN_NODES", True)
     
     # 🌟 核心魔法：将配置写入 GITHUB_ENV，让工作流的后续步骤可以直接使用
     env_file = os.getenv('GITHUB_ENV')
@@ -29,10 +35,14 @@ try:
         with open(env_file, "a", encoding="utf-8") as env_f:
             env_f.write(f"TARGET_REPO={TARGET_REPO}\n")
             env_f.write(f"TARGET_DIR={TARGET_DIR}\n")
+            # 🌟 新增：将开关状态转为小写字符串传给 Bash
+            env_f.write(f"CLEAN_NODES={str(CLEAN_NODES).lower()}\n")
             
     print(f"✅ 成功加载 sources.yaml")
     print(f"  --> B 仓库目标: {TARGET_REPO}")
     print(f"  --> B 仓库路径: {TARGET_DIR}")
+    print(f"  --> 自动清空 Nodes 开关: {'开启' if CLEAN_NODES else '关闭'}")
+    print(f"  --> 日期模板数量: {len(DATE_TEMPLATES)} 个")
     
 except Exception as e:
     print(f"❌ 读取 sources.yaml 失败: {e}")
@@ -169,6 +179,60 @@ def check_external_links(urls_to_check):
             
     return valid_urls
 
+# 🌟 新增：智能日期模板探测函数 (全占位符支持版)
+def get_date_template_links():
+    print("\n" + "="*50)
+    print("📆 阶段 2.5: 智能嗅探日期动态源")
+    print("="*50)
+    valid_date_urls = []
+    
+    # 获取今天、昨天、前天的时间对象，防止时差或网站还没更新
+    today = datetime.datetime.now()
+    dates_to_try = [
+        today,
+        today - datetime.timedelta(days=1),
+        today - datetime.timedelta(days=2)
+    ]
+    
+    for template in DATE_TEMPLATES:
+        found = False
+        for target_date in dates_to_try:
+            # 自动生成基础日期格式
+            format_basic = target_date.strftime("%Y%m%d")      # 20260317
+            format_hyphen = target_date.strftime("%Y-%m-%d")   # 2026-03-17
+            format_under = target_date.strftime("%Y_%m_%d")    # 2026_03_17
+            
+            # 提取独立的年、月、日
+            yyyy = target_date.strftime("%Y")                  # 2026
+            mm = target_date.strftime("%m")                    # 03
+            dd = target_date.strftime("%d")                    # 17
+            
+            # 智能替换模板中可能出现的所有格式占位符
+            test_url = template.replace("{YYYYMMDD}", format_basic) \
+                               .replace("{YYYY-MM-DD}", format_hyphen) \
+                               .replace("{YYYY_MM_DD}", format_under) \
+                               .replace("{YYYY}", yyyy) \
+                               .replace("{MM}", mm) \
+                               .replace("{DD}", dd)
+                               
+            is_yaml = test_url.endswith('.yaml') or test_url.endswith('.yml')
+            try:
+                res = requests.get(test_url, timeout=5)
+                if res.status_code == 200:
+                    count = count_nodes_in_text(res.text, is_yaml)
+                    if count > 0:
+                        print(f"  [✅ 命中] 日期 {format_basic} 发现 {count:3} 个节点 <- {test_url}")
+                        valid_date_urls.append(test_url)
+                        found = True
+                        break # 命中最新的就直接跳出，不再找更旧的日期
+            except:
+                pass
+        if not found:
+            # 日期模板哪怕找不到也不会触发自动清理，因为明天它可能又活了
+            print(f"  [❌ 失败] 该模板近3天日期均无效 <- {template}")
+            
+    return valid_date_urls
+
 def get_dynamic_links():
     print("\n" + "="*50)
     print("📅 阶段 3: 智能嗅探动态仓库 (API & README 双引擎)")
@@ -241,6 +305,9 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"  [⚠️ 配置净化失败] {e}")
 
+    # 🌟 调用新增的日期探测函数
+    date_template_urls = get_date_template_links()
+
     dynamic_urls = get_dynamic_links()
     
     print("\n" + "="*50)
@@ -260,6 +327,8 @@ if __name__ == "__main__":
         all_urls.append("http://127.0.0.1:8000/tg_nodes.txt")
     all_urls.extend(local_nodes_urls)
     all_urls.extend(valid_external_urls)
+    # 🌟 将探测成功的日期链接加进大部队
+    all_urls.extend(date_template_urls) 
     all_urls.extend(dynamic_urls)
     
     encoded_url = urllib.parse.quote("|".join(all_urls))

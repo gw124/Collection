@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'sources.yaml'   
-      - 'Nodes/**'       
+#      - 'Nodes/**'       
 
 jobs:
   run-all:
@@ -65,18 +65,16 @@ jobs:
         run: |
           curl -s "http://127.0.0.1:25500/sub?target=mixed&url=http://127.0.0.1:8000/final_sub.yaml" > final_sub.txt
 
-      - name: 9. Update Config & Push
+      - name: 9. Update Config & Push (仅同步配置文件与结果)
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
 
-          # 移除了所有关于 rm -f Nodes/* 的清理逻辑
-          echo "📦 保持 Nodes 文件夹内容持久化"
+          git add final_sub.yaml final_sub.txt sources.yaml || true
 
-          git rm --cached tg_nodes.txt || true
-          git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true
-
+          # 提交更改
           git commit -m "🚀 Auto updated nodes & synced sources: $(date) [skip ci]" || echo "No changes to commit"
           
-          git pull origin main --rebase=false -X ours || (git add final_sub.yaml final_sub.txt sources.yaml Nodes/ || true && git commit -m "Auto resolve merge conflicts [skip ci]" || true)
+          # 拉取并推送，优先保留本次运行生成的配置
+          git pull origin main --rebase=false -X ours || true
           git push

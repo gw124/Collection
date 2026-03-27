@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'sources.yaml'   
-      - 'Nodes/**'       
+#      - 'Nodes/**'       
 
 jobs:
   run-all:
@@ -66,17 +66,18 @@ jobs:
         run: |
           curl -s "http://127.0.0.1:25500/sub?target=mixed&url=http://127.0.0.1:8000/final_sub.yaml" > final_sub.txt
 
-      - name: 9. Clean A Repo (清理当前 A 仓库现场)
+      - name: 9. Sync A Repo Config (同步当前 A 仓库配置)
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
           
-          rm -f Nodes/* || true
-          touch Nodes/.gitkeep
-          git rm --cached tg_nodes.txt || true
+          # 仅针对 sources.yaml 的变动进行提交
+          git add sources.yaml || true
           
-          git add sources.yaml Nodes/ || true
-          git commit -m "♻️ Cleaned Nodes Dir & Updated Config: $(date) [skip ci]" || echo "No changes to commit in A Repo"
+          # 如果有变动则提交，没有则跳过
+          git commit -m "♻️ Updated Config: $(date) [skip ci]" || echo "No changes to commit in A Repo"
+          
+          # 拉取并推送到主分支，优先保留当前运行产生的配置
           git pull origin main --rebase=false -X ours || true
           git push
 

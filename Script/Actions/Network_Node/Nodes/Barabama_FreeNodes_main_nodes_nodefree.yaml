@@ -1,0 +1,605 @@
+allow-lan: true
+dns:
+  default-nameserver:
+  - 223.5.5.5
+  - 114.114.114.114
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - '*.lan'
+  - '*.localdomain'
+  - '*.example'
+  - '*.invalid'
+  - '*.localhost'
+  - '*.test'
+  - '*.local'
+  - '*.home.arpa'
+  - router.asus.com
+  - localhost.sec.qq.com
+  - localhost.ptlogin2.qq.com
+  - +.msftconnecttest.com
+  fake-ip-range: 198.18.0.1/16
+  ipv6: false
+  listen: 0.0.0.0:53
+  nameserver:
+  - 223.5.5.5
+  - 114.114.114.114
+  - 119.29.29.29
+  - 180.76.76.76
+external-controller: 0.0.0.0:9090
+ipv6: false
+log-level: info
+mixed-port: 7890
+mode: rule
+proxies:
+- cipher: aes-256-cfb
+  name: 未知
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.240
+  type: ss
+- client-fingerprint: chrome
+  name: 🇨🇳_CN_中国->🇺🇸_US_美国
+  network: ws
+  port: 443
+  server: 139.196.41.153
+  servername: ylnhh.cc.cd
+  tls: true
+  type: vless
+  uuid: 14b02e2a-8930-4afb-8412-ea4a4954ca5b
+  ws-opts:
+    headers:
+      Host: ylnhh.cc.cd
+    path: /gs5=6666:6666@47.239.178.125:6666
+- client-fingerprint: chrome
+  name: 🇩🇪_DE_德国
+  network: ws
+  port: 4001
+  server: 185.94.29.156
+  servername: sub.mot.ip-ddns.com
+  tls: true
+  type: vless
+  uuid: 00000000-0000-4000-8000-000000000000
+  ws-opts:
+    headers:
+      Host: sub.mot.ip-ddns.com
+    path: /
+- client-fingerprint: random
+  name: 🇨🇳_CN_中国
+  port: 443
+  reality-opts:
+    public-key: RravQN06gzsNsm5ojEhZGrxBgLGEpqEThtHEltdjpBk
+    short-id: b3d76d
+  server: logggg.nammknammknammknammknammkb2.ir
+  servername: logggg.nammknammknammknammknammkb2.ir
+  tls: true
+  type: vless
+  uuid: d4de1f64-bf3c-4d97-9663-0091f8c07359
+- cipher: aes-256-cfb
+  name: 未知_1
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.232
+  type: ss
+- name: 🇧🇬_BG_保加利亚
+  password: IL37892054
+  port: 443
+  server: steady-lemming.rooster465.autos
+  skip-cert-verify: false
+  sni: steady-lemming.rooster465.autos
+  tls: false
+  type: trojan
+- client-fingerprint: chrome
+  name: 🇺🇸_US_美国
+  network: ws
+  port: 443
+  server: vip1.kaixincloud.top
+  servername: r.icy.de5.net
+  tls: true
+  type: vless
+  uuid: 9e4f36da-8f61-44f8-a9a7-0fd3a8d81234
+  ws-opts:
+    headers:
+      Host: r.icy.de5.net
+    path: /?ed=2560
+- cipher: aes-256-cfb
+  name: 未知_2
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.180
+  type: ss
+- cipher: aes-256-cfb
+  name: 未知_3
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.16
+  type: ss
+- client-fingerprint: chrome
+  flow: xtls-rprx-vision
+  name: 🇩🇪_DE_德国_1
+  port: 443
+  reality-opts:
+    public-key: xpv3OgIQ4ND_ZaiLxjHk1JsykVAVUY73UkyxPlU8Clc
+    short-id: 695f0df252f9889d
+  server: der.jojack.ru
+  servername: der.jojack.ru
+  tls: true
+  type: vless
+  uuid: c67f81df-34e8-4cb3-ab43-599585775fa9
+- client-fingerprint: chrome
+  name: 🇺🇸_US_美国_1
+  network: ws
+  port: 443
+  server: 192.200.160.20
+  servername: 639073677243557970.camry-perma.info
+  tls: true
+  type: vless
+  uuid: ee248e40-9468-4ef6-81b7-707a1e47c54a
+  ws-opts:
+    headers:
+      Host: 639073677243557970.camry-perma.info
+    path: /yaeungws
+- cipher: aes-256-cfb
+  name: 未知_4
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.75
+  type: ss
+- client-fingerprint: chrome
+  flow: xtls-rprx-vision
+  name: 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  port: 443
+  server: pl234.mechvpn.online
+  servername: pl234.mechvpn.online
+  tls: true
+  type: vless
+  uuid: 729764b1-149c-49f2-b170-322544df7b5b
+- name: 🇨🇳_CN_中国_1
+  password: BxceQaOe
+  port: 443
+  server: 58.152.25.253
+  skip-cert-verify: true
+  tls: false
+  type: trojan
+- cipher: aes-256-cfb
+  name: 未知_5
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.170
+  type: ss
+- client-fingerprint: chrome
+  flow: xtls-rprx-vision
+  name: 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  port: 13344
+  reality-opts:
+    public-key: DC71RjKr16drr8gqK8QhEuCVLpkbBfUfPb9Far8Jkzo
+    short-id: e2bd9802e29deb
+  server: 45.136.59.44
+  servername: yahoo.com
+  tls: true
+  type: vless
+  uuid: 3fce3b0d-0b92-4e92-9a78-18051dd648b4
+- client-fingerprint: chrome
+  name: 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  network: ws
+  port: 20231
+  server: 64.120.89.69
+  servername: r.icy.de5.net
+  tls: true
+  type: vless
+  uuid: 9e4f36da-8f61-44f8-a9a7-0fd3a8d81234
+  ws-opts:
+    headers:
+      Host: r.icy.de5.net
+    path: /?ed=2560
+- client-fingerprint: chrome
+  name: 🇺🇸_US_美国_2
+  port: 18959
+  reality-opts:
+    public-key: -hwVEdgFkvjku8ESuDoAA7id5yGGv_zXBvBW_RdhmHA
+    short-id: d557c6895d014075
+  server: 157.254.223.44
+  servername: itunes.apple.com
+  tls: true
+  type: vless
+  uuid: d0b3e27d-bbfc-4a3b-8e60-6973de8fcefa
+- cipher: aes-256-cfb
+  name: 未知_6
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.143
+  type: ss
+- client-fingerprint: chrome
+  name: 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  network: ws
+  port: 8005
+  server: 45.145.42.170
+  servername: sub.mot.ip-ddns.com
+  tls: true
+  type: vless
+  uuid: 00000000-0000-4000-8000-000000000000
+  ws-opts:
+    headers:
+      Host: sub.mot.ip-ddns.com
+    path: /
+- client-fingerprint: chrome
+  flow: xtls-rprx-vision
+  name: 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  port: 10965
+  reality-opts:
+    public-key: lHxeD2nYtDb1V7JseV-sUTEuqH6_jie7U_iOARX7cT0
+    short-id: 9f3a7c6d2e8b41af
+  server: desta.axinode.sbs
+  servername: deepl.com
+  tls: true
+  type: vless
+  uuid: d1209ffb-c159-48d5-b40d-542ce11fc768
+- cipher: aes-256-cfb
+  name: 🇪🇸_ES_西班牙
+  password: M3t2ZEQcMGRWBjRa
+  port: 9011
+  server: 5.188.181.201
+  type: ss
+- cipher: aes-256-cfb
+  name: 未知_7
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.150
+  type: ss
+- cipher: aes-256-cfb
+  name: 未知_8
+  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
+  port: 38388
+  server: 103.186.154.152
+  type: ss
+- client-fingerprint: chrome
+  name: 🇨🇳_CN_中国->🏳️_unKnow_未知
+  port: 443
+  reality-opts:
+    public-key: RravQN06gzsNsm5ojEhZGrxBgLGEpqEThtHEltdjpBk
+    short-id: b3d76d
+  server: 62.60.237.240
+  servername: logggg.nammknammknammknammknammkb2.ir
+  tls: true
+  type: vless
+  uuid: d4de1f64-bf3c-4d97-9663-0091f8c07359
+- client-fingerprint: chrome
+  name: 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  network: ws
+  port: 11001
+  server: 47.245.99.66
+  servername: sub.mot.ip-ddns.com
+  tls: true
+  type: vless
+  uuid: 00000000-0000-4000-8000-000000000000
+  ws-opts:
+    headers:
+      Host: sub.mot.ip-ddns.com
+    path: /
+proxy-groups:
+- name: 🚀 节点选择
+  proxies:
+  - ♻️ 自动选择
+  - DIRECT
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+- interval: 300
+  name: ♻️ 自动选择
+  proxies:
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  tolerance: 50
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+- name: 🌍 国外媒体
+  proxies:
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - 🎯 全球直连
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+- name: 📲 电报信息
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+- name: Ⓜ️ 微软服务
+  proxies:
+  - 🎯 全球直连
+  - 🚀 节点选择
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+- name: 🍎 苹果服务
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+- name: 🎯 全球直连
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  type: select
+- name: 🛑 全球拦截
+  proxies:
+  - REJECT
+  - DIRECT
+  type: select
+- name: 🍃 应用净化
+  proxies:
+  - REJECT
+  - DIRECT
+  type: select
+- name: 🐟 漏网之鱼
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - ♻️ 自动选择
+  - 未知
+  - 🇨🇳_CN_中国->🇺🇸_US_美国
+  - 🇩🇪_DE_德国
+  - 🇨🇳_CN_中国
+  - 未知_1
+  - 🇧🇬_BG_保加利亚
+  - 🇺🇸_US_美国
+  - 未知_2
+  - 未知_3
+  - 🇩🇪_DE_德国_1
+  - 🇺🇸_US_美国_1
+  - 未知_4
+  - 🇺🇸_US_美国->🇸🇨_SC_塞舌尔
+  - 🇨🇳_CN_中国_1
+  - 未知_5
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国
+  - 🇨🇳_CN_中国->🇺🇸_US_美国_1
+  - 🇺🇸_US_美国_2
+  - 未知_6
+  - 🇳🇱_NL_荷兰->🇺🇸_US_美国_1
+  - 🇨🇿_CZ_捷克->🇷🇺_RU_俄罗斯
+  - 🇪🇸_ES_西班牙
+  - 未知_7
+  - 未知_8
+  - 🇨🇳_CN_中国->🏳️_unKnow_未知
+  - 🇺🇸_US_美国->🇸🇬_SG_新加坡
+  type: select
+rule-providers:
+  Apple:
+    behavior: classical
+    path: ./rules/Apple.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Apple.list
+  BanAD:
+    behavior: classical
+    path: ./rules/BanAD.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanAD.list
+  BanProgramAD:
+    behavior: classical
+    path: ./rules/BanProgramAD.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanProgramAD.list
+  ChinaCompanyIp:
+    behavior: classical
+    path: ./rules/ChinaCompanyIp.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaCompanyIp.list
+  ChinaDomain:
+    behavior: classical
+    path: ./rules/ChinaDomain.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaDomain.list
+  GoogleCN:
+    behavior: classical
+    path: ./rules/GoogleCN.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/GoogleCN.list
+  LocalAreaNetwork:
+    behavior: classical
+    path: ./rules/LocalAreaNetwork.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/LocalAreaNetwork.list
+  Microsoft:
+    behavior: classical
+    path: ./rules/Microsoft.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Microsoft.list
+  ProxyLite:
+    behavior: classical
+    path: ./rules/ProxyLite.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyLite.list
+  ProxyMedia:
+    behavior: classical
+    path: ./rules/ProxyMedia.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ProxyMedia.list
+  SteamCN:
+    behavior: classical
+    path: ./rules/SteamCN.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/SteamCN.list
+  Telegram:
+    behavior: classical
+    path: ./rules/Telegram.yaml
+    type: http
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Telegram.list
+rules:
+- RULE-SET,LocalAreaNetwork,🎯 全球直连
+- RULE-SET,BanAD,🛑 全球拦截
+- RULE-SET,BanProgramAD,🍃 应用净化
+- RULE-SET,GoogleCN,🎯 全球直连
+- RULE-SET,SteamCN,🎯 全球直连
+- RULE-SET,Microsoft,Ⓜ️ 微软服务
+- RULE-SET,Apple,🍎 苹果服务
+- RULE-SET,ProxyMedia,🌍 国外媒体
+- RULE-SET,Telegram,📲 电报信息
+- RULE-SET,ProxyLite,🚀 节点选择
+- RULE-SET,ChinaDomain,🎯 全球直连
+- RULE-SET,ChinaCompanyIp,🎯 全球直连
+- GEOIP,CN,🎯 全球直连
+- MATCH,🐟 漏网之鱼
+tun:
+  auto-detect-interface: true
+  auto-route: true
+  dns-hijack:
+  - 114.114.114.114
+  - 180.76.76.76
+  - 119.29.29.29
+  - 223.5.5.5
+  - 8.8.8.8
+  - 8.8.4.4
+  - 1.1.1.1
+  - 1.0.0.1
+  enable: true
+  stack: system

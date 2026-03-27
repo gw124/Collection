@@ -14,7 +14,7 @@ import concurrent.futures
 # 警告：GitHub 服务器在美国，测亚洲节点物理延迟极高(>600ms)
 # 强烈建议保持 2500ms 以上，否则会把香港/新加坡/日本节点全部杀光！
 # ==========================================
-MAX_DELAY = 1000 
+MAX_DELAY = 3000
 
 try:
     with open("clash_nodes.yaml", "r", encoding='utf-8') as f:
@@ -163,10 +163,9 @@ def test_proxy(p, retries=2):
     return p, 0
 
 valid_proxies = []
-print(f"开始进行【双重验证】并发连通性测试 (限时 {MAX_DELAY}ms，50 线程狂飙)...")
+print(f"开始进行【双重验证】并发连通性测试 (限时 {MAX_DELAY}ms，100 线程狂飙)...")
 
-# 核心升级：使用 ThreadPoolExecutor 开启 50 个并发线程同时测速
-with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
     # 提交所有测速任务
     future_to_proxy = {executor.submit(test_proxy, p): p for p in proxies}
     
@@ -186,32 +185,47 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
 process.terminate()
 
 # ==========================================
-# 4. 智能归属地查询与重命名
+# 4. 智能归属地查询与重命名 (极速批量版)
 # ==========================================
-print("\n正在查询存活节点 IP 归属地并重新命名...")
+print("\n正在批量查询存活节点 IP 归属地并重新命名...")
 country_counters = {}
 ip_cache = {} 
 
-def get_country(server):
-    if server in ip_cache:
-        return ip_cache[server]
-    try:
-        res = requests.get(f"http://ip-api.com/json/{server}?lang=zh-CN", timeout=3).json()
-        if res.get('status') == 'success':
-            country = res.get('country', '未知地区')
-            country = country.replace("中国香港", "香港").replace("中国台湾", "台湾").replace("中国澳门", "澳门").replace("美利坚合众国", "美国")
-            ip_cache[server] = country
-            # 免费接口限频 45次/分钟，为了防止被封，每个新 IP 查询后停顿 1.5 秒
-            time.sleep(1.5) 
-            return country
-    except:
-        pass
-    ip_cache[server] = '未知地区'
-    return '未知地区'
+# 1. 提取去重后的独立 server 列表 (很多节点可能同 IP 不同端口，去重后查得更快)
+unique_servers = list(set([p.get('server') for p in valid_proxies if p.get('server')]))
 
+# 2. 按 100 个一批进行切片 (ip-api 批量接口每次最多支持查询 100 个)
+def chunk_list(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+# 3. 发送批量 POST 请求
+for batch in chunk_list(unique_servers, 100):
+    try:
+        # ⚠️ 这里直接用 POST 发送一个包含 IP/域名的 JSON 数组
+        res = requests.post("http://ip-api.com/batch?lang=zh-CN", json=batch, timeout=10)
+        
+        if res.status_code == 200:
+            data = res.json()
+            for info in data:
+                server = info.get('query')
+                if info.get('status') == 'success':
+                    country = info.get('country', '未知地区')
+                    # 地区名称简化净化
+                    country = country.replace("中国香港", "香港").replace("中国台湾", "台湾").replace("中国澳门", "澳门").replace("美利坚合众国", "美国")
+                    ip_cache[server] = country
+                else:
+                    ip_cache[server] = '未知地区'
+        
+        # 批量接口限频是 15次/分钟，每次请求后停顿 1 秒绝对安全
+        time.sleep(1) 
+    except Exception as e:
+        print(f"  [❌ 批量查询异常]: {e}")
+
+# 4. 瞬间完成本地重命名
 for p in valid_proxies:
     server = p.get('server', '')
-    country = get_country(server)
+    country = ip_cache.get(server, '未知地区')
     
     if country not in country_counters:
         country_counters[country] = 1

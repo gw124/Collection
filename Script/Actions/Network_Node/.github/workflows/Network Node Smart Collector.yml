@@ -20,9 +20,8 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     env:
-      CLEAN_BEFORE_PULL: true 
+      CLEAN_BEFORE_PULL: false
       CLEAN_OLD_FILES: true
-      # 【关键】必须在仓库 Secrets 中配置 MY_GIT_TOKEN (PAT)，否则无法触发后续流
       GH_TOKEN: ${{ secrets.MY_GIT_TOKEN }} 
 
     steps:
@@ -46,58 +45,51 @@ jobs:
             fi
           fi
 
-      - name: 🚀 采集并自动处理同名冲突
+      - name: 🚀 采集并从外部配置加载 Git 源
         shell: bash
         run: |
           TARGET_DIR="Nodes"
-          smart_move() {
-              local src="$1"
-              local base_name=$(basename "$2")
-              local name="${base_name%.*}"
-              local ext="${base_name##*.}"
-              if [[ "$name" == "$ext" ]]; then ext_dot=""; else ext_dot=".$ext"; fi
-              local final_path="$TARGET_DIR/$base_name"
-              local counter=1
-              while [[ -f "$final_path" ]]; do
-                  final_path="$TARGET_DIR/${name}_${counter}${ext_dot}"
-                  ((counter++))
-              done
-              cp "$src" "$final_path"
-          }
+          mkdir -p "$TARGET_DIR"
+          
+          if [ ! -f "sources.yaml" ]; then
+            echo "❌ 找不到 sources.yaml 配置文件！"
+            exit 1
+          fi
 
-          repos=(
-            "https://github.com/Barabama/FreeNodes/tree/main/nodes"
-            "https://github.com/Jsnzkpg/Jsnzkpg.git"
-            "https://github.com/free-nodes/v2rayfree.git"
-            "https://github.com/free-nodes/clashfree.git"
-          )
+          mapfile -t repos < <(yq -r '.REPOS[]' sources.yaml)
+          echo "✅ 成功加载了 ${#repos[@]} 个源"
 
           for url in "${repos[@]}"; do
-            echo "🔄 正在处理: $url"
+            # 1. 生成唯一来源标识 (把 https://github.com/abc/def 变成 abc_def)
+            origin_id=$(echo "$url" | sed -E 's|https?://github.com/||;s|/tree/|_|;s|/blob/|_|;s|/|_|g;s|\.git$||' | cut -c1-50)
+            
+            echo "🔄 正在处理: $url (标识: $origin_id)"
+
             if [[ "$url" == *".git" ]] || [[ "$url" == *"/tree/"* ]]; then
                 repo_url_part=$(echo "$url" | sed -E 's|https://github.com/([^/]+/[^/]+).*|\1|')
                 repo_name="${repo_url_part%.git}"
-                rm -rf temp/clone/*
+                rm -rf temp/clone && mkdir -p temp/clone
+                
                 if [[ "$url" == *"/tree/"* ]]; then
                     branch=$(echo "$url" | sed -E 's|.*/tree/([^/]+).*|\1|')
                     repo_subpath=$(echo "$url" | sed -E "s|.*/tree/$branch/||")
                 else
                     branch="main"; repo_subpath=""
                 fi
+
                 if git clone --depth=1 -b "$branch" "https://github.com/${repo_name}.git" temp/clone 2>/dev/null; then
                     search_path="temp/clone/$repo_subpath"
                     if [ -d "$search_path" ]; then
                         find "$search_path" -maxdepth 1 -type f | while read -r file; do
-                            smart_move "$file" "$(basename "$file")"
+                            cp "$file" "$TARGET_DIR/${origin_id}_$(basename "$file")"
                         done
                     fi
                 fi
-                continue
-            fi
-            [[ "$url" == *"/blob/"* ]] && url=$(echo "$url" | sed 's|github.com|raw.githubusercontent.com|;s|/blob/|/|')
-            filename=$(basename "$url")
-            if curl -L -s -f "$url" -o "temp/single_file"; then
-              smart_move "temp/single_file" "$filename"
+            else
+                # 处理单文件
+                [[ "$url" == *"/blob/"* ]] && url=$(echo "$url" | sed 's|github.com|raw.githubusercontent.com|;s|/blob/|/|')
+                filename=$(basename "$url")
+                curl -L -s -f "$url" -o "$TARGET_DIR/${origin_id}_$filename" || echo "⚠️ 下载失败: $url"
             fi
           done
 
