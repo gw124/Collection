@@ -35,6 +35,8 @@ https://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
 http://dassby.qqff.top:99/live/辽宁影视剧/index.m3u8
 #EXTINF:-1 tvg-name="辽宁影视剧" tvg-id="辽宁影视剧" tvg-logo="https://tb.zbds.top/logo/辽宁影视剧.png" group-title="影视频道""影视频道", 辽宁影视剧
 http://120.76.248.139/live/bfgd/4200000070.m3u8
+#EXTINF:-1 tvg-name="都市剧场" tvg-id="178" tvg-logo="https://tb.zbds.top/logo/都市剧场.png" group-title="影视频道""影视频道", 都市剧场
+https://satellitepull.cnr.cn/live/wxcqxwgb/playlist.m3u8
 #EXTINF:-1 tvg-name="靖天戏剧" tvg-id="514" tvg-logo="https://tb.zbds.top/logo/靖天戏剧.png" group-title="影视频道""影视频道", 靖天戏剧
 http://breezy-audrie-zspace-7524863c.koyeb.app/vipsir?token=leifeng&id=4gtv-4gtv058
 #EXTINF:-1 tvg-name="靖天映画" tvg-id="513" tvg-logo="https://tb.zbds.top/logo/靖天映画.png" group-title="影视频道""影视频道", 靖天映画
