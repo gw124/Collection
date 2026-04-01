@@ -3,20 +3,22 @@
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV15.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="Momo 1",Momo 1
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV04.m3u8
+#EXTINF:-1 tvg-name="韩国电影1" tvg-logo="https://live.fanmingming.cn/tv/韩国电影1.png" group-title="港澳台频道""港澳台频道",韩国电影1
+https://stream.ads.ottera.tv/playlist.m3u8?network_id=595
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/YxFRoft.png" tvg-id="Good 2",Good 2
 https://live.streamingfast.net/osmflivech2.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="Momo 2",Momo 2
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV05.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="NU2",NU2
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV14.m3u8
+#EXTINF:-1 tvg-name="韩国电影2" tvg-logo="https://live.fanmingming.cn/tv/韩国电影2.png" group-title="港澳台频道""港澳台频道",韩国电影2
+https://stream.ads.ottera.tv/playlist.m3u8?network_id=743
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CH5
 http://cdn6.163189.xyz/163189/ch5
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",VIUTV 6
 http://67.220.67.246:2347/livehttpplay?channel_id=30033
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CH8
 http://cdn6.163189.xyz/163189/ch8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",RHK31
-http://iptv.4666888.xyz/iptv2A.php?id=23
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",RTHK 32
 http://67.220.67.246:2347/livehttpplay?channel_id=20203
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/jkOgbLw.png" tvg-id="ET Mall 60",ET Mall 60
@@ -51,8 +53,6 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV26.m3u8
 https://live.streamingfast.net/osmflivech1.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="KPop",KPop
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV16.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",MYTV SUPER
-http://iptv.4666888.xyz/iptv2A.php?id=24
 #EXTINF:-1 tvg-name="NOW NEWS" tvg-logo="https://live.fanmingming.cn/tv/NOWNEWS.png" group-title="港澳台频道""港澳台频道",NOW NEWS
 http://cdn.163189.xyz/163189/now
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",NOW新闻
@@ -63,8 +63,6 @@ http://67.220.67.246:2347/livehttpplay?channel_id=13000
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV10.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",Now爆谷台
 http://67.220.67.246:2347/livehttpplay?channel_id=13002
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",ROCK
-http://iptv.4666888.xyz/iptv2A.php?id=50
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/kFMHayP.png" tvg-id="Supreme Master TV",Supreme Master TV
 https://lbs-us1.suprememastertv.com/720p.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",TVB Plus
@@ -75,8 +73,6 @@ http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
 http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
 #EXTINF:-1 tvg-name="TVBS新闻台" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/TVBS1.png" group-title="港澳台频道""港澳台频道",TVBS新闻台
 http://61.221.215.25:8800/hls/9/index.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",TVBS精采
-http://iptv.4666888.xyz/iptv2A.php?id=47
 #EXTINF:-1 tvg-id="TVB无线新闻" tvg-name="无线新闻" tvg-logo="https://live.fanmingming.cn/tv/无线新闻台.png" group-title="港澳台频道""港澳台频道",TVB无线新闻
 http://cdn9.163189.xyz/smt1.1.php?id=inews_twn
 #EXTINF:-1 tvg-id="明珠台" tvg-name="明珠台" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/TVB2.png" group-title="港澳台频道""港澳台频道",TVB明珠台
@@ -105,8 +101,8 @@ http://61.221.215.25:8800/hls/39/index.m3u8
 http://cdn6.163189.xyz/163189/8tv
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",动物星球
 http://61.221.215.25:8800/hls/57/index.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",千禧经典
-http://iptv.4666888.xyz/iptv2A.php?id=22
+#EXTINF:-1 tvg-id="千禧经典" tvg-name="千禧经典" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/千禧经典.png" group-title="港澳台频道""港澳台频道",千禧经典
+http://cdn9.163189.xyz/smt3.1.1.php?id=Tvbclassic
 #EXTINF:-1 tvg-id="华丽翡翠" tvg-name="华丽翡翠" tvg-logo="https://live.fanmingming.cn/tv/华丽翡翠.png" group-title="港澳台频道""港澳台频道",华丽翡翠台
 http://cdn9.163189.xyz/smt1.1.php?id=Tvbjade
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="华视HD",华视HD
@@ -117,20 +113,14 @@ http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8
 http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",天映经典
 https://o11.163189.xyz/stream/live/ccm/
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",娱乐新闻
-http://iptv.4666888.xyz/iptv2A.php?id=36
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/jkOgbLw.png" tvg-id="寰宇新闻台",寰宇新闻台
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV02.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",无线新闻
 http://cdn6.163189.xyz/163189/wxxw
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",明珠台
 http://cdn6.163189.xyz/163189/mzt
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",民视影剧
-http://iptv.4666888.xyz/iptv2A.php?id=53
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",民视综艺
-http://iptv.4666888.xyz/iptv2A.php?id=46
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
 https://cdn6.163189.xyz/163189/as
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",澳视澳门
@@ -159,10 +149,6 @@ http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
 http://67.220.67.246:2347/livehttpplay?channel_id=20197
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",重温经典
 http://cdn6.163189.xyz/163189/cwjd
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",靖洋戏剧
-http://iptv.4666888.xyz/iptv2A.php?id=42
-#EXTINF:-1 group-title="港澳台频道""港澳台频道",非凡新闻
-http://iptv.4666888.xyz/iptv2A.php?id=44
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",香港面包
 https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",龙华偶像
@@ -175,5 +161,7 @@ http://cdn8.163189.xyz/163189/lhxj
 http://cdn8.163189.xyz/163189/lhrh
 #EXTINF:-1 tvg-name="龙华洋片" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/LTV2.png" group-title="港澳台频道""港澳台频道",龙华洋片
 https://cdn8.163189.xyz/live/lhyp/stream.m3u8
+#EXTINF:-1 tvg-name="龙华电影" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/LTV1.png" group-title="港澳台频道""港澳台频道",龙华电影
+https://cdn8.163189.xyz/live/lhdy/stream.m3u8
 #EXTINF:-1 tvg-name="龙华经典" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/LTV7.png" group-title="港澳台频道""港澳台频道",龙华经典
 https://cdn8.163189.xyz/live/lhjd/stream.m3u8
