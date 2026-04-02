@@ -3,18 +3,16 @@
 http://125.43.244.20:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV2.png" group-title="央视频道""央视频道" response-time="120ms",CCTV2
 http://183.223.157.33:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV3.png" group-title="央视频道""央视频道" response-time="27ms",CCTV3
-http://125.43.244.20:9901/tsfile/live/1009_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1 tvg-name="CCTV3" tvg-id="CCTV3" tvg-logo="https://tb.zbds.top/logo/CCTV3.png" group-title="央视频道""央视频道", CCTV3
+http://39.152.103.17:8089/tsfile/live/1002_1.m3u8
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV4.png" group-title="央视频道""央视频道" response-time="34ms",CCTV4
 http://125.43.244.20:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV5.png" group-title="央视频道""央视频道" response-time="120ms",CCTV5+
 http://223.112.114.228:50080/newlive/live/hls/180/live.m3u8
-#EXTINF:-1 group-title="央视频道""央视频道" tvg-id="CCTV-6" tvg-logo="https://live.fanmingming.com/tv/CCTV6.png",CCTV-6 电影频道
-https://piccpndks.v.kcdnvip.com/audio/cctv6_2/index.m3u8
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV6.png" group-title="央视频道""央视频道" response-time="42ms",CCTV6
 http://125.43.244.20:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV7.png" group-title="央视频道""央视频道" response-time="120ms",CCTV7
-http://222.214.208.34:59901/tsfile/live/0007_1.m3u8
+#EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV7.png" group-title="央视频道""央视频道" response-time="28ms",CCTV7
+http://112.123.243.37:50085/tsfile/live/0008_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV8.png" group-title="央视频道""央视频道" response-time="32ms",CCTV8
 http://125.43.244.20:9901/tsfile/live/1007_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV9.png" group-title="央视频道""央视频道" response-time="120ms",CCTV-9纪录
@@ -37,8 +35,8 @@ http://113.25.252.226:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=
 http://69.30.246.194/live/cctv15.m3u8
 #EXTINF:-1 tvg-name="CCTV16" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV16.png" group-title="央视频道""央视频道" response-time="120ms",CCTV16
 http://39.152.103.17:8089/tsfile/live/1015_1.m3u8
-#EXTINF:-1 tvg-name="CCTV17" tvg-id="135" tvg-logo="https://tb.zbds.top/logo/CCTV17.png" group-title="央视频道""央视频道", CCTV17
-http://58.57.40.22:9901/tsfile/live/0019_1.m3u8
+#EXTINF:-1 tvg-name="CCTV17" tvg-id="CCTV17" tvg-logo="https://tb.zbds.top/logo/CCTV17.png" group-title="央视频道""央视频道", CCTV17
+http://120.76.248.139/live/bfgd/4200000204.m3u8
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4K.png" group-title="央视频道""央视频道",CCTV4K
 http://p.ytelc.com/169l/0/cctv.php?id=cctv4k
 #EXTINF:-1 tvg-name="CCTV4K" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4K.png" group-title="央视频道""央视频道",CCTV4K真4K
@@ -73,14 +71,14 @@ http://39.152.103.17:8089/tsfile/live/1044_1.m3u8
 http://nn.7x9d.cn/深圳最新.php?id=szws4k
 #EXTINF:-1 tvg-name="上海卫视" tvg-logo="https://live.fanmingming.cn/tv/上海卫视.png" group-title="卫视频道""卫视频道",上海卫视
 http://112.27.235.94:8000/hls/28/index.m3u8
-#EXTINF:-1 tvg-name="东南卫视" tvg-id="138" tvg-logo="https://tb.zbds.top/logo/东南卫视.png" group-title="卫视频道""卫视频道", 东南卫视
-http://58.57.40.22:9901/tsfile/live/1037_1.m3u8
+#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://live.fanmingming.cn/tv/东南卫视.png" group-title="卫视频道""卫视频道",东南卫视
+http://112.27.235.94:8000/hls/38/index.m3u8
 #EXTINF:-1,tvg-id="云南卫视" tvg-name="云南卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png" group-title="卫视频道""卫视频道",云南卫视
 http://nn.7x9d.cn/xzc2.php?ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgNi4xOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTA2LjAuMC4wIFNhZmFyaS81MzcuMzY=&hls=aHR0cDovL3d3dy5kc2suY2MvcGhwL3N4Z2QucGhwP2lkPXlud3M=
 #EXTINF:-1 tvg-name="人间卫视" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/BLTV.png" group-title="卫视频道""卫视频道",人间卫视
 http://61.216.67.119:1935/bltvhd/bltv1/chunklist_w1266569526.m3u
-#EXTINF:-1 tvg-name="兵团卫视" tvg-id="7" tvg-logo="https://tb.zbds.top/logo/兵团卫视.png" group-title="卫视频道""卫视频道", 兵团卫视
-http://183.11.239.36:808/hls/7/index.m3u8
+#EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/兵团卫视.png" group-title="卫视频道""卫视频道" response-time="30ms",兵团卫视
+http://112.123.243.37:50085/tsfile/live/0112_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="内蒙古卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/内蒙古卫视.png" group-title="卫视频道""卫视频道" response-time="28ms",内蒙古卫视
 http://112.123.243.37:50085/tsfile/live/0118_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="农林卫视" tvg-id="农林卫视" tvg-logo="https://tb.zbds.top/logo/农林卫视.png" group-title="卫视频道""卫视频道", 农林卫视
@@ -117,8 +115,8 @@ http://222.214.208.34:59901/tsfile/live/0125_1.m3u8
 http://125.43.244.20:9901/tsfile/live/1027_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="延边卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/延边卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",延边卫视
 https://srs.iyb983.cn:443/video/CYS/index.m3u8
-#EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新疆卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",新疆卫视
-http://218.17.33.178:53290/tsfile/live/0110_1.m3u8?key=txiptv
+#EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/新疆卫视.png" group-title="卫视频道""卫视频道" response-time="30ms",新疆卫视
+http://112.123.243.37:50085/tsfile/live/0143_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/江苏卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",江苏卫视
 http://183.223.157.33:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/江西卫视.png" group-title="卫视频道""卫视频道" response-time="32ms",江西卫视
@@ -131,12 +129,12 @@ http://113.25.252.226:9901/tsfile/live/1032_1.m3u8?key=txiptv&playlive=1&authid=
 https://play-qukan.cztv.com/live/1746687519046362.m3u8
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/海南卫视.png" group-title="卫视频道""卫视频道" response-time="120ms",海南卫视
 http://39.152.103.17:8089/tsfile/live/1046_1.m3u8
-#EXTINF:-1 tvg-name="海峡卫视" tvg-id="3" tvg-logo="https://tb.zbds.top/logo/海峡卫视.png" group-title="卫视频道""卫视频道", 海峡卫视
-http://38.64.72.148:80/hls/modn/list/4009/chunklist0.m3u8
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/湖北卫视.png" group-title="卫视频道""卫视频道" response-time="32ms",湖北卫视
 http://125.43.244.20:9901/tsfile/live/1033_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-name="湖南卫视" tvg-id="149" tvg-logo="https://tb.zbds.top/logo/湖南卫视.png" group-title="卫视频道""卫视频道", 湖南卫视
-http://58.57.40.22:9901/tsfile/live/1028_1.m3u8
+#EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://live.fanmingming.cn/tv/湖南卫视.png" group-title="卫视频道""卫视频道",湖南卫视
+http://112.27.235.94:8000/hls/31/index.m3u8
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/特种兵之火凤凰.png" group-title="卫视频道""卫视频道",特种兵之火凤凰
+https://live.ottiptv.cc/huya/29982636
 #EXTINF:-1 tvg-name="甘肃卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/甘肃卫视.png" group-title="卫视频道""卫视频道" response-time="29ms",甘肃卫视
 http://112.123.243.37:50085/tsfile/live/0123_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="西藏卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/西藏卫视.png" group-title="卫视频道""卫视频道" response-time="29ms",西藏卫视
@@ -146,19 +144,19 @@ http://125.43.244.20:9901/tsfile/live/1038_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/辽宁卫视.png" group-title="卫视频道""卫视频道" response-time="28ms",辽宁卫视
 http://222.169.85.8:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 group-title="卫视频道""卫视频道" tvg-id="重庆卫视" tvg-logo="https://live.fanmingming.com/tv/重庆卫视.png",重庆卫视
-http://p2.ytelc.com/videojs.php?id=https://sjlivecdn9.cbg.cn/202604022001/app_2/_definst_/ls_2.stream/chunklist.m3u8
+http://p2.ytelc.com/videojs.php?id=https://sjlivecdn9.cbg.cn/202604030006/app_2/_definst_/ls_2.stream/chunklist.m3u8
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/陕西卫视.png" group-title="卫视频道""卫视频道" response-time="30ms",陕西卫视
 http://112.123.243.37:50085/tsfile/live/0109_1.m3u8?key=txiptv&playlive=0&authid=0
-#EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/青海卫视.png" group-title="卫视频道""卫视频道" response-time="56ms",青海卫视
-http://36.136.38.87:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1 tvg-name="青海卫视" tvg-id="青海卫视" tvg-logo="https://tb.zbds.top/logo/青海卫视.png" group-title="卫视频道""卫视频道", 青海卫视
+http://120.76.248.139/live/bfgd/4200000111.m3u8
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/黑龙江卫视.png" group-title="卫视频道""卫视频道" response-time="33ms",黑龙江卫视
 http://125.43.244.20:9901/tsfile/live/1024_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="JP1",JP1
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV15.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="Momo 1",Momo 1
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV04.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/YxFRoft.png" tvg-id="Good 2",Good 2
-https://live.streamingfast.net/osmflivech2.m3u8
+#EXTINF:-1 group-title="港澳台频道""港澳台频道",TVBJ1
+http://iptv.4666888.xyz/iptv2A.php?id=26
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="Momo 2",Momo 2
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV05.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="NU2",NU2
@@ -187,8 +185,6 @@ http://67.220.67.246:2347/livehttpplay?channel_id=20707
 http://67.220.67.246:2347/livehttpplay?channel_id=20704
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",ASTRO欢喜台
 http://67.220.67.246:2347/livehttpplay?channel_id=20705
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/hkwcBM9.png" tvg-id="Beautiful Life TV",Beautiful Life TV
-https://5ddce30eb4b55.streamlock.net/bltvhd/bltv1/playlist.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CHU
 http://cdn6.163189.xyz/163189/chu
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/fEUmRST.png" tvg-id="CTi News",CTi News
@@ -199,8 +195,6 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV08.m3u8
 http://www.dalitv.com.tw:4568/live/dali/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/GGdnGqH.png" tvg-id="Genius Go Go Go",Genius Go Go Go
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV26.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k28Kc3o.png" tvg-id="Good",Good
-https://live.streamingfast.net/osmflivech1.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="KPop",KPop
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV16.m3u8
 #EXTINF:-1 tvg-name="NOW NEWS" tvg-logo="https://live.fanmingming.cn/tv/NOWNEWS.png" group-title="港澳台频道""港澳台频道",NOW NEWS
@@ -253,8 +247,6 @@ http://cdn6.163189.xyz/163189/8tv
 http://61.221.215.25:8800/hls/57/index.m3u8
 #EXTINF:-1 tvg-id="千禧经典" tvg-name="千禧经典" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/千禧经典.png" group-title="港澳台频道""港澳台频道",千禧经典
 http://cdn9.163189.xyz/smt3.1.1.php?id=Tvbclassic
-#EXTINF:-1 tvg-id="华丽翡翠" tvg-name="华丽翡翠" tvg-logo="https://live.fanmingming.cn/tv/华丽翡翠.png" group-title="港澳台频道""港澳台频道",华丽翡翠台
-http://cdn9.163189.xyz/smt1.1.php?id=Tvbjade
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="华视HD",华视HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV12.m3u8
 #EXTINF:-1 tvg-id="台视新闻" tvg-name="台视新闻" tvg-logo="https://live.fanmingming.cn/tv/台视新闻.png" group-title="港澳台频道""港澳台频道",台视新闻
@@ -274,11 +266,11 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTQ3MTkzOWY5NzNlYTMyNWY3MGY0NTFlZTgxNmNjNTJiJnVpZD0mdXVpZD0yMDM4YTJiMjY1OGNlZDY2MzNjYjUyMDNmNTk2ODRhNC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTYyNzgw/HNYLMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南爱晚" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%88%B1%E6%99%9A.png",湖南爱晚
-http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz1kZjdkYzg3NDBkMDUzYTViZjc4NDYwODU2MGE1MWViNyZ1aWQ9JnV1aWQ9ODY0NGZiM2E1ZjZhZDUyODE4NDE1MWEwMDE1OTYxYWMtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NTEzNjQ3MQ,,/HNGGMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTliMzRjZTBhNTQ2N2RiNTMzYmRkNTgzZWQxYzQ1OWUxJnVpZD0mdXVpZD03YTA1MGQwYTNiM2IyODAyZmJhZjk3MjdkNWVkOTkwYy02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTY1NjA0/HNGGMPP360.m3u8
 #EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWIwYjAwZjlmZDM2OGE2NGIyY2IxZTM4ZmEyOGE0ZTU4JnVpZD0mdXVpZD05ZDYyMzg1OTg0NmY3MGFjMmExY2YxYTUwYzA0NTMyMC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTUzNDQ3/HNDSJMPP360.m3u8
 #EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
-http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz1hNjIxNGZmZmYzZTY3MWJkNDBjOWViNDZhZDgyOTYyMiZ1aWQ9JnV1aWQ9YzdiYmM4MmYzYzM0ODFhMWE4OTM0Yjc0Y2RjYjYxNjMtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NTE0MTI1MQ,,/HNJSMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTVmODJkMjIzYTliOGJiYjI5MDZlY2JhYzQwNDU1Nzc0JnVpZD0mdXVpZD0yODc4Njg4MTZlOWE0OGQ3OTBmMzBhMjhmYzZjYzI2NS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTcwODE1/HNJSMPP360.m3u8
 #EXTINF:-1 tvg-id="湖南都市" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E9%83%BD%E5%B8%82.png" group-title="港澳台频道""港澳台频道",湖南都市
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTAxNTBlOTA0MmE5MmZhY2Y1Y2M4ZmM4YzE3ODFkMjA0JnVpZD0mdXVpZD05MTc0NzEzYzljZGRmZDI3MjljZTk2OWEzNTAxOWZlNC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTYwMzU2/HNDSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
@@ -309,6 +301,8 @@ http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
 http://67.220.67.246:2347/livehttpplay?channel_id=20197
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",重温经典
 http://cdn6.163189.xyz/163189/cwjd
+#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="金鹰纪实频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125839242.jpg",金鹰纪实频道
+https://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWRlZTExMzQxMDg0NGE3MzA0OThmNGM5NGNjMzkwY2E5JnVpZD0mdXVpZD0xMGE3YTNmNTA2OTdlZDIyM2QzZjQ3MjllZDJkZTU0OC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc1MTU1NzMw/JYJSMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",香港面包
 https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",龙华偶像
@@ -329,8 +323,6 @@ https://stream.ads.ottera.tv/playlist.m3u8?network_id=595
 https://stream.ads.ottera.tv/playlist.m3u8?network_id=743
 #EXTINF:-1 tvg-name="AMC电影" tvg-id="AMC电影" tvg-logo="https://tb.zbds.top/logo/AMC电影.png" group-title="影视频道""影视频道", AMC电影
 http://61.221.215.25:8800/hls/43/index.m3u8
-#EXTINF:-1 tvg-name="CHC家庭影院" tvg-id="3" tvg-logo="https://tb.zbds.top/logo/CHC家庭影院.png" group-title="影视频道""影视频道", CHC家庭影院
-http://61.162.52.6:8088/newlive/live/hls/60/live.m3u8
 #EXTINF:-1 tvg-name="CHC电影" tvg-id="CHC电影" tvg-logo="https://tb.zbds.top/logo/CHC电影.png" group-title="影视频道""影视频道", CHC电影
 http://183.237.95.108:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="上虞文化影院" tvg-id="上虞文化影院" tvg-logo="https://tb.zbds.top/logo/上虞文化影院.png" group-title="影视频道""影视频道", 上虞文化影院
@@ -349,12 +341,12 @@ http://jrlive.jrntv.com/live/_definst_/yingshis/chunklist_w1994429382.m3u8?zjian
 http://stream.hrbtv.net/yspd/sd/live.m3u8?zheild
 #EXTINF:-1 tvg-name="广东影视" tvg-logo="https://live.fanmingming.cn/tv/广东影视.png" group-title="影视频道""影视频道",广东影视
 http://119.32.12.17:2901/udp/224.1.100.11:11111
+#EXTINF:-1 tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/虎牙直播.png" group-title="影视频道""影视频道",成龙电影
+http://cdn.jdshipin.com:8880/huya.php?id=11342386
 #EXTINF:-1 group-title="影视频道""影视频道",教科影院
 http://ali-xwl.cztv.com/live/channel041080Plxw.m3u8
 #EXTINF:-1 tvg-name="无线星河" tvg-id="无线星河" tvg-logo="https://tb.zbds.top/logo/无线星河.png" group-title="影视频道""影视频道", 无线星河
 https://cdn6.101.qzz.io/163189/tvbxh
-#EXTINF:-1 tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/虎牙直播.png" group-title="影视频道""影视频道",末日电影合集
-https://live.ottiptv.cc/yy/1354889019
 #EXTINF:-1 tvg-name="浙江教科影视" tvg-id="浙江教科影视" tvg-logo="https://tb.zbds.top/logo/浙江教科影视.png" group-title="影视频道""影视频道", 浙江教科影视
 https://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
 #EXTINF:-1 tvg-name="辽宁影视剧" tvg-logo="https://live.fanmingming.cn/tv/辽宁影视.png" group-title="影视频道""影视频道",辽宁影视
@@ -371,20 +363,30 @@ http://breezy-audrie-zspace-7524863c.koyeb.app/vipsir?token=leifeng&id=4gtv-4gtv
 https://cdn8.163189.xyz/live/lhdy/stream.m3u8
 #EXTINF:-1 tvg-name="龙门飞甲" tvg-id="龙门飞甲" tvg-logo="https://tb.zbds.top/logo/龙门飞甲.png" group-title="影视频道""影视频道", 龙门飞甲
 http://jsmov2.a.yximgs.com/bs3/video-hls/5203346449046555193_hlsb.m3u8
-#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/中华小当家.png" group-title="少儿频道""少儿频道",中华小当家
-https://live.ottiptv.cc/huya/11342413
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/七龙珠.png" group-title="少儿频道""少儿频道",七龙珠
+https://live.ottiptv.cc/huya/11601966
 #EXTINF:-1 tvg-name="南京少儿" tvg-id="南京少儿" tvg-logo="https://tb.zbds.top/logo/南京少儿.png" group-title="少儿频道""少儿频道", 南京少儿
 http://nklive.nbs.cn/hls/e0981f3f-1a20-4a59-b8d1-17feb83a4610/index.m3u8
-#EXTINF:-1 tvg-name="卡酷少儿" tvg-id="20" tvg-logo="https://tb.zbds.top/logo/卡酷少儿.png" group-title="少儿频道""少儿频道", 卡酷少儿
-http://58.57.40.22:9901/tsfile/live/1060_1.m3u8
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/名侦探柯南.png" group-title="少儿频道""少儿频道",名侦探柯南
+https://live.ottiptv.cc/huya/30080236
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/哆啦A梦.png" group-title="少儿频道""少儿频道",哆啦A梦
+https://live.ottiptv.cc/huya/11601963
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/喜羊羊灰太狼.png" group-title="少儿频道""少儿频道",喜羊羊与灰太狼
+https://live.ottiptv.cc/huya/23865080
 #EXTINF:-1 group-title="少儿频道""少儿频道",少儿频道
 http://ali-xwl.cztv.com/live/channel081080Plxw.m3u8
-#EXTINF:-1 tvg-name="广东少儿" tvg-id="1" tvg-logo="https://tb.zbds.top/logo/广东少儿.png" group-title="少儿频道""少儿频道", 广东少儿
-http://gmxw.7766.org:808/hls/175/index.m3u8
+#EXTINF:-1 tvg-name="广东少儿" tvg-logo="https://live.fanmingming.cn/tv/广东少儿.png" group-title="少儿频道""少儿频道",广东少儿
+http://119.32.12.17:2901/udp/224.1.100.9:11111
 #EXTINF:-1 tvg-name="浙江少儿" tvg-id="浙江少儿" tvg-logo="https://tb.zbds.top/logo/浙江少儿.png" group-title="少儿频道""少儿频道", 浙江少儿
 https://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
-#EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/金鹰卡通.png" group-title="少儿频道""少儿频道" response-time="30ms",金鹰卡通
-http://101.66.198.27:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/猫和老鼠.png" group-title="少儿频道""少儿频道",猫和老鼠
+https://live.ottiptv.cc/huya/11352879
+#EXTINF:-1 tvg-name="福州少儿" tvg-id="福州少儿" tvg-logo="https://tb.zbds.top/logo/福州少儿.png" group-title="少儿频道""少儿频道", 福州少儿
+http://live.zohi.tv/video/s10001-fztv-4/index.m3u8
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/精灵宝可梦.png" group-title="少儿频道""少儿频道",精灵宝可梦
+https://live.ottiptv.cc/huya/23749096
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/蜡笔小新.png" group-title="少儿频道""少儿频道",蜡笔小新
+https://live.ottiptv.cc/bilibili/30837590
 #EXTINF:-1 tvg-name="韩国EBS少儿" tvg-id="韩国EBS少儿" tvg-logo="https://tb.zbds.top/logo/韩国EBS少儿.png" group-title="少儿频道""少儿频道", 韩国EBS少儿
 http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
 #EXTINF:-1 tvg-name="黑龙江少儿" tvg-id="黑龙江少儿" tvg-logo="https://tb.zbds.top/logo/黑龙江少儿.png" group-title="少儿频道""少儿频道", 黑龙江少儿
@@ -739,3 +741,5 @@ https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8
 https://hlscdn.liangtv.cn/live/0234c48e0bc24fe1b41b9999a253e581/1075ee38e04f490690f6a36a16e09c79.m3u8
 #EXTINF:-1 tvg-name="浙江国际" tvg-id="浙江国际" tvg-logo="https://tb.zbds.top/logo/浙江国际.png" group-title="国际频道""国际频道", 浙江国际
 https://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
+#EXTINF:-1 group-title="国际频道""国际频道" tvg-id="湖南国际频道" tvg-logo="http://tv.haoqu99.com/d/file/2016/0614/20160614032623217.jpg",湖南国际频道
+http://phonehwei.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPWh3X3Bob25lJmNocz0mZGVmPTEmcz04NThhZDFiMTQ0YzNjZjkwZjJiMmJkYzUyYzI1YjE3NCZ1aWQ9JnV1aWQ9YjMyNDE0NjdlOGQ5N2ViOTc5ODBkMDlmNTFjMWIwZjUtNmEwZTI2Mzcmdj0yJmFzPTAmZXM9MTc3NTE3NDQyNg,,/HNGJMPP360.m3u8
