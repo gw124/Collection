@@ -50,6 +50,11 @@ EXT_PRIORITY = ['.mkv', '.mp4', '.ts', '.avi', '.flv', '.rmvb', '.webm', '.mov',
 # 这两个开关专门对付“残缺不全”的剧集，与上方的“去重”逻辑互不干扰。
 # =====================================================================
 
+# 🌟 刮削错乱灭门模式（默认 False）：
+# 只有在发现“同一集存在重复文件，且这些重复文件的年份互不相同”时触发。
+# 一旦判定为刮削彻底串台污染，直接物理删除【整部剧集】。
+DELETE_CORRUPTED_SHOW = True
+
 # 灭门模式（默认 False）：如果检测到该剧集任一季有缺集，直接物理删除【整部剧集】的根目录。
 DELETE_ENTIRE_SHOW = True  
 
@@ -220,6 +225,7 @@ def fast_scan(base_paths, output_filepath):
                         
                     sys.stdout.write(f"\r🔍 正在扫: {entry.name[:40].ljust(40)}")
                     sys.stdout.flush()
+                    #print(f"🔍 正在扫: {entry.name}")
                     time.sleep(SCAN_DELAY) 
                     
                     if "Season" in entry.name or "Specials" in entry.name:
@@ -237,7 +243,40 @@ def fast_scan(base_paths, output_filepath):
                             log_text = f"📺 剧集: {show_name} -> {entry.name}\n"
                             log_text += f"📁 位置: {friendly_path}\n"  
                             log_text += f"📊 统计: 共 {report['total_files']} 个视频。最大至 {report['max']}。\n"
+
+                            # =========================================================
+                            # 🌟 新增：刮削致命错乱（同集不同年份）强力灭门检测
+                            # =========================================================
+                            is_corrupted = False
+                            # 核心锁：只有在发现了“重复文件”的前提下，才去对比年份
+                            if DELETE_CORRUPTED_SHOW and report["duplicates"]:
+                                for ep, files in report["duplicates"].items():
+                                    years = set()
+                                    for f in files:
+                                        m = re.search(r'\((\d{4})\)', os.path.basename(f))
+                                        if m: years.add(m.group(1))
+                                    
+                                    # 如果在“同一集”的“重复文件”中，发现了 2 个以上的不同年份，实锤串台！
+                                    if len(years) > 1:
+                                        is_corrupted = True
+                                        log_text += f"🚨 致命错乱: 第 {ep} 集的重复文件中存在不同年份 {years}，刮削已严重污染！\n"
+                                        try:
+                                            shutil.rmtree(current_path)
+                                            log_text += "🛡 操作: 🧨 已执行：物理删除错乱的整部剧集\n"
+                                        except Exception as e:
+                                            log_text += f"🛡 操作: ❌ 删除错乱剧集失败: {e}\n"
+                                        break # 已经删了整剧，不用再测其他集了
                             
+                            if is_corrupted:
+                                sys.stdout.write("\r" + " " * 60 + "\r")
+                                print(log_text)
+                                if need_to_write_file:
+                                    with open(final_output_path, 'a', encoding='utf-8') as f:
+                                        f.write(log_text + "\n")
+                                if ENABLE_TG_REALTIME: send_tg_message(log_text)
+                                return False # 阻断，不再扫描这部剧的剩下的季
+                            # =========================================================
+
                             if report["missing"]:
                                 log_text += f"❌ 缺失: {', '.join(map(str, report['missing']))}\n"
                             
