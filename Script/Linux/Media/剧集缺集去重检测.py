@@ -14,12 +14,20 @@ BASE_PATHS = [
     "/volume1/CloudNAS/CloudDrive/115/Media/动漫"
 ]
 
+# 🌟【豁免/排除路径池 (按绝对路径)】🌟
 # 填入你【绝对不想被扫描、去重或删除】的文件夹路径。支持填写多个。
 # 智能匹配：填入整剧路径，则整剧被忽略；填入具体的 Season 路径，则仅忽略该季。
 EXCLUDE_PATHS = [
     # 示例用法 (把不想碰的路径用双引号包起来，逗号分隔，不用的话可以留空)：
     # "/volume1/CloudNAS/CloudDrive/115/Media/动漫/航海王 (1999) {tmdb-37854}",
-    # "/volume1/CloudNAS/CloudDrive/115/Media/电视剧/某部珍藏老剧/Season 1"
+]
+
+# 🌟【全局文件夹名称排除 (按文件夹名)】🌟
+# 只要文件夹名字包含在这里，不管在哪个剧集下都会被直接跳过（不区分大小写）。
+# 专用于一键全局排除剧场版、特别篇、花絮等。
+EXCLUDE_FOLDER_NAMES = [
+    "Season 0", 
+    "Specials"
 ]
 
 # 【显示路径美化】
@@ -43,7 +51,7 @@ EXT_PRIORITY = ['.mkv', '.mp4', '.ts', '.avi', '.flv', '.rmvb', '.webm', '.mov',
 # =====================================================================
 
 # 灭门模式（默认 False）：如果检测到该剧集任一季有缺集，直接物理删除【整部剧集】的根目录。
-DELETE_ENTIRE_SHOW = False 
+DELETE_ENTIRE_SHOW = True  
 
 # 精准打击模式（默认 False）：如果检测到缺集，仅物理删除【当前缺集的那一个 Season 季】文件夹。
 # 注意：如果上面的 DELETE_ENTIRE_SHOW 已经是 True，这个开关就没意义了（因为整部剧都没了）。
@@ -202,8 +210,12 @@ def fast_scan(base_paths, output_filepath):
                 for entry in it:
                     if not entry.is_dir(): continue
                     
-                    # 🌟 护盾触发：如果命中排除路径，直接跳过这个文件夹
+                    # 🌟 护盾触发 1：如果命中排除绝对路径，直接跳过这个文件夹
                     if is_excluded(entry.path):
+                        continue
+                        
+                    # 🌟 护盾触发 2：如果命中全局排斥的文件夹名称（如 Season 0），直接跳过
+                    if entry.name.lower() in [n.lower() for n in EXCLUDE_FOLDER_NAMES]:
                         continue
                         
                     sys.stdout.write(f"\r🔍 正在扫: {entry.name[:40].ljust(40)}")
