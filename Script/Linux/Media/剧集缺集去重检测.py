@@ -77,7 +77,7 @@ VIDEO_EXTS = {'.mp4', '.mkv', '.ts', '.avi', '.rmvb', '.flv', '.iso', '.mov', '.
 # ================= Telegram 推送配置 =================
 
 # 扫描过程中，只要发现缺集或重复，立刻发送一条简短的实时告警消息（建议 False，免得手机一直响）。
-ENABLE_TG_REALTIME = False
+ENABLE_TG_REALTIME = True
 
 # 扫描结束后，发送一条包含“总耗时、总缺集数量”的汇总概览消息。
 ENABLE_TG_SUMMARY = True
