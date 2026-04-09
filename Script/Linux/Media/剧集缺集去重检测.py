@@ -50,17 +50,18 @@ EXT_PRIORITY = ['.mkv', '.mp4', '.ts', '.avi', '.flv', '.rmvb', '.webm', '.mov',
 # 这两个开关专门对付“残缺不全”的剧集，与上方的“去重”逻辑互不干扰。
 # =====================================================================
 
-# 🌟 刮削错乱灭门模式（默认 False）：
+# 🌟 刮削错乱删除模式（默认 False）：
 # 只有在发现“同一集存在重复文件，且这些重复文件的年份互不相同”时触发。
-# 一旦判定为刮削彻底串台污染，直接物理删除【整部剧集】。
+# 一旦判定为刮削彻底串台污染，默认仅物理删除【错乱的那个 Season 季】文件夹。
+# 如果整部剧集里只有这 1 个季了，为了防止留下空荡荡的根目录，直接物理删除整部剧。
 DELETE_CORRUPTED_SHOW = True
 
 # 灭门模式（默认 False）：如果检测到该剧集任一季有缺集，直接物理删除【整部剧集】的根目录。
-DELETE_ENTIRE_SHOW = True  
+DELETE_ENTIRE_SHOW = False  
 
 # 精准打击模式（默认 False）：如果检测到缺集，仅物理删除【当前缺集的那一个 Season 季】文件夹。
-# 注意：如果上面的 DELETE_ENTIRE_SHOW 已经是 True，这个开关就没意义了（因为整部剧都没了）。
-DELETE_ONLY_SEASON = False 
+# 如果整部剧集里只有这 1 个季了，为了防止留下空荡荡的剧集根目录，直接物理删除整部剧。
+DELETE_ONLY_SEASON = True 
 
 # 【本地报告生成开关】
 # True = 扫描结束后，会在脚本同级目录下永久保留一份 txt 详细报告。
@@ -69,7 +70,7 @@ ENABLE_LOCAL_REPORT = False
 
 # 【报告输出名称】
 # 导出的检测报告文件名。
-OUTPUT_FILE = "缺集检测报告.txt"
+OUTPUT_FILE = "剧集缺集检测报告.txt"
 
 # 【防风控延迟机制】(单位：秒)
 # 每扫一个文件夹暂停一下。模拟人类操作速度，防止因为全速无缝扫描被 115 网盘风控拦截或封禁 API。
@@ -116,6 +117,18 @@ def is_excluded(check_path):
         if check_path == ex_path or check_path.startswith(ex_path + os.sep):
             return True
     return False
+
+def count_seasons_in_show(show_path):
+    """辅助函数：计算一部剧集中包含多少个 Season 或 Specials 文件夹"""
+    count = 0
+    try:
+        with os.scandir(show_path) as it:
+            for entry in it:
+                if entry.is_dir() and ("Season" in entry.name or "Specials" in entry.name):
+                    count += 1
+    except OSError:
+        pass
+    return count
 
 def extract_episode_number(filename):
     """从文件名中利用正则提取集数"""
@@ -248,6 +261,7 @@ def fast_scan(base_paths, output_filepath):
                             # 🌟 新增：刮削致命错乱（同集不同年份）强力灭门检测
                             # =========================================================
                             is_corrupted = False
+                            corrupt_del_status = ""
                             # 核心锁：只有在发现了“重复文件”的前提下，才去对比年份
                             if DELETE_CORRUPTED_SHOW and report["duplicates"]:
                                 for ep, files in report["duplicates"].items():
@@ -260,12 +274,24 @@ def fast_scan(base_paths, output_filepath):
                                     if len(years) > 1:
                                         is_corrupted = True
                                         log_text += f"🚨 致命错乱: 第 {ep} 集的重复文件中存在不同年份 {years}，刮削已严重污染！\n"
-                                        try:
-                                            shutil.rmtree(current_path)
-                                            log_text += "🛡 操作: 🧨 已执行：物理删除错乱的整部剧集\n"
-                                        except Exception as e:
-                                            log_text += f"🛡 操作: ❌ 删除错乱剧集失败: {e}\n"
-                                        break # 已经删了整剧，不用再测其他集了
+                                        
+                                        # 🌟 核心升级：同 DELETE_ONLY_SEASON 逻辑，优先删季，只剩一季才删整剧
+                                        season_count = count_seasons_in_show(current_path)
+                                        if season_count <= 1:
+                                            try:
+                                                shutil.rmtree(current_path)
+                                                corrupt_del_status = "🧨 已执行：物理删除错乱的整部剧集 (因其只包含这一季)"
+                                            except Exception as e:
+                                                corrupt_del_status = f"❌ 删除错乱整剧失败: {str(e)}"
+                                        else:
+                                            try:
+                                                shutil.rmtree(entry.path)
+                                                corrupt_del_status = "🧨 已执行：物理删除错乱的当前季"
+                                            except Exception as e:
+                                                corrupt_del_status = f"❌ 删除错乱当前季失败: {str(e)}"
+                                                
+                                        log_text += f"🛡 操作: {corrupt_del_status}\n"
+                                        break # 已经执行删除操作，跳出年份判断循环
                             
                             if is_corrupted:
                                 sys.stdout.write("\r" + " " * 60 + "\r")
@@ -274,7 +300,12 @@ def fast_scan(base_paths, output_filepath):
                                     with open(final_output_path, 'a', encoding='utf-8') as f:
                                         f.write(log_text + "\n")
                                 if ENABLE_TG_REALTIME: send_tg_message(log_text)
-                                return False # 阻断，不再扫描这部剧的剩下的季
+                                
+                                # 根据删的是季还是整剧，决定接下来的动作
+                                if "整部剧集" in corrupt_del_status:
+                                    return False # 剧都没了，直接阻断这部剧剩下其他季的扫描
+                                else:
+                                    continue # 季没了，但剧还在，跳过下方的缺集/去重代码，直接去扫下一个 Season
                             # =========================================================
 
                             if report["missing"]:
@@ -305,10 +336,18 @@ def fast_scan(base_paths, output_filepath):
                                         del_status = "🧨 已执行：物理删除整部剧集"
                                     except Exception as e: del_status = f"❌ 删除失败：{str(e)}"
                                 elif DELETE_ONLY_SEASON:
-                                    try:
-                                        shutil.rmtree(entry.path)
-                                        del_status = "🧨 已执行：物理删除当前季"
-                                    except Exception as e: del_status = f"❌ 删除失败：{str(e)}"
+                                    # 🌟 核心升级：如果只剩一季，连锅端
+                                    season_count = count_seasons_in_show(current_path)
+                                    if season_count <= 1:
+                                        try:
+                                            shutil.rmtree(current_path)
+                                            del_status = "🧨 已执行：物理删除整部剧集 (因其只包含这一季)"
+                                        except Exception as e: del_status = f"❌ 删除整部剧集失败：{str(e)}"
+                                    else:
+                                        try:
+                                            shutil.rmtree(entry.path)
+                                            del_status = "🧨 已执行：物理删除当前季"
+                                        except Exception as e: del_status = f"❌ 删除当前季失败：{str(e)}"
                             
                             if del_status:
                                 log_text += f"🛡 操作: {del_status}\n"
@@ -322,7 +361,8 @@ def fast_scan(base_paths, output_filepath):
                                 
                             if ENABLE_TG_REALTIME: send_tg_message(log_text)
                             
-                            if DELETE_ENTIRE_SHOW and report["missing"]: 
+                            # 如果是连根拔起（整剧全删）或者因为它是唯一一季导致整剧被删，那就中止这层扫描
+                            if (DELETE_ENTIRE_SHOW or (DELETE_ONLY_SEASON and "整部剧集" in del_status)) and report["missing"]: 
                                 return False 
                     else:
                         scan_directory(entry.path, current_category_set)
