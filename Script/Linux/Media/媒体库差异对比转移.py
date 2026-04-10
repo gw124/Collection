@@ -46,12 +46,12 @@ ANTI_BAN_DELAY = (0.5, 1.5)
 # True = 每成功转移一个资源就推送一条消息 | False = 关闭实时推送，仅最后推送总报告
 ENABLE_REALTIME_PUSH = True 
 # 您的专属 TG 机器人 Token 和 Chat ID
-TG_BOT_TOKEN = "8775176544:AAGh7PfmE1kqJVyzK-MAcJNsfAAfIsCgcok"
-TG_CHAT_ID = "964709543"
+TG_BOT_TOKEN = ""
+TG_CHAT_ID = ""
 
 # 8. 高阶配置项
 # TMDB API Key：如果本地无 nfo，尝试通过 TMDB 接口查询是否完结。
-TMDB_API_KEY = "038df783a5fa07bc9e495c1c452b021d"           
+TMDB_API_KEY = ""           
 
 REPORT_FILE_NAME = "媒体对比同步报告.txt" 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
