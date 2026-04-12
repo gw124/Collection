@@ -14,6 +14,11 @@ BASE_PATHS = [
     "/volume1/CloudNAS/CloudDrive/115/Media/动漫"
 ]
 
+# 🌟【模拟测试模式 (Dry Run)】🌟 
+# True = 开启测试。脚本会正常扫描并输出报告，但【绝对不会】执行任何真实的删除或移动操作，仅打印预期行为。
+# False = 关闭测试。脚本会真实执行物理删除和文件转移（高危操作，请确认后再关闭测试！）。
+DRY_RUN = False
+
 # 🌟【豁免/排除路径池 (按绝对路径)】🌟
 # 填入你【绝对不想被扫描、去重或删除】的文件夹路径。支持填写多个。
 # 智能匹配：填入整剧路径，则整剧被忽略；填入具体的 Season 路径，则仅忽略该季。
@@ -45,9 +50,10 @@ EXT_PRIORITY = ['.mkv', '.mp4', '.ts', '.avi', '.flv', '.rmvb', '.webm', '.mov',
 # ⚠️ 警告：物理删除操作极其高危！建议只有在确认刮削完美时才开启。
 # =====================================================================
 
-# 🌟 刮削错乱灭门模式（默认 False）：
+# 🌟 刮削错乱处理模式（默认 False）：
 # 只有在发现“同一集存在重复文件，且这些重复文件的年份互不相同”时触发。
-# 一旦判定为刮削彻底串台污染，删除错季文件夹，如果只有一季就删除整部剧集。
+# 一旦判定为刮削彻底串台污染，仅物理删除【错乱的当前 Season 季】文件夹。
+# 如果整部剧集里只有这 1 个季，为了防止留下空壳根目录，直接物理删除整部剧。
 DELETE_CORRUPTED_SHOW = True
 
 # 🌟【缺集转移补救模式】🌟 
@@ -215,9 +221,10 @@ def fast_scan(base_paths, output_filepath):
     
     if need_to_write_file:
         with open(final_output_path, 'w', encoding='utf-8') as f:
-            f.write("================ 媒体库缺集与去重检测报告 =================\n\n")
+            f.write("================ 媒体库缺集与去重检测报告 =================\n")
+            f.write(f"当前运行模式: {'🟢 模拟测试 (不修改文件)' if DRY_RUN else '🔴 真实执行 (物理读写)'}\n\n")
 
-    print(f"🚀 开始扫描... (去重: {'开启' if AUTO_DELETE_DUPLICATES else '关闭'} | 本地报告: {'开启' if ENABLE_LOCAL_REPORT else '关闭(阅后即焚)'})")
+    print(f"🚀 开始扫描... (测试模式: {'✅模拟' if DRY_RUN else '❌实装'} | 去重: {'开启' if AUTO_DELETE_DUPLICATES else '关闭'} | 报告: {'本地' if ENABLE_LOCAL_REPORT else '阅后即焚'})")
     
     start_time = time.time()
     missing_summary = {} 
@@ -266,17 +273,23 @@ def fast_scan(base_paths, output_filepath):
                                         
                                         season_count = count_seasons_in_show(current_path)
                                         if season_count <= 1:
-                                            try:
-                                                shutil.rmtree(current_path)
-                                                corrupt_del_status = "🧨 已执行：物理删除错乱的整部剧集 (因其只包含这一季)"
-                                            except Exception as e:
-                                                corrupt_del_status = f"❌ 删除错乱整剧失败: {str(e)}"
+                                            if DRY_RUN:
+                                                corrupt_del_status = "🛡️ [模拟] 准备物理删除错乱的整部剧集 (因其只包含这一季)"
+                                            else:
+                                                try:
+                                                    shutil.rmtree(current_path)
+                                                    corrupt_del_status = "🧨 已执行：物理删除错乱的整部剧集 (因其只包含这一季)"
+                                                except Exception as e:
+                                                    corrupt_del_status = f"❌ 删除错乱整剧失败: {str(e)}"
                                         else:
-                                            try:
-                                                shutil.rmtree(entry.path)
-                                                corrupt_del_status = "🧨 已执行：物理删除错乱的当前季"
-                                            except Exception as e:
-                                                corrupt_del_status = f"❌ 删除错乱当前季失败: {str(e)}"
+                                            if DRY_RUN:
+                                                corrupt_del_status = "🛡️ [模拟] 准备物理删除错乱的当前季"
+                                            else:
+                                                try:
+                                                    shutil.rmtree(entry.path)
+                                                    corrupt_del_status = "🧨 已执行：物理删除错乱的当前季"
+                                                except Exception as e:
+                                                    corrupt_del_status = f"❌ 删除错乱当前季失败: {str(e)}"
                                                 
                                         log_text += f"🛡 操作: {corrupt_del_status}\n"
                                         break 
@@ -303,13 +316,41 @@ def fast_scan(base_paths, output_filepath):
                                 for ep, files in report["duplicates"].items():
                                     if AUTO_DELETE_DUPLICATES:
                                         keep_file, trash_files = get_best_file_to_keep(files)
+                                        
+                                        # 🌟 核心提取：智能获取最干净的无后缀名
+                                        stems = [os.path.splitext(os.path.basename(f))[0] for f in files]
+                                        cleanest_stem = min(stems, key=len)
+                                        kept_ext = os.path.splitext(keep_file)[1]
+                                        target_filename = cleanest_stem + kept_ext
+                                        target_filepath = os.path.join(os.path.dirname(keep_file), target_filename)
+                                        
                                         log_text += f"   ├── 第 {ep} 集 -> ✅保留: {os.path.basename(keep_file)}\n"
+                                        
+                                        # 1. 先删垃圾
                                         for trash in trash_files:
-                                            try:
-                                                os.remove(trash) 
-                                                log_text += f"   │             -> 🗑️已删除: {os.path.basename(trash)}\n"
-                                            except Exception as e:
-                                                log_text += f"   │             -> ❌删除失败: {os.path.basename(trash)} ({e})\n"
+                                            if DRY_RUN:
+                                                log_text += f"   │             -> 🛡️ [模拟] 准备删除: {os.path.basename(trash)}\n"
+                                            else:
+                                                try:
+                                                    os.remove(trash) 
+                                                    log_text += f"   │             -> 🗑️已删除: {os.path.basename(trash)}\n"
+                                                except Exception as e:
+                                                    log_text += f"   │             -> ❌删除失败: {os.path.basename(trash)} ({e})\n"
+                                                    
+                                        # 2. 再重命名(净化)被保留的文件
+                                        if os.path.basename(keep_file) != target_filename:
+                                            if DRY_RUN:
+                                                log_text += f"   │             -> 🛡️ [模拟] 准备净化命名: {os.path.basename(keep_file)} -> {target_filename}\n"
+                                            else:
+                                                try:
+                                                    # 确保目标位置安全（没有被其他残留文件占用）
+                                                    if not os.path.exists(target_filepath) or target_filepath == keep_file:
+                                                        os.rename(keep_file, target_filepath)
+                                                        log_text += f"   │             -> 🏷️已净化命名: {target_filename}\n"
+                                                    else:
+                                                        log_text += f"   │             -> ⚠️命名净化跳过: {target_filename} 仍被占用\n"
+                                                except Exception as e:
+                                                    log_text += f"   │             -> ❌命名净化失败: {str(e)}\n"
                                     else:
                                         log_text += f"   ├── 第 {ep} 集: 共有 {len(files)} 个重复版本\n"
 
@@ -318,42 +359,57 @@ def fast_scan(base_paths, output_filepath):
                                 season_count = count_seasons_in_show(current_path)
                                 
                                 if DELETE_ENTIRE_SHOW:
-                                    try:
-                                        shutil.rmtree(current_path)
-                                        del_status = "🧨 已执行：物理删除整部剧集"
-                                    except Exception as e: del_status = f"❌ 删除失败：{str(e)}"
+                                    if DRY_RUN:
+                                        del_status = "🛡️ [模拟] 准备物理删除整部剧集"
+                                    else:
+                                        try:
+                                            shutil.rmtree(current_path)
+                                            del_status = "🧨 已执行：物理删除整部剧集"
+                                        except Exception as e: del_status = f"❌ 删除失败：{str(e)}"
                                     
                                 elif MOVE_MISSING_TO_SYNC:
-                                    try:
-                                        os.makedirs(SYNC_TARGET_DIR, exist_ok=True)
+                                    if DRY_RUN:
                                         if season_count <= 1:
-                                            dest_path = os.path.join(SYNC_TARGET_DIR, show_name)
-                                            if os.path.exists(dest_path):
-                                                dest_path += f"_{int(time.time())}"
-                                            shutil.move(current_path, dest_path)
-                                            del_status = "🚚 已执行：移动整部剧集至刮削补救区 (因其只包含这一季)"
+                                            del_status = "🛡️ [模拟] 准备移动整部剧集至刮削补救区 (因其只包含这一季)"
                                         else:
-                                            dest_show_dir = os.path.join(SYNC_TARGET_DIR, show_name)
-                                            os.makedirs(dest_show_dir, exist_ok=True)
-                                            dest_season_dir = os.path.join(dest_show_dir, entry.name)
-                                            if os.path.exists(dest_season_dir):
-                                                dest_season_dir += f"_{int(time.time())}"
-                                            shutil.move(entry.path, dest_season_dir)
-                                            del_status = "🚚 已执行：移动当前缺集的季至刮削补救区 (已保留剧名父目录)"
-                                    except Exception as e:
-                                        del_status = f"❌ 移动至刮削补救区失败：{str(e)}"
+                                            del_status = "🛡️ [模拟] 准备移动当前缺集的季至刮削补救区 (已保留剧名父目录)"
+                                    else:
+                                        try:
+                                            os.makedirs(SYNC_TARGET_DIR, exist_ok=True)
+                                            if season_count <= 1:
+                                                dest_path = os.path.join(SYNC_TARGET_DIR, show_name)
+                                                if os.path.exists(dest_path):
+                                                    dest_path += f"_{int(time.time())}"
+                                                shutil.move(current_path, dest_path)
+                                                del_status = "🚚 已执行：移动整部剧集至刮削补救区 (因其只包含这一季)"
+                                            else:
+                                                dest_show_dir = os.path.join(SYNC_TARGET_DIR, show_name)
+                                                os.makedirs(dest_show_dir, exist_ok=True)
+                                                dest_season_dir = os.path.join(dest_show_dir, entry.name)
+                                                if os.path.exists(dest_season_dir):
+                                                    dest_season_dir += f"_{int(time.time())}"
+                                                shutil.move(entry.path, dest_season_dir)
+                                                del_status = "🚚 已执行：移动当前缺集的季至刮削补救区 (已保留剧名父目录)"
+                                        except Exception as e:
+                                            del_status = f"❌ 移动至刮削补救区失败：{str(e)}"
                                         
                                 elif DELETE_ONLY_SEASON:
                                     if season_count <= 1:
-                                        try:
-                                            shutil.rmtree(current_path)
-                                            del_status = "🧨 已执行：物理删除整部剧集 (因其只包含这一季)"
-                                        except Exception as e: del_status = f"❌ 删除整部剧集失败：{str(e)}"
+                                        if DRY_RUN:
+                                            del_status = "🛡️ [模拟] 准备物理删除整部剧集 (因其只包含这一季)"
+                                        else:
+                                            try:
+                                                shutil.rmtree(current_path)
+                                                del_status = "🧨 已执行：物理删除整部剧集 (因其只包含这一季)"
+                                            except Exception as e: del_status = f"❌ 删除整部剧集失败：{str(e)}"
                                     else:
-                                        try:
-                                            shutil.rmtree(entry.path)
-                                            del_status = "🧨 已执行：物理删除当前季"
-                                        except Exception as e: del_status = f"❌ 删除当前季失败：{str(e)}"
+                                        if DRY_RUN:
+                                            del_status = "🛡️ [模拟] 准备物理删除当前季"
+                                        else:
+                                            try:
+                                                shutil.rmtree(entry.path)
+                                                del_status = "🧨 已执行：物理删除当前季"
+                                            except Exception as e: del_status = f"❌ 删除当前季失败：{str(e)}"
                             
                             if del_status:
                                 log_text += f"🛡 操作: {del_status}\n"
@@ -398,6 +454,7 @@ def fast_scan(base_paths, output_filepath):
 
     summary_text = (
         f"🏁 任务完成！\n"
+        f"🛡️ 运行模式：{'模拟测试 (未修改任何文件)' if DRY_RUN else '真实执行 (物理读写)'}\n"
         f"⏱ 用时：{time_str}\n"
         f"⚠️ 缺集总计：{total_missing} 部\n"
         f"{category_text.rstrip()}\n"
