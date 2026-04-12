@@ -1,7 +1,6 @@
 import os
 import shutil
 import re
-import xml.etree.ElementTree as ET
 import urllib.request
 import urllib.parse
 import json
@@ -19,7 +18,7 @@ PATH_C = "/volume1/CloudNAS/CloudDrive/115/Sync/待刮削"       # 达标后，�
 # 2. 演习测试开关 (DRY_RUN)
 # True = 演习模式。只做逻辑对比和打印日志，绝不进行真实的物理拷贝/移动！(测试逻辑、防止重名冲突的最佳工具)
 # False = 实弹模式。脚本将真正开始搬运文件。
-DRY_RUN = False             
+DRY_RUN = False           
 
 # 3. 模式开关
 # False = 复制模式 (默认推荐，安全不丢数据) 
@@ -50,8 +49,13 @@ TG_BOT_TOKEN = ""
 TG_CHAT_ID = ""
 
 # 8. 高阶配置项
-# TMDB API Key：如果本地无 nfo，尝试通过 TMDB 接口查询是否完结。
+# TMDB API Key：核心数据源，用于向 TMDB 直接查询剧集/动漫是否完结
 TMDB_API_KEY = ""           
+
+# 9. 电影处理开关
+# False = 差异对比：目标库没有这部电影才进行移动/复制 (默认推荐)
+# True  = 强制处理：只要判定是电影，无视目标库是否已存在，全部强行移动/复制
+FORCE_SYNC_MOVIES = False
 
 REPORT_FILE_NAME = "媒体对比同步报告.txt" 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -112,22 +116,55 @@ def get_tmdb_id(folder_name):
     match = re.search(r'\{tmdb-(\d+)\}', folder_name)
     return match.group(1) if match else None
 
-def is_show_completed(folder_path, folder_name):
-    nfo_path = os.path.join(folder_path, "tvshow.nfo")
-    if os.path.exists(nfo_path):
+def is_tv_show_smart(folder_path, folder_name):
+    """
+    【四维智能判定引擎】无惧混装目录，精准识别电影和剧集
+    """
+    # 1. 结构特征识别 (最快)：查里面有没有 Season 季文件夹
+    try:
+        for item in os.listdir(folder_path):
+            if os.path.isdir(os.path.join(folder_path, item)):
+                if re.search(r'(?i)^(season|specials|第.*季|sp)', item.strip()):
+                    return True
+    except: pass
+
+    # 2. 命名特征识别 (较快)：查视频文件是否带 S01E01 或 EP01
+    video_exts = {'.mp4', '.mkv', '.avi', '.ts', '.rmvb', '.flv'}
+    try:
+        for file in os.listdir(folder_path):
+            if os.path.splitext(file)[1].lower() in video_exts:
+                if re.search(r'(?i)(S\d+\s*E\d+|EP\d+|E\d+|第\d+集)', file):
+                    return True
+    except: pass
+
+    # 3. TMDB API 权威认证 (最准)
+    tmdb_id = get_tmdb_id(folder_name)
+    if tmdb_id and TMDB_API_KEY:
         try:
-            tree = ET.parse(nfo_path)
-            status = tree.getroot().find('status')
-            if status is not None and status.text.strip().lower() in ['ended', 'canceled']: return True
-            return False
+            url = f"https://api.themoviedb.org/3/tv/{tmdb_id}?api_key={TMDB_API_KEY}&language=zh-CN"
+            req = urllib.request.Request(url)
+            with urllib.request.urlopen(req, timeout=5) as response:
+                return True 
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return False 
         except: pass
+
+    # 4. 路径关键字兜底
+    if any(kw in folder_path for kw in ["电视剧", "动漫", "剧集", "动画"]):
+        return True
         
+    return False 
+
+def is_show_completed(folder_name):
     tmdb_id = get_tmdb_id(folder_name)
     if tmdb_id and TMDB_API_KEY:
         try:
             url = f"https://api.themoviedb.org/3/tv/{tmdb_id}?api_key={TMDB_API_KEY}&language=zh-CN"
             with urllib.request.urlopen(urllib.request.Request(url), timeout=10) as response:
-                if json.loads(response.read().decode()).get('status', '') in ['Ended', 'Canceled']: return True
+                status = json.loads(response.read().decode()).get('status', '')
+                if status in ['Ended', 'Canceled']: 
+                    return True
                 return False
         except: pass
     return False
@@ -186,43 +223,60 @@ def main():
 
     try:
         media_tasks = list(find_media_folders_lazy(PATH_A))
-        log_and_print(f"📂 扫描到待处理资源共 {len(media_tasks)} 个，开始逐个比对...", write_to_report=False)
+        log_and_print(f"📂 扫描到待处理资源共 {len(media_tasks)} 个，开始智能识别与比对...", write_to_report=False)
 
         for a_dir, folder_name in media_tasks:
             time.sleep(random.uniform(*ANTI_BAN_DELAY)) 
             
             rel_path = os.path.relpath(a_dir, PATH_A)
             b_dir = os.path.join(PATH_B, rel_path)
-            c_dir_initial = os.path.join(PATH_C, rel_path) # 原始目标路径
+            c_dir_initial = os.path.join(PATH_C, rel_path) 
             
-            is_tv_show = any(kw in a_dir for kw in ["电视剧", "动漫", "剧集"]) or os.path.exists(os.path.join(a_dir, "tvshow.nfo"))
+            is_tv_show = is_tv_show_smart(a_dir, folder_name)
 
             # 【第一步：极速查异】
             is_new_entirely = not os.path.exists(b_dir)
-            missing_seasons = set()
+            missing_items = set() # 改为 missing_items，因为它可能是文件夹，也可能是扁平的单集视频
 
-            if not is_new_entirely:
-                if not is_tv_show:
+            if not is_tv_show:
+                # ====== 电影专用逻辑 ======
+                if FORCE_SYNC_MOVIES:
+                    is_new_entirely = True 
+                elif not is_new_entirely:
                     log_and_print(f"跳过 (电影在媒体库已存在): {rel_path}", write_to_report=False)
                     skip_count += 1
                     continue
-                else:
+            else:
+                # ====== 剧集专用逻辑 ======
+                if not is_new_entirely:
                     try:
-                        # 只对比子目录(季目录)
-                        a_dirs = set(d for d in os.listdir(a_dir) if os.path.isdir(os.path.join(a_dir, d)))
-                        b_dirs = set(d for d in os.listdir(b_dir) if os.path.isdir(os.path.join(b_dir, d)))
-                        missing_seasons = a_dirs - b_dirs
+                        a_items = set(os.listdir(a_dir))
+                        b_items = set(os.listdir(b_dir))
+                        
+                        # 尝试寻找规范的“季”目录
+                        a_season_dirs = set(d for d in a_items if os.path.isdir(os.path.join(a_dir, d)) and re.search(r'(?i)^(season|specials|第.*季|sp)', d.strip()))
+                        
+                        if a_season_dirs:
+                            # 模式A：规范结构。只对比季目录差异。
+                            b_dirs = set(d for d in b_items if os.path.isdir(os.path.join(b_dir, d)))
+                            missing_items = a_season_dirs - b_dirs
+                        else:
+                            # 模式B：扁平化结构(没季文件夹)。直接对比底层的视频文件差异。
+                            video_exts = {'.mp4', '.mkv', '.avi', '.ts', '.rmvb', '.flv'}
+                            a_videos = set(f for f in a_items if os.path.splitext(f)[1].lower() in video_exts)
+                            b_videos = set(f for f in b_items if os.path.splitext(f)[1].lower() in video_exts)
+                            missing_items = a_videos - b_videos
                     except: pass
                     
-                    if not missing_seasons:
-                        log_and_print(f"跳过 (媒体库已存在该剧且无新增季): {rel_path}", write_to_report=False)
+                    if not missing_items:
+                        log_and_print(f"跳过 (媒体库已存在该剧且无新增内容): {rel_path}", write_to_report=False)
                         skip_count += 1
                         continue
 
-            # 【第二步：状态核查】
+            # 【第二步：状态核查 (仅剧集参与)】
             if is_tv_show:
-                if CHECK_COMPLETED and not is_show_completed(a_dir, folder_name):
-                    log_and_print(f"跳过 (连载中/未完结): {rel_path}", write_to_report=False)
+                if CHECK_COMPLETED and not is_show_completed(folder_name):
+                    log_and_print(f"跳过 (连载中/未完结或 TMDB 查询失败): {rel_path}", write_to_report=False)
                     skip_count += 1
                     continue
                 
@@ -231,11 +285,10 @@ def main():
                     skip_count += 1
                     continue
 
-            # 【第三步：执行转移 (应用防撞名重命名)】
+            # 【第三步：执行转移】
             op_text = "移动" if IS_MOVE_MODE else "复制"
             
             if is_new_entirely:
-                # 检查目标文件夹是否存在冲突(如之前报错残留的文件夹)
                 final_c_dir = get_unique_path(c_dir_initial)
                 if final_c_dir != c_dir_initial:
                     log_and_print(f"⚠️ 发现同名残留！已自动重命名为: {os.path.basename(final_c_dir)}")
@@ -254,20 +307,25 @@ def main():
                     except Exception as e:
                         log_and_print(f"❌ 失败: {e}", write_to_report=True)
             else:
-                # 增量转移：季目录也应用防撞名
-                for item in missing_seasons:
+                # 增量转移 (可能是文件夹，也可能是单集视频文件)
+                for item in missing_items:
                     a_item = os.path.join(a_dir, item)
                     c_item_initial = os.path.join(c_dir_initial, item)
                     final_c_item = get_unique_path(c_item_initial)
 
                     if DRY_RUN:
-                        log_and_print(f"✅ [模拟] 准备{op_text}增量季至: {final_c_item}", write_to_report=True)
+                        log_and_print(f"✅ [模拟] 准备{op_text}增量内容至: {final_c_item}", write_to_report=True)
                         success_count += 1
                     else:
                         os.makedirs(os.path.dirname(final_c_item), exist_ok=True)
                         try:
                             if IS_MOVE_MODE: shutil.move(a_item, final_c_item)
-                            else: shutil.copytree(a_item, final_c_item, dirs_exist_ok=True, copy_function=shutil.copyfile)
+                            else: 
+                                if os.path.isdir(a_item):
+                                    shutil.copytree(a_item, final_c_item, dirs_exist_ok=True, copy_function=shutil.copyfile)
+                                else:
+                                    shutil.copyfile(a_item, final_c_item)
+                                    
                             log_and_print(f"✅ 增量成功: {item}", write_to_report=True)
                             success_count += 1
                             if ENABLE_REALTIME_PUSH: send_tg_msg(f"✅ *增量 ({op_text})*\n`{folder_name} - {item}`")
