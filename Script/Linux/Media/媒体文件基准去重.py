@@ -8,18 +8,23 @@ from pathlib import Path
 from datetime import datetime
 
 # ================= 配置区域 =================
+# 基准库
 DIR_A = "/volume1/CloudNAS/CloudDrive/115/Media" 
+# 去重库
 DIR_B = "/volume1/CloudNAS/CloudDrive/115/Media/每日更新"
 
 # 屏蔽设置
 EXCLUDE_DIRS = ["每日更新", "@eaDir", "#recycle"] 
 
 # 安全开关 (True 为测试模式，False 为正式执行彻底删除)
-DRY_RUN = False        
+DRY_RUN = False       
 
 # --- Telegram 推送设置 ---
 TG_BOT_TOKEN = ""   # 请填入你的 Token
 TG_CHAT_ID = ""     # 请填入你的 Chat ID
+
+# 实时推送开关 (True 为开启去重明细实时推送，False 为仅推送开头和结尾的汇总报告)
+TG_REALTIME_PUSH = True  
 # -------------------------
 
 # 媒体与去重参数
@@ -65,6 +70,17 @@ def extract_ep(name):
     m = re.search(r'(?i)s\d+e\d+(?:-e\d+)?', name)
     return m.group(0).lower() if m else None
 
+def extract_db_id(name):
+    """
+    智能提取 TMDB 或 IMDB ID
+    支持格式: {tmdb-123}, [imdbid=tt123], tmdb_123 等一切变体
+    统一返回标准化特征，如: tmdb-123 或 imdb-tt123
+    """
+    m = re.search(r'(?i)(tmdb|imdb).*?(tt\d+|\d+)', name)
+    if m:
+        return f"{m.group(1).lower()}-{m.group(2).lower()}"
+    return None
+
 def main():
     path_a = Path(DIR_A)
     path_b = Path(DIR_B)
@@ -75,7 +91,6 @@ def main():
 
     mode_label = "⚠️ 测试模式 (不删除)" if DRY_RUN else "🚀 正式清理模式"
     
-    # --- 启动推送通知 ---
     start_msg = (
         f"🔔 基准去重任务启动\n"
         f"=========================\n"
@@ -87,7 +102,7 @@ def main():
     print("\n" + start_msg + "\n")
     send_tg_msg(start_msg)
 
-    print(">>> [步骤 1] 正在启用智能模糊匹配对比资源...\n")
+    print(">>> [步骤 1] 正在启用智能模糊匹配 (含 TMDB/IMDB 身份证核验) ...\n")
     
     for root, dirs, files in os.walk(DIR_B):
         for dname in list(dirs):
@@ -109,6 +124,9 @@ def main():
         is_movie_dir = "电影" in path_str
         is_episode_dir = any(k in path_str for k in ["电视剧", "动漫", "短剧", "系列合集"])
 
+        folder_db_id_b = extract_db_id(root_path.name)
+        folder_db_id_a = extract_db_id(target_path_a.name)
+
         for f in files:
             file_path = Path(f)
             stem_b = file_path.stem
@@ -116,30 +134,45 @@ def main():
             prefix_b = get_clean_prefix(stem_b)
             ep_code_b = extract_ep(f)
             
+            db_id_b = extract_db_id(f) or folder_db_id_b
+            
             matched_a_file = None
             
             for stem_a, original_a_name in a_bases.items():
                 clean_a = stem_a.replace(" ", "").lower()
                 prefix_a = get_clean_prefix(stem_a)
                 ep_code_a = extract_ep(original_a_name)
+                db_id_a = extract_db_id(original_a_name) or folder_db_id_a
+
+                if db_id_b and db_id_a and db_id_b != db_id_a:
+                    continue
 
                 if clean_b == clean_a:
                     matched_a_file = target_path_a / original_a_name
                     break
+                
                 if f.startswith(f"{stem_a}-") or f.startswith(f"{stem_a}."):
                     matched_a_file = target_path_a / original_a_name
                     break
+                
                 if ep_code_b and ep_code_a and ep_code_b == ep_code_a:
                     matched_a_file = target_path_a / original_a_name
                     break
-                if is_movie_dir and prefix_b and prefix_a and prefix_b == prefix_a:
-                    matched_a_file = target_path_a / original_a_name
-                    break
+                
+                if is_movie_dir:
+                    if db_id_b and db_id_a and db_id_b == db_id_a:
+                        matched_a_file = target_path_a / original_a_name
+                        break
+                    elif prefix_b and prefix_a and prefix_b == prefix_a:
+                        matched_a_file = target_path_a / original_a_name
+                        break
             
             if matched_a_file:
                 full_path_b = root_path / f
                 
-                if file_path.suffix.lower() in MEDIA_EXTS:
+                is_main_media = file_path.suffix.lower() in MEDIA_EXTS
+                
+                if is_main_media:
                     if is_movie_dir: count_movie += 1
                     else: count_episode += 1
                 else:
@@ -148,14 +181,26 @@ def main():
                 if DRY_RUN:
                     print(f"[测试] 智能命中 -> 拟删除: {full_path_b}")
                     print(f"               参照基准库: {matched_a_file}")
+                    
+                    # 实时推送 (测试模式)
+                    if TG_REALTIME_PUSH and is_main_media:
+                        send_tg_msg(f"👀 [测试拟删除]\n🎬 {file_path.name}")
                 else:
                     print(f"[*] 执行删除: {full_path_b}")
-                    print(f"               参照基准库: {matched_a_file}")
+                    print(f"  参照基准库: {matched_a_file}")
                     try:
                         os.remove(full_path_b)
                         time.sleep(DELAY_FILE_DEL)
+                        
+                        # 实时推送 (正式模式)
+                        if TG_REALTIME_PUSH and is_main_media:
+                            send_tg_msg(f"🗑️ [成功删除]\n🎬 {file_path.name}")
                     except Exception as e:
                         print(f"[!] 删除失败: {e}")
+                        
+                        # 失败时强制推送 (不受文件类型限制)
+                        if TG_REALTIME_PUSH:
+                            send_tg_msg(f"❌ [删除失败]\n📁 {file_path.name}\n⚠️ 原因: {e}")
                         
         time.sleep(DELAY_DIR_SCAN)
 
