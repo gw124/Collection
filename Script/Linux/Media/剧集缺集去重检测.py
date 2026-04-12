@@ -14,7 +14,7 @@ BASE_PATHS = [
     "/volume1/CloudNAS/CloudDrive/115/Media/动漫"
 ]
 
-# 🌟【模拟测试模式 (Dry Run)】🌟
+# 🌟【模拟测试模式 (Dry Run)】🌟 
 # True = 开启测试。脚本会正常扫描并输出报告，但【绝对不会】执行任何真实的删除或移动操作，仅打印预期行为。
 # False = 关闭测试。脚本会真实执行物理删除和文件转移（高危操作，请确认后再关闭测试！）。
 DRY_RUN = False
@@ -107,12 +107,16 @@ TG_CHAT_ID = ""
 PROXIES = None 
 
 # =====================================================================
-# 填入你的 TMDB API Key。
-# 填入后，脚本遇到类似 "天才小子 (1997) {tmdb-2291}" 这样的目录时，
-# 会去 TMDB 查出这一季"到底应该有几集"，彻底解决“单集孤岛”查不出缺集的盲区！
+# 🌟 【TMDB API 绝对真理校验 与 连载豁免】 🌟
 # =====================================================================
 TMDB_API_KEY = "" # 强烈建议填入！例如 "a1b2c3d4e5f6g7h8i9j0"
-TMDB_CACHE = {} # 内存缓存，防止重复请求 API 导致限流
+
+# 🌟【连载中剧集：尾部缺集豁免开关】🌟
+# True = 开启。如果 TMDB 识别到该剧正在“连载中 (Returning Series)”，且你本地只缺最新还没播/没下的集数（中间没断档），则【不视为缺集】，不执行删除或转移。
+# False = 关闭。不管连不连载，只要本地集数少于 TMDB 的总集数，一律视为缺集处理。
+IGNORE_ONGOING_TRAILING_MISSING = True
+
+TMDB_CACHE = {} 
 
 # ================= 正则预编译 =================
 RE_RULES = [
@@ -123,7 +127,6 @@ RE_RULES = [
 
 # ================= 核心功能函数 =================
 def is_excluded(check_path):
-    """检测当前路径是否命中排除列表（支持模糊子目录匹配）"""
     if not EXCLUDE_PATHS: return False
     check_path = os.path.normpath(check_path)
     for ex_path in EXCLUDE_PATHS:
@@ -134,7 +137,6 @@ def is_excluded(check_path):
     return False
 
 def count_seasons_in_show(show_path):
-    """辅助函数：计算一部剧集中包含多少个 Season 或 Specials 文件夹"""
     count = 0
     try:
         with os.scandir(show_path) as it:
@@ -146,37 +148,37 @@ def count_seasons_in_show(show_path):
     return count
 
 def extract_episode_number(filename):
-    """从文件名中利用正则提取集数"""
     for regex in RE_RULES:
         match = regex.search(filename)
         if match: return int(match.group(1))
     return None
 
-def get_tmdb_season_episode_count(tmdb_id, season_num):
+def get_tmdb_info(tmdb_id):
+    """同时获取剧集的播发状态和各季度的总集数"""
     if not TMDB_API_KEY.strip():
         return None
     
-    cache_key = f"{tmdb_id}_S{season_num}"
-    if cache_key in TMDB_CACHE:
-        return TMDB_CACHE[cache_key]
+    if tmdb_id in TMDB_CACHE:
+        return TMDB_CACHE[tmdb_id]
 
-    url = f"https://api.themoviedb.org/3/tv/{tmdb_id}/season/{season_num}?api_key={TMDB_API_KEY}"
+    url = f"https://api.themoviedb.org/3/tv/{tmdb_id}?api_key={TMDB_API_KEY}&language=zh-CN"
     try:
         response = requests.get(url, proxies=PROXIES, timeout=5)
         if response.status_code == 200:
             data = response.json()
-            ep_count = len(data.get("episodes", []))
-            if ep_count > 0:
-                TMDB_CACHE[cache_key] = ep_count
-                return ep_count
+            info = {
+                "status": data.get("status", ""),
+                "seasons": {s["season_number"]: s.get("episode_count", 0) for s in data.get("seasons", [])}
+            }
+            TMDB_CACHE[tmdb_id] = info
+            return info
     except Exception:
         pass
     
-    TMDB_CACHE[cache_key] = None
+    TMDB_CACHE[tmdb_id] = None
     return None
 
 def analyze_season_folder(season_path, show_name):
-    """分析 Season 文件夹，返回缺失列表和重复的字典"""
     episodes_map = {} 
     try:
         with os.scandir(season_path) as it:
@@ -198,6 +200,8 @@ def analyze_season_folder(season_path, show_name):
     
     expected_start = 1
     expected_end = max_ep
+    is_ongoing = False
+    ongoing_skipped = False
     
     tmdb_match = re.search(r'\{tmdb-(\d+)\}', show_name, re.IGNORECASE)
     season_match = re.search(r'Season\s+(\d+)', os.path.basename(season_path), re.IGNORECASE)
@@ -205,16 +209,32 @@ def analyze_season_folder(season_path, show_name):
     if tmdb_match and season_match:
         tmdb_id = tmdb_match.group(1)
         season_num = int(season_match.group(1))
-        true_ep_count = get_tmdb_season_episode_count(tmdb_id, season_num)
+        tmdb_info = get_tmdb_info(tmdb_id)
         
-        if true_ep_count is not None:
-            expected_end = max(max_ep, true_ep_count)
+        if tmdb_info is not None:
+            is_ongoing = (tmdb_info["status"] == "Returning Series")
+            true_ep_count = tmdb_info["seasons"].get(season_num)
+            
+            if true_ep_count is not None and true_ep_count > 0:
+                expected_end = max(max_ep, true_ep_count)
+            else:
+                expected_start = 1 if min_ep < 20 else min_ep
         else:
             expected_start = 1 if min_ep < 20 else min_ep
     else:
         expected_start = 1 if min_ep < 20 else min_ep
 
     missing_eps = [i for i in range(expected_start, expected_end + 1) if i not in episodes]
+    
+    # 🌟 核心：连载中尾部缺集豁免判定
+    if IGNORE_ONGOING_TRAILING_MISSING and is_ongoing and missing_eps:
+        # 检查有没有属于“中间断档”的缺集
+        middle_missing = [ep for ep in missing_eps if ep < max_ep]
+        if not middle_missing:
+            # 如果中间没断档，说明缺的都是未来待更新的集数，清空缺失列表！
+            missing_eps = []
+            ongoing_skipped = True
+            
     duplicate_eps = {ep: files for ep, files in episodes_map.items() if len(files) > 1}
             
     return {
@@ -222,25 +242,21 @@ def analyze_season_folder(season_path, show_name):
         "missing": missing_eps,
         "duplicates": duplicate_eps,
         "expected_start": expected_start, 
-        "total_files": sum(len(f) for f in episodes_map.values())
+        "total_files": sum(len(f) for f in episodes_map.values()),
+        "ongoing_skipped": ongoing_skipped
     }
 
 def get_best_file_to_keep(filepaths):
-    """智能去重决断：两轮 PK 淘汰制"""
     def score_file(filepath):
         ext = os.path.splitext(filepath)[1].lower()
         ext_score = EXT_PRIORITY.index(ext) if ext in EXT_PRIORITY else 999
-        try:
-            size = os.path.getsize(filepath)
-        except OSError:
-            size = 0
+        try: size = os.path.getsize(filepath)
+        except OSError: size = 0
         return (ext_score, -size)
-
     sorted_files = sorted(filepaths, key=score_file)
     return sorted_files[0], sorted_files[1:]
 
 def send_tg_message(text):
-    """向 Telegram 发送文本"""
     if not TG_BOT_TOKEN.strip() or TG_BOT_TOKEN == "YOUR_BOT_TOKEN": return
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"
     try:
@@ -249,7 +265,6 @@ def send_tg_message(text):
         sys.stdout.write(f"\r[TG推送失败] {e} ".ljust(60) + "\n")
 
 def send_tg_document(filepath, caption=""):
-    """向 Telegram 发送报告文件"""
     if not ENABLE_TG_FILE or not TG_BOT_TOKEN.strip() or TG_BOT_TOKEN == "YOUR_BOT_TOKEN": return
     url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendDocument"
     try:
@@ -260,7 +275,6 @@ def send_tg_document(filepath, caption=""):
         pass
 
 def fast_scan(base_paths, output_filepath):
-    """核心扫描调度器"""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     final_output_path = os.path.join(script_dir, output_filepath)
     
@@ -292,7 +306,7 @@ def fast_scan(base_paths, output_filepath):
                         show_name = os.path.basename(current_path)
                         report = analyze_season_folder(entry.path, show_name)
                         
-                        if report and (report["missing"] or report["duplicates"]):
+                        if report and (report["missing"] or report["duplicates"] or report.get("ongoing_skipped")):
                             if report["missing"]: 
                                 current_category_set.add(show_name)
                             
@@ -304,6 +318,9 @@ def fast_scan(base_paths, output_filepath):
                             log_text = f"📺 剧集: {show_name} -> {entry.name}\n"
                             log_text += f"📁 位置: {friendly_path}\n"  
                             log_text += f"📊 统计: 共 {report['total_files']} 个视频。最大至 {report['max']}。\n"
+
+                            if report.get("ongoing_skipped"):
+                                log_text += f"ℹ️ 豁免: 识别为连载中剧集，无中间断档，尾部待更新集数已安全忽略\n"
 
                             # ================= 刮削致命错乱检测 =================
                             is_corrupted = False
@@ -455,17 +472,16 @@ def fast_scan(base_paths, output_filepath):
                                                 del_status = "🧨 已执行：物理删除当前季"
                                             except Exception as e: del_status = f"❌ 删除当前季失败：{str(e)}"
                             
-                            if del_status:
-                                log_text += f"🛡 操作: {del_status}\n"
-
-                            sys.stdout.write("\r" + " " * 60 + "\r")
-                            print(log_text)
-                            
-                            if need_to_write_file:
-                                with open(final_output_path, 'a', encoding='utf-8') as f:
-                                    f.write(log_text + "\n")
+                            if del_status or report["missing"] or report["duplicates"] or report.get("ongoing_skipped"):
+                                if del_status: log_text += f"🛡 操作: {del_status}\n"
+                                sys.stdout.write("\r" + " " * 60 + "\r")
+                                print(log_text)
                                 
-                            if ENABLE_TG_REALTIME: send_tg_message(log_text)
+                                if need_to_write_file:
+                                    with open(final_output_path, 'a', encoding='utf-8') as f:
+                                        f.write(log_text + "\n")
+                                    
+                                if ENABLE_TG_REALTIME: send_tg_message(log_text)
                             
                             if report["missing"] and ("整部剧集" in del_status or DELETE_ENTIRE_SHOW): 
                                 return False 
