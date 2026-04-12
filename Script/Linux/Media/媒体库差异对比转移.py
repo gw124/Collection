@@ -215,8 +215,8 @@ def find_media_folders_lazy(base_path):
 def main():
     start_time = datetime.now()
     mode_text = "🟢 [模拟演习模式]" if DRY_RUN else "🔴 [实弹执行模式]"
-    log_and_print(f"🚀 媒体对比同步脚本启动 {mode_text}...", write_to_report=True)
-    send_tg_msg(f"🔔 *脚本启动 {mode_text}*")
+    log_and_print(f"🚀 媒体库差异对比转移脚本启动 {mode_text}...", write_to_report=True)
+    send_tg_msg(f"🔔 *媒体库差异对比转移脚本启动 {mode_text}*")
 
     success_count = 0
     skip_count = 0
