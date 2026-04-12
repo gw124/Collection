@@ -14,7 +14,7 @@ BASE_PATHS = [
     "/volume1/CloudNAS/CloudDrive/115/Media/动漫"
 ]
 
-# 🌟【模拟测试模式 (Dry Run)】🌟 
+# 🌟【模拟测试模式 (Dry Run)】🌟
 # True = 开启测试。脚本会正常扫描并输出报告，但【绝对不会】执行任何真实的删除或移动操作，仅打印预期行为。
 # False = 关闭测试。脚本会真实执行物理删除和文件转移（高危操作，请确认后再关闭测试！）。
 DRY_RUN = False
@@ -106,6 +106,14 @@ TG_CHAT_ID = ""
 # 网络代理。如果你的 NAS 在国内环境无法直连 TG 接口，请在此配置代理（如无需求留空 None 即可）。
 PROXIES = None 
 
+# =====================================================================
+# 填入你的 TMDB API Key。
+# 填入后，脚本遇到类似 "天才小子 (1997) {tmdb-2291}" 这样的目录时，
+# 会去 TMDB 查出这一季"到底应该有几集"，彻底解决“单集孤岛”查不出缺集的盲区！
+# =====================================================================
+TMDB_API_KEY = "" # 强烈建议填入！例如 "a1b2c3d4e5f6g7h8i9j0"
+TMDB_CACHE = {} # 内存缓存，防止重复请求 API 导致限流
+
 # ================= 正则预编译 =================
 RE_RULES = [
     re.compile(r'[Ss]\d+[Ee](\d+)', re.IGNORECASE), 
@@ -144,7 +152,30 @@ def extract_episode_number(filename):
         if match: return int(match.group(1))
     return None
 
-def analyze_season_folder(season_path):
+def get_tmdb_season_episode_count(tmdb_id, season_num):
+    if not TMDB_API_KEY.strip():
+        return None
+    
+    cache_key = f"{tmdb_id}_S{season_num}"
+    if cache_key in TMDB_CACHE:
+        return TMDB_CACHE[cache_key]
+
+    url = f"https://api.themoviedb.org/3/tv/{tmdb_id}/season/{season_num}?api_key={TMDB_API_KEY}"
+    try:
+        response = requests.get(url, proxies=PROXIES, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            ep_count = len(data.get("episodes", []))
+            if ep_count > 0:
+                TMDB_CACHE[cache_key] = ep_count
+                return ep_count
+    except Exception:
+        pass
+    
+    TMDB_CACHE[cache_key] = None
+    return None
+
+def analyze_season_folder(season_path, show_name):
     """分析 Season 文件夹，返回缺失列表和重复的字典"""
     episodes_map = {} 
     try:
@@ -165,9 +196,25 @@ def analyze_season_folder(season_path):
     min_ep = min(episodes)
     max_ep = max(episodes)
     
-    expected_start = 1 if min_ep < 20 else min_ep
-    missing_eps = [i for i in range(expected_start, max_ep + 1) if i not in episodes]
+    expected_start = 1
+    expected_end = max_ep
     
+    tmdb_match = re.search(r'\{tmdb-(\d+)\}', show_name, re.IGNORECASE)
+    season_match = re.search(r'Season\s+(\d+)', os.path.basename(season_path), re.IGNORECASE)
+    
+    if tmdb_match and season_match:
+        tmdb_id = tmdb_match.group(1)
+        season_num = int(season_match.group(1))
+        true_ep_count = get_tmdb_season_episode_count(tmdb_id, season_num)
+        
+        if true_ep_count is not None:
+            expected_end = max(max_ep, true_ep_count)
+        else:
+            expected_start = 1 if min_ep < 20 else min_ep
+    else:
+        expected_start = 1 if min_ep < 20 else min_ep
+
+    missing_eps = [i for i in range(expected_start, expected_end + 1) if i not in episodes]
     duplicate_eps = {ep: files for ep, files in episodes_map.items() if len(files) > 1}
             
     return {
@@ -242,9 +289,10 @@ def fast_scan(base_paths, output_filepath):
                     time.sleep(SCAN_DELAY) 
                     
                     if "Season" in entry.name or "Specials" in entry.name:
-                        report = analyze_season_folder(entry.path)
+                        show_name = os.path.basename(current_path)
+                        report = analyze_season_folder(entry.path, show_name)
+                        
                         if report and (report["missing"] or report["duplicates"]):
-                            show_name = os.path.basename(current_path)
                             if report["missing"]: 
                                 current_category_set.add(show_name)
                             
@@ -317,7 +365,6 @@ def fast_scan(base_paths, output_filepath):
                                     if AUTO_DELETE_DUPLICATES:
                                         keep_file, trash_files = get_best_file_to_keep(files)
                                         
-                                        # 🌟 核心提取：智能获取最干净的无后缀名
                                         stems = [os.path.splitext(os.path.basename(f))[0] for f in files]
                                         cleanest_stem = min(stems, key=len)
                                         kept_ext = os.path.splitext(keep_file)[1]
@@ -326,7 +373,6 @@ def fast_scan(base_paths, output_filepath):
                                         
                                         log_text += f"   ├── 第 {ep} 集 -> ✅保留: {os.path.basename(keep_file)}\n"
                                         
-                                        # 1. 先删垃圾
                                         for trash in trash_files:
                                             if DRY_RUN:
                                                 log_text += f"   │             -> 🛡️ [模拟] 准备删除: {os.path.basename(trash)}\n"
@@ -337,13 +383,11 @@ def fast_scan(base_paths, output_filepath):
                                                 except Exception as e:
                                                     log_text += f"   │             -> ❌删除失败: {os.path.basename(trash)} ({e})\n"
                                                     
-                                        # 2. 再重命名(净化)被保留的文件
                                         if os.path.basename(keep_file) != target_filename:
                                             if DRY_RUN:
                                                 log_text += f"   │             -> 🛡️ [模拟] 准备净化命名: {os.path.basename(keep_file)} -> {target_filename}\n"
                                             else:
                                                 try:
-                                                    # 确保目标位置安全（没有被其他残留文件占用）
                                                     if not os.path.exists(target_filepath) or target_filepath == keep_file:
                                                         os.rename(keep_file, target_filepath)
                                                         log_text += f"   │             -> 🏷️已净化命名: {target_filename}\n"
