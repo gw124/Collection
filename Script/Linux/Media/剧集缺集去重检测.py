@@ -30,10 +30,6 @@ EXCLUDE_FOLDER_NAMES = [
     "Specials"
 ]
 
-# 【显示路径美化】
-# 纯视觉优化：在最终的报告 txt 里，把这段冗长的网盘挂载路径隐藏掉，让路径显示更简短清爽。
-PATH_PREFIX_TO_STRIP = "/volume1/CloudNAS/CloudDrive/115/Media"
-
 # 【自动去重开关】
 # True = 开启。当发现同一个 Season 文件夹里有重复集数时，触发“两轮 PK 淘汰制”，只保留最好的一个，其余物理删除。
 # False = 关闭。发现重复时只在报告里记录警告，绝不动手删文件。
@@ -45,23 +41,29 @@ AUTO_DELETE_DUPLICATES = True
 EXT_PRIORITY = ['.mkv', '.mp4', '.ts', '.avi', '.flv', '.rmvb', '.webm', '.mov', '.iso']
 
 # =====================================================================
-# 【高危操作：缺集连坐删除开关】
+# 【高危操作：缺集连坐删除/转移开关】
 # ⚠️ 警告：物理删除操作极其高危！建议只有在确认刮削完美时才开启。
-# 这两个开关专门对付“残缺不全”的剧集，与上方的“去重”逻辑互不干扰。
 # =====================================================================
 
-# 🌟 刮削错乱删除模式（默认 False）：
+# 🌟 刮削错乱灭门模式（默认 False）：
 # 只有在发现“同一集存在重复文件，且这些重复文件的年份互不相同”时触发。
-# 一旦判定为刮削彻底串台污染，默认仅物理删除【错乱的那个 Season 季】文件夹。
-# 如果整部剧集里只有这 1 个季了，为了防止留下空荡荡的根目录，直接物理删除整部剧。
+# 一旦判定为刮削彻底串台污染，删除错季文件夹，如果只有一季就删除整部剧集。
 DELETE_CORRUPTED_SHOW = True
 
+# 🌟【缺集转移补救模式】🌟 
+# True = 开启。发现缺集时，将其移动到指定刮削目录进行补救。
+# 智能逻辑：多季剧仅移动缺集的 Season（并在目标区自动建好剧名父级）；单季剧则整剧连锅端移动。
+# 优先级说明：如果下方的 DELETE_ENTIRE_SHOW 为 True，则无视转移，直接执行整剧删除！
+MOVE_MISSING_TO_SYNC = True
+SYNC_TARGET_DIR = "/volume1/CloudNAS/CloudDrive/115/Sync/每日刮削"
+
 # 灭门模式（默认 False）：如果检测到该剧集任一季有缺集，直接物理删除【整部剧集】的根目录。
+# ⚠️ 优先级最高：开启此项后，上面的转移开关和下方的单季删除均自动失效。
 DELETE_ENTIRE_SHOW = False  
 
-# 精准打击模式（默认 False）：如果检测到缺集，仅物理删除【当前缺集的那一个 Season 季】文件夹。
+# 精准打击模式（默认 False）：如果检测到缺集，仅物理删除【当前缺集的 Season 季】文件夹。
 # 如果整部剧集里只有这 1 个季了，为了防止留下空荡荡的剧集根目录，直接物理删除整部剧。
-DELETE_ONLY_SEASON = True 
+DELETE_ONLY_SEASON = False 
 
 # 【本地报告生成开关】
 # True = 扫描结束后，会在脚本同级目录下永久保留一份 txt 详细报告。
@@ -113,7 +115,6 @@ def is_excluded(check_path):
     for ex_path in EXCLUDE_PATHS:
         if not ex_path.strip(): continue
         ex_path = os.path.normpath(ex_path.strip())
-        # 如果当前路径正好是排除路径，或者是它的子目录，直接触发护盾
         if check_path == ex_path or check_path.startswith(ex_path + os.sep):
             return True
     return False
@@ -210,7 +211,6 @@ def fast_scan(base_paths, output_filepath):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     final_output_path = os.path.join(script_dir, output_filepath)
     
-    # 🌟 核心逻辑：只要你需要本地报告，或者需要TG推送，就必须在运行中写文件
     need_to_write_file = ENABLE_LOCAL_REPORT or ENABLE_TG_FILE
     
     if need_to_write_file:
@@ -222,23 +222,16 @@ def fast_scan(base_paths, output_filepath):
     start_time = time.time()
     missing_summary = {} 
     
-    def scan_directory(current_path, current_category_set):
+    def scan_directory(current_path, current_category_set, auto_strip_prefix):
         try:
             with os.scandir(current_path) as it:
                 for entry in it:
                     if not entry.is_dir(): continue
-                    
-                    # 🌟 护盾触发 1：如果命中排除绝对路径，直接跳过这个文件夹
-                    if is_excluded(entry.path):
-                        continue
-                        
-                    # 🌟 护盾触发 2：如果命中全局排斥的文件夹名称（如 Season 0），直接跳过
-                    if entry.name.lower() in [n.lower() for n in EXCLUDE_FOLDER_NAMES]:
-                        continue
+                    if is_excluded(entry.path): continue
+                    if entry.name.lower() in [n.lower() for n in EXCLUDE_FOLDER_NAMES]: continue
                         
                     sys.stdout.write(f"\r🔍 正在扫: {entry.name[:40].ljust(40)}")
                     sys.stdout.flush()
-                    #print(f"🔍 正在扫: {entry.name}")
                     time.sleep(SCAN_DELAY) 
                     
                     if "Season" in entry.name or "Specials" in entry.name:
@@ -249,20 +242,17 @@ def fast_scan(base_paths, output_filepath):
                                 current_category_set.add(show_name)
                             
                             friendly_path = entry.path 
-                            if PATH_PREFIX_TO_STRIP and entry.path.startswith(PATH_PREFIX_TO_STRIP):
-                                friendly_path = entry.path[len(PATH_PREFIX_TO_STRIP):]
+                            if auto_strip_prefix and entry.path.startswith(auto_strip_prefix):
+                                friendly_path = entry.path[len(auto_strip_prefix):]
                                 friendly_path = friendly_path if friendly_path else "/"
                             
                             log_text = f"📺 剧集: {show_name} -> {entry.name}\n"
                             log_text += f"📁 位置: {friendly_path}\n"  
                             log_text += f"📊 统计: 共 {report['total_files']} 个视频。最大至 {report['max']}。\n"
 
-                            # =========================================================
-                            # 🌟 新增：刮削致命错乱（同集不同年份）强力灭门检测
-                            # =========================================================
+                            # ================= 刮削致命错乱检测 =================
                             is_corrupted = False
                             corrupt_del_status = ""
-                            # 核心锁：只有在发现了“重复文件”的前提下，才去对比年份
                             if DELETE_CORRUPTED_SHOW and report["duplicates"]:
                                 for ep, files in report["duplicates"].items():
                                     years = set()
@@ -270,12 +260,10 @@ def fast_scan(base_paths, output_filepath):
                                         m = re.search(r'\((\d{4})\)', os.path.basename(f))
                                         if m: years.add(m.group(1))
                                     
-                                    # 如果在“同一集”的“重复文件”中，发现了 2 个以上的不同年份，实锤串台！
                                     if len(years) > 1:
                                         is_corrupted = True
                                         log_text += f"🚨 致命错乱: 第 {ep} 集的重复文件中存在不同年份 {years}，刮削已严重污染！\n"
                                         
-                                        # 🌟 核心升级：同 DELETE_ONLY_SEASON 逻辑，优先删季，只剩一季才删整剧
                                         season_count = count_seasons_in_show(current_path)
                                         if season_count <= 1:
                                             try:
@@ -291,7 +279,7 @@ def fast_scan(base_paths, output_filepath):
                                                 corrupt_del_status = f"❌ 删除错乱当前季失败: {str(e)}"
                                                 
                                         log_text += f"🛡 操作: {corrupt_del_status}\n"
-                                        break # 已经执行删除操作，跳出年份判断循环
+                                        break 
                             
                             if is_corrupted:
                                 sys.stdout.write("\r" + " " * 60 + "\r")
@@ -301,24 +289,21 @@ def fast_scan(base_paths, output_filepath):
                                         f.write(log_text + "\n")
                                 if ENABLE_TG_REALTIME: send_tg_message(log_text)
                                 
-                                # 根据删的是季还是整剧，决定接下来的动作
                                 if "整部剧集" in corrupt_del_status:
-                                    return False # 剧都没了，直接阻断这部剧剩下其他季的扫描
+                                    return False 
                                 else:
-                                    continue # 季没了，但剧还在，跳过下方的缺集/去重代码，直接去扫下一个 Season
-                            # =========================================================
+                                    continue 
 
+                            # ================= 缺集与去重逻辑 =================
                             if report["missing"]:
                                 log_text += f"❌ 缺失: {', '.join(map(str, report['missing']))}\n"
                             
                             if report["duplicates"]:
                                 log_text += f"⚠️ 重复: 发现 {len(report['duplicates'])} 集存在重复文件\n"
-                                
                                 for ep, files in report["duplicates"].items():
                                     if AUTO_DELETE_DUPLICATES:
                                         keep_file, trash_files = get_best_file_to_keep(files)
                                         log_text += f"   ├── 第 {ep} 集 -> ✅保留: {os.path.basename(keep_file)}\n"
-                                        
                                         for trash in trash_files:
                                             try:
                                                 os.remove(trash) 
@@ -330,14 +315,35 @@ def fast_scan(base_paths, output_filepath):
 
                             del_status = ""
                             if report["missing"]:
+                                season_count = count_seasons_in_show(current_path)
+                                
                                 if DELETE_ENTIRE_SHOW:
                                     try:
                                         shutil.rmtree(current_path)
                                         del_status = "🧨 已执行：物理删除整部剧集"
                                     except Exception as e: del_status = f"❌ 删除失败：{str(e)}"
+                                    
+                                elif MOVE_MISSING_TO_SYNC:
+                                    try:
+                                        os.makedirs(SYNC_TARGET_DIR, exist_ok=True)
+                                        if season_count <= 1:
+                                            dest_path = os.path.join(SYNC_TARGET_DIR, show_name)
+                                            if os.path.exists(dest_path):
+                                                dest_path += f"_{int(time.time())}"
+                                            shutil.move(current_path, dest_path)
+                                            del_status = "🚚 已执行：移动整部剧集至刮削补救区 (因其只包含这一季)"
+                                        else:
+                                            dest_show_dir = os.path.join(SYNC_TARGET_DIR, show_name)
+                                            os.makedirs(dest_show_dir, exist_ok=True)
+                                            dest_season_dir = os.path.join(dest_show_dir, entry.name)
+                                            if os.path.exists(dest_season_dir):
+                                                dest_season_dir += f"_{int(time.time())}"
+                                            shutil.move(entry.path, dest_season_dir)
+                                            del_status = "🚚 已执行：移动当前缺集的季至刮削补救区 (已保留剧名父目录)"
+                                    except Exception as e:
+                                        del_status = f"❌ 移动至刮削补救区失败：{str(e)}"
+                                        
                                 elif DELETE_ONLY_SEASON:
-                                    # 🌟 核心升级：如果只剩一季，连锅端
-                                    season_count = count_seasons_in_show(current_path)
                                     if season_count <= 1:
                                         try:
                                             shutil.rmtree(current_path)
@@ -361,20 +367,25 @@ def fast_scan(base_paths, output_filepath):
                                 
                             if ENABLE_TG_REALTIME: send_tg_message(log_text)
                             
-                            # 如果是连根拔起（整剧全删）或者因为它是唯一一季导致整剧被删，那就中止这层扫描
-                            if (DELETE_ENTIRE_SHOW or (DELETE_ONLY_SEASON and "整部剧集" in del_status)) and report["missing"]: 
+                            if report["missing"] and ("整部剧集" in del_status or DELETE_ENTIRE_SHOW): 
                                 return False 
                     else:
-                        scan_directory(entry.path, current_category_set)
+                        scan_directory(entry.path, current_category_set, auto_strip_prefix)
         except OSError:
             pass 
         return False
 
     for path in base_paths:
         if os.path.exists(path):
-            category_name = os.path.basename(path.rstrip('/\\'))
-            if category_name not in missing_summary: missing_summary[category_name] = set()
-            scan_directory(path, missing_summary[category_name])
+            clean_path = path.rstrip('/\\')
+            category_name = os.path.basename(clean_path)
+            
+            auto_strip_prefix = os.path.dirname(clean_path)
+            
+            if category_name not in missing_summary: 
+                missing_summary[category_name] = set()
+                
+            scan_directory(clean_path, missing_summary[category_name], auto_strip_prefix)
 
     # ================= 最终统计汇总 =================
     total_seconds = int(time.time() - start_time)
@@ -400,7 +411,6 @@ def fast_scan(base_paths, output_filepath):
 
     if ENABLE_TG_SUMMARY: send_tg_message(summary_text)
     
-    # 🌟 阅后即焚逻辑：发送文件，如果不需要本地保留则立刻物理删除
     if ENABLE_TG_FILE and need_to_write_file: 
         send_tg_document(final_output_path, caption="📦 缺集与去重清理报告")
         
