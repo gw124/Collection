@@ -44,7 +44,7 @@ TG_CHAT_ID = ""     # 请填入你的 Chat ID
 TG_REALTIME_PUSH = True  
 
 # === CloudDrive gRPC API 设置 ===
-USE_CLOUDDRIVE_API = False              # API 执行开关：True 为调用 API 删除，False 为本地 OS 删除。默认关闭
+USE_CLOUDDRIVE_API = True              # API 执行开关：True 为调用 API 删除，False 为本地 OS 删除。默认关闭
 
 CD_SERVER_ADDRESS = "localhost:19798"   # CloudDrive 服务地址及端口
 CD_USERNAME = ""                        # 方式 1: 你的 CloudDrive 登录账号
