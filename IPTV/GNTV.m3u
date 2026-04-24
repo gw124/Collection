@@ -37,10 +37,6 @@ http://67.220.67.246:2347/livehttpplay?channel_id=20705
 https://o11.163189.xyz/stream/live/iqiyi/
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/hkwcBM9.png" tvg-id="Beautiful Life TV",Beautiful Life TV
 https://5ddce30eb4b55.streamlock.net/bltvhd/bltv1/playlist.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="CGTN-News" tvg-logo="",CGNT 新闻频道
-https://english-livebkali.cgtn.com/live/encgtn_0.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="CGTN" tvg-logo="",CGNT 记录频道
-https://english-livebkali.cgtn.com/live/doccgtn_0.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CHU
 http://cdn6.163189.xyz/163189/chu
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/fEUmRST.png" tvg-id="CTi News",CTi News
@@ -122,15 +118,15 @@ http://cdn6.163189.xyz/163189/wxxw
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWI3MjU5MzY0ZWQwYmIwZWE1MGE1N2NlYmIyMzYyYzQ1JnVpZD0mdXVpZD00MzgxNzhkOWFmNDIzYmVlM2MzZGUyZDM0YTM0NGEzYi02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDIwMDMx/HNYLMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTEzYjExMDNhOTU3NmJkZDcyMjNiZGFhODE2NmRiMjc5JnVpZD0mdXVpZD1hMTFiNDY5NDIyMjFhYTBlZmI5NWUwMWMxZDljYzQ3My02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQ4ODQy/HNYLMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南爱晚" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%88%B1%E6%99%9A.png",湖南爱晚
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWIwMzhlOTI2ODVlM2FjMDhhZGE1NDZhNTc3MjAxNjU1JnVpZD0mdXVpZD03NjdmM2FkNmNhOGEwYzMyMjdlYTE1YWVmMDFkMTEwNC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDEzNzA1/HNGGMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWEwNWQzZTMxNTg1MmRjMjAxMWY0NmM0ZGE4ZWM0MzcwJnVpZD0mdXVpZD04ODVkZGI0MGYyOWI0MjM3ZWRjNGNiZDM3ZjczNDk3Ni02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQyNTMy/HNGGMPP360.m3u8
 #EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWNiZWIyZWE5MThmOGEwZTIzYTI0NGRjNDgzODMxMGVmJnVpZD0mdXVpZD1kN2FmMDViNTVhZDI2NjM2MDA1MjY0MDczNzY1MWY1My02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDI4NDM1/HNDSJMPP360.m3u8
 #EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
 http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTVmNjQ0ZDliNDk2Y2RkNmViMjk2ZGE3ODFjOTlkMTQxJnVpZD0mdXVpZD0xNjNjZTEyNThiYmM5ZmJkMGUxNzRjMWUwMDE5NjZkZS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDMyMjY2/HNJSMPP360.m3u8
 #EXTINF:-1 tvg-id="湖南都市" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E9%83%BD%E5%B8%82.png" group-title="港澳台频道""港澳台频道",湖南都市
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWZjNzRhNTNkNjY0ZGQ3MjZkYmFmZDQ5OTQyNjkxYjkxJnVpZD0mdXVpZD0wM2M1OWFkNDkzYTdiM2ViMzBhMzFlMGU2OWY1ODlmZS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDE2NTQ5/HNDSMPP360.m3u8
+http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWJmMDY0OTEwZWIyZTFkNzU2MWRiMjdkZTkwODUzZGRlJnVpZD0mdXVpZD02ZTk3ODk0NzI1NjVmNDRhZTYyYzhiMTU4MGQzOTIxYS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQ2MTAx/HNDSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
 https://cdn6.163189.xyz/163189/as
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",澳视澳门
