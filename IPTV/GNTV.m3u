@@ -9,6 +9,8 @@ https://live.streamingfast.net/osmflivech2.m3u8
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV05.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="NU2",NU2
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV14.m3u8
+#EXTINF:-1 tvg-name="ELEVEN体育3" tvg-logo="https://gitee.com/suxuang/TVlogo/raw/main/img/ELTA6.png" group-title="港澳台频道""港澳台频道",ELEVEN体育3
+https://stream1.freetv.fun/eltaai-er-da-ti-yu--3--wj-1.ctv
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",CH5
 http://cdn6.163189.xyz/163189/ch5
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",VIUTV 6
@@ -117,16 +119,6 @@ https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV02.m3u8
 http://cdn6.163189.xyz/163189/wxxw
 #EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-logo="https://i.imgur.com/k4fhcPl.png" tvg-id="民视新闻HD",民视新闻HD
 https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV17.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南娱乐频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125630263.jpg",湖南娱乐频道
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTEzYjExMDNhOTU3NmJkZDcyMjNiZGFhODE2NmRiMjc5JnVpZD0mdXVpZD1hMTFiNDY5NDIyMjFhYTBlZmI5NWUwMWMxZDljYzQ3My02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQ4ODQy/HNYLMPP360.m3u8
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="湖南爱晚" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%88%B1%E6%99%9A.png",湖南爱晚
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWEwNWQzZTMxNTg1MmRjMjAxMWY0NmM0ZGE4ZWM0MzcwJnVpZD0mdXVpZD04ODVkZGI0MGYyOWI0MjM3ZWRjNGNiZDM3ZjczNDk3Ni02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQyNTMy/HNGGMPP360.m3u8
-#EXTINF:-1 tvg-id="dianshiju.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%94%B5%E8%A7%86%E5%89%A7.png" group-title="港澳台频道""港澳台频道",湖南电视剧
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWE1MjNmYjMxYmQ0NTRiNDZmN2RiMDMwY2UwYzU1M2QxJnVpZD0mdXVpZD00MmZlZTY4OTk3YjM4MGQ0OTg5OGNiNTA5OTJmNzc2YS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDU3MzE3/HNDSJMPP360.m3u8
-#EXTINF:-1 tvg-id="eco.hunan" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E7%BB%8F%E8%A7%86.png" group-title="港澳台频道""港澳台频道",湖南经视
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPTA2NGFiOTgxMDRiMjAyMzE4OTI3YzNmNmJhNDViYjZjJnVpZD0mdXVpZD02MDNlMmRjY2FhYTkwZmZhM2NlYTY5YmY0YTA2OWQyOC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDYxMTA1/HNJSMPP360.m3u8
-#EXTINF:-1 tvg-id="湖南都市" tvg-logo="https://live.fanmingming.com/tv/%E6%B9%96%E5%8D%97%E9%83%BD%E5%B8%82.png" group-title="港澳台频道""港澳台频道",湖南都市
-http://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWJmMDY0OTEwZWIyZTFkNzU2MWRiMjdkZTkwODUzZGRlJnVpZD0mdXVpZD02ZTk3ODk0NzI1NjVmNDRhZTYyYzhiMTU4MGQzOTIxYS02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDQ2MTAx/HNDSMPP360.m3u8
 #EXTINF:-1 tvg-name="澳视卫星" tvg-logo="https://live.fanmingming.cn/tv/澳视卫星.png" group-title="港澳台频道""港澳台频道",澳视卫星
 https://cdn6.163189.xyz/163189/as
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",澳视澳门
@@ -155,8 +147,6 @@ http://67.220.67.246:2347/livehttpplay?channel_id=20197
 https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",重温经典
 http://cdn6.163189.xyz/163189/cwjd
-#EXTINF:-1 group-title="港澳台频道""港澳台频道" tvg-id="金鹰纪实频道" tvg-logo="http://tv.haoqu99.com/d/file/2015/0417/20150417125839242.jpg",金鹰纪实频道
-https://phoneqq.qing.mgtv.com/nn_live/nn_x64/dWlwPTEwNi4xNC4zOC41NSZ0ZXJtPTUmcWlkPSZyYXV0aF9lbmFibGU9b2ZmJmNkbmV4X2lkPXFxX3Bob25lX2xpdmUmY2hzPSZkZWY9MSZzPWY1OGQyMjg5NTc3YzMwNzY4ZWNmMTI3NWUxNGM4N2RmJnVpZD0mdXVpZD1lNTQ2NTAxMmRkZThkNWE3ZDBjNGQzZjhkZjk4NmM0NC02YTBlMjYzNyZ2PTImYXM9MCZlcz0xNzc3MDY0MTUy/JYJSMPP360.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",香港面包
 https://video.bread-tv.com:8091/hls-live24/online/index.m3u8
 #EXTINF:-1 group-title="港澳台频道""港澳台频道",龙华偶像
