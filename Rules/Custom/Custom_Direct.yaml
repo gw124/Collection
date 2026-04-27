@@ -35,8 +35,17 @@ payload:
   - DOMAIN-SUFFIX,quark.cn
   - DOMAIN-SUFFIX,189.cn
   - DOMAIN-SUFFIX,ctyunxs.cn
+  - DOMAIN,fhnfile.oss-cn-shenzhen.aliyuncs.com
   - DOMAIN-SUFFIX,115.com
-
+  - DOMAIN-SUFFIX,115cdn.com
+  - DOMAIN-SUFFIX,115cdn.net
+  - DOMAIN-SUFFIX,115img.com
+  - DOMAIN-SUFFIX,116cd.cn
+  - DOMAIN-SUFFIX,116cd.com
+  - DOMAIN-SUFFIX,116cd.net
+  - DOMAIN-SUFFIX,anxia.com
+  - DOMAIN-SUFFIX,sq.cc
+  
   # GitHub 反代 CDN
   - DOMAIN-SUFFIX,jsdelivr.net
   - DOMAIN-SUFFIX,gh-proxy.com
