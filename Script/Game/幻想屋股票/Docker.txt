@@ -1,0 +1,9 @@
+docker rm -f hxw-web
+docker run -d \
+  --name hxw-web \
+  -p 8501:8501 \
+  -v /mnt/Docker/hxwgp:/app \
+  -w /app \
+  --restart unless-stopped \
+  python:3.10-slim \
+  bash -c "pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/ && pip install streamlit pandas plotly requests -i https://mirrors.aliyun.com/pypi/simple/ && (python app.py fetcher &) && streamlit run app.py --server.address=0.0.0.0"
